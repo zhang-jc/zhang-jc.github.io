@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="为了有效地使用 Java 范型，必须考虑下面的限制：  不能用原始类型实例化范型类型 不能创建类型参数的实例 不能声明类型为类型参数的的静态属性 不能对参数化类型使用类型转换或者 instanceof 操作 不能创建参数化类型的数组 不能创建、捕获或抛出参数化类型的对象 不能重载一个重载参数类型擦除后是原始类型相同的方法">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="范型（十二）：范型限制">
+<meta property="og:url" content="http://zhang-jc.github.io/2016/12/17/范型（十二）：范型限制/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="为了有效地使用 Java 范型，必须考虑下面的限制：  不能用原始类型实例化范型类型 不能创建类型参数的实例 不能声明类型为类型参数的的静态属性 不能对参数化类型使用类型转换或者 instanceof 操作 不能创建参数化类型的数组 不能创建、捕获或抛出参数化类型的对象 不能重载一个重载参数类型擦除后是原始类型相同的方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="范型（十二）：范型限制">
+<meta name="twitter:description" content="为了有效地使用 Java 范型，必须考虑下面的限制：  不能用原始类型实例化范型类型 不能创建类型参数的实例 不能声明类型为类型参数的的静态属性 不能对参数化类型使用类型转换或者 instanceof 操作 不能创建参数化类型的数组 不能创建、捕获或抛出参数化类型的对象 不能重载一个重载参数类型擦除后是原始类型相同的方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2016/12/17/范型（十二）：范型限制/">
+
+
+
+
+
+  <title>范型（十二）：范型限制 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2016/12/17/范型（十二）：范型限制/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">范型（十二）：范型限制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-17T12:18:01+08:00">
+                2016-12-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/17/范型（十二）：范型限制/" class="leancloud_visitors" data-flag-title="范型（十二）：范型限制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为了有效地使用 Java 范型，必须考虑下面的限制：</p>
+<ul>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#instantiate" target="_blank" rel="noopener">不能用原始类型实例化范型类型</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#createObjects" target="_blank" rel="noopener">不能创建类型参数的实例</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#createStatic" target="_blank" rel="noopener">不能声明类型为类型参数的的静态属性</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#cannotCast" target="_blank" rel="noopener">不能对参数化类型使用类型转换或者 instanceof 操作</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#createArrays" target="_blank" rel="noopener">不能创建参数化类型的数组</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#cannotCatch" target="_blank" rel="noopener">不能创建、捕获或抛出参数化类型的对象</a></li>
+<li><a href="http://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#cannotOverload" target="_blank" rel="noopener">不能重载一个重载参数类型擦除后是原始类型相同的方法</a></li>
+</ul>
+<a id="more"></a>
+<h3 id="不能用原始类型实例化范型类型"><a href="#不能用原始类型实例化范型类型" class="headerlink" title="不能用原始类型实例化范型类型"></a>不能用原始类型实例化范型类型</h3><p>考虑下面的参数化类型：</p>
+<pre><code>class Pair&lt;K, V&gt; {
+
+  private K key;
+  private V value;
+
+  public Pair(K key, V value) {
+    this.key = key;
+    this.value = value;
+  }
+
+  // ...
+}
+</code></pre><p>当创建一个 Pair 对象时，不能用原始类型替换类型参数 K 或 V：</p>
+<pre><code>Pair&lt;int, char&gt; p = new Pair&lt;&gt;(8, &apos;a&apos;);  // compile-time error
+</code></pre><p>只能用非原始类型替换类型参数 K 和 V：</p>
+<pre><code>Pair&lt;Integer, Character&gt; p = new Pair&lt;&gt;(8, &apos;a&apos;);
+</code></pre><p>注意，Java 编译器会自动装箱 8 为 Integer.valueOf(8) 及 ‘a’ 为 Character(‘a’)：</p>
+<pre><code>Pair&lt;Integer, Character&gt; p = new Pair&lt;&gt;(Integer.valueOf(8), new Character(&apos;a&apos;));
+</code></pre><p>要获取关于自动装箱的更多信息，参见<a href="http://docs.oracle.com/javase/tutorial/java/data/index.html" target="_blank" rel="noopener">数字和字符串</a>一节中的<a href="http://docs.oracle.com/javase/tutorial/java/data/autoboxing.html" target="_blank" rel="noopener">自动装箱和拆箱</a>。</p>
+<h3 id="不能创建类型参数的实例"><a href="#不能创建类型参数的实例" class="headerlink" title="不能创建类型参数的实例"></a>不能创建类型参数的实例</h3><p>不能创建类型参数的实例。例如，下面的代码导致一个编译器错误：</p>
+<pre><code>public static &lt;E&gt; void append(List&lt;E&gt; list) {
+  E elem = new E();  // compile-time error
+  list.add(elem);
+}
+</code></pre><p>作为一种变通方法，可以通过反射创建类型参数的一个对象：</p>
+<pre><code>public static &lt;E&gt; void append(List&lt;E&gt; list, Class&lt;E&gt; cls) throws Exception {
+  E elem = cls.newInstance();   // OK
+  list.add(elem);
+}
+</code></pre><p>像下面这样调用 append 方法：</p>
+<pre><code>List&lt;String&gt; ls = new ArrayList&lt;&gt;();
+append(ls, String.class);
+</code></pre><h3 id="不能声明类型为类型参数的的静态属性"><a href="#不能声明类型为类型参数的的静态属性" class="headerlink" title="不能声明类型为类型参数的的静态属性"></a>不能声明类型为类型参数的的静态属性</h3><p>类的静态属性是类级别的被类非静态对象共享的变量。因此，类型参数的静态属性是不允许的。考虑下面的类：</p>
+<pre><code>public class MobileDevice&lt;T&gt; {
+  private static T os;
+
+  // ...
+}
+</code></pre><p>如果允许类型参数的静态属性，那么下面的代码会引起混乱：</p>
+<pre><code>MobileDevice&lt;Smartphone&gt; phone = new MobileDevice&lt;&gt;();
+MobileDevice&lt;Pager&gt; pager = new MobileDevice&lt;&gt;();
+MobileDevice&lt;TabletPC&gt; pc = new MobileDevice&lt;&gt;();
+</code></pre><p>因为静态属性 os 被 phone、pager 和 pc 共享，os 的实际类型是什么？它不能同时是 Smartphone、Pager 和 TabletPC。因此，不能创建类型参数的静态属性。</p>
+<h3 id="不能对参数化类型使用类型转换或者-instanceof-操作"><a href="#不能对参数化类型使用类型转换或者-instanceof-操作" class="headerlink" title="不能对参数化类型使用类型转换或者 instanceof 操作"></a>不能对参数化类型使用类型转换或者 instanceof 操作</h3><p>因为在范型代码中 Java 编译器擦除所有类型参数，在运行时不能确定范型类型的哪个参数化类型被使用：</p>
+<pre><code>public static &lt;E&gt; void rtti(List&lt;E&gt; list) {
+  if (list instanceof ArrayList&lt;Integer&gt;) {  // compile-time error
+    // ...
+  }
+}
+</code></pre><p>参数化类型集合传递给 rtti 方法：</p>
+<pre><code>S = { ArrayList&lt;Integer&gt;, ArrayList&lt;String&gt; LinkedList&lt;Character&gt;, ... }
+</code></pre><p>运行时不会跟踪类型参数，所以它不能说出 ArrayList<integer> 和 ArrayList<string> 之间的区别。你可以做的是用一个无界通配符来确定 list 是一个 ArrayList：</string></integer></p>
+<pre><code>public static void rtti(List&lt;?&gt; list) {
+  if (list instanceof ArrayList&lt;?&gt;) {  // OK; instanceof requires a reifiable type
+    // ...
+  }
+}
+</code></pre><p>通常，不能类型转换一个参数化类型，除非它是被无界通配符参数化的。例如：</p>
+<pre><code>List&lt;Integer&gt; li = new ArrayList&lt;&gt;();
+List&lt;Number&gt;  ln = (List&lt;Number&gt;) li;  // compile-time error
+</code></pre><p>然而，在一些场景下编译器知道类型参数总是有效的且允许类型转换。例如：</p>
+<pre><code>List&lt;String&gt; l1 = ...;
+ArrayList&lt;String&gt; l2 = (ArrayList&lt;String&gt;)l1;  // OK
+</code></pre><h3 id="不能创建参数化类型的数组"><a href="#不能创建参数化类型的数组" class="headerlink" title="不能创建参数化类型的数组"></a>不能创建参数化类型的数组</h3><p>不能创建参数化类型的数组。例如，下面的代码不能编译：</p>
+<pre><code>List&lt;Integer&gt;[] arrayOfLists = new List&lt;Integer&gt;[2];  // compile-time error
+</code></pre><p>下面的代码展示了当不同类型插入一个数组时会发生什么：</p>
+<pre><code>Object[] strings = new String[2];
+strings[0] = &quot;hi&quot;;   // OK
+strings[1] = 100;    // An ArrayStoreException is thrown.
+</code></pre><p>如果对范型列表做同样的事情，将会有一个问题：</p>
+<pre><code>Object[] stringLists = new List&lt;String&gt;[];  // compiler error, but pretend it&apos;s allowed
+stringLists[0] = new ArrayList&lt;String&gt;();   // OK
+stringLists[1] = new ArrayList&lt;Integer&gt;();  // An ArrayStoreException should be thrown,
+                                            // but the runtime can&apos;t detect it.
+</code></pre><p>如果参数化列表数组被允许，前面的代码将不能抛出期望的 ArrayStoreException。</p>
+<h3 id="不能创建、捕获或抛出参数化类型的对象"><a href="#不能创建、捕获或抛出参数化类型的对象" class="headerlink" title="不能创建、捕获或抛出参数化类型的对象"></a>不能创建、捕获或抛出参数化类型的对象</h3><p>范型类不能直接或间接地继承 Throwable 类。例如，下面的类不能编译：</p>
+<pre><code>// Extends Throwable indirectly
+class MathException&lt;T&gt; extends Exception { /* ... */ }    // compile-time error
+
+// Extends Throwable directly
+class QueueFullException&lt;T&gt; extends Throwable { /* ... */ // compile-time error
+</code></pre><p>一个方法不能捕获类型参数的一个实例：</p>
+<pre><code>public static &lt;T extends Exception, J&gt; void execute(List&lt;J&gt; jobs) {
+  try {
+    for (J job : jobs)
+        // ...
+  } catch (T e) {   // compile-time error
+    // ...
+  }
+}
+</code></pre><p>然而，可以在 throws 语句中使用一个类型参数：</p>
+<pre><code>class Parser&lt;T extends Exception&gt; {
+  public void parse(File file) throws T {     // OK
+    // ...
+  }
+}
+</code></pre><h3 id="不能重载一个重载参数类型擦除后是原始类型相同的方法"><a href="#不能重载一个重载参数类型擦除后是原始类型相同的方法" class="headerlink" title="不能重载一个重载参数类型擦除后是原始类型相同的方法"></a>不能重载一个重载参数类型擦除后是原始类型相同的方法</h3><p>一个类不能有两个类型擦除后有相同特征的重载方法。</p>
+<pre><code>public class Example {
+  public void print(Set&lt;String&gt; strSet) { }
+  public void print(Set&lt;Integer&gt; intSet) { }
+}
+</code></pre><p>重载将共享相同的类文件表现且生成一个编译时错误。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/14/范型（十一）：类型擦除/" rel="next" title="范型（十一）：类型擦除">
+                <i class="fa fa-chevron-left"></i> 范型（十一）：类型擦除
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/22/注解（一）：综述/" rel="prev" title="注解（一）：综述">
+                注解（一）：综述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#不能用原始类型实例化范型类型"><span class="nav-number">1.</span> <span class="nav-text">不能用原始类型实例化范型类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能创建类型参数的实例"><span class="nav-number">2.</span> <span class="nav-text">不能创建类型参数的实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能声明类型为类型参数的的静态属性"><span class="nav-number">3.</span> <span class="nav-text">不能声明类型为类型参数的的静态属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能对参数化类型使用类型转换或者-instanceof-操作"><span class="nav-number">4.</span> <span class="nav-text">不能对参数化类型使用类型转换或者 instanceof 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能创建参数化类型的数组"><span class="nav-number">5.</span> <span class="nav-text">不能创建参数化类型的数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能创建、捕获或抛出参数化类型的对象"><span class="nav-number">6.</span> <span class="nav-text">不能创建、捕获或抛出参数化类型的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不能重载一个重载参数类型擦除后是原始类型相同的方法"><span class="nav-number">7.</span> <span class="nav-text">不能重载一个重载参数类型擦除后是原始类型相同的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

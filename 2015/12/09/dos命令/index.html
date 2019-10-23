@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基础命令1. dir  无参数： 查看当前所在目录的文件和文件夹。 /s： 查看当前目录已及其所有子目录的文件和文件夹。 /a： 查看包括隐藏文件的所有文件。 /ah： 只显示出隐含文件。 /w： 以紧凑方式（一行显示3个文件）显示文件和文件夹。 /p： 以分页方式（显示一页之后会自动暂停）显示。">
+<meta name="keywords" content="DOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dos命令">
+<meta property="og:url" content="http://zhang-jc.github.io/2015/12/09/dos命令/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="基础命令1. dir  无参数： 查看当前所在目录的文件和文件夹。 /s： 查看当前目录已及其所有子目录的文件和文件夹。 /a： 查看包括隐藏文件的所有文件。 /ah： 只显示出隐含文件。 /w： 以紧凑方式（一行显示3个文件）显示文件和文件夹。 /p： 以分页方式（显示一页之后会自动暂停）显示。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dos命令">
+<meta name="twitter:description" content="基础命令1. dir  无参数： 查看当前所在目录的文件和文件夹。 /s： 查看当前目录已及其所有子目录的文件和文件夹。 /a： 查看包括隐藏文件的所有文件。 /ah： 只显示出隐含文件。 /w： 以紧凑方式（一行显示3个文件）显示文件和文件夹。 /p： 以分页方式（显示一页之后会自动暂停）显示。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2015/12/09/dos命令/">
+
+
+
+
+
+  <title>dos命令 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2015/12/09/dos命令/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dos命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-09T09:48:49+08:00">
+                2015-12-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/DOS/" itemprop="url" rel="index">
+                    <span itemprop="name">DOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/12/09/dos命令/" class="leancloud_visitors" data-flag-title="dos命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><p><strong>1. dir</strong></p>
+<ul>
+<li>无参数： 查看当前所在目录的文件和文件夹。</li>
+<li>/s： 查看当前目录已及其所有子目录的文件和文件夹。</li>
+<li>/a： 查看包括隐藏文件的所有文件。</li>
+<li>/ah： 只显示出隐含文件。</li>
+<li>/w： 以紧凑方式（一行显示3个文件）显示文件和文件夹。</li>
+<li>/p： 以分页方式（显示一页之后会自动暂停）显示。</li>
+</ul>
+<a id="more"></a>
+<p><strong>2. cd</strong></p>
+<ul>
+<li>cd 目录名： 进入特定的目录。</li>
+<li>cd \： 退回到根目录。</li>
+<li>cd ..： 退回到上一级目录。</li>
+</ul>
+<p><strong>3. md</strong></p>
+<p>md 目录名： 建立特定的文件夹。</p>
+<p><strong>4. rd</strong></p>
+<p>rd 目录名： 删除特定的文件夹。</p>
+<p><strong>5. cls</strong></p>
+<p>清除屏幕。</p>
+<p><strong>6. copy</strong></p>
+<p>copy 路径\文件名 路径\文件名： 把一个文件拷贝到另一个地方。</p>
+<p><strong>7. move</strong></p>
+<p>move 路径\文件名 路径\文件名： 把一个文件移动到另一个地方。</p>
+<p><strong>8. del</strong></p>
+<p>del不能删除文件夹。</p>
+<ul>
+<li>del 文件名： 删除一个文件。</li>
+<li>del <em>.</em>： 删除当前文件夹下所有文件。</li>
+</ul>
+<p><strong>9. deltree</strong></p>
+<p>删除文件夹和它下面的所有子文件夹还有文件。</p>
+<p><strong>10. format</strong></p>
+<p>format x: x代表盘符，格式化一个分区。在dos下是用fat文件系统格式化的，在windows2000安装的时候会问你要不要转换为ntfs。</p>
+<p><strong>11. type</strong></p>
+<p>type 文本文件名： 显示出文本文件的内容。</p>
+<p><strong>12. ren</strong></p>
+<p>ren 旧文件名 新文件名： 改文件名。</p>
+<h3 id="关于网络的常用命令"><a href="#关于网络的常用命令" class="headerlink" title="关于网络的常用命令"></a>关于网络的常用命令</h3><p><strong>1. ping</strong></p>
+<ul>
+<li>ping 主机ip或名字： 向目标主机发送4个icmp数据包，测试对方主机是否收到并响应，一般常用于做普通网络是否通畅的测试。但是ping不同不代表网络不通，有可能是目标主机装有防火墙并且阻止了icmp响应。</li>
+<li>ping -t： 不停的发送数据包。当然都很小，不能称作攻击。有些人自己写了一些类似于ping命令的程序，不停的发送很大的数据包，以阻塞目标主机的网络连接。</li>
+</ul>
+<p><strong>2. net</strong></p>
+<p>建议是用 net /? 获取具体帮助信息。实在是有很多参数，参数下面还有参数。常用：net view \主机 来看共享，net start/stop 服务来启动和停止服务。</p>
+<p><strong>3. netstat</strong></p>
+<p>netstat 主机： 查看主机当前的 tcp/ip 连接状态，如端口的状态。</p>
+<p><strong>4. nbtstat</strong></p>
+<p>查看主机使用的 NetBIOS name。使用 nbtstat /? 查看帮助。</p>
+<p><strong>5. tracert</strong></p>
+<p>tracert 主机： 查看从你自己到目标主机到底经过了那些路径。如： tracert <a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 然后等待。。。 就会看到你经过的一个个路由节点，一般大一点的路由器，如电信的主干路由，除了ip以外，都有英文标示的。</p>
+<p><strong>6. pathping</strong></p>
+<p>pathping 主机： 类似tracert，但可以显示一些tracert不能显示出来的信息。</p>
+<p><strong>7. ftp</strong></p>
+<p>字符方式的 ftp 。</p>
+<p><strong>8. telnet</strong></p>
+<p>字符方式的远程登录程序，是网络人员极其爱用的远程登录程序。一般可以用来测试主机端口是否可用：<br>telnet 主机IP 端口号</p>
+<p><strong>9. ipconfig</strong></p>
+<p>非常有用的网络配置、排错命令。</p>
+<ul>
+<li>不加参数： 显示当前机器的网络接口状态。</li>
+<li>/all： 显示详细的信息。</li>
+<li>/release： 释放当前ip。</li>
+<li>/renew： 重新申请ip。</li>
+<li>/flushdns： 刷新dns缓存。</li>
+<li>/registerdns： 重新在dns服务器上注册自己。</li>
+</ul>
+<p><strong>10. arp</strong></p>
+<p>操作当前的arp缓存。</p>
+<ul>
+<li>arp -a： 显示arp缓存。</li>
+<li>arp -d： 删除一条缓存纪录。</li>
+<li>arp -s： 添加一条缓存纪录。</li>
+</ul>
+<p><strong>11. nslookup</strong></p>
+<p>排除dns错误的利器。是一个交互的工具。使用之前请先努力弄清楚dns的作用以及dns的工作原理。</p>
+<p><strong>12. route</strong></p>
+<p>一般用来查看路由表或者添加静态路由：</p>
+<ul>
+<li>route print： 打印路由</li>
+<li>route add： 添加路由</li>
+</ul>
+<p>添加路由参考以下示例：</p>
+<pre><code>route ADD 157.0.0.0 MASK 255.0.0.0  157.55.80.1
+</code></pre><p>如果想每次开机保留该路由，则添加 -p 参数：</p>
+<pre><code>route ADD 157.0.0.0 MASK 255.0.0.0  157.55.80.1 -p
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DOS/" rel="tag"># DOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/07/mongoose安装/" rel="next" title="mongoose安装">
+                <i class="fa fa-chevron-left"></i> mongoose安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/20/react-native-windows-系统本地图片不能显示问题/" rel="prev" title="react native windows 系统本地图片不能显示问题">
+                react native windows 系统本地图片不能显示问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础命令"><span class="nav-number">1.</span> <span class="nav-text">基础命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于网络的常用命令"><span class="nav-number">2.</span> <span class="nav-text">关于网络的常用命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

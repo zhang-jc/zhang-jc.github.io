@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="范型类型是一个范型类或者接口，是参数化的类型。下面的 Box 类将被修改以展示这个概念。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="范型（三）：范型类型">
+<meta property="og:url" content="http://zhang-jc.github.io/2016/11/19/范型（三）：范型类型/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="范型类型是一个范型类或者接口，是参数化的类型。下面的 Box 类将被修改以展示这个概念。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="范型（三）：范型类型">
+<meta name="twitter:description" content="范型类型是一个范型类或者接口，是参数化的类型。下面的 Box 类将被修改以展示这个概念。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2016/11/19/范型（三）：范型类型/">
+
+
+
+
+
+  <title>范型（三）：范型类型 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2016/11/19/范型（三）：范型类型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">范型（三）：范型类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-19T23:51:56+08:00">
+                2016-11-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/19/范型（三）：范型类型/" class="leancloud_visitors" data-flag-title="范型（三）：范型类型">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>范型类型是一个范型类或者接口，是参数化的类型。下面的 Box 类将被修改以展示这个概念。</p>
+<a id="more"></a>
+<h3 id="简单的-Box-类"><a href="#简单的-Box-类" class="headerlink" title="简单的 Box 类"></a>简单的 Box 类</h3><p>首先检查一个可以操作任何类型对象的非范型 Box 类。它只需要提供两个方法：set，给 box 添加一个对象；get，获取这个对象。</p>
+<pre><code>public class Box {
+  private Object object;
+
+  public void set(Object object) { this.object = object; }
+  public Object get() { return object; }
+}
+</code></pre><p>因为它的方法接受或返回一个 Object，你可以自由的输入任何你想要的，如果它不是原始类型之一。在编译期，没有方法确认这个类是如何被使用的。代码的一部分可能放置一个 Integer 在 box 中并且希望取出 Integer，而另一部分的代码可能错误的输入一个 String，导致一个运行时错误。</p>
+<h3 id="范型版本的-Box-类"><a href="#范型版本的-Box-类" class="headerlink" title="范型版本的 Box 类"></a>范型版本的 Box 类</h3><p>用下面的格式定义一个范型类：</p>
+<pre><code>class name&lt;T1, T2, ..., Tn&gt; { /* ... */ }
+</code></pre><p>类型参数部分，被尖括号分隔的（&lt;&gt;），在类名称的后面。它指明类型参数（也叫类型变量）T1、T2 … 和 Tn。</p>
+<p>更新 Box 类使用范型，通过改变”public class Box”为“public class Box<t>”创建一个范型类型声明。这引出了类型变量 T，它可以在类内部任何地方使用。</t></p>
+<p>变化后，Box 类变为：</p>
+<pre><code>/**
+ * Generic version of the Box class.
+ * @param &lt;T&gt; the type of the value being boxed
+ */
+public class Box&lt;T&gt; {
+  // T stands for &quot;Type&quot;
+  private T t;
+
+  public void set(T t) { this.t = t; }
+  public T get() { return t; }
+}
+</code></pre><p>像你看到的，所有出现的 Object 都被 T 取代了。类型变量可以是你指定的任意<strong>非基本</strong>类型：任意类类型、任意接口类型、任意数组类型，或者甚至是另外一个类型变量。</p>
+<p>同样的技术可以应用来创建通用接口。</p>
+<h3 id="类型参数命名约定"><a href="#类型参数命名约定" class="headerlink" title="类型参数命名约定"></a>类型参数命名约定</h3><p>按照约定，类型参数名称是单个大写字母。这与你已经知道的变量命名约定形成了鲜明对比，并且有很好的理由：如果没有这个约定，就很难知道一个类型变量和一个普通的类或接口名称之间的区别。</p>
+<p>最常用的类型参数名称是：</p>
+<ul>
+<li>E - Element（被 Java 集合框架广泛使用）</li>
+<li>K - Key</li>
+<li>N - Number</li>
+<li>T - Type</li>
+<li>V - Value</li>
+<li>S、U、V 等 - 第二个、第三个、第四个类型</li>
+</ul>
+<p>你会在 Java SE API 和这节课剩下的内容看到这些名称的使用。</p>
+<h3 id="调用和实例化范型类型"><a href="#调用和实例化范型类型" class="headerlink" title="调用和实例化范型类型"></a>调用和实例化范型类型</h3><p>在你的代码中引用范型 Box 类，你必须执行范型类型调用，用一些具体的值代替 T，例如 Integer：</p>
+<pre><code>Box&lt;Integer&gt; integerBox;
+</code></pre><p>你可以理解一个范型类型调用类似与一个普通方法调用，只是不是传递一个参数给一个方法，而是你传递一个类型参数-在这个例子中是 Integer -给 Box 类自己。</p>
+<blockquote>
+<p><strong>Type Parameter 和 Type Argument 术语</strong>：许多开发人员可互换的使用术语“type parameter”和“type argument”，但是这些术语不是相同的。当编码时，提供“type argument”为了创建一个参数化的类型。因此，T 在 Foo<t> 中是一个“type parameter”，String 在 Foo<string> 中是一个“type argument”。在这节课中当使用这些术语时遵守这个定义。</string></t></p>
+</blockquote>
+<p>像任意其他变量声明，这个代码不会实际创建一个 Box 对象。它简单的声明 integerBox 将保持一个指向“Integer 的 Box”的引用，这是 Box<integer> 是如何读的。</integer></p>
+<p>一个范型类型调用通常被称为参数化类型。</p>
+<p>要实例化这个类，通常使用 new 关键字，但是在类名和圆括号中间放置 <integer>：</integer></p>
+<pre><code>Box&lt;Integer&gt; integerBox = new Box&lt;Integer&gt;();
+</code></pre><h3 id="钻石语法"><a href="#钻石语法" class="headerlink" title="钻石语法"></a>钻石语法</h3><p>在 Java SE 7 之后，你可以用一个空类型参数组（&lt;&gt;）替换调用一个范型类构造方法的类型参数，主要编译器可以从上下文中确定或推断类型参数。这对尖括号（&lt;&gt;）被通俗的叫做钻石语法。例如，你可以使用下面的表达式创建一个 Box<integer> 的实例：</integer></p>
+<pre><code>Box&lt;Integer&gt; integerBox = new Box&lt;&gt;();
+</code></pre><p>有关钻石符号和类型推断的更多信息，请参见<a href="http://docs.oracle.com/javase/tutorial/java/generics/genTypeInference.html" target="_blank" rel="noopener">类型推断</a>。</p>
+<h3 id="多类型参数"><a href="#多类型参数" class="headerlink" title="多类型参数"></a>多类型参数</h3><p>如前所述，一个范型类可以有多个类型参数。例如，OrderedPair 范型类，实现了 Pair 范型接口：</p>
+<pre><code>public interface Pair&lt;K, V&gt; {
+  public K getKey();
+  public V getValue();
+}
+
+public class OrderedPair&lt;K, V&gt; implements Pair&lt;K, V&gt; {
+
+  private K key;
+  private V value;
+
+  public OrderedPair(K key, V value) {
+this.key = key;
+this.value = value;
+  }
+
+  public K getKey()    { return key; }
+  public V getValue() { return value; }
+}
+</code></pre><p>下面的表达式创建了 OrderedPair 类的两个实例：</p>
+<pre><code>Pair&lt;String, Integer&gt; p1 = new OrderedPair&lt;String, Integer&gt;(&quot;Even&quot;, 8);
+Pair&lt;String, String&gt;  p2 = new OrderedPair&lt;String, String&gt;(&quot;hello&quot;, &quot;world&quot;);
+</code></pre><p>代码 new OrderedPair&lt;String, Integer&gt; 实例化 K 为一个 String 且 V 为一个 Integer。因此，OrderedPair 的构造函数的各个参数化类型是 String 和 Integer。由于<a href="http://docs.oracle.com/javase/tutorial/java/data/autoboxing.html" target="_blank" rel="noopener">自动装箱</a>，传递一个 String 和一个 int 给这个类是有效的。</p>
+<p>如<a href="http://docs.oracle.com/javase/tutorial/java/generics/types.html#diamond" target="_blank" rel="noopener">钻石语法</a>所述，因为 Java 编译器可以从 OrderedPair&lt;String, Integer&gt; 声明推测 K 和 V 的类型，这些表达式可以使用钻石符号简写：</p>
+<pre><code>OrderedPair&lt;String, Integer&gt; p1 = new OrderedPair&lt;&gt;(&quot;Even&quot;, 8);
+OrderedPair&lt;String, String&gt;  p2 = new OrderedPair&lt;&gt;(&quot;hello&quot;, &quot;world&quot;);
+</code></pre><p>要创建一个范型接口，遵循创建范型类的相同的约定。</p>
+<h3 id="参数化类型"><a href="#参数化类型" class="headerlink" title="参数化类型"></a>参数化类型</h3><p>你也可以用参数化类型（即 List<string>）来代替类型参数（即 K 或 V）。例如，使用 OrderedPair&lt;K, V&gt; 的例子：</string></p>
+<pre><code>OrderedPair&lt;String, Box&lt;Integer&gt;&gt; p = new OrderedPair&lt;&gt;(&quot;primes&quot;, new Box&lt;Integer&gt;(...));
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/19/范型（二）：为什么使用范型？/" rel="next" title="范型（二）：为什么使用范型？">
+                <i class="fa fa-chevron-left"></i> 范型（二）：为什么使用范型？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/26/范型（四）：范型类型之原始类型/" rel="prev" title="范型（四）：范型类型之原始类型">
+                范型（四）：范型类型之原始类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的-Box-类"><span class="nav-number">1.</span> <span class="nav-text">简单的 Box 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范型版本的-Box-类"><span class="nav-number">2.</span> <span class="nav-text">范型版本的 Box 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型参数命名约定"><span class="nav-number">3.</span> <span class="nav-text">类型参数命名约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用和实例化范型类型"><span class="nav-number">4.</span> <span class="nav-text">调用和实例化范型类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钻石语法"><span class="nav-number">5.</span> <span class="nav-text">钻石语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多类型参数"><span class="nav-number">6.</span> <span class="nav-text">多类型参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数化类型"><span class="nav-number">7.</span> <span class="nav-text">参数化类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

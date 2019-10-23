@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="大数据,MySQL,Sqoop,Hive,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="问题描述MySQL 中原始数据有 790W+ 的记录数，在 Sqoop 抽取作业成功的情况下在 Hive 中只有 500W 左右的记录数。">
+<meta name="keywords" content="大数据,MySQL,Sqoop,Hive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过">
+<meta property="og:url" content="http://zhang-jc.github.io/2018/12/11/记录一次-Sqoop-从-MySQL-导入数据到-Hive-问题的排查经过/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="问题描述MySQL 中原始数据有 790W+ 的记录数，在 Sqoop 抽取作业成功的情况下在 Hive 中只有 500W 左右的记录数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhang-jc.github.io/uploads/20181214/namenodeLogs.png">
+<meta property="og:image" content="http://zhang-jc.github.io/uploads/20181214/namenodeInfo.png">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过">
+<meta name="twitter:description" content="问题描述MySQL 中原始数据有 790W+ 的记录数，在 Sqoop 抽取作业成功的情况下在 Hive 中只有 500W 左右的记录数。">
+<meta name="twitter:image" content="http://zhang-jc.github.io/uploads/20181214/namenodeLogs.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2018/12/11/记录一次-Sqoop-从-MySQL-导入数据到-Hive-问题的排查经过/">
+
+
+
+
+
+  <title>记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2018/12/11/记录一次-Sqoop-从-MySQL-导入数据到-Hive-问题的排查经过/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T19:07:03+08:00">
+                2018-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Sqoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Sqoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/11/记录一次-Sqoop-从-MySQL-导入数据到-Hive-问题的排查经过/" class="leancloud_visitors" data-flag-title="记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>MySQL 中原始数据有 790W+ 的记录数，在 Sqoop 抽取作业成功的情况下在 Hive 中只有 500W 左右的记录数。</p>
+<a id="more"></a>
+<h4 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h4><h5 id="数据导入脚本-Log"><a href="#数据导入脚本-Log" class="headerlink" title="数据导入脚本 Log"></a>数据导入脚本 Log</h5><p>通过 Log 可以发现以下信息：</p>
+<ol>
+<li>该 Sqoop 任务被分解为 4 个 MapTask。</li>
+<li>MapTask 执行期间有异常，是网络异常导致 MySQL 连接不成功。</li>
+<li>Sqoop 任务对应的 MR 执行过程中总的被调起 9 个 MapTask，其中 3 个失败、2 个被 kill，理论上剩余的 4 个 MapTask 是成功执行的。</li>
+<li>Sqoop 导入对应的 MR 只有 MapTask，且 MapTask 的数据记录数为 790W+。所以，单纯看 MR 的输出是正常的。</li>
+<li>Sqoop 导入完成后，紧跟着有一个读取 Sqoop 目标表数据的 insert overwrite 的操作。该操作只被分解为 2 个 MapTask，说明原数据文件只有两个块。</li>
+<li>根据以上信息说明 Sqoop 之后确实只生成了 2 个数据文件，有两个文件丢失了。</li>
+</ol>
+<p>详细原始 Log 信息见附件：<a href="/uploads/20181214/sqoop.txt">Sqoop 执行日志</a></p>
+<h5 id="查看-Sqoop-任务对应-MR-的执行日志"><a href="#查看-Sqoop-任务对应-MR-的执行日志" class="headerlink" title="查看 Sqoop 任务对应 MR 的执行日志"></a>查看 Sqoop 任务对应 MR 的执行日志</h5><p>根据上面的 Log 中的信息，从 HDFS 上查找对应的日志。Yarn 所有的应用执行日志在 HDFS 的 /data/hadoop/yarn-logs/hadoop/logs/ 目录下。从该目录下查找应用程序 application_1533196506314_4460157 的日志。日志会包含 MR 在各个节点上执行的信息。</p>
+<p>从 Log 中发现以下异常信息：</p>
+<pre><code>2018-12-10 00:42:30,595 FATAL [IPC Server handler 17 on 8046] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Task: attempt_1533196506314_4460157_m_000001_0 - exited : org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /user/hive/warehouse/ods.db/bss_customer_fj/_SCRATCH0.3130352759450352/dt=20181209/_temporary/1/_temporary/attempt_1533196506314_4460157_m_000001_0/part-m-00001 (inode 761544109): File does not exist. Holder DFSClient_attempt_1533196506314_4460157_m_000001_0_-1729942809_1 does not have any open files.
+</code></pre><p>所以，怀疑是 MR 在执行结束时，将临时文件移动到正式目录时发生错误。</p>
+<p>原始 Log 文件见目录：</p>
+<p><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-12_27463.txt">192-168-72-12_27463</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-24_16310.txt">192-168-72-24_16310</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-84_13498.txt">192-168-72-84_13498</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-93_53778.txt">192-168-72-93_53778</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-23_18284.txt">192-168-72-23_18284</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-73_2363.txt">192-168-72-73_2363</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-88_24481.txt">192-168-72-88_24481</a><br><a href="/uploads/20181214/application_1533196506314_4460157/192-168-72-94_54353.txt">192-168-72-94_54353</a></p>
+<h5 id="查看-DN-Log-信息"><a href="#查看-DN-Log-信息" class="headerlink" title="查看 DN Log 信息"></a>查看 DN Log 信息</h5><p>根据上面的 Log 信息，发现 DN 节点 192-168-72-24 上的 MapTask 各有以下异常信息。</p>
+<p>192-168-72-24 异常信息：</p>
+<pre><code>2018-12-10 00:42:34,410 WARN [main] org.apache.hadoop.mapred.YarnChild: Exception running child : org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /user/hive/warehouse/ods.db/bss_customer_fj/_SCRATCH0.3130352759450352/dt=20181209/_temporary/1/_temporary/attempt_1533196506314_4460157_m_000000_0/part-m-00000 (inode 761544157): File does not exist. Holder DFSClient_attempt_1533196506314_4460157_m_000000_0_798513081_1 does not have any open files.
+</code></pre><p>所以怀疑是 MapTask 的最后阶段写文件的时候未成功。检查该 DN 节点的 Log 发现以下异常信息：</p>
+<pre><code>2018-12-10 00:42:32,643 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: BlockSender.sendChunks() exception:
+java.io.IOException: 断开的管道
+        at sun.nio.ch.FileChannelImpl.transferTo0(Native Method)
+        at sun.nio.ch.FileChannelImpl.transferToDirectlyInternal(FileChannelImpl.java:428)
+        at sun.nio.ch.FileChannelImpl.transferToDirectly(FileChannelImpl.java:493)
+        at sun.nio.ch.FileChannelImpl.transferTo(FileChannelImpl.java:608)
+        at org.apache.hadoop.net.SocketOutputStream.transferToFully(SocketOutputStream.java:223)
+        at org.apache.hadoop.hdfs.server.datanode.BlockSender.sendPacket(BlockSender.java:583)
+        at org.apache.hadoop.hdfs.server.datanode.BlockSender.doSendBlock(BlockSender.java:763)
+        at org.apache.hadoop.hdfs.server.datanode.BlockSender.sendBlock(BlockSender.java:710)
+        at org.apache.hadoop.hdfs.server.datanode.DataXceiver.readBlock(DataXceiver.java:552)
+        at org.apache.hadoop.hdfs.protocol.datatransfer.Receiver.opReadBlock(Receiver.java:116)
+        at org.apache.hadoop.hdfs.protocol.datatransfer.Receiver.processOp(Receiver.java:71)
+        at org.apache.hadoop.hdfs.server.datanode.DataXceiver.run(DataXceiver.java:253)
+        at java.lang.Thread.run(Thread.java:748)
+</code></pre><p>百度之后发现该异常信息跟 DN 的一个配置有关系，具体配置项是 DN 可以同时处理的文件上限。对于老版本配置项名称为“dfs.datanode.max.xcievers”，对于新版本配置项名称改为“dfs.datanode.max.transfer.threads”。该参数的默认值为 4096，所以需要修改为 8192。</p>
+<h5 id="查看-NN-Log-信息"><a href="#查看-NN-Log-信息" class="headerlink" title="查看 NN Log 信息"></a>查看 NN Log 信息</h5><p>默认的，Log4j 输出的 NameNode 日志文件只保留最近的 20 个文件。因为 NN 的 Log 信息比较多，20 个文件保存的日志不足 1 天，异常时间的日志已经被冲掉了。</p>
+<p><img src="/uploads/20181214/namenodeLogs.png" alt="NameNode Log"></p>
+<h5 id="查看-NN-信息"><a href="#查看-NN-信息" class="headerlink" title="查看 NN 信息"></a>查看 NN 信息</h5><p>通过 NN WebUI 查看发现 NN 内存的使用已经 70% 左右，负载已经比较高。</p>
+<p><img src="/uploads/20181214/namenodeInfo.png" alt="NameNode Info"></p>
+<h5 id="处理措施"><a href="#处理措施" class="headerlink" title="处理措施"></a>处理措施</h5><p>综合以上信息，其实问题发生的根本原因未能查明。基于对 Hadoop 了解的深度、精力及对故障恢复的容忍程度的考虑，待定位根本原因再解决问题的方案不可控。所以，采取以下改进措施：</p>
+<p>（1）修改 DN 最大处理文件数量上限至 8192。<br>（2）将 NN 内存扩展到 100G。<br>（3）修改 Sqoop 源代码，当落地到目标 HDFS 目录下的文件数量与 MapTask 数量不一致时返回错误状态，并由调度系统进行重新抽取。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/Sqoop/" rel="tag"># Sqoop</a>
+          
+            <a href="/tags/Hive/" rel="tag"># Hive</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/30/CentOS-6-8-Python3-遇到的坑/" rel="next" title="CentOS 6.8 Python3 遇到的坑">
+                <i class="fa fa-chevron-left"></i> CentOS 6.8 Python3 遇到的坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/28/Sqoop-支持-ORC-文件格式/" rel="prev" title="Sqoop 支持 ORC 文件格式">
+                Sqoop 支持 ORC 文件格式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排查过程"><span class="nav-number">2.</span> <span class="nav-text">排查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据导入脚本-Log"><span class="nav-number">2.1.</span> <span class="nav-text">数据导入脚本 Log</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看-Sqoop-任务对应-MR-的执行日志"><span class="nav-number">2.2.</span> <span class="nav-text">查看 Sqoop 任务对应 MR 的执行日志</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看-DN-Log-信息"><span class="nav-number">2.3.</span> <span class="nav-text">查看 DN Log 信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看-NN-Log-信息"><span class="nav-number">2.4.</span> <span class="nav-text">查看 NN Log 信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看-NN-信息"><span class="nav-number">2.5.</span> <span class="nav-text">查看 NN 信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理措施"><span class="nav-number">2.6.</span> <span class="nav-text">处理措施</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

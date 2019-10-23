@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="类型推断是 Java 编译器的能力，通过查看每个方法调用和相应的声明以确定类型参数（或多个类型参数）使调用是适当的。推断算法确定参数的类型，并且如果可用的话，这个类型会赋值给结果或者返回。最终，推断算法尝试找出对所有参数都适用的最明确的类型。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="范型（九）：类型推断">
+<meta property="og:url" content="http://zhang-jc.github.io/2016/11/30/范型（九）：类型推断/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="类型推断是 Java 编译器的能力，通过查看每个方法调用和相应的声明以确定类型参数（或多个类型参数）使调用是适当的。推断算法确定参数的类型，并且如果可用的话，这个类型会赋值给结果或者返回。最终，推断算法尝试找出对所有参数都适用的最明确的类型。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="范型（九）：类型推断">
+<meta name="twitter:description" content="类型推断是 Java 编译器的能力，通过查看每个方法调用和相应的声明以确定类型参数（或多个类型参数）使调用是适当的。推断算法确定参数的类型，并且如果可用的话，这个类型会赋值给结果或者返回。最终，推断算法尝试找出对所有参数都适用的最明确的类型。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2016/11/30/范型（九）：类型推断/">
+
+
+
+
+
+  <title>范型（九）：类型推断 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2016/11/30/范型（九）：类型推断/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">范型（九）：类型推断</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-30T14:22:37+08:00">
+                2016-11-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/30/范型（九）：类型推断/" class="leancloud_visitors" data-flag-title="范型（九）：类型推断">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>类型推断是 Java 编译器的能力，通过查看每个方法调用和相应的声明以确定类型参数（或多个类型参数）使调用是适当的。推断算法确定参数的类型，并且如果可用的话，这个类型会赋值给结果或者返回。最终，推断算法尝试找出对所有参数都适用的最明确的类型。</p>
+<a id="more"></a>
+<p>为了说明这最后一点，在下面的例子中，类型推断确定传递给 pick 方法的参数的类型是 Serializable：</p>
+<pre><code>static &lt;T&gt; T pick(T a1, T a2) { return a2; }
+Serializable s = pick(&quot;d&quot;, new ArrayList&lt;String&gt;());
+</code></pre><h4 id="类型推断和范型方法"><a href="#类型推断和范型方法" class="headerlink" title="类型推断和范型方法"></a>类型推断和范型方法</h4><p><a href="http://docs.oracle.com/javase/tutorial/java/generics/methods.html" target="_blank" rel="noopener">范型方法</a>介绍的类型推断，这使你像调用普通方法一样调用一个范型方法，不需要指定尖括号间的类型。看下面的例子，<a href="http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/java/generics/examples/BoxDemo.java" target="_blank" rel="noopener">BoxDemo</a>，需要 <a href="http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/java/generics/examples/Box.java" target="_blank" rel="noopener">Box</a> 类。</p>
+<pre><code>public class BoxDemo {
+
+  public static &lt;U&gt; void addBox(U u,
+      java.util.List&lt;Box&lt;U&gt;&gt; boxes) {
+    Box&lt;U&gt; box = new Box&lt;&gt;();
+    box.set(u);
+    boxes.add(box);
+  }
+
+  public static &lt;U&gt; void outputBoxes(java.util.List&lt;Box&lt;U&gt;&gt; boxes) {
+    int counter = 0;
+    for (Box&lt;U&gt; box: boxes) {
+      U boxContents = box.get();
+      System.out.println(&quot;Box #&quot; + counter + &quot; contains [&quot; + boxContents.toString() + &quot;]&quot;);
+      counter++;
+    }
+  }
+
+  public static void main(String[] args) {
+    java.util.ArrayList&lt;Box&lt;Integer&gt;&gt; listOfIntegerBoxes = new java.util.ArrayList&lt;&gt;();
+    BoxDemo.&lt;Integer&gt;addBox(Integer.valueOf(10), listOfIntegerBoxes);
+    BoxDemo.addBox(Integer.valueOf(20), listOfIntegerBoxes);
+    BoxDemo.addBox(Integer.valueOf(30), listOfIntegerBoxes);
+    BoxDemo.outputBoxes(listOfIntegerBoxes);
+  }
+}
+</code></pre><p>下面是这个例子的输出：</p>
+<pre><code>Box #0 contains [10]
+Box #1 contains [20]
+Box #2 contains [30]
+</code></pre><p>范型方法 addBox 定义了一个命名为 U 的类型参数。通常，Java 编译器可以推断出范型方法调用的类型参数。因此，大多数场景下，不需要指定它们。例如，调用范型方法 addBox，你可以指定类型参数如下：</p>
+<pre><code>BoxDemo.**&lt;Integer&gt;**addBox(Integer.valueOf(10), listOfIntegerBoxes);
+</code></pre><p>或者，忽略类型指定，Java 编译器自动推断（从方法的参数）类型参数是 Integer：</p>
+<pre><code>BoxDemo.addBox(Integer.valueOf(20), listOfIntegerBoxes);
+</code></pre><h4 id="类型推断和实例化范型类"><a href="#类型推断和实例化范型类" class="headerlink" title="类型推断和实例化范型类"></a>类型推断和实例化范型类</h4><p>可以用一个空的类型参数集（&lt;&gt;）代替调用范型类构造方法需要的类型参数，只要编译器可以从上下文类型参数。这对尖括号被通俗的叫做<a href="http://docs.oracle.com/javase/tutorial/java/generics/types.html#diamond" target="_blank" rel="noopener">钻石语法</a>。</p>
+<p>例如，看下面的变量声明：</p>
+<pre><code>Map&lt;String, List&lt;String&gt;&gt; myMap = new HashMap&lt;String, List&lt;String&gt;&gt;();
+</code></pre><p>可以用一个空类型参数集（&lt;&gt;）替换参数化类型：</p>
+<pre><code>Map&lt;String, List&lt;String&gt;&gt; myMap = new HashMap&lt;&gt;();
+</code></pre><p>注意，为了在范型类实例化过程中利用类型推断，必须使用钻石语法。在下面的例子中，编译器生成一个未检查的类型转换告警，因为 HashMap() 构造方法引用的是 HashMap 原始类型，而不是 Map&lt;String, List<string>&gt; 类型：</string></p>
+<pre><code>Map&lt;String, List&lt;String&gt;&gt; myMap = new HashMap(); // unchecked conversion warning
+</code></pre><h4 id="类型推断和范型类及非范型类的范型构造方法"><a href="#类型推断和范型类及非范型类的范型构造方法" class="headerlink" title="类型推断和范型类及非范型类的范型构造方法"></a>类型推断和范型类及非范型类的范型构造方法</h4><p>注意在范型类及非范型类中构造方法都可以是范型方法（或者说，声明自己的正式类型参数）。考虑下面的例子：</p>
+<pre><code>class MyClass&lt;X&gt; {
+  &lt;T&gt; MyClass(T t) {
+    // ...
+  }
+}
+</code></pre><p>考虑下面 MyClass 类的实例化：</p>
+<pre><code>new MyClass&lt;Integer&gt;(&quot;&quot;)
+</code></pre><p>这个表达式创建了参数化类型 MyClass<integer> 的一个实例；表达式明确为范型类 MyClass<x> 的类型参数 X 指定了 Integer 类型。注意，这个范型类的构造方法包含一个正式的类型参数 T。编译器推断类型 String 为这个范型类构造方法的正式类型参数 T 的类型（因为这个构造方法的实参是一个 String 对象）。</x></integer></p>
+<p>Java SE 7 之前的编译器可以推断范型构造方法的实际类型参数，就像范型方法。但是，Java SE 7 和之后的编译器可以推断被实例化范型类的实际类型参数，如果使用钻石语法。考虑下面的例子：</p>
+<pre><code>MyClass&lt;Integer&gt; myObject = new MyClass&lt;&gt;(&quot;&quot;);
+</code></pre><p>在这个例子中，编译器推断出范型类 MyClass<x> 的正式类型参数 X 的类型为 Integer。推断出这个范型类构造方法的正式类型参数 T 的类型为 String。</x></p>
+<blockquote>
+<p>注：特别注意，推断算法只用调用参数、目标类型和可能一个明显的希望的返回类型来推断类型。推断算法不使用程序中后面的结果。</p>
+</blockquote>
+<h4 id="目标类型"><a href="#目标类型" class="headerlink" title="目标类型"></a>目标类型</h4><p>Java 编译器使用目标类型来推断一个范型方法调用的类型参数。一个表达式的目标类型是基于表达式 Java 编译器期望的数据类型。考虑 Collections.emptyList 方法，声明如下：</p>
+<pre><code>static &lt;T&gt; List&lt;T&gt; emptyList();
+</code></pre><p>考虑下面的赋值表达式：</p>
+<pre><code>List&lt;String&gt; listOne = Collections.emptyList();
+</code></pre><p>这个表达式期望一个 List<string> 的实例；这个数据类型就是目标类型。因为 emptyList 方法返回类型 List<t> 的值，编译器推断类型参数 T 必须是值 String。这在 Java SE 7 和 8 中都可行。可选择的，可以使用类型依据并指定 T 的值，如下：</t></string></p>
+<pre><code>List&lt;String&gt; listOne = Collections.&lt;String&gt;emptyList();
+</code></pre><p>然而，在这个上下文中这不是必须的。而在别的上下文中这是必须的。考虑下面的例子：</p>
+<pre><code>void processStringList(List&lt;String&gt; stringList) {
+  // process stringList
+}
+</code></pre><p>假设你想用一个空列表调用方法 processStringList。在 Java SE 7 中，下面的表达式不会编译：</p>
+<pre><code>processStringList(Collections.emptyList());
+</code></pre><p>Java SE 7 编译器生成一个像下面一样的错误的信息：</p>
+<pre><code>List&lt;Object&gt; cannot be converted to List&lt;String&gt;
+</code></pre><p>编译器需要类型参数 T 的一个值，所以从 Object 开始。因此，Collections.emptyList 调用返回一个 List<object> 的值，这跟 processStringList 方法不兼容。因此，在 Java SE 7 中，必须指定类型参数的值，如下：</object></p>
+<pre><code>processStringList(Collections.&lt;String&gt;emptyList());
+</code></pre><p>这在 Java SE 8 中不再是必须的。什么是目标类型的概念已经被延伸到包含方法参数，像方法 processStringList 的参数。在这个案例中，processStringList 需要一个类型为 List<string> 的参数。方法 Collections.emptyList 返回一个 List<t> 的值，所以使用目标类型 List<string>，编译器推断类型参数 T 的值为 String。因此，Java SE 8 中，下面的语句可以编译：</string></t></string></p>
+<pre><code>processStringList(Collections.emptyList());
+</code></pre><p>查看 <a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" target="_blank" rel="noopener">Lambda 表达式</a> 中的 <a href="http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html#target-typing" target="_blank" rel="noopener">目标类型</a> 获取更多信息。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/27/范型（八）：范型、继承和子类型/" rel="next" title="范型（八）：范型、继承和子类型">
+                <i class="fa fa-chevron-left"></i> 范型（八）：范型、继承和子类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/04/范型（十）：通配符/" rel="prev" title="范型（十）：通配符">
+                范型（十）：通配符 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型推断和范型方法"><span class="nav-number">1.</span> <span class="nav-text">类型推断和范型方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型推断和实例化范型类"><span class="nav-number">2.</span> <span class="nav-text">类型推断和实例化范型类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型推断和范型类及非范型类的范型构造方法"><span class="nav-number">3.</span> <span class="nav-text">类型推断和范型类及非范型类的范型构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目标类型"><span class="nav-number">4.</span> <span class="nav-text">目标类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

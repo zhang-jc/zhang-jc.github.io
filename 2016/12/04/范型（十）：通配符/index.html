@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在范型代码中，问好（?），被叫做通配符，表示一个未知的类型。通配符可以被用在多种情况：作为一个参数的类型、域或本地变量；有时作为返回类型（虽然编程的最佳实践是更明确）。通配符永远不会被用作范型方法调用的类型参数、范型类实例化的创建或者超类型。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="范型（十）：通配符">
+<meta property="og:url" content="http://zhang-jc.github.io/2016/12/04/范型（十）：通配符/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="在范型代码中，问好（?），被叫做通配符，表示一个未知的类型。通配符可以被用在多种情况：作为一个参数的类型、域或本地变量；有时作为返回类型（虽然编程的最佳实践是更明确）。通配符永远不会被用作范型方法调用的类型参数、范型类实例化的创建或者超类型。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://zhang-jc.github.io/uploads/20161203/generics-listParent.gif">
+<meta property="og:image" content="http://zhang-jc.github.io/uploads/20161203/generics-wildcardSubtyping.gif">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="范型（十）：通配符">
+<meta name="twitter:description" content="在范型代码中，问好（?），被叫做通配符，表示一个未知的类型。通配符可以被用在多种情况：作为一个参数的类型、域或本地变量；有时作为返回类型（虽然编程的最佳实践是更明确）。通配符永远不会被用作范型方法调用的类型参数、范型类实例化的创建或者超类型。">
+<meta name="twitter:image" content="http://zhang-jc.github.io/uploads/20161203/generics-listParent.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2016/12/04/范型（十）：通配符/">
+
+
+
+
+
+  <title>范型（十）：通配符 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2016/12/04/范型（十）：通配符/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">范型（十）：通配符</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-04T18:03:45+08:00">
+                2016-12-04
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/" itemprop="url" rel="index">
+                    <span itemprop="name">语言</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/语言/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/04/范型（十）：通配符/" class="leancloud_visitors" data-flag-title="范型（十）：通配符">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在范型代码中，问好（?），被叫做通配符，表示一个未知的类型。通配符可以被用在多种情况：作为一个参数的类型、域或本地变量；有时作为返回类型（虽然编程的最佳实践是更明确）。通配符永远不会被用作范型方法调用的类型参数、范型类实例化的创建或者超类型。</p>
+<a id="more"></a>
+<p>下面的章节更细致的讨论通配符，包括上限通配符、下限通配符和通配符匹配。</p>
+<h3 id="上限通配符"><a href="#上限通配符" class="headerlink" title="上限通配符"></a>上限通配符</h3><p>可以用上限通配符可以放宽对变量的限制。例如，你想写一个工作于 List<integer>、List<double> 和 List<number> 的方法；你可以通过使用上限通配符实现。</number></double></integer></p>
+<p>声明一个上限通配符，使用通配符字符（‘?‘），后面跟着 extends 关键字，随后是它的上限。注意，关于这点，extends 被用作一般意义上的“extends”（对类而言）或者“implements“（对接口而言）。</p>
+<p>为了写工作与 Number 和 Number 子类型（例如：Integer、Double 和 Float）列表的方法，你需要指定 List&lt;? extends Number&gt;。List<number> 比 List&lt;? extends Number&gt; 更加严格，因为前者只匹配 Number 类型的列表，然而后者匹配 Number 或者它的子类的列表。</number></p>
+<p>考虑下面的 process 方法：</p>
+<pre><code>public static void process(List&lt;? extends Foo&gt; list) { /* ... */ }
+</code></pre><p>上限通配符，&lt;? extends Foo&gt;，这里 Foo 是任意匹配 Foo 和任意 Foo 的子类型。process 方法可以作为类型 Foo 访问列表元素：</p>
+<pre><code>public static void process(List&lt;? extends Foo&gt; list) {
+  for (Foo elem : list) {
+    // ...
+  }
+}
+</code></pre><p>在 foreach 语句中，elem 变量遍历列表中的每个元素。在 Foo 类中定义的所有方法可用于 elem。</p>
+<p>sumOfList 方法返回在列表中数字的和：</p>
+<pre><code>public static double sumOfList(List&lt;? extends Number&gt; list) {
+  double s = 0.0;
+  for (Number n : list)
+    s += n.doubleValue();
+  return s;
+}
+</code></pre><p>下面的代码，使用 Integer 对象的列表，打印 sum = 6.0：</p>
+<pre><code>List&lt;Integer&gt; li = Arrays.asList(1, 2, 3);
+System.out.println(&quot;sum = &quot; + sumOfList(li));
+</code></pre><p>Double 数值的列表可以使用同样的 sumOfList 方法。下面的代码打印 sum = 7.0：</p>
+<p>List<double> ld = Arrays.asList(1.2, 2.3, 3.5);<br>System.out.println(“sum = “ + sumOfList(ld));</double></p>
+<h3 id="无界通配符"><a href="#无界通配符" class="headerlink" title="无界通配符"></a>无界通配符</h3><p>无界通配符类型用通配符字符（?）被指定，例如，List&lt;?&gt;。这被叫做一个未知类型的列表。有两种情况无界通配符是有用的方法：</p>
+<ul>
+<li>如果您正在编写一个可以使用 Object 类中提供的功能来实现的方法。</li>
+<li>当代码使用不依赖类型参数的泛型类中的方法时。例如，List.size 或 List.clear。事实上，Class&lt;?&gt; 如此频繁的被使用，因为 Class<t> 中的大部分方法不依赖 T。</t></li>
+</ul>
+<p>考虑下面的方法，printList：</p>
+<pre><code>public static void printList(List&lt;Object&gt; list) {
+  for (Object elem : list)
+    System.out.println(elem + &quot; &quot;);
+  System.out.println();
+}
+</code></pre><p>printList 的目标是打印任何类型的列表，但是这个目标却不能实现 - 它只能打印 Object 的列表实例；它不能打印 List<integer>、List<string>、List<double> 等，因为它们不是 List<object> 的子类型。为了写一个范型 printList 方法，使用 List&lt;?&gt;：</object></double></string></integer></p>
+<pre><code>public static void printList(List&lt;?&gt; list) {
+  for (Object elem: list)
+    System.out.print(elem + &quot; &quot;);
+  System.out.println();
+}
+</code></pre><p>因为对于任何具体类型 A，List<a> 是 List&lt;?&gt; 的一个子类型，你可以使用 printList 打印任何类型的列表：</a></p>
+<pre><code>List&lt;Integer&gt; li = Arrays.asList(1, 2, 3);
+List&lt;String&gt;  ls = Arrays.asList(&quot;one&quot;, &quot;two&quot;, &quot;three&quot;);
+printList(li);
+printList(ls);
+</code></pre><blockquote>
+<p>备注：<a href="https://docs.oracle.com/javase/8/docs/api/java/util/Arrays.html#asList-T...-" target="_blank" rel="noopener">Arrays.asList</a> 在这节课中的例子中被用到。这个静态工厂方法转变指定的数组并返回一个固定大小的列表。</p>
+</blockquote>
+<p>注意到 List<object> 和 List&lt;?&gt; 不是一样的很重要。你可以插入一个 Object，或 Object 的任意子类型，到 List<object>。但是你只能插入 null 到 List&lt;?&gt;。<a href="http://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html" target="_blank" rel="noopener">通配符使用指南</a> 一节有更多信息关于如何确定在一个给定的情况下应该用什么样的通配符，如果有的话。</object></object></p>
+<h3 id="下限通配符"><a href="#下限通配符" class="headerlink" title="下限通配符"></a>下限通配符</h3><p><a href="http://docs.oracle.com/javase/tutorial/java/generics/upperBounded.html" target="_blank" rel="noopener">上限通配符</a>一节展示了上限通配符限制一个未知类型到一个指定类型或这个类型的子类型，并且使用 extends 关键字来表示。同样的方法，下限通配符限制未知类型为一个指定的类型或这个类型的超类型。</p>
+<p>下限通配符用通配符字符（?）表示，跟着 super 关键字，后面跟着它的下限：&lt;? super A&gt;。</p>
+<blockquote>
+<p>注意：你可以为一个通配符指定上限，或者你可以下限，但是不能同时指定。</p>
+</blockquote>
+<p>你想写一个将 Integer 对象放入列表的方法。为了最大化灵活性，你会希望对 List<integer>、List<number> 和 List<object> 都可用 - 任何可保存 Integer 值的。</object></number></integer></p>
+<p>为了写可用于 Integer 和 Integer 超类型（如：Integer、Number 和 Object）的列表的方法，你应该指定 List&lt;? super Integer&gt;。List<integer> 比 List&lt;? super Integer&gt; 限制更严格，因为前者只匹配类型 Integer 的列表，然而后者匹配任何 Integer 超类的列表。</integer></p>
+<p>下面的代码添加数字 1 到 10 到一个列表的末尾：</p>
+<pre><code>public static void addNumbers(List&lt;? super Integer&gt; list) {
+  for (int i = 1; i &lt;= 10; i++) {
+    list.add(i);
+  }
+}
+</code></pre><p><a href="http://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html" target="_blank" rel="noopener">通配符使用指南</a> 一节提供关于什么时候使用上限通配符和什么时候使用下限通配符的指南。</p>
+<h3 id="通配符和子类型"><a href="#通配符和子类型" class="headerlink" title="通配符和子类型"></a>通配符和子类型</h3><p>像<a href="http://docs.oracle.com/javase/tutorial/java/generics/inheritance.html" target="_blank" rel="noopener">范型、继承和子类型</a>中描述的，范型类或接口不相关，仅仅因为它们的类型间有关系。然而，可以使用通配符来创建范型类或接口间的关系。</p>
+<p>给出下面两个常规（非范型）类：</p>
+<pre><code>class A { /* ... */ }
+class B extends A { /* ... */ }
+</code></pre><p>有理由写下面的代码：</p>
+<pre><code>B b = new B();
+A a = b;
+</code></pre><p>这个例子显示常规类的继承遵循这样的子类型规则：类 B 是类 A 的一个子类型，如果 B 扩展 A。这个规则不适用于范型类型：</p>
+<pre><code>List&lt;B&gt; lb = new ArrayList&lt;&gt;();
+List&lt;A&gt; la = lb;   // compile-time error
+</code></pre><p>给定 Integer 是 Number 的一个子类型，List<integer> 和 List<number> 之间是什么关系？</number></integer></p>
+<p>公共的父类是 List&lt;?&gt;。<img src="/uploads/20161203/generics-listParent.gif" alt="generics-listParent"></p>
+<p>虽然 Integer 是 Number 的一个子类型，List<integer> 不是 List<number> 的一个子类型，并且事实上，这两个类型没有关系。List<number> 和 List<integer> 的公共父类是 List&lt;?&gt;。</integer></number></number></integer></p>
+<p>为了在这些类间创建关系，因此代码可以通过 List<integer> 的元素访问 Number 的方法，那么使用上限通配符：</integer></p>
+<pre><code>List&lt;? extends Integer&gt; intList = new ArrayList&lt;&gt;();
+List&lt;? extends Number&gt;  numList = intList;  // OK. List&lt;? extends Integer&gt; is a subtype of List&lt;? extends Number&gt;
+</code></pre><p>因为 Integer 是 Number 的一个子类型，且 numList 是 Number 对象的一个列表，现在 intList（Integer 对象的列表）和 numList 之间存在关系了。下面的图片展示了几种用上限通配符和下限通配符声明的 List 类之间的关系。</p>
+<p>几种范型 List 类声明的层次。<img src="/uploads/20161203/generics-wildcardSubtyping.gif" alt="generics-wildcardSubtyping"></p>
+<p><a href="http://docs.oracle.com/javase/tutorial/java/generics/wildcardGuidelines.html" target="_blank" rel="noopener">通配符使用指南</a> 一节有更多关于使用上限和下限通配符结果的信息。</p>
+<h3 id="通配符匹配和辅助方法"><a href="#通配符匹配和辅助方法" class="headerlink" title="通配符匹配和辅助方法"></a>通配符匹配和辅助方法</h3><p>在一些场景中，编译器推断通配符的类型。例如，一个列表可能被定义为 List&lt;?&gt;，但是当评估一个表达式时，编译器从代码中推断一个特定的类型。这种情况被称为通配符匹配。</p>
+<p>在大多数情况下，你不需要担心通配符匹配，除了当你看到一个错误消息包含短语“捕捉“。</p>
+<p><a href="http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/java/generics/examples/WildcardError.java" target="_blank" rel="noopener">WildcardError</a> 例子当编译时产生一个匹配错误：</p>
+<pre><code>import java.util.List;
+
+public class WildcardError {
+
+  void foo(List&lt;?&gt; i) {
+    i.set(0, i.get(0));
+  }
+}
+</code></pre><p>在这个例子中，编译器处理 i 输入参数为类型 Object。当 foo 方法调用 <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html#set-int-E-" target="_blank" rel="noopener">List.set(int, E)</a>，编译器不能确定被插入列表中的对象的类型，并且会产生一个错误。当这种类型错误发生时，它通常意味着编译器确信你赋值错误类型给一个变量。范型被添加到 Java 语言中就是因为这个原因 - 在编译期增强类型安全。</p>
+<p>通过 Oracle 的 JDK 7 javac 实现编译 WildcardError 例子时产生下面的错误：</p>
+<pre><code>WildcardError.java:6: error: method set in interface List&lt;E&gt; cannot be applied to given types;
+    i.set(0, i.get(0));
+     ^
+  required: int,CAP#1
+  found: int,Object
+  reason: actual argument Object cannot be converted to CAP#1 by method invocation conversion
+  where E is a type-variable:
+    E extends Object declared in interface List
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+1 error
+</code></pre><p>在这个例子中，代码尝试执行一个安全操作，那么如何解决编译器错误呢？可以通过写一个匹配通配符的私有辅助方法来解决这个问题。在这个案例中，你可以通过创建私有辅助方法 fooHelper 解决这个问题，像 <a href="http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/java/generics/examples/WildcardFixed.java" target="_blank" rel="noopener">WildcardFixed</a> 中显示的：</p>
+<pre><code>public class WildcardFixed {
+
+  void foo(List&lt;?&gt; i) {
+    fooHelper(i);
+  }
+
+
+  // Helper method created so that the wildcard can be captured
+  // through type inference.
+  private &lt;T&gt; void fooHelper(List&lt;T&gt; l) {
+    l.set(0, l.get(0));
+  }
+
+}
+</code></pre><p>感谢辅助方法，编译器使用推断确定 T 是 CAP#1，在调用中的匹配变量。现在这个例子编译成功。</p>
+<p>按照惯例，辅助方法一般命名为<em>原方法名Helper</em>。</p>
+<p>现在考虑一个更复杂的例子，<a href="http://docs.oracle.com/javase/tutorial/displayCode.html?code=http://docs.oracle.com/javase/tutorial/java/generics/examples/WildcardErrorBad.java" target="_blank" rel="noopener">WildcardErrorBad</a>：</p>
+<pre><code>import java.util.List;
+
+public class WildcardErrorBad {
+
+  void swapFirst(List&lt;? extends Number&gt; l1, List&lt;? extends Number&gt; l2) {
+    Number temp = l1.get(0);
+    l1.set(0, l2.get(0)); // expected a CAP#1 extends Number,
+                          // got a CAP#2 extends Number;
+                          // same bound, but different types
+    l2.set(0, temp);      // expected a CAP#1 extends Number,
+                          // got a Number
+  }
+}
+</code></pre><p>在这个例子中，代码尝试一个不安全的操作。例如，考虑下面 swapFirst 方法的调用：</p>
+<pre><code>List&lt;Integer&gt; li = Arrays.asList(1, 2, 3);
+List&lt;Double&gt;  ld = Arrays.asList(10.10, 20.20, 30.30);
+swapFirst(li, ld);
+</code></pre><p>因为 List<integer> 和 List<double> 都符合 List&lt;? extends Number&gt; 的标准，明显不正确的是取 Integer 列表中的一个值并尝试放入 Double 值的列表中。</double></integer></p>
+<p>用 Oracle JDK javac 编译器编译会生成下面的错误：</p>
+<pre><code>WildcardErrorBad.java:7: error: method set in interface List&lt;E&gt; cannot be applied to given types;
+      l1.set(0, l2.get(0)); // expected a CAP#1 extends Number,
+        ^
+  required: int,CAP#1
+  found: int,Number
+  reason: actual argument Number cannot be converted to CAP#1 by method invocation conversion
+  where E is a type-variable:
+    E extends Object declared in interface List
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Number from capture of ? extends Number
+WildcardErrorBad.java:10: error: method set in interface List&lt;E&gt; cannot be applied to given types;
+      l2.set(0, temp);      // expected a CAP#1 extends Number,
+        ^
+  required: int,CAP#1
+  found: int,Number
+  reason: actual argument Number cannot be converted to CAP#1 by method invocation conversion
+  where E is a type-variable:
+    E extends Object declared in interface List
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Number from capture of ? extends Number
+WildcardErrorBad.java:15: error: method set in interface List&lt;E&gt; cannot be applied to given types;
+        i.set(0, i.get(0));
+         ^
+  required: int,CAP#1
+  found: int,Object
+  reason: actual argument Object cannot be converted to CAP#1 by method invocation conversion
+  where E is a type-variable:
+    E extends Object declared in interface List
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+3 errors
+</code></pre><p>针对这个问题没有辅助方法可以使用，因为代码是基础错误。</p>
+<h3 id="通配符使用指"><a href="#通配符使用指" class="headerlink" title="通配符使用指"></a>通配符使用指</h3><p>当学习使用范型编程时一个混乱的方面是确定何时使用上限通配符和何时使用下限通配符。本页提供了在设计代码时遵循的一些指导方针。</p>
+<p>为了这个讨论的目的，考虑变量提供两个功能之一是有帮助的：</p>
+<p><strong>“In”变量</strong></p>
+<p>一个“in”变量提供数据给代码。想象一个有两个参数的 copy 方法：copy(src, dest)。src 参数提供被拷贝的数据，因此它是“in”参数。</p>
+<p><strong>“Out”变量</strong></p>
+<p>一个“Out”变量保持数据为在其他地方使用。在 copy 的例子中，copy(src, dest)，dest 参数接收数据，因此它是“out”参数。</p>
+<p>当然，一些变量被同时用作“in”和“out”目的 - 这种情况也在指导方针中。</p>
+<p>可以使用“in”和“out”准则，当决定是否使用通配符及什么类型通配符是合适的。下面的列表提供了遵循的指南：</p>
+<p><strong>通配符指南</strong></p>
+<ul>
+<li>一个“in”变量用上限通配符被定义，用 extends 关键字。</li>
+<li>一个“out”变量用下限通配符被定义，用 super 关键字。</li>
+<li>在“in”变量可以用定义在 Object 类中的方法被访问的场景，使用无界通配符。</li>
+<li>在代码需要访问同时作为“in”和“out”变量的场景，不要使用通配符。</li>
+</ul>
+<p>这些指南不适用于方法的返回类型。使用通配符作为返回类型应该避免，因为它强制开发人员使用代码处理通配符。</p>
+<p>通过 List&lt;? extends …&gt; 定义的列表可以非正式的被认为是只读的，但这不是一个严格的保证。假设有下面两个类：</p>
+<pre><code>class NaturalNumber {
+
+  private int i;
+
+  public NaturalNumber(int i) { this.i = i; }
+  // ...
+}
+
+class EvenNumber extends NaturalNumber {
+
+  public EvenNumber(int i) { super(i); }
+  // ...
+}
+</code></pre><p>考虑下面的代码：</p>
+<pre><code>List&lt;EvenNumber&gt; le = new ArrayList&lt;&gt;();
+List&lt;? extends NaturalNumber&gt; ln = le;
+ln.add(new NaturalNumber(35));  // compile-time error
+</code></pre><p>因为 List<evennumber> 是 List&lt;? extends NaturalNumber&gt; 的一个子类型，可以赋值 le 给 ln。但是不能用 ln 添加一个自然数到偶数列表中。下面对这个列表的操作是可能的：</evennumber></p>
+<ul>
+<li>可以添加 null。</li>
+<li>可以调用 clear。</li>
+<li>可以获取迭代器且调用 remove。</li>
+<li>可以匹配通配符和写从列表中读取的元素。</li>
+</ul>
+<p>可以看到通过 List&lt;? extends NaturalNumber&gt; 定义的列表严格意义上不是只读的，但可以这样认为，因为不能存储一个新的元素或改变列表中已经存在的元素。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/30/范型（九）：类型推断/" rel="next" title="范型（九）：类型推断">
+                <i class="fa fa-chevron-left"></i> 范型（九）：类型推断
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/14/范型（十一）：类型擦除/" rel="prev" title="范型（十一）：类型擦除">
+                范型（十一）：类型擦除 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#上限通配符"><span class="nav-number">1.</span> <span class="nav-text">上限通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无界通配符"><span class="nav-number">2.</span> <span class="nav-text">无界通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下限通配符"><span class="nav-number">3.</span> <span class="nav-text">下限通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符和子类型"><span class="nav-number">4.</span> <span class="nav-text">通配符和子类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符匹配和辅助方法"><span class="nav-number">5.</span> <span class="nav-text">通配符匹配和辅助方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符使用指"><span class="nav-number">6.</span> <span class="nav-text">通配符使用指</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

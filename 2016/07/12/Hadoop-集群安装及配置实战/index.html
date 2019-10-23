@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hadoop,大数据,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="目的在三台机器上安装 Hadoop 集群，并配置启动，且成功运行 WordCount 示例程序。本文只设置了必要的配置。">
+<meta name="keywords" content="Hadoop,大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop 集群安装及配置实战">
+<meta property="og:url" content="http://zhang-jc.github.io/2016/07/12/Hadoop-集群安装及配置实战/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="目的在三台机器上安装 Hadoop 集群，并配置启动，且成功运行 WordCount 示例程序。本文只设置了必要的配置。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-22T08:12:14.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop 集群安装及配置实战">
+<meta name="twitter:description" content="目的在三台机器上安装 Hadoop 集群，并配置启动，且成功运行 WordCount 示例程序。本文只设置了必要的配置。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://zhang-jc.github.io/2016/07/12/Hadoop-集群安装及配置实战/">
+
+
+
+
+
+  <title>Hadoop 集群安装及配置实战 | 一张假钞的真实世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一张假钞的真实世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2016/07/12/Hadoop-集群安装及配置实战/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hadoop 集群安装及配置实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-12T22:46:10+08:00">
+                2016-07-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/07/12/Hadoop-集群安装及配置实战/" class="leancloud_visitors" data-flag-title="Hadoop 集群安装及配置实战">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>在三台机器上安装 Hadoop 集群，并配置启动，且成功运行 WordCount 示例程序。本文只设置了必要的配置。</p>
+<a id="more"></a>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="机器列表"><a href="#机器列表" class="headerlink" title="机器列表"></a>机器列表</h4><p>三台相同配置的虚拟机：192.168.1.133、192.168.1.134、192.168.1.139</p>
+<p>三台虚拟机配置互相免密码 SSH 登陆。</p>
+<h4 id="机器配置"><a href="#机器配置" class="headerlink" title="机器配置"></a>机器配置</h4><p>三台虚拟机配置如下：</p>
+<ul>
+<li>操作系统：Ubuntu Server 16.04 LTS</li>
+<li>内存：2G</li>
+<li>磁盘：15G</li>
+</ul>
+<h4 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h4><ul>
+<li>192.168.1.133：Master 主机，运行 NameNode、ResourceManager、MapReduce 作业历史服务器</li>
+<li>192.168.1.134、192.168.1.139：Slave 主机，运行 DataNode、NodeManager</li>
+</ul>
+<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><h4 id="配置-etc-hosts"><a href="#配置-etc-hosts" class="headerlink" title="配置 /etc/hosts"></a>配置 /etc/hosts</h4><p>在三台机器的 /etc/hosts 中添加以下配置：</p>
+<pre><code>192.168.1.133 master-hadoop
+192.168.1.134 slave1-hadoop
+192.168.1.139 slave2-hadoop
+</code></pre><h4 id="配置-slaves"><a href="#配置-slaves" class="headerlink" title="配置 slaves"></a>配置 slaves</h4><p>编辑 etc/hadoop/slaves 文件，内容如下：</p>
+<pre><code>192.168.1.134
+192.168.1.139
+</code></pre><h4 id="设置-JAVA-HOME"><a href="#设置-JAVA-HOME" class="headerlink" title="设置 JAVA_HOME"></a>设置 JAVA_HOME</h4><p>修改 etc/hadoop/hadoop-env.sh、etc/hadoop/mapred-env.sh、etc/hadoop/yarn-env.sh 三个配置文件中的 JAVA_HOME 参数。</p>
+<h4 id="配置-etc-hadoop-core-site-xml"><a href="#配置-etc-hadoop-core-site-xml" class="headerlink" title="配置 etc/hadoop/core-site.xml"></a>配置 etc/hadoop/core-site.xml</h4><pre><code>&lt;configuration&gt;
+  &lt;property&gt;
+    &lt;name&gt;fs.defaultFS&lt;/name&gt;
+    &lt;value&gt;hdfs://master-hadoop:9000&lt;/value&gt;
+  &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><h4 id="配置-etc-hadoop-hdfs-site-xml"><a href="#配置-etc-hadoop-hdfs-site-xml" class="headerlink" title="配置 etc/hadoop/hdfs-site.xml"></a>配置 etc/hadoop/hdfs-site.xml</h4><pre><code>&lt;configuration&gt;
+  &lt;property&gt;
+    &lt;name&gt;dfs.replication&lt;/name&gt;
+    &lt;value&gt;1&lt;/value&gt;
+  &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><h4 id="配置-etc-hadoop-mapred-site-xml"><a href="#配置-etc-hadoop-mapred-site-xml" class="headerlink" title="配置 etc/hadoop/mapred-site.xml"></a>配置 etc/hadoop/mapred-site.xml</h4><pre><code>&lt;configuration&gt;
+  &lt;property&gt;
+    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+    &lt;value&gt;yarn&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;mapreduce.jobhistory.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:10020&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;mapreduce.jobhistory.webapp.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:19888&lt;/value&gt;
+  &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><h4 id="配置-etc-hadoop-yarn-site-xml"><a href="#配置-etc-hadoop-yarn-site-xml" class="headerlink" title="配置 etc/hadoop/yarn-site.xml"></a>配置 etc/hadoop/yarn-site.xml</h4><pre><code>&lt;configuration&gt;
+  &lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:8032&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:8030&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:8031&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.admin.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:18033&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;yarn.resourcemanager.webapp.address&lt;/name&gt;
+    &lt;value&gt;master-hadoop:8088&lt;/value&gt;
+  &lt;/property&gt;
+  &lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+  &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><h4 id="分发文件"><a href="#分发文件" class="headerlink" title="分发文件"></a>分发文件</h4><p>将配置完成的 hadoop 文件包分发到三台虚拟机的 /root 目录下（可以根据自己的情况选择）。</p>
+<h3 id="启动-Hadoop"><a href="#启动-Hadoop" class="headerlink" title="启动 Hadoop"></a>启动 Hadoop</h3><h4 id="格式化-HDFS"><a href="#格式化-HDFS" class="headerlink" title="格式化 HDFS"></a>格式化 HDFS</h4><p>在 NameNode 主机上执行以下命令格式化 HDFS：</p>
+<pre><code>hdfs namenode -format
+</code></pre><h4 id="启动-NameNode"><a href="#启动-NameNode" class="headerlink" title="启动 NameNode"></a>启动 NameNode</h4><p>登陆 192.168.1.133 节点，执行以下命令启动 NameNode：</p>
+<pre><code># sbin/hadoop-daemon.sh --script hdfs start namenode
+</code></pre><h4 id="启动-DataNode"><a href="#启动-DataNode" class="headerlink" title="启动 DataNode"></a>启动 DataNode</h4><p>在每个 Slave 节点上用以下命令启动 DataNode：</p>
+<pre><code># sbin/hadoop-daemons.sh --script hdfs start datanode
+</code></pre><blockquote>
+<p>注：可以直接使用下面的命令启动 NameNode 和 DataNode，因为我们已经配置了 slaves 和 免密码登陆。</p>
+</blockquote>
+<pre><code># sbin/start-dfs.sh
+</code></pre><h4 id="启动-ResourceManager"><a href="#启动-ResourceManager" class="headerlink" title="启动 ResourceManager"></a>启动 ResourceManager</h4><p>登陆 192.168.1.133 ，执行以下命令启动 ResourceManager：</p>
+<pre><code># sbin/yarn-daemon.sh start resourcemanager
+</code></pre><h4 id="启动-NodeManager"><a href="#启动-NodeManager" class="headerlink" title="启动 NodeManager"></a>启动 NodeManager</h4><p>在每个 Slave 节点上启动 NodeManager：</p>
+<pre><code># sbin/yarn-daemons.sh start nodemanager
+</code></pre><blockquote>
+<p>注：可以直接使用下面的命令启动 NameNode 和 DataNode，因为我们已经配置了 slaves 和 免密码登陆。</p>
+</blockquote>
+<pre><code># sbin/start-yarn.sh
+</code></pre><h4 id="启动-MapReduce-作业历史服务器"><a href="#启动-MapReduce-作业历史服务器" class="headerlink" title="启动 MapReduce 作业历史服务器"></a>启动 MapReduce 作业历史服务器</h4><p>登陆 192.168.1.133，执行以下命令启动 MapReduce 作业历史服务器：</p>
+<h3 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h3><h4 id="Web-界面"><a href="#Web-界面" class="headerlink" title="Web 界面"></a>Web 界面</h4><p>分别打开下面三个 Web 界面检查启动正确性：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">守护进程</th>
+<th style="text-align:left">Web 用户界面</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">NameNode</td>
+<td style="text-align:left"><a href="http://192.168.1.133:50070/" target="_blank" rel="noopener">http://192.168.1.133:50070/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">ResourceManager</td>
+<td style="text-align:left"><a href="http://192.168.1.133::8088/" target="_blank" rel="noopener">http://192.168.1.133::8088/</a></td>
+</tr>
+<tr>
+<td style="text-align:left">MapReduce JobHistory Server</td>
+<td style="text-align:left"><a href="http://192.168.1.133:19888/" target="_blank" rel="noopener">http://192.168.1.133:19888/</a></td>
+</tr>
+</tbody>
+</table>
+<h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><p>在检查 NameNode 的 Web 界面时，发现 live node 数量为 0，检查及解决步骤如下：</p>
+<ol>
+<li>检查了 Slave 主机上的 DataNode 都已经启动；</li>
+<li><p>检查 192.168.1.134 Slave 主机上 DataNode 启动 log，发现下面的警告信息，说明 DataNode 节点无法连接 NameNode 的 9000 端口：</p>
+<p> 2016-07-10 22:41:17,213 WARN org.apache.hadoop.hdfs.server.datanode.DataNode: Problem connecting to server: master-hadoop/192.168.1.133:9000<br> 2016-07-10 22:41:23,216 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:24,217 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 1 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:25,219 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 2 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:26,220 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 3 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:27,222 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 4 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:28,223 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 5 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:29,225 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 6 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:30,227 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 7 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:31,229 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 8 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)<br> 2016-07-10 22:41:32,231 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: master-hadoop/192.168.1.133:9000. Already tried 9 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)</p>
+</li>
+<li><p>检查 NameNode 端口 9000 情况，信息如下所示，说明 NameNode 进程只监听了 127.0.1.1:9000 端口，除了自己之外其他主机都不能连接：</p>
+<p> $ netstat -apn|grep 9000<br> tcp        0      0 127.0.1.1:9000          0.0.0.0:*               LISTEN      4964/java</p>
+</li>
+<li><p>检查 /etc/hosts 配置文件，发现有如下配置：</p>
+<p> 127.0.1.1 master-hadoop</p>
+</li>
+<li><p>从 /etc/hosts 中删除上面一条配置，重启 NameNode，再次检查 NameNode 端口 9000 情况：</p>
+<p> $ netstat -apn|grep 9000<br> tcp        0      0 192.168.1.133:9000      0.0.0.0:*               LISTEN      1772/java<br> tcp        0      0 192.168.1.133:9000      192.168.1.139:56002     ESTABLISHED 1772/java<br> tcp        0      0 192.168.1.133:9000      192.168.1.134:35168     ESTABLISHED 1772/java</p>
+</li>
+<li><p>再次检查 NameNode 的 Web 界面发现 live node 数量为 2。</p>
+</li>
+</ol>
+<h3 id="运行-WordCount-示例程序"><a href="#运行-WordCount-示例程序" class="headerlink" title="运行 WordCount 示例程序"></a>运行 WordCount 示例程序</h3><pre><code># hdfs dfs -mkdir -p /user/root/input
+# hdfs dfs -put etc/hadoop/*.xml /user/root/input
+# hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.2.jar grep /user/root/input /user/root/output &apos;dfs[a-z.]+&apos;
+# hdfs dfs -cat /user/root/output/*
+1    dfsadmin
+1    dfs.replication
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/12/Emacs-禁用自动备份及修改备份目录/" rel="next" title="Emacs 禁用自动备份及修改备份目录">
+                <i class="fa fa-chevron-left"></i> Emacs 禁用自动备份及修改备份目录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/17/Mac-OS-安装-Emacs/" rel="prev" title="Mac OS 安装 Emacs">
+                Mac OS 安装 Emacs <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="一张假钞">
+            
+              <p class="site-author-name" itemprop="name">一张假钞</p>
+              <p class="site-description motion-element" itemprop="description">人一定要有梦想，万一实现了呢...</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#机器列表"><span class="nav-number">2.1.</span> <span class="nav-text">机器列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#机器配置"><span class="nav-number">2.2.</span> <span class="nav-text">机器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#架构"><span class="nav-number">2.3.</span> <span class="nav-text">架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置过程"><span class="nav-number">3.</span> <span class="nav-text">配置过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-etc-hosts"><span class="nav-number">3.1.</span> <span class="nav-text">配置 /etc/hosts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-slaves"><span class="nav-number">3.2.</span> <span class="nav-text">配置 slaves</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置-JAVA-HOME"><span class="nav-number">3.3.</span> <span class="nav-text">设置 JAVA_HOME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-etc-hadoop-core-site-xml"><span class="nav-number">3.4.</span> <span class="nav-text">配置 etc/hadoop/core-site.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-etc-hadoop-hdfs-site-xml"><span class="nav-number">3.5.</span> <span class="nav-text">配置 etc/hadoop/hdfs-site.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-etc-hadoop-mapred-site-xml"><span class="nav-number">3.6.</span> <span class="nav-text">配置 etc/hadoop/mapred-site.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置-etc-hadoop-yarn-site-xml"><span class="nav-number">3.7.</span> <span class="nav-text">配置 etc/hadoop/yarn-site.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分发文件"><span class="nav-number">3.8.</span> <span class="nav-text">分发文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Hadoop"><span class="nav-number">4.</span> <span class="nav-text">启动 Hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#格式化-HDFS"><span class="nav-number">4.1.</span> <span class="nav-text">格式化 HDFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-NameNode"><span class="nav-number">4.2.</span> <span class="nav-text">启动 NameNode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-DataNode"><span class="nav-number">4.3.</span> <span class="nav-text">启动 DataNode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-ResourceManager"><span class="nav-number">4.4.</span> <span class="nav-text">启动 ResourceManager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-NodeManager"><span class="nav-number">4.5.</span> <span class="nav-text">启动 NodeManager</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-MapReduce-作业历史服务器"><span class="nav-number">4.6.</span> <span class="nav-text">启动 MapReduce 作业历史服务器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查"><span class="nav-number">5.</span> <span class="nav-text">检查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-界面"><span class="nav-number">5.1.</span> <span class="nav-text">Web 界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遇到的问题"><span class="nav-number">5.2.</span> <span class="nav-text">遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行-WordCount-示例程序"><span class="nav-number">6.</span> <span class="nav-text">运行 WordCount 示例程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">一张假钞</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jrvDEw4g5DJT4x0YfGPEm0MT-gzGzoHsz", "65zbvF5eSp8XmEcCPeiszS3m");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
