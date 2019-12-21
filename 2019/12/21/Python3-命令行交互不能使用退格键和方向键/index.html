@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="一张假钞的真实世界">
 <meta property="og:description" content="自定义安装 Python3 后在命令行使用方向键时出现以下问题： $ python3 Python 3.7.4 (default, Dec 11 2019, 17:40:08)  [GCC 7.4.0] on linux Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T10:37:43.996Z">
+<meta property="og:updated_time" content="2019-12-21T14:41:55.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python3 命令行交互不能使用方向键">
 <meta name="twitter:description" content="自定义安装 Python3 后在命令行使用方向键时出现以下问题： $ python3 Python 3.7.4 (default, Dec 11 2019, 17:40:08)  [GCC 7.4.0] on linux Type &amp;quot;help&amp;quot;, &amp;quot;copyright&amp;quot;, &amp;quot;credits&amp;quot; or &amp;quot;license&amp;quot;">
@@ -308,7 +308,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-21T18:37:43+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-12-21T22:41:55+08:00">
                 2019-12-21
               </time>
             
@@ -364,8 +364,11 @@ Python 3.7.4 (default, Dec 11 2019, 17:40:08)
 [GCC 7.4.0] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt; ^[[A^[[B^[[C^[[D
-</code></pre><p>解决方法是安装 readline：</p>
-<pre><code>pip3 install readline
+</code></pre><p>解决方法是安装 libreadline-dev 后重新安装 Python3：</p>
+<pre><code>$ sudo apt install libreadline-dev
+$ ./configure --prefix=/opt/Python3.7.4
+$ make
+$ sudo make install
 </code></pre>
       
     </div>
@@ -405,6 +408,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/21/Python3-命令行交互不能使用方向键/" rel="prev" title="Python3 命令行交互不能使用方向键">
+                Python3 命令行交互不能使用方向键 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -474,7 +481,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">172</span>
+                  <span class="site-state-item-count">173</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
