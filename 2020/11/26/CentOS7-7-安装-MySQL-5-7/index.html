@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="一张假钞的真实世界">
 <meta property="og:description" content="添加 MySQL Yum Repositorya. 从 MySQL Yum Repository 下载页面（https://dev.mysql.com/downloads/repo/yum/）选择对应的版本下载。 b. 使用以下命令安装 RPM 包： # sudo yum localinstall mysql80-community-release-el7-3.noarch.rpm 版本选择a.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-26T10:23:19.010Z">
+<meta property="og:updated_time" content="2020-11-26T15:09:38.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7.7 安装 MySQL 5.7">
 <meta name="twitter:description" content="添加 MySQL Yum Repositorya. 从 MySQL Yum Repository 下载页面（https://dev.mysql.com/downloads/repo/yum/）选择对应的版本下载。 b. 使用以下命令安装 RPM 包： # sudo yum localinstall mysql80-community-release-el7-3.noarch.rpm 版本选择a.">
@@ -308,7 +308,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-11-26T18:23:19+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-26T23:09:38+08:00">
                 2020-11-26
               </time>
             
@@ -423,6 +423,16 @@ mysql80-community-source           MySQL 8.0 Community Server - Sou 禁用
 </code></pre><h3 id="启动-MySQL-Server"><a href="#启动-MySQL-Server" class="headerlink" title="启动 MySQL Server"></a>启动 MySQL Server</h3><pre><code># sudo service mysqld start
 </code></pre><p>检查 MySQL 启动状态</p>
 <pre><code># sudo service mysqld status
+</code></pre><p>安装时生成的超级用户初始密码查看：</p>
+<pre><code># sudo grep &apos;temporary password&apos; /var/log/mysqld.log
+</code></pre><p>修改初始密码：</p>
+<pre><code># mysql -uroot -p
+mysql&gt; ALTER USER &apos;root&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;MyNewPass4!&apos;;
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;Data-platform@212&apos; WITH GRANT OPTION;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql&gt; FLUSH   PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
 </code></pre>
       
     </div>
