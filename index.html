@@ -262,6 +262,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/11/26/CentOS7-7-安装-MySQL-5-7/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/26/CentOS7-7-安装-MySQL-5-7/" itemprop="url">CentOS7.7 安装 MySQL 5.7</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-26T17:19:38+08:00">
+                2020-11-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-26T18:23:19+08:00">
+                2020-11-26
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/11/26/CentOS7-7-安装-MySQL-5-7/" class="leancloud_visitors" data-flag-title="CentOS7.7 安装 MySQL 5.7">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="添加-MySQL-Yum-Repository"><a href="#添加-MySQL-Yum-Repository" class="headerlink" title="添加 MySQL Yum Repository"></a>添加 MySQL Yum Repository</h3><p>a. 从 MySQL Yum Repository 下载页面（<a href="https://dev.mysql.com/downloads/repo/yum/）选择对应的版本下载。" target="_blank" rel="noopener">https://dev.mysql.com/downloads/repo/yum/）选择对应的版本下载。</a></p>
+<p>b. 使用以下命令安装 RPM 包：</p>
+<pre><code># sudo yum localinstall mysql80-community-release-el7-3.noarch.rpm
+</code></pre><h3 id="版本选择"><a href="#版本选择" class="headerlink" title="版本选择"></a>版本选择</h3><p>a. 查看当前启用的版本：</p>
+<pre><code># yum repolist all | grep mysql
+mysql-cluster-7.5-community/x86_64 MySQL Cluster 7.5 Community      禁用
+mysql-cluster-7.5-community-source MySQL Cluster 7.5 Community - So 禁用
+mysql-cluster-7.6-community/x86_64 MySQL Cluster 7.6 Community      禁用
+mysql-cluster-7.6-community-source MySQL Cluster 7.6 Community - So 禁用
+mysql-cluster-8.0-community/x86_64 MySQL Cluster 8.0 Community      禁用
+mysql-cluster-8.0-community-source MySQL Cluster 8.0 Community - So 禁用
+mysql-connectors-community/x86_64  MySQL Connectors Community       启用:    175
+mysql-connectors-community-source  MySQL Connectors Community - Sou 禁用
+mysql-tools-community/x86_64       MySQL Tools Community            启用:    120
+mysql-tools-community-source       MySQL Tools Community - Source   禁用
+mysql-tools-preview/x86_64         MySQL Tools Preview              禁用
+mysql-tools-preview-source         MySQL Tools Preview - Source     禁用
+mysql55-community/x86_64           MySQL 5.5 Community Server       禁用
+mysql55-community-source           MySQL 5.5 Community Server - Sou 禁用
+mysql56-community/x86_64           MySQL 5.6 Community Server       禁用
+mysql56-community-source           MySQL 5.6 Community Server - Sou 禁用
+mysql57-community/x86_64           MySQL 5.7 Community Server       禁用
+mysql57-community-source           MySQL 5.7 Community Server - Sou 禁用
+mysql80-community/x86_64           MySQL 8.0 Community Server       启用:    211
+mysql80-community-source           MySQL 8.0 Community Server - Sou 禁用
+</code></pre><p>b. 启用 MySQL5.7 版本</p>
+<pre><code># sudo yum-config-manager --disable mysql80-community
+# sudo yum-config-manager --enable mysql57-community
+</code></pre><h3 id="安装-MySQL5-7"><a href="#安装-MySQL5-7" class="headerlink" title="安装 MySQL5.7"></a>安装 MySQL5.7</h3><pre><code># sudo yum install mysql-community-server
+</code></pre><h3 id="启动-MySQL-Server"><a href="#启动-MySQL-Server" class="headerlink" title="启动 MySQL Server"></a>启动 MySQL Server</h3><pre><code># sudo service mysqld start
+</code></pre><p>检查 MySQL 启动状态</p>
+<pre><code># sudo service mysqld status
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/11/26/Shell-字符串截取技巧/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2008,156 +2215,6 @@ drwxr-xr-x  2 zhangjc zhangjc   4096 6月  23 17:06 urllib3-1.25.9.dist-info
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2019/12/21/Python3-命令行交互不能使用方向键/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="一张假钞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/21/Python3-命令行交互不能使用方向键/" itemprop="url">Python3 命令行交互不能使用方向键</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-21T17:25:50+08:00">
-                2019-12-21
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-21T18:37:43+08:00">
-                2019-12-21
-              </time>
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/12/21/Python3-命令行交互不能使用方向键/" class="leancloud_visitors" data-flag-title="Python3 命令行交互不能使用方向键">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>自定义安装 Python3 后在命令行使用方向键时出现以下问题：</p>
-<pre><code>$ python3
-Python 3.7.4 (default, Dec 11 2019, 17:40:08) 
-[GCC 7.4.0] on linux
-Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt; ^[[A^[[B^[[C^[[D
-</code></pre><p>解决方法是安装 readline：</p>
-<pre><code>pip3 install readline
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2210,7 +2267,7 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">181</span>
+                  <span class="site-state-item-count">182</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
