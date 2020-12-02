@@ -262,6 +262,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/12/02/Ranger-Hive-Service连接测试失败问题解决/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/02/Ranger-Hive-Service连接测试失败问题解决/" itemprop="url">Ranger Hive Service连接测试失败问题解决</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-02T10:56:59+08:00">
+                2020-12-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-12-02T11:03:13+08:00">
+                2020-12-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Ranger/" itemprop="url" rel="index">
+                    <span itemprop="name">Ranger</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/12/02/Ranger-Hive-Service连接测试失败问题解决/" class="leancloud_visitors" data-flag-title="Ranger Hive Service连接测试失败问题解决">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>异常信息如下：</p>
+<pre><code>org.apache.ranger.plugin.client.HadoopException: Unable to connect to Hive Thrift Server instance..
+Unable to connect to Hive Thrift Server instance..
+Could not open client transport with JDBC Uri: jdbc:hive2://192.168.72.212:10000: Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &apos;client_protocol&apos; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:{set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default}).
+Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &apos;client_protocol&apos; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:{set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default}).
+Required field &apos;client_protocol&apos; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:{set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default}). 
+</code></pre><p>百度后是因为Hive版本不匹配导致的。我的测试环境Hive版本是2.1.1，通过下面的命令发现确实版本不一致：</p>
+<pre><code># find . -name &quot;*hive*&quot;
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/ranger-hive-plugin-1.2.0.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-common-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-service-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-exec-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-metastore-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-jdbc-2.3.2.jar
+</code></pre><p>问题解决方法就显而易见了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/12/01/Ranger-Admin安装MySQL初始化问题解决/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2100,187 +2291,6 @@ $ make locales
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/09/17/npm-代理/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="一张假钞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/17/npm-代理/" itemprop="url">npm 代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-17T11:25:50+08:00">
-                2020-09-17
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-09-17T17:12:24+08:00">
-                2020-09-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/Node-js/" itemprop="url" rel="index">
-                    <span itemprop="name">Node.js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2020/09/17/npm-代理/" class="leancloud_visitors" data-flag-title="npm 代理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>加快 npm 安装的代理设置：</p>
-<p>使用以下命令查看当前的库：</p>
-<pre><code>npm config get registry
-</code></pre><p>默认为：<a href="https://registry.npmjs.org/。因为是国外的站点，所以会很慢。" target="_blank" rel="noopener">https://registry.npmjs.org/。因为是国外的站点，所以会很慢。</a></p>
-<p>用set命令换成阿里的镜像：</p>
-<pre><code>npm config set registry https://registry.npm.taobao.org
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2333,7 +2343,7 @@ $ make locales
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">186</span>
+                  <span class="site-state-item-count">187</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
