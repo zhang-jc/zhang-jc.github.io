@@ -262,6 +262,213 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/11/18/Hue-Load-Balance配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/18/Hue-Load-Balance配置/" itemprop="url">Hue Load Balance配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-18T17:11:29+08:00">
+                2020-11-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-25T15:12:51+08:00">
+                2020-11-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Hue/" itemprop="url" rel="index">
+                    <span itemprop="name">Hue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/11/18/Hue-Load-Balance配置/" class="leancloud_visitors" data-flag-title="Hue Load Balance配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>直接上配置：</p>
+<pre><code>server {
+  server_name 192.168.72.31;
+  listen 8001;
+
+  charset utf-8;
+
+  proxy_connect_timeout 600s;
+  proxy_read_timeout 600s;
+  proxy_send_timeout 600s;
+
+  location / {
+    proxy_set_header Host $http_x_forwarded_for;
+    proxy_set_header X-Forwarded-For $http_x_forwarded_for;
+
+    proxy_pass http://hue;
+  }
+}
+
+upstream hue {
+  hash $cookie_sessionid;
+
+  server 192.168.72.22:8888 max_fails=3;
+  server 192.168.72.31:8888 max_fails=3;
+}
+</code></pre><p>重点是调整 upstream hash 的策略。因为 Hue 是需要保持 session 的，同一个 session 的请求需要发送到同一台后端服务器上。简单的可以采用 ip_hash 策略，这个策略存在两个重要的问题：</p>
+<ul>
+<li>对隐藏在局域网后的用户不起作用。</li>
+<li>ip_hash 只取 IPV4 的前三段值做 Hash，在非公网大并发场景下会出现负载非常不均衡的情况。参见：<a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash" target="_blank" rel="noopener">http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash</a></li>
+</ul>
+<p>基于以上两点修改了 Nginx 的配置采用 $cookie_sessionid 做为 hash 值，达到 session 级别的负载均衡。</p>
+<p>主要的问题其实是这种方式未做到按照后端服务器实际负载再按照 session 级别来分配请求。后续打算研究 HAProxy 是否可以做到。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/09/17/Hue-UI-展示中文/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1913,190 +2120,6 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2019/12/11/Python3-ImportError-cannot-import-name-XXX-from-XXX/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="一张假钞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/11/Python3-ImportError-cannot-import-name-XXX-from-XXX/" itemprop="url">Python3 ImportError: cannot import name 'XXX' from 'XXX'</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T18:52:53+08:00">
-                2019-12-11
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-11T18:57:51+08:00">
-                2019-12-11
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/Python3/" itemprop="url" rel="index">
-                    <span itemprop="name">Python3</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/12/11/Python3-ImportError-cannot-import-name-XXX-from-XXX/" class="leancloud_visitors" data-flag-title="Python3 ImportError: cannot import name 'XXX' from 'XXX'">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>例如如下错误：</p>
-<pre><code>$ python3 git.py 
-Traceback (most recent call last):
-  File &quot;git.py&quot;, line 1, in &lt;module&gt;
-    from git import Repo
-  File &quot;/home/a/git.py&quot;, line 1, in &lt;module&gt;
-    from git import Repo
-ImportError: cannot import name &apos;Repo&apos; from &apos;git&apos; (/home/a/git.py)
-</code></pre><p>这种错误基本都是因为 python 脚本的名称与模块的名称重复导致的。像我这个例子中就是因为 git.py 与 GitPython 模块中的文件名一样导致的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2149,7 +2172,7 @@ ImportError: cannot import name &apos;Repo&apos; from &apos;git&apos; (/home/a/g
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2208,7 +2231,7 @@ ImportError: cannot import name &apos;Repo&apos; from &apos;git&apos; (/home/a/g
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

@@ -262,6 +262,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2018/12/28/Linux-命令行导出-Emacs-ORG-文档为-HTML/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/28/Linux-命令行导出-Emacs-ORG-文档为-HTML/" itemprop="url">Linux 命令行导出 Emacs ORG 文档为 HTML</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T01:44:30+08:00">
+                2018-12-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发工具/" itemprop="url" rel="index">
+                    <span itemprop="name">开发工具</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发工具/Emacs/" itemprop="url" rel="index">
+                    <span itemprop="name">Emacs</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/28/Linux-命令行导出-Emacs-ORG-文档为-HTML/" class="leancloud_visitors" data-flag-title="Linux 命令行导出 Emacs ORG 文档为 HTML">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Emacs 版本 25.2。使用以下命令将 org 文档导出 html：</p>
+<pre><code>emacs {orgFile} --batch --eval &quot;(require &apos;ox)&quot; --eval &quot;(org-html-export-to-html)&quot;
+</code></pre><p>批量导出目录下的 org 文档：</p>
+<pre><code>for orgFile in `ls *.org`
+do
+  emacs ${orgFile} --batch --eval &quot;(require &apos;ox)&quot; --eval &quot;(org-html-export-to-html)&quot;
+done
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2018/12/28/Sqoop-支持-ORC-文件格式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1991,216 +2173,6 @@ azScheduled.insert_many(scheduledList)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2018/11/15/Python3-连接-MySQL-并且读取-Blob-字段信息/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="一张假钞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/15/Python3-连接-MySQL-并且读取-Blob-字段信息/" itemprop="url">Python3 连接 MySQL 并且读取 Blob 字段信息</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-15T14:33:28+08:00">
-                2018-11-15
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
-                2019-10-22
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/Python3/" itemprop="url" rel="index">
-                    <span itemprop="name">Python3</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/11/15/Python3-连接-MySQL-并且读取-Blob-字段信息/" class="leancloud_visitors" data-flag-title="Python3 连接 MySQL 并且读取 Blob 字段信息">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h4><pre><code>$ pip3 install mysql-connector-python
-Command &apos;pip3&apos; not found, but can be installed with:
-sudo apt install python3-pip
-</code></pre><p>根据提示信息安装 pip3。</p>
-<p>根据 MySQL 官网建议应该安装 8.0 的驱动。我的安装：mysql-connector-python-8.0.13、protobuf-3.6.1、setuptools-40.6.2、six-1.11.0。</p>
-<h4 id="读取MySQL数据"><a href="#读取MySQL数据" class="headerlink" title="读取MySQL数据"></a>读取MySQL数据</h4><p>以读取 Azkaban 中的 triggers 表数据为例。代码如下：</p>
-<pre><code>#!/usr/bin/python3
-
-import mysql.connector
-import gzip
-
-config = {
-    &apos;user&apos;: &apos;roHive&apos;,
-    &apos;password&apos;: &apos;hive@bigdata!23&apos;,
-    &apos;host&apos;: &apos;172.16.72.22&apos;,
-    &apos;database&apos;: &apos;azkaban3&apos;,
-    &apos;raise_on_warnings&apos;: True,
-    &apos;charset&apos;: &apos;latin1&apos;
-}
-
-cnx = mysql.connector.connect(**config)
-cursor = cnx.cursor()
-query = (&quot;SELECT trigger_id, data FROM azkaban3.triggers&quot;)
-cursor.execute(query)
-
-for (triggerId, triggerData) in cursor:
-    print(f&apos;triggerId={triggerId}&apos;)
-
-cursor.close()
-cnx.close()
-</code></pre><p>Azkaban 的 triggers 表中的 data 字段是 BLOB 类型。因为我的 Azkaban MySQL 库采用的是 latin1 编码，如果连接时不设置字符集在读取 data 字段数据时在读取 BLOB 类型字段时会报如下错误：</p>
-<pre><code>UnicodeDecodeError: &apos;utf-8&apos; codec can&apos;t decode byte 0x8b in position 1: invalid start byte
-</code></pre><p>因为 data 字段是采用 gzip 压缩的，所以需要解压，代码如下：</p>
-<pre><code>for (triggerId, triggerData) in cursor:
-    print(gzip.decompress(bytes(triggerData, encoding=&apos;latin1&apos;)))
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2253,7 +2225,7 @@ cnx.close()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">188</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2312,7 +2284,7 @@ cnx.close()
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
