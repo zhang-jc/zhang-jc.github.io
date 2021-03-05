@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="大数据,Kafka,">
+  <meta name="keywords" content="大数据,Hive,Ranger,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Producer 向 Kafka 写入数据时遇到异常：org.apache.kafka.common.errors.RecordTooLargeException。该异常是因为单条消息大小超过限制导致的。解决方法是将限制参数调大： （1）server端：server.properties    message.max.bytes 参数默认值为 1000012，调整为适合的值，如 10485760。">
-<meta name="keywords" content="大数据,Kafka">
+<meta name="description" content="HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作提示以下权限问题： Error: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [test] does not have [UPDATE] privilege on [">
+<meta name="keywords" content="大数据,Hive,Ranger">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kafka RecordTooLargeException 问题解决">
-<meta property="og:url" content="http://zhang-jc.github.io/2017/08/17/Kafka-RecordTooLargeException-问题解决/index.html">
+<meta property="og:title" content="HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作权限问题">
+<meta property="og:url" content="http://zhang-jc.github.io/2021/03/05/HiverServer2-启用-Ranger-行过滤规则后表-Insert-Values操作权限问题/index.html">
 <meta property="og:site_name" content="一张假钞的真实世界">
-<meta property="og:description" content="Producer 向 Kafka 写入数据时遇到异常：org.apache.kafka.common.errors.RecordTooLargeException。该异常是因为单条消息大小超过限制导致的。解决方法是将限制参数调大： （1）server端：server.properties    message.max.bytes 参数默认值为 1000012，调整为适合的值，如 10485760。">
+<meta property="og:description" content="HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作提示以下权限问题： Error: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [test] does not have [UPDATE] privilege on [">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-22T08:12:14.154Z">
+<meta property="og:updated_time" content="2021-03-05T10:29:47.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kafka RecordTooLargeException 问题解决">
-<meta name="twitter:description" content="Producer 向 Kafka 写入数据时遇到异常：org.apache.kafka.common.errors.RecordTooLargeException。该异常是因为单条消息大小超过限制导致的。解决方法是将限制参数调大： （1）server端：server.properties    message.max.bytes 参数默认值为 1000012，调整为适合的值，如 10485760。">
+<meta name="twitter:title" content="HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作权限问题">
+<meta name="twitter:description" content="HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作提示以下权限问题： Error: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [test] does not have [UPDATE] privilege on [">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://zhang-jc.github.io/2017/08/17/Kafka-RecordTooLargeException-问题解决/">
+  <link rel="canonical" href="http://zhang-jc.github.io/2021/03/05/HiverServer2-启用-Ranger-行过滤规则后表-Insert-Values操作权限问题/">
 
 
 
 
 
-  <title>Kafka RecordTooLargeException 问题解决 | 一张假钞的真实世界</title>
+  <title>HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作权限问题 | 一张假钞的真实世界</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2017/08/17/Kafka-RecordTooLargeException-问题解决/">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2021/03/05/HiverServer2-启用-Ranger-行过滤规则后表-Insert-Values操作权限问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="一张假钞">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kafka RecordTooLargeException 问题解决</h1>
+          <h1 class="post-title" itemprop="name headline">HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作权限问题</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T18:50:31+08:00">
-                2017-08-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-05T17:46:11+08:00">
+                2021-03-05
               </time>
             
 
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
-                2019-10-22
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-05T18:29:47+08:00">
+                2021-03-05
               </time>
             
           </span>
@@ -338,8 +338,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/Kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">Kafka</span>
+                  <a href="/categories/大数据/Ranger/" itemprop="url" rel="index">
+                    <span itemprop="name">Ranger</span>
                   </a>
                 </span>
 
@@ -355,7 +355,7 @@
 
           
           
-             <span id="/2017/08/17/Kafka-RecordTooLargeException-问题解决/" class="leancloud_visitors" data-flag-title="Kafka RecordTooLargeException 问题解决">
+             <span id="/2021/03/05/HiverServer2-启用-Ranger-行过滤规则后表-Insert-Values操作权限问题/" class="leancloud_visitors" data-flag-title="HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作权限问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -391,10 +391,40 @@
       
 
       
-        <p>Producer 向 Kafka 写入数据时遇到异常：org.apache.kafka.common.errors.RecordTooLargeException。该异常是因为单条消息大小超过限制导致的。解决方法是将限制参数调大：</p>
-<p>（1）server端：server.properties<br>    message.max.bytes 参数默认值为 1000012，调整为适合的值，如 10485760。</p>
-<p>（2）producer端：<br>    设置 Producer 的参数 max.request.size 的值与 server 端的 message.max.bytes 值一致。</p>
+        <p>HiverServer2 启用 Ranger 行过滤规则后表 Insert Values 操作提示以下权限问题：</p>
+<pre><code>Error: Error while compiling statement: FAILED: HiveAccessControlException Permission denied: user [test] does not have [UPDATE] privilege on [dev/test_insert_table_values] (state=42000,code=40000)
+</code></pre><p>默认的 Ranger 会拒绝启用行过滤规则表的 UPDATE 权限。Ranger 源代码如下（Ranger版本1.2.0）：类org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizer中L1789到L1813</p>
+<pre><code>private boolean isBlockAccessIfRowfilterColumnMaskSpecified(
+        HiveOperationType hiveOpType, RangerHiveAccessRequest request) {
+    boolean ret = false;
+    RangerHiveResource resource = (RangerHiveResource) request.getResource();
+    HiveObjectType objType = resource.getObjectType();
 
+    if (objType == HiveObjectType.TABLE || objType == HiveObjectType.VIEW
+            || objType == HiveObjectType.COLUMN) {
+        ret = hiveOpType == HiveOperationType.EXPORT;
+
+        if (!ret) {
+            if (request.getHiveAccessType() == HiveAccessType.UPDATE
+                    &amp;&amp; hivePlugin.BlockUpdateIfRowfilterColumnMaskSpecified) {
+                ret = true;
+            }
+        }
+    }
+
+    if (LOG.isDebugEnabled()) {
+        LOG.debug(&quot;isBlockAccessIfRowfilterColumnMaskSpecified(&quot; + hiveOpType
+                + &quot;, &quot; + request + &quot;): &quot; + ret);
+    }
+
+    return ret;
+}
+</code></pre><p>通过源代码跟踪找到解决方案：在ranger-hive-security.xml配置文件中设置xasecure.hive.block.update.if.rowfilter.columnmask.specified的值为false即可。如下：</p>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;xasecure.hive.block.update.if.rowfilter.columnmask.specified&lt;/name&gt;
+    &lt;value&gt;false&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
       
     </div>
     
@@ -413,7 +443,9 @@
           
             <a href="/tags/大数据/" rel="tag"># 大数据</a>
           
-            <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+            <a href="/tags/Hive/" rel="tag"># Hive</a>
+          
+            <a href="/tags/Ranger/" rel="tag"># Ranger</a>
           
         </div>
       
@@ -426,8 +458,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/08/Hive-MapJoin-的限制/" rel="next" title="Hive MapJoin 的限制">
-                <i class="fa fa-chevron-left"></i> Hive MapJoin 的限制
+              <a href="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/" rel="next" title="HiveServer2 Load Data To Table AccessControlException">
+                <i class="fa fa-chevron-left"></i> HiveServer2 Load Data To Table AccessControlException
               </a>
             
           </div>
@@ -435,10 +467,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/24/org-apache-kafka-common-errors-TimeoutException/" rel="prev" title="org.apache.kafka.common.errors.TimeoutException">
-                org.apache.kafka.common.errors.TimeoutException <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
