@@ -262,6 +262,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/" itemprop="url">HiveServer2 Load Data To Table AccessControlException</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-05T15:54:29+08:00">
+                2021-03-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-05T16:07:45+08:00">
+                2021-03-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Hive/" itemprop="url" rel="index">
+                    <span itemprop="name">Hive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/" class="leancloud_visitors" data-flag-title="HiveServer2 Load Data To Table AccessControlException">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在用HiveServer2执行语句”load data inpath ‘/user/test/test.csv’ into table dev.load_test_tbl;“时报错信息如下：</p>
+<pre><code>Failed with exception org.apache.hadoop.security.AccessControlException: User does not belong to data-dev
+    at org.apache.hadoop.hdfs.server.namenode.FSDirAttrOp.setOwner(FSDirAttrOp.java:86)
+    at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.setOwner(FSNamesystem.java:1676)
+    at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.setOwner(NameNodeRpcServer.java:703)
+    at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.setOwner(ClientNamenodeProtocolServerSideTranslatorPB.java:464)
+    at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
+    at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:616)
+    at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:982)
+    at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2049)
+    at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2045)
+    at java.security.AccessController.doPrivileged(Native Method)
+    at javax.security.auth.Subject.doAs(Subject.java:422)
+    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1698)
+    at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2045)
+
+FAILED: Operation cancelled
+</code></pre><p>原因是Hive默认在Load数据时会修改HDFS上目的地下的数据文件与目的地目录的属主及组等权限信息一致，而提交任务的用户信息与目标目录的信息不一致，所以抛出如上异常。</p>
+<p>解决方法：在hiveserver2-site.xml中增加以下配置：</p>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;hive.warehouse.subdir.inherit.perms&lt;/name&gt;
+    &lt;value&gt;false&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2021/01/26/Hadoop2-7-3-编译错误一例/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2318,215 +2516,11 @@ Query OK, 0 rows affected (0.00 sec)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/11/26/Shell-字符串截取技巧/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="一张假钞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/11/26/Shell-字符串截取技巧/" itemprop="url">Shell 字符串截取技巧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-26T15:55:22+08:00">
-                2020-11-26
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2020-11-26T16:16:55+08:00">
-                2020-11-26
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2020/11/26/Shell-字符串截取技巧/" class="leancloud_visitors" data-flag-title="Shell 字符串截取技巧">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li># 号截取：删除左边字符，保留右边字符。</li>
-<li>## 号截取：删除左边字符，保留右边字符。</li>
-<li>%号截取：删除右边字符，保留左边字符</li>
-<li>%% 号截取：删除右边字符，保留左边字符</li>
-</ul>
-<p>示例一：</p>
-<pre><code>$ var=&apos;abcbd&apos;
-$ echo ${var#*b}
-cbd
-$ echo ${var##*b}
-d
-$ echo ${var%b*}
-abc
-$ echo ${var%%b*}
-a
-</code></pre><p>示例二：</p>
-<pre><code>$ cat /etc/passwd
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-bin:x:2:2:bin:/bin:/usr/sbin/nologin
-sys:x:3:3:sys:/dev:/usr/sbin/nologin
-sync:x:4:65534:sync:/bin:/bin/sync
-$ for line in `cat /etc/passwd`; do echo ${line%%:*}; done
-root
-daemon
-bin
-sys
-sync
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2574,7 +2568,7 @@ sync
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">190</span>
+                  <span class="site-state-item-count">191</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
