@@ -309,7 +309,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-04-19T15:57:20+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-04-19T16:08:37+08:00">
                 2021-04-19
               </time>
             
@@ -400,55 +400,32 @@
 <li><p>org.apache.hadoop.hive.ql.parse.CalcitePlanner：</p>
 <ul>
 <li><p>L292-L298：</p>
-<p>// 2. Regen OP plan from optimized AST<br>init(false);<br>if (cboCtx.type == PreCboCtx.Type.CTAS) {<br>  // Redo create-table analysis, because it’s not part of doPhase1.<br>  setAST(newAST);<br>  newAST = reAnalyzeCtasAfterCbo(newAST);<br>}</p>
-</li>
-<li><p>L647-L657：</p>
-<p>ASTNode reAnalyzeCtasAfterCbo(ASTNode newAst) throws SemanticException {<br>  // analyzeCreateTable uses this.ast, but doPhase1 doesn’t, so only reset it<br>  // here.<br>  newAst = analyzeCreateTable(newAst, getQB(), null);<br>  if (newAst == null) {</p>
-<pre><code>LOG.error(&quot;analyzeCreateTable failed to initialize CTAS after CBO;&quot; + &quot; new ast is &quot;
-    + getAST().dump());
-throw new SemanticException(&quot;analyzeCreateTable failed to initialize CTAS after CBO&quot;);
-</code></pre><p>  }<br>  return newAst;<br>}</p>
-</li>
-<li><p>L590-L604：</p>
-<p>private void set(Type type, ASTNode ast) {<br>  if (this.type != Type.NONE) {</p>
-<pre><code>STATIC_LOG.warn(&quot;Setting &quot; + type + &quot; when already &quot; + this.type + &quot;; node &quot; + ast.dump()
-    + &quot; vs old node &quot; + nodeOfInterest.dump());
-this.type = Type.UNEXPECTED;
-return;
-</code></pre><p>  }<br>  this.type = type;<br>  this.nodeOfInterest = ast;<br>}</p>
-<p>@Override<br>void setCTASToken(ASTNode child) {<br>  set(PreCboCtx.Type.CTAS, child);<br>}</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2. Regen OP plan from optimized AST</span></span><br><span class="line">init(<span class="keyword">false</span>);</span><br><span class="line"><span class="keyword">if</span> (cboCtx.type == PreCboCtx.Type.CTAS) &#123;</span><br><span class="line">  <span class="comment">// Redo create-table analysis, because it's not part of doPhase1.</span></span><br><span class="line">  setAST(newAST);</span><br><span class="line">  newAST = reAnalyzeCtasAfterCbo(newAST);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
+</ul>
+<ul>
+<li><p>L647-L657：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ASTNode <span class="title">reAnalyzeCtasAfterCbo</span><span class="params">(ASTNode newAst)</span> <span class="keyword">throws</span> SemanticException </span>&#123;</span><br><span class="line">  <span class="comment">// analyzeCreateTable uses this.ast, but doPhase1 doesn't, so only reset it</span></span><br><span class="line">  <span class="comment">// here.</span></span><br><span class="line">  newAst = analyzeCreateTable(newAst, getQB(), <span class="keyword">null</span>);</span><br><span class="line">  <span class="keyword">if</span> (newAst == <span class="keyword">null</span>) &#123;</span><br><span class="line">    LOG.error(<span class="string">"analyzeCreateTable failed to initialize CTAS after CBO;"</span> + <span class="string">" new ast is "</span></span><br><span class="line">        + getAST().dump());</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(<span class="string">"analyzeCreateTable failed to initialize CTAS after CBO"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newAst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>L590-L604：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(Type type, ASTNode ast)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.type != Type.NONE) &#123;</span><br><span class="line">    STATIC_LOG.warn(<span class="string">"Setting "</span> + type + <span class="string">" when already "</span> + <span class="keyword">this</span>.type + <span class="string">"; node "</span> + ast.dump()</span><br><span class="line">        + <span class="string">" vs old node "</span> + nodeOfInterest.dump());</span><br><span class="line">    <span class="keyword">this</span>.type = Type.UNEXPECTED;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.type = type;</span><br><span class="line">  <span class="keyword">this</span>.nodeOfInterest = ast;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setCTASToken</span><span class="params">(ASTNode child)</span> </span>&#123;</span><br><span class="line">  set(PreCboCtx.Type.CTAS, child);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
 <li><p>org.apache.hadoop.hive.ql.parse.SemanticAnalyzer</p>
 <ul>
 <li><p>L11573-L11597:</p>
-<p>case HiveParser.TOK_QUERY: // CTAS<br>  if (command_type == CTLT) {</p>
-<pre><code>throw new SemanticException(ErrorMsg.CTAS_CTLT_COEXISTENCE.getMsg());
-</code></pre><p>  }<br>  if (cols.size() != 0) {</p>
-<pre><code>throw new SemanticException(ErrorMsg.CTAS_COLLST_COEXISTENCE.getMsg());
-</code></pre><p>  }<br>  if (partCols.size() != 0 || bucketCols.size() != 0) {</p>
-<pre><code>boolean dynPart = HiveConf.getBoolVar(conf, HiveConf.ConfVars.DYNAMICPARTITIONING);
-if (dynPart == false) {
-  throw new SemanticException(ErrorMsg.CTAS_PARCOL_COEXISTENCE.getMsg());
-} else {
-  // TODO: support dynamic partition for CTAS
-  throw new SemanticException(ErrorMsg.CTAS_PARCOL_COEXISTENCE.getMsg());
-}
-</code></pre><p>  }<br>  if (isExt) {</p>
-<pre><code>throw new SemanticException(ErrorMsg.CTAS_EXTTBL_COEXISTENCE.getMsg());
-</code></pre><p>  }<br>  command_type = CTAS;<br>  if (plannerCtx != null) {</p>
-<pre><code>plannerCtx.setCTASToken(child);
-</code></pre><p>  }<br>  selectStmt = child;<br>  break;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> HiveParser.TOK_QUERY: <span class="comment">// CTAS</span></span><br><span class="line">  <span class="keyword">if</span> (command_type == CTLT) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(ErrorMsg.CTAS_CTLT_COEXISTENCE.getMsg());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (cols.size() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(ErrorMsg.CTAS_COLLST_COEXISTENCE.getMsg());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (partCols.size() != <span class="number">0</span> || bucketCols.size() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">boolean</span> dynPart = HiveConf.getBoolVar(conf, HiveConf.ConfVars.DYNAMICPARTITIONING);</span><br><span class="line">    <span class="keyword">if</span> (dynPart == <span class="keyword">false</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(ErrorMsg.CTAS_PARCOL_COEXISTENCE.getMsg());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> support dynamic partition for CTAS</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(ErrorMsg.CTAS_PARCOL_COEXISTENCE.getMsg());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (isExt) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> SemanticException(ErrorMsg.CTAS_EXTTBL_COEXISTENCE.getMsg());</span><br><span class="line">  &#125;</span><br><span class="line">  command_type = CTAS;</span><br><span class="line">  <span class="keyword">if</span> (plannerCtx != <span class="keyword">null</span>) &#123;</span><br><span class="line">    plannerCtx.setCTASToken(child);</span><br><span class="line">  &#125;</span><br><span class="line">  selectStmt = child;</span><br><span class="line">  <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>禁用CBO可以解决问题。</p>
-<pre><code>&lt;property&gt;
-    &lt;name&gt;hive.cbo.enable&lt;/name&gt;
-    &lt;value&gt;false&lt;/value&gt;
-&lt;/property&gt;
+<pre><code><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.cbo.enable<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </code></pre>
           
         
