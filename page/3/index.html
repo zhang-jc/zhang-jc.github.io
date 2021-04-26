@@ -262,6 +262,237 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/06/23/Hue-编译异常：ImportError-cannot-import-name-six-from-urllib3-packages/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="一张假钞">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/23/Hue-编译异常：ImportError-cannot-import-name-six-from-urllib3-packages/" itemprop="url">Hue 编译异常：ImportError: cannot import name 'six' from 'urllib3.packages'</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-23T17:14:36+08:00">
+                2020-06-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-06-23T17:41:37+08:00">
+                2020-06-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Hue/" itemprop="url" rel="index">
+                    <span itemprop="name">Hue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2020/06/23/Hue-编译异常：ImportError-cannot-import-name-six-from-urllib3-packages/" class="leancloud_visitors" data-flag-title="Hue 编译异常：ImportError: cannot import name 'six' from 'urllib3.packages'">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在编译Hue的时候出现错误信息如下：</p>
+<pre><code>Running &apos;/home/zhangjc/ysten/git/ysten-hue/build/env/bin/hue makemigrations --noinput&apos; with None
+Traceback (most recent call last):
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/bin/hue&quot;, line 33, in &lt;module&gt;
+    sys.exit(load_entry_point(&apos;desktop&apos;, &apos;console_scripts&apos;, &apos;hue&apos;)())
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/manage_entry.py&quot;, line 225, in entry
+    execute_from_command_line(sys.argv)
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/core/management/__init__.py&quot;, line 364, in execute_from_command_line
+    utility.execute()
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/core/management/__init__.py&quot;, line 338, in execute
+    django.setup()
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/__init__.py&quot;, line 27, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/apps/registry.py&quot;, line 108, in populate
+    app_config.import_models()
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/apps/config.py&quot;, line 202, in import_models
+    self.models_module = import_module(models_module_name)
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/importlib/__init__.py&quot;, line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1006, in _gcd_import
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 983, in _find_and_load
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 967, in _find_and_load_unlocked
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 677, in _load_unlocked
+  File &quot;&lt;frozen importlib._bootstrap_external&gt;&quot;, line 728, in exec_module
+  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 219, in _call_with_frames_removed
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/models.py&quot;, line 47, in &lt;module&gt;
+    from useradmin.models import User, Group, get_organization
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/apps/useradmin/src/useradmin/models.py&quot;, line 56, in &lt;module&gt;
+    from desktop.lib.connectors.models import _get_installed_connectors, Connector
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/connectors/models.py&quot;, line 29, in &lt;module&gt;
+    from desktop.lib.connectors.types import get_connectors_types
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/connectors/types.py&quot;, line 24, in &lt;module&gt;
+    from desktop.lib.exceptions_renderable import PopupException
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/exceptions_renderable.py&quot;, line 31, in &lt;module&gt;
+    import desktop.lib.django_util
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/django_util.py&quot;, line 42, in &lt;module&gt;
+    import desktop.lib.thrift_util
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/thrift_util.py&quot;, line 49, in &lt;module&gt;
+    from desktop.lib.thrift_.http_client import THttpClient
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/thrift_/http_client.py&quot;, line 26, in &lt;module&gt;
+    from desktop.lib.rest.http_client import HttpClient
+  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/rest/http_client.py&quot;, line 32, in &lt;module&gt;
+    from urllib3.contrib import pyopenssl
+  File &quot;/usr/lib/python3/dist-packages/urllib3/contrib/pyopenssl.py&quot;, line 62, in &lt;module&gt;
+    from ..packages import six
+ImportError: cannot import name &apos;six&apos; from &apos;urllib3.packages&apos; (/usr/lib/python3/dist-packages/urllib3/packages/__init__.py)
+</code></pre><p>错误原因：根据错误信息可以看到是“/usr/lib/python3/dist-packages/urllib3”这个包的问题。正确的应该是引用“build/env/lib/python3.7/site-packages/”下的包。查看”/usr/lib/python3/dist-packages/urllib3”下的包信息，发现包版本比较低。</p>
+<pre><code>$ ls -l /usr/lib/python3/dist-packages/
+drwxr-xr-x  6 root root   4096 1月  13 17:07 urllib3
+drwxr-xr-x  2 root root   4096 1月  13 17:06 urllib3-1.22.egg-info
+</code></pre><p>解决方法：删除有问题的包后再试成功。</p>
+<pre><code>$ sudo rm -rf /usr/lib/python3/dist-packages/urllib3*
+</code></pre><p>查看“build/env/lib/python3.7/site-packages/”下的urllib3包信息：</p>
+<pre><code>$ ls -l build/env/lib/python3.7/site-packages/|grep urllib3
+drwxr-xr-x  6 zhangjc zhangjc   4096 6月  23 17:06 urllib3
+drwxr-xr-x  2 zhangjc zhangjc   4096 6月  23 17:06 urllib3-1.25.9.dist-info
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2020/05/19/博傻理论/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1858,194 +2089,6 @@ no matching cipher found: client arcfour server chacha20-poly1305@openssh.com,ae
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhang-jc.github.io/2019/10/17/修改MySQL参数max-connections/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="一张假钞">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/17/修改MySQL参数max-connections/" itemprop="url">修改MySQL参数max_connections</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-17T11:38:51+08:00">
-                2019-10-17
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-22T16:12:14+08:00">
-                2019-10-22
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2019/10/17/修改MySQL参数max-connections/" class="leancloud_visitors" data-flag-title="修改MySQL参数max_connections">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>编辑配置文件 /etc/my.cnf，修改以下参数：</p>
-<pre><code>max_connections=2000
-</code></pre><p>MySQL 管理员登陆 MySQL 数据库，在命令行执行：</p>
-<pre><code>mysql&gt; set GLOBAL max_connections=3000;
-Query OK, 0 rows affected (0.01 sec)
-mysql&gt; show variables like &apos;%connections%&apos;;
-+----------------------+-------+
-| Variable_name        | Value |
-+----------------------+-------+
-| max_connections      | 3000  |
-| max_user_connections | 0     |
-+----------------------+-------+
-2 rows in set (0.00 sec)
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2098,7 +2141,7 @@ mysql&gt; show variables like &apos;%connections%&apos;;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">193</span>
+                  <span class="site-state-item-count">194</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
