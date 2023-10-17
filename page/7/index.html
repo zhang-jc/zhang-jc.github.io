@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">289</span>
+          <span class="site-state-item-count">290</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">Spark on YARN部署</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-25 11:55:41" itemprop="dateCreated datePublished" datetime="2021-10-25T11:55:41+08:00">2021-10-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Spark on YARN部署" href="/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::8b38afa401120609d86abf1de9071880" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>目前各大数据组件部署其实都比较简单，几乎接近开箱即用。此处只记录部署时遇到的问题。</p>
+<h1 id="问题一：java-lang-ClassNotFoundException-org-apache-log4j-spi-Filter"><a href="#问题一：java-lang-ClassNotFoundException-org-apache-log4j-spi-Filter" class="headerlink" title="问题一：java.lang.ClassNotFoundException: org.apache.log4j.spi.Filter"></a>问题一：java.lang.ClassNotFoundException: org.apache.log4j.spi.Filter</h1><p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Error: A JNI error has occurred, please check your installation and try again</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/apache/log4j/spi/Filter</span><br><span class="line">	at java.lang.Class.getDeclaredMethods0(Native Method)</span><br><span class="line">	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)</span><br><span class="line">	at java.lang.Class.privateGetMethodRecursive(Class.java:3048)</span><br><span class="line">	at java.lang.Class.getMethod0(Class.java:3018)</span><br><span class="line">	at java.lang.Class.getMethod(Class.java:1784)</span><br><span class="line">	at sun.launcher.LauncherHelper.validateMainClass(LauncherHelper.java:544)</span><br><span class="line">	at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:526)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.log4j.spi.Filter</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</span><br><span class="line">	... 7 more</span><br></pre></td></tr></table></figure>
+
+<p>从Spark3.1.2源码pom.xml中可以看到log4j的版本为：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -273,7 +387,14 @@
 <li>Job：由多个任务组成的并行计算，这些任务响应Spark操作（例如保存、收集）而生成；您将在驱动程序日志中看到这个术语。</li>
 <li>Stage：每个作业被划分为更小的任务集，称为相互依赖的阶段（类似于MapReduce中的map和reduce阶段）；您将在驱动程序日志中看到这个术语。</li>
 </ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -369,7 +490,14 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts &quot;10.0.0.55&quot; -m shell -a &quot;ls -l /&quot;</span><br></pre></td></tr></table></figure>
 
 <p>详细信息参见Ansible官方文档：<a target="_blank" rel="noopener" href="https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html#intro-patterns">https://docs.ansible.com/ansible/latest/user_guide&#x2F;intro_patterns.html#intro-patterns</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/19/Ansible%E6%8C%87%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%A7%E8%A1%8C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -462,32 +590,14 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">[root@ebd4ba8d5b72]# </span><span class="language-bash">ps -ef|grep java</span></span><br><span class="line">root        18     1  0 23:50 pts/0    00:00:00 java -jar math-game.jar</span><br><span class="line">root       136    69  0 23:52 pts/1    00:00:00 grep --color=auto java</span><br><span class="line"><span class="meta prompt_">[root@ebd4ba8d5b72]# </span><span class="language-bash">jmap -heap 18</span></span><br><span class="line">Attaching to process ID 18, please wait...</span><br><span class="line">ERROR: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">Error attaching to process: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">sun.jvm.hotspot.debugger.DebuggerException: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.execute(LinuxDebuggerLocal.java:163)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.attach(LinuxDebuggerLocal.java:278)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.attachDebugger(HotSpotAgent.java:671)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.setupDebuggerLinux(HotSpotAgent.java:611)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.setupDebugger(HotSpotAgent.java:337)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.go(HotSpotAgent.java:304)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.attach(HotSpotAgent.java:140)</span><br><span class="line">	at sun.jvm.hotspot.tools.Tool.start(Tool.java:185)</span><br><span class="line">	at sun.jvm.hotspot.tools.Tool.execute(Tool.java:118)</span><br><span class="line">	at sun.jvm.hotspot.tools.HeapSummary.main(HeapSummary.java:49)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at sun.tools.jmap.JMap.runTool(JMap.java:201)</span><br><span class="line">	at sun.tools.jmap.JMap.main(JMap.java:130)</span><br><span class="line">Caused by: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.attach0(Native Method)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.access$100(LinuxDebuggerLocal.java:62)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$1AttachTask.doit(LinuxDebuggerLocal.java:269)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.run(LinuxDebuggerLocal.java:138)</span><br></pre></td></tr></table></figure>
 
 <h1 id="方法一（已验证Ok）"><a href="#方法一（已验证Ok）" class="headerlink" title="方法一（已验证Ok）"></a>方法一（已验证Ok）</h1><p>在容器启动时添加–cap-add&#x3D;SYS_PTRACE，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --cap-add=SYS_PTRACE -v /root:/root -it 7a4460957494 bash</span><br></pre></td></tr></table></figure>
-
-<p>这种方式在调试镜像时没问题。但是在线上环境会存在比较严重的安全问题。</p>
-<h1 id="方法二（未能验证）"><a href="#方法二（未能验证）" class="headerlink" title="方法二（未能验证）"></a>方法二（未能验证）</h1><p>方法二是修改Linux内核设置。执行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 0 &gt; /proc/sys/kernel/yama/ptrace_scope</span><br></pre></td></tr></table></figure>
-
-<p>或者在配置文件&#x2F;etc&#x2F;sysctl.d&#x2F;10-ptrace.conf中修改或添加以下配置：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kernel.yama.ptrace_scope</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<p>在我的环境中两种方式都会报以下错误信息：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/proc/sys/kernel/yama/ptrace_scope: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<p>具体原因我没有深究，怀疑跟我的操作系统版本有关：</p>
-<ul>
-<li>CentOS Linux release 7.7.1908 (Core)</li>
-<li>Linux 4.4.222-1.el7.elrepo.x86_64 #1 SMP Mon May 4 19:25:23 EDT 2020 x86_64 x86_64 x86_64 GNU&#x2F;Linux</li>
-</ul>
-<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p>怀疑是我操作系统内核过低导致的，见方法二中操作系统内核信息。怀疑是内核版本问题的原因是在我另外一台主机上不存在这个问题，正常主机的版本信息如下：</p>
-<ul>
-<li>CentOS Linux release 7.2.1511 (Core)</li>
-<li>Linux 5.4.107-1.el7.elrepo.x86_64 #1 SMP Sat Mar 20 09:47:18 EDT 2021 x86_64 x86_64 x86_64 GNU&#x2F;Linux</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum -y update</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">sudo yum -y install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum --disablerepo=<span class="string">&quot;*&quot;</span> --enablerepo=<span class="string">&quot;elrepo-kernel&quot;</span> list available | grep kernel-ml</span></span><br><span class="line">kernel-ml-doc.noarch                    5.14.9-2.el7.elrepo        elrepo-kernel</span><br><span class="line">kernel-ml-headers.x86_64                5.14.9-2.el7.elrepo        elrepo-kernel</span><br><span class="line">kernel-ml-tools.x86_64                  5.14.9-2.el7.elrepo        elrepo-kernel</span><br><span class="line">kernel-ml-tools-libs.x86_64             5.14.9-2.el7.elrepo        elrepo-kernel</span><br><span class="line">kernel-ml-tools-libs-devel.x86_64       5.14.9-2.el7.elrepo        elrepo-kernel</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum --enablerepo=elrepo-kernel install kernel-ml</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum -y --enablerepo=elrepo-kernel install kernel-ml-&#123;devel,headers,perf&#125;</span></span><br><span class="line">已加载插件：fastestmirror, langpacks, priorities</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> * base: mirrors.nju.edu.cn</span><br><span class="line"> * elrepo: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * elrepo-kernel: mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"> * epel: mirrors.bfsu.edu.cn</span><br><span class="line"> * extras: mirrors.163.com</span><br><span class="line"> * updates: mirrors.163.com</span><br><span class="line">软件包 kernel-ml-devel-5.14.9-2.el7.elrepo.x86_64 已安装并且是最新版本</span><br><span class="line">没有可用软件包 kernel-ml-perf。</span><br><span class="line">正在解决依赖关系</span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">正在检查事务</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">软件包 kernel-ml-headers.x86_64.0.5.14.9-2.el7.elrepo 将被 安装</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">处理 kernel-ml-headers-5.14.9-2.el7.elrepo.x86_64 与 kernel-headers &lt; 5.14.9-2.el7.elrepo 的冲突</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">解决依赖关系完成</span></span><br><span class="line">错误：kernel-ml-headers conflicts with kernel-headers-3.10.0-1160.42.2.el7.x86_64</span><br><span class="line"> 您可以尝试添加 --skip-broken 选项来解决该问题</span><br><span class="line"> 您可以尝试执行：rpm -Va --nofiles --nodigest</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rpm -qa | grep kernel</span></span><br><span class="line">kernel-devel-3.10.0-1160.42.2.el7.x86_64</span><br><span class="line">kernel-headers-3.10.0-1160.42.2.el7.x86_64</span><br><span class="line">kernel-devel-3.10.0-1062.el7.x86_64</span><br><span class="line">kernel-ml-5.14.9-2.el7.elrepo.x86_64</span><br><span class="line">abrt-addon-kerneloops-2.1.11-60.el7.centos.x86_64</span><br><span class="line">kernel-ml-devel-5.14.9-2.el7.elrepo.x86_64</span><br><span class="line">kernel-tools-libs-3.10.0-1160.42.2.el7.x86_64</span><br><span class="line">kernel-3.10.0-1062.el7.x86_64</span><br><span class="line">kernel-lt-4.4.222-1.el7.elrepo.x86_64</span><br><span class="line">kernel-3.10.0-1160.42.2.el7.x86_64</span><br><span class="line">kernel-tools-3.10.0-1160.42.2.el7.x86_64</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum remove kernel-devel-3.10.0-1160.42.2.el7.x86_64 kernel-headers-3.10.0-1160.42.2.el7.x86_64 kernel-devel-3.10.0-1062.el7.x86_64 kernel-tools-libs-3.10.0-1160.42.2.el7.x86_64 kernel-3.10.0-1062.el7.x86_64 kernel-3.10.0-1160.42.2.el7.x86_64 kernel-tools-3.10.0-1160.42.2.el7.x86_64</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">yum -y --enablerepo=elrepo-kernel install kernel-ml-&#123;devel,headers,perf&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>内核升级完成后，再次验证问题解决！！！</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -597,7 +707,14 @@
 <p>注意，该配置项跟core-site.xml中的很像，但是开头部分不一样。</p>
 </blockquote>
 <p>这个问题我是通过跟踪Hadoop源代码解决的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/hadoop-hdfs-httpfs/src/main/java/org/apache/hadoop/fs/http/server/HttpFSAuthenticationFilter.java</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> Configuration <span class="title function_">getProxyuserConfiguration</span><span class="params">(FilterConfig filterConfig)</span> &#123;</span><br><span class="line">  Map&lt;String, String&gt; proxyuserConf = HttpFSServerWebApp.get().getConfig().</span><br><span class="line">      getValByRegex(<span class="string">&quot;httpfs\\.proxyuser\\.&quot;</span>);</span><br><span class="line">  <span class="type">Configuration</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Configuration</span>(<span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : proxyuserConf.entrySet()) &#123;</span><br><span class="line">    conf.set(entry.getKey().substring(<span class="string">&quot;httpfs.&quot;</span>.length()), entry.getValue());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/28/Hadoop-HTTPFS%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -802,26 +919,14 @@
 <li>Shell模块：执行Shell命令。</li>
 <li>File模块：管理服务器文件，例如新建、删除、创建软连接等。</li>
 </ul>
-<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><h2 id="Inventory"><a href="#Inventory" class="headerlink" title="Inventory"></a>Inventory</h2><p>服务器清单，如下：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[coordinator]</span></span><br><span class="line">10.0.0.51  <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.65  <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line"></span><br><span class="line"><span class="section">[worker]</span></span><br><span class="line">10.0.0.133 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.134 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.135 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.136 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.137 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.138 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.139 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.140 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.141 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.142 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.143 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.144 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.145 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.146 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.147 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.148 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.149 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.150 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.151 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.152 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.153 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.154 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.155 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br><span class="line">10.0.0.156 <span class="attr">ansible_user</span>=ops ansible_password=******** ansible_become=<span class="literal">yes</span> ansible_become_password=********</span><br></pre></td></tr></table></figure>
-
-<h2 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m user -a &quot;name=trino&quot;</span><br><span class="line">ansible -i hosts all -m copy -a &quot;src=etc/security/limits.d/trino.conf dest=/etc/security/limits.d/ mode=644&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="JDK"><a href="#JDK" class="headerlink" title="JDK"></a>JDK</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m copy -a &quot;src=zulu11.50.19-ca-jdk11.0.12-linux_x64.tar.gz dest=/opt/&quot;</span><br><span class="line">ansible -i hosts all -m shell -a &quot;cd /opt/ &amp;&amp; tar xzvf zulu11.50.19-ca-jdk11.0.12-linux_x64.tar.gz&quot;</span><br><span class="line">ansible -i hosts all -m file -a &quot;path=/opt/java-zulu src=/opt/zulu11.50.19-ca-jdk11.0.12-linux_x64 state=link&quot;</span><br><span class="line">ansible -i hosts all -m shell -a &quot;cd /opt/java-zulu/bin &amp;&amp; ./java --version&quot;</span><br><span class="line">ansible -i hosts all -m copy -a &quot;src=bin/launcher dest=/opt/trino/bin/ owner=trino group=trino&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Trino"><a href="#Trino" class="headerlink" title="Trino"></a>Trino</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m copy -a &quot;src=trino-server-362.tar.gz dest=/opt/&quot;</span><br><span class="line">ansible -i hosts all -m shell -a &quot;cd /opt/ &amp;&amp; tar xzvf trino-server-362.tar.gz</span><br><span class="line">ansible -i hosts all -m file -a &quot;path=/opt/trino src=/opt/trino-server-362 state=link&quot;</span><br><span class="line">ansible -i hosts all -m file -a &quot;path=/opt/trino-server-362 owner=trino group=trino recurse=yes&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="node-properties"><a href="#node-properties" class="headerlink" title="node.properties"></a>node.properties</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m file -a &quot;path=/data/trino state=directory owner=trino group=trino&quot;</span><br><span class="line">ansible -i hosts all -m copy -a &quot;src=etc/node.properties dest=/opt/trino/etc/ owner=trino group=trino&quot;</span><br><span class="line">ansible -i hosts all -m shell -a &quot;ifconfig|grep &#x27;inet 10.0.0&#x27;|awk &#x27;&#123;gsub(\&quot;\\\\.\&quot;, \&quot;-\&quot;); line=\&quot;\nnode.id=\&quot;\$2; print line&#125;&#x27; &gt;&gt; /opt/trino/etc/node.properties&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="jvm-config"><a href="#jvm-config" class="headerlink" title="jvm.config"></a>jvm.config</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m copy -a &quot;src=etc/jvm.config dest=/opt/trino/etc/ owner=trino group=trino&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="config-properties"><a href="#config-properties" class="headerlink" title="config.properties"></a>config.properties</h4><h5 id="coordinator"><a href="#coordinator" class="headerlink" title="coordinator"></a>coordinator</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts coordinator -m copy -a &quot;src=etc/coordinator.config.properties dest=/opt/trino/etc/ owner=trino group=trino&quot;</span><br><span class="line">ansible -i hosts coordinator -m shell -a &quot;mv /opt/trino/etc/coordinator.config.properties /opt/trino/etc/config.properties&quot;</span><br></pre></td></tr></table></figure>
-
-<h5 id="worker"><a href="#worker" class="headerlink" title="worker"></a>worker</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts worker -m copy -a &quot;src=etc/worker.config.properties dest=/opt/trino/etc/ owner=trino group=trino&quot;</span><br><span class="line">ansible -i hosts worker -m shell -a &quot;mv /opt/trino/etc/worker.config.properties /opt/trino/etc/config.properties&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="log-properties"><a href="#log-properties" class="headerlink" title="log.properties"></a>log.properties</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m copy -a &quot;src=etc/log.properties dest=/opt/trino/etc/ owner=trino group=trino&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="catalog"><a href="#catalog" class="headerlink" title="catalog"></a>catalog</h4><h5 id="hive-properties"><a href="#hive-properties" class="headerlink" title="hive.properties"></a>hive.properties</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts all -m copy -a &quot;src=etc/catalog/hive.properties dest=/opt/trino/etc/catalog/ owner=trino group=trino&quot;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/26/%E5%80%9FTrino%E5%AE%89%E8%A3%85%E4%BB%8B%E7%BB%8DAnsible%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1020,14 +1125,14 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">telnet 192.168.72.156 30000</span></span><br><span class="line">Trying 192.168.72.156...</span><br><span class="line">Connected to 192.168.72.156.</span><br><span class="line">Escape character is &#x27;^]&#x27;.</span><br></pre></td></tr></table></figure>
 
 <p>异常界面如下：</p>
-<p><img src="/images/20210907/jconsole_security_failed.png" alt="安全连接失败"></p>
-<p>点击“不安全的连接”异常界面如下：</p>
-<p><img src="/images/20210907/jconsole_not_security_failed.png" alt="非安全连接失败"></p>
-<p>最终还是防火墙的问题。网上大都是直接关闭了防火墙，所以问题可以解决。但对于服务器来说，直接关闭防火墙是存在比较大安全隐患的，尤其是暴露在公网上的服务器。用netstat查看进程监听的所有端口，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">netstat -ntlp | grep 30000</span></span><br><span class="line">tcp6       0      0 :::30000                :::*                    LISTEN      24488/java</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">netstat -ntlp | grep 24488</span></span><br><span class="line">tcp6       0      0 :::24605                :::*                    LISTEN      24488/java          </span><br><span class="line">tcp6       0      0 :::19170                :::*                    LISTEN      24488/java          </span><br><span class="line">tcp6       0      0 :::30000                :::*                    LISTEN      24488/java</span><br></pre></td></tr></table></figure>
-
-<p>通过上面的信息可以看出，我们启动的应用程序共监听了3个端口。放开3个端口的访问，再次连接成功。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/07/JConsole%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1135,123 +1240,14 @@
 <p>网上大都是说因为代理的问题，对我这个场景没用。通过搜索找到一个很好的代理：<a target="_blank" rel="noopener" href="https://mirror.ghproxy.com/">https://mirror.ghproxy.com</a></p>
 <p>desktop&#x2F;core&#x2F;requirements.txt中以下位置：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git+https://github.com/gethue/django-babel.git</span><br><span class="line">git+https://github.com/gethue/django-mako.git</span><br></pre></td></tr></table></figure>
-
-<p>改为：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git+https://mirror.ghproxy.com/https://github.com/gethue/django-babel.git</span><br><span class="line">git+https://mirror.ghproxy.com/https://github.com/gethue/django-mako.git</span><br></pre></td></tr></table></figure>
-
-<p>tools&#x2F;docker&#x2F;hue&#x2F;Dockerfile中以下位置：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git+https://github.com/gethue/PyHive \</span><br><span class="line"># pyhive \</span><br><span class="line">#ksql \</span><br><span class="line">git+https://github.com/bryanyang0528/ksql-python \</span><br></pre></td></tr></table></figure>
-
-<p>改为：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git+https://mirror.ghproxy.com/https://github.com/gethue/PyHive \</span><br><span class="line"># pyhive \</span><br><span class="line">#ksql \</span><br><span class="line">git+https://mirror.ghproxy.com/https://github.com/bryanyang0528/ksql-python \</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/09/02/Connection-to-pypi-python-org-timed-out/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/02/Connection-to-pypi-python-org-timed-out/" class="post-title-link" itemprop="url">Connection to pypi.python.org timed out</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-02 10:49:32" itemprop="dateCreated datePublished" datetime="2021-09-02T10:49:32+08:00">2021-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Connection to pypi.python.org timed out" href="/2021/09/02/Connection-to-pypi-python-org-timed-out/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e96d7579fd15246881d243c233469ef0" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果出现以下错误信息说明采用了默认的pypi源（国外的pypi源），这个很容易出现这种连接超时的问题，应当采用国内的镜像源。下面以阿里提供的镜像源为例。</p>
-<p>一般配置参照阿里官网说明：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/pypi?spm=a2c6h.13651102.0.0.3e221b11xoeg2M">PyPI 镜像</a></p>
-<p>下面主要说明Docker中如何设置。首先创建pip.conf文件并添加以下内容：</p>
-<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span>=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-
-<p>将以下内容添加至Dockerfile中：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RUN mkdir /root/.pip</span><br><span class="line"></span><br><span class="line">COPY pip.conf /root/.pip</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/03/Hue-Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%BC%82%E5%B8%B8%EF%BC%9Agnutls-handshake-failed/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

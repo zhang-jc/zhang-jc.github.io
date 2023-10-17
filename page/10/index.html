@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">289</span>
+          <span class="site-state-item-count">290</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,95 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">大道至简 - 奥卡姆剃刀理论</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-23 17:08:48" itemprop="dateCreated datePublished" datetime="2021-07-23T17:08:48+08:00">2021-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="大道至简 - 奥卡姆剃刀理论" href="/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::c34581874cc74cbd1b6951210021783d" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -260,25 +349,15 @@
 <p>原因是Ranger安装程序默认会使用MySQL的root账号创建所需要的账号，也就是DBA过程。如果不需要安装程序自动创建，则将install.properties中的以下配置前的#号去掉：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setup_mode=SeparateDBA</span><br></pre></td></tr></table></figure>
 
-<h1 id="Specified-key-was-too-long-max-key-length-is-767-bytes"><a href="#Specified-key-was-too-long-max-key-length-is-767-bytes" class="headerlink" title="Specified key was too long; max key length is 767 bytes"></a>Specified key was too long; max key length is 767 bytes</h1><ul>
-<li>第一种报错：</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error executing: CREATE TABLE `x_portal_user` (   `id` bigint(20) NOT NULL AUTO_INCREMENT,   `create_time` datetime DEFAULT NULL,   `update_time` datetime DEFAULT NULL,   `added_by_id` bigint(20) DEFAULT NULL,   `upd_by_id` bigint(20) DEFAULT NULL,   `first_name` varchar(1022) DEFAULT NULL,   `last_name` varchar(1022) DEFAULT NULL,   `pub_scr_name` varchar(2048) DEFAULT NULL,   `login_id` varchar(767) DEFAULT NULL,   `password` varchar(512) NOT NULL,   `email` varchar(512) DEFAULT NULL,   `status` int(11) NOT NULL DEFAULT &#x27;0&#x27;,   `user_src` int(11) NOT NULL DEFAULT &#x27;0&#x27;,   `notes` varchar(4000) DEFAULT NULL,   `other_attributes` varchar(4000) DEFAULT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `x_portal_user_UK_login_id` (`login_id`),   UNIQUE KEY `x_portal_user_UK_email` (`email`),   KEY `x_portal_user_FK_added_by_id` (`added_by_id`),   KEY `x_portal_user_FK_upd_by_id` (`upd_by_id`),   KEY `x_portal_user_cr_time` (`create_time`),   KEY `x_portal_user_up_time` (`update_time`),   KEY `x_portal_user_name` (`first_name`(767)),   KEY `x_portal_user_email` (`email`),   CONSTRAINT `x_portal_user_FK_added_by_id` FOREIGN KEY (`added_by_id`) REFERENCES `x_portal_user` (`id`),   CONSTRAINT `x_portal_user_FK_upd_by_id` FOREIGN KEY (`upd_by_id`) REFERENCES`x_portal_user` (`id`) ) ROW_FORMAT=DYNAMIC;</span><br><span class="line">java.sql.SQLSyntaxErrorException: Specified key was too long; max key length is 767 bytes</span><br><span class="line">SQLException : SQL state: 42000 java.sql.SQLSyntaxErrorException: Specified key was too long; max key length is 767 bytes ErrorCode: 1071</span><br><span class="line">2021-07-02 10:44:54,411  [E] ranger_core_db_mysql.sql file import failed!</span><br></pre></td></tr></table></figure>
-
-<p>修改对应字段的长度可以解决。注意UTF8每个字符4个字节。</p>
-<ul>
-<li>第二种报错：</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Error executing: CREATE TABLE `x_portal_user` (   `id` bigint(20) NOT NULL AUTO_INCREMENT,   `create_time` datetime DEFAULT NULL,   `update_time` datetime DEFAULT NULL,   `added_by_id` bigint(20) DEFAULT NULL,   `upd_by_id` bigint(20) DEFAULT NULL,   `first_name` varchar(128) DEFAULT NULL,   `last_name` varchar(1022) DEFAULT NULL,   `pub_scr_name` varchar(2048) DEFAULT NULL,  `login_id` varchar(128) DEFAULT NULL,   `password` varchar(512) NOT NULL,   `email` varchar(128) DEFAULT NULL,   `status` int(11) NOT NULL DEFAULT &#x27;0&#x27;,   `user_src` int(11) NOT NULL DEFAULT &#x27;0&#x27;,   `notes` varchar(4000) DEFAULT NULL,   `other_attributes` varchar(4000) DEFAULT NULL,   PRIMARY KEY (`id`),   UNIQUE KEY `x_portal_user_UK_login_id` (`login_id`),   UNIQUE KEY `x_portal_user_UK_email` (`email`),   KEY `x_portal_user_FK_added_by_id` (`added_by_id`),   KEY `x_portal_user_FK_upd_by_id` (`upd_by_id`),   KEY `x_portal_user_cr_time` (`create_time`),   KEY `x_portal_user_up_time` (`update_time`),   KEY `x_portal_user_name` (`first_name`(767)),   KEY `x_portal_user_email` (`email`),   CONSTRAINT `x_portal_user_FK_added_by_id` FOREIGN KEY (`added_by_id`) REFERENCES `x_portal_user` (`id`),   CONSTRAINT `x_portal_user_FK_upd_by_id` FOREIGN KEY (`upd_by_id`) REFERENCES `x_portal_user` (`id`) ) ROW_FORMAT=DYNAMIC;</span><br><span class="line">java.sql.SQLException: Incorrect prefix key; the used key part isn&#x27;t a string, the used length is longer than the key part, or the storage engine doesn&#x27;t support unique prefix keys</span><br><span class="line">SQLException : SQL state: HY000 java.sql.SQLException: Incorrect prefix key; the used key part isn&#x27;t a string, the used length is longer than the key part, or the storage engine doesn&#x27;t support unique prefix keys ErrorCode: 1089</span><br><span class="line">2021-07-02 11:51:23,763  [E] ranger_core_db_mysql.sql file import failed!</span><br></pre></td></tr></table></figure>
-
-<p>去掉prefix key的定义即可。</p>
-<p>修改后的建表语句如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `x_portal_user` (</span><br><span class="line">  `id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  `create_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `update_time` datetime <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `added_by_id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `upd_by_id` <span class="type">bigint</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `first_name` <span class="type">varchar</span>(<span class="number">128</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `last_name` <span class="type">varchar</span>(<span class="number">1022</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `pub_scr_name` <span class="type">varchar</span>(<span class="number">2048</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `login_id` <span class="type">varchar</span>(<span class="number">128</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `password` <span class="type">varchar</span>(<span class="number">512</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `email` <span class="type">varchar</span>(<span class="number">128</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `status` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  `user_src` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">  `notes` <span class="type">varchar</span>(<span class="number">4000</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `other_attributes` <span class="type">varchar</span>(<span class="number">4000</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `x_portal_user_UK_login_id` (`login_id`),</span><br><span class="line">  <span class="keyword">UNIQUE</span> KEY `x_portal_user_UK_email` (`email`),</span><br><span class="line">  KEY `x_portal_user_FK_added_by_id` (`added_by_id`),</span><br><span class="line">  KEY `x_portal_user_FK_upd_by_id` (`upd_by_id`),</span><br><span class="line">  KEY `x_portal_user_cr_time` (`create_time`),</span><br><span class="line">  KEY `x_portal_user_up_time` (`update_time`),</span><br><span class="line">  KEY `x_portal_user_name` (`first_name`),</span><br><span class="line">  KEY `x_portal_user_email` (`email`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `x_portal_user_FK_added_by_id` <span class="keyword">FOREIGN</span> KEY (`added_by_id`) <span class="keyword">REFERENCES</span> `x_portal_user` (`id`),</span><br><span class="line">  <span class="keyword">CONSTRAINT</span> `x_portal_user_FK_upd_by_id` <span class="keyword">FOREIGN</span> KEY (`upd_by_id`) <span class="keyword">REFERENCES</span> `x_portal_user` (`id`)</span><br><span class="line">) ROW_FORMAT<span class="operator">=</span><span class="keyword">DYNAMIC</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>对整个建表脚本中的SQL都需要对应的修改。</p>
-</blockquote>
-
+<h1 id="Specified-key-was-too-long-max-key-length-is-767-bytes"><a href="#Specified-key-was-too-long-max-key-length-is-767-bytes" class="headerlink" title="Specified key was too long; max key length is 767 bytes"></a>Specified key was too long; max key length is 767 bytes</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/02/Ranger-2-1-0-Admin%E5%AE%89%E8%A3%85/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -385,34 +464,14 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2 | tar jx</span><br><span class="line">mv gtest-1.5.0 gtest</span><br></pre></td></tr></table></figure>
 
 <p>替换为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/google/googletest/archive/release-1.5.0.tar.gz</span><br><span class="line">tar xzvf release-1.5.0.tar.gz</span><br><span class="line">mv googletest-release-1.5.0 gtest</span><br></pre></td></tr></table></figure>
-
-<p>执行以下命令进行安装：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make check</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装问题"><a href="#安装问题" class="headerlink" title="安装问题"></a>安装问题</h1><h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><p>执行 autogen.sh 时出现一下错误：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">configure.ac:29: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br><span class="line">      If this token and others are legitimate, please use m4_pattern_allow.</span><br><span class="line">      See the Autoconf documentation.</span><br><span class="line">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>安装 libtool：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libtool</span><br></pre></td></tr></table></figure>
-
-<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><h3 id="问题现象-1"><a href="#问题现象-1" class="headerlink" title="问题现象"></a>问题现象</h3><p>安装完成后验证出现以下错误：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">protoc --version</span></span><br><span class="line">protoc: error while loading shared libraries: libprotoc.so.8: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题解决-1"><a href="#问题解决-1" class="headerlink" title="问题解决"></a>问题解决</h3><ul>
-<li>使用find命令找到libprotoc.so.8文件位置。</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> /usr/local/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">find . -name libprotoc.so.8</span></span><br><span class="line">./lib/libprotoc.so.8</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>创建&#x2F;etc&#x2F;ld.so.conf.d&#x2F;libprotobuf.conf文件，并输入以下内容：</li>
-</ul>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/lib</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>执行命令：sudo ldconfig</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/01/Ubuntu-20-04%E5%AE%89%E8%A3%85Protocol-Buffers-2-5-0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -521,11 +580,14 @@
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">2021-06-30T11:44:45,568 ERROR [pool-6-thread-77] thrift.ProcessFunction: Internal error processing get_current_notificationEventId</span><br><span class="line">org.apache.thrift.TException: MetaException(message:User root is not allowed to perform this API call)</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.get_current_notificationEventId(HiveMetaStore.java:7481) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source) ~[?:?]</span><br><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">  at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:147) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:108) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at com.sun.proxy.$Proxy26.get_current_notificationEventId(Unknown Source) ~[?:?]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$get_current_notificationEventId.getResult(ThriftHiveMetastore.java:18364) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$get_current_notificationEventId.getResult(ThriftHiveMetastore.java:18349) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:111) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:107) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at java.security.AccessController.doPrivileged(Native Method) [?:1.8.0_281]</span><br><span class="line">  at javax.security.auth.Subject.doAs(Subject.java:422) [?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762) [hadoop-common-3.2.2.jar:?]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.TUGIBasedProcessor.process(TUGIBasedProcessor.java:119) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_281]</span><br><span class="line">  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_281]</span><br><span class="line">  at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281]</span><br><span class="line">Caused by: org.apache.hadoop.hive.metastore.api.MetaException: User root is not allowed to perform this API call</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.authorizeProxyPrivilege(HiveMetaStore.java:7517) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.get_current_notificationEventId(HiveMetaStore.java:7477) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  ... 19 more</span><br></pre></td></tr></table></figure>
 
 <p>解决方法如下：</p>
-<ul>
-<li>改用hive用户启动hiveserver2和metastore。</li>
-<li>在hadoop配置文件core-site.xml中增加以下配置，并更新集群及客户端。重启metastore及hiveserver2。</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.hive.groups<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.hive.hosts<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/30/Hive-Metastore-User-XX-is-not-allowed-to-perform-this-API-call/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -951,31 +1013,15 @@
 <li>Hadoop 2.7.3</li>
 </ul>
 <h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><p>Ranger中启用行过滤规则后出现异常信息：Error: Error running query: java.lang.AssertionError: Unexpected type UNEXPECTED (state&#x3D;,code&#x3D;0)。如下图：<br><img src="/uploads/20210419/ctaException.png" alt="异常信息"></p>
-<h3 id="问题调查"><a href="#问题调查" class="headerlink" title="问题调查"></a>问题调查</h3><p>Hive社区Jira参考信息：<a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/HIVE-22029">https://issues.apache.org/jira/browse/HIVE-22029</a></p>
-<ul>
-<li><p>org.apache.hadoop.hive.ql.parse.CalcitePlanner：</p>
-<ul>
-<li><p>L292-L298：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2. Regen OP plan from optimized AST</span></span><br><span class="line">init(<span class="literal">false</span>);</span><br><span class="line"><span class="keyword">if</span> (cboCtx.type == PreCboCtx.Type.CTAS) &#123;</span><br><span class="line">  <span class="comment">// Redo create-table analysis, because it&#x27;s not part of doPhase1.</span></span><br><span class="line">  setAST(newAST);</span><br><span class="line">  newAST = reAnalyzeCtasAfterCbo(newAST);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>L647-L657：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ASTNode <span class="title function_">reAnalyzeCtasAfterCbo</span><span class="params">(ASTNode newAst)</span> <span class="keyword">throws</span> SemanticException &#123;</span><br><span class="line">  <span class="comment">// analyzeCreateTable uses this.ast, but doPhase1 doesn&#x27;t, so only reset it</span></span><br><span class="line">  <span class="comment">// here.</span></span><br><span class="line">  newAst = analyzeCreateTable(newAst, getQB(), <span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">if</span> (newAst == <span class="literal">null</span>) &#123;</span><br><span class="line">    LOG.error(<span class="string">&quot;analyzeCreateTable failed to initialize CTAS after CBO;&quot;</span> + <span class="string">&quot; new ast is &quot;</span></span><br><span class="line">        + getAST().dump());</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SemanticException</span>(<span class="string">&quot;analyzeCreateTable failed to initialize CTAS after CBO&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> newAst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>L590-L604：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(Type type, ASTNode ast)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.type != Type.NONE) &#123;</span><br><span class="line">    STATIC_LOG.warn(<span class="string">&quot;Setting &quot;</span> + type + <span class="string">&quot; when already &quot;</span> + <span class="built_in">this</span>.type + <span class="string">&quot;; node &quot;</span> + ast.dump()</span><br><span class="line">        + <span class="string">&quot; vs old node &quot;</span> + nodeOfInterest.dump());</span><br><span class="line">    <span class="built_in">this</span>.type = Type.UNEXPECTED;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">this</span>.type = type;</span><br><span class="line">  <span class="built_in">this</span>.nodeOfInterest = ast;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">setCTASToken</span><span class="params">(ASTNode child)</span> &#123;</span><br><span class="line">  set(PreCboCtx.Type.CTAS, child);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>org.apache.hadoop.hive.ql.parse.SemanticAnalyzer</p>
-<ul>
-<li><p>L11573-L11597:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> HiveParser.TOK_QUERY: <span class="comment">// CTAS</span></span><br><span class="line">  <span class="keyword">if</span> (command_type == CTLT) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SemanticException</span>(ErrorMsg.CTAS_CTLT_COEXISTENCE.getMsg());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (cols.size() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SemanticException</span>(ErrorMsg.CTAS_COLLST_COEXISTENCE.getMsg());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (partCols.size() != <span class="number">0</span> || bucketCols.size() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">dynPart</span> <span class="operator">=</span> HiveConf.getBoolVar(conf, HiveConf.ConfVars.DYNAMICPARTITIONING);</span><br><span class="line">    <span class="keyword">if</span> (dynPart == <span class="literal">false</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SemanticException</span>(ErrorMsg.CTAS_PARCOL_COEXISTENCE.getMsg());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> support dynamic partition for CTAS</span></span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SemanticException</span>(ErrorMsg.CTAS_PARCOL_COEXISTENCE.getMsg());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (isExt) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">SemanticException</span>(ErrorMsg.CTAS_EXTTBL_COEXISTENCE.getMsg());</span><br><span class="line">  &#125;</span><br><span class="line">  command_type = CTAS;</span><br><span class="line">  <span class="keyword">if</span> (plannerCtx != <span class="literal">null</span>) &#123;</span><br><span class="line">    plannerCtx.setCTASToken(child);</span><br><span class="line">  &#125;</span><br><span class="line">  selectStmt = child;</span><br><span class="line">  <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>禁用CBO可以解决问题。</p>
-<pre><code><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hive.cbo.enable<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</code></pre>
-
+<h3 id="问题调查"><a href="#问题调查" class="headerlink" title="问题调查"></a>问题调查</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/19/Hive%E5%90%AF%E7%94%A8RowLevelFilter%E5%90%8ECreate-Table-AS%E5%BC%82%E5%B8%B8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1108,12 +1154,14 @@
 &#125;
 </code></pre>
 <p>通过源代码跟踪找到解决方案：在ranger-hive-security.xml配置文件中设置xasecure.hive.block.update.if.rowfilter.columnmask.specified的值为false即可。如下：</p>
-<pre><code>&lt;property&gt;
-    &lt;name&gt;xasecure.hive.block.update.if.rowfilter.columnmask.specified&lt;/name&gt;
-    &lt;value&gt;false&lt;/value&gt;
-&lt;/property&gt;
-</code></pre>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/05/HiverServer2-%E5%90%AF%E7%94%A8-Ranger-%E8%A1%8C%E8%BF%87%E6%BB%A4%E8%A7%84%E5%88%99%E5%90%8E%E8%A1%A8-Insert-Values%E6%93%8D%E4%BD%9C%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1240,250 +1288,14 @@ FAILED: Operation cancelled
     &lt;value&gt;false&lt;/value&gt;
 &lt;/property&gt;
 </code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/01/26/Hadoop2-7-3-%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%E4%B8%80%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/01/26/Hadoop2-7-3-%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%E4%B8%80%E4%BE%8B/" class="post-title-link" itemprop="url">Hadoop2.7.3 编译错误一例</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-01-26 16:39:01" itemprop="dateCreated datePublished" datetime="2021-01-26T16:39:01+08:00">2021-01-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hadoop2.7.3 编译错误一例" href="/2021/01/26/Hadoop2-7-3-%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF%E4%B8%80%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::bc4ae7dc155391b664d18272eabca376" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>错误信息如下：</p>
-<pre><code>[ERROR] Failed to execute goal org.apache.maven.plugins:maven-antrun-plugin:1.7:run (dist) on project hadoop-kms: An Ant BuildException has occured: exec returned: 2
-[ERROR] around Ant part ...&lt;exec failonerror=&quot;true&quot; dir=&quot;/data/jenkins/.jenkins/workspace/HttpFSProduct/hadoop-common-project/hadoop-kms/target&quot; executable=&quot;sh&quot;&gt;... @ 10:137 in /data/jenkins/.jenkins/workspace/HttpFSProduct/hadoop-common-project/hadoop-kms/target/antrun/build-main.xml
-[ERROR] -&gt; [Help 1]
-org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-antrun-plugin:1.7:run (dist) on project hadoop-kms: An Ant BuildException has occured: exec returned: 2
-around Ant part ...&lt;exec failonerror=&quot;true&quot; dir=&quot;/data/jenkins/.jenkins/workspace/HttpFSProduct/hadoop-common-project/hadoop-kms/target&quot; executable=&quot;sh&quot;&gt;... @ 10:137 in /data/jenkins/.jenkins/workspace/HttpFSProduct/hadoop-common-project/hadoop-kms/target/antrun/build-main.xml
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:215)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
-    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
-    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
-    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
-    at org.jvnet.hudson.maven3.launcher.Maven35Launcher.main (Maven35Launcher.java:130)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
-    at jenkins.maven3.agent.Maven35Main.launch (Maven35Main.java:176)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at hudson.maven.Maven3Builder.call (Maven3Builder.java:139)
-    at hudson.maven.Maven3Builder.call (Maven3Builder.java:70)
-    at hudson.remoting.UserRequest.perform (UserRequest.java:212)
-    at hudson.remoting.UserRequest.perform (UserRequest.java:54)
-    at hudson.remoting.Request$2.run (Request.java:369)
-    at hudson.remoting.InterceptingExecutorService$1.call (InterceptingExecutorService.java:72)
-    at java.util.concurrent.FutureTask.run (FutureTask.java:266)
-    at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1149)
-    at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:624)
-    at java.lang.Thread.run (Thread.java:748)
-Caused by: org.apache.maven.plugin.MojoExecutionException: An Ant BuildException has occured: exec returned: 2
-around Ant part ...&lt;exec failonerror=&quot;true&quot; dir=&quot;/data/jenkins/.jenkins/workspace/HttpFSProduct/hadoop-common-project/hadoop-kms/target&quot; executable=&quot;sh&quot;&gt;... @ 10:137 in /data/jenkins/.jenkins/workspace/HttpFSProduct/hadoop-common-project/hadoop-kms/target/antrun/build-main.xml
-    at org.apache.maven.plugin.antrun.AntRunMojo.execute (AntRunMojo.java:355)
-    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
-    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
-    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
-    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
-    at org.jvnet.hudson.maven3.launcher.Maven35Launcher.main (Maven35Launcher.java:130)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
-    at jenkins.maven3.agent.Maven35Main.launch (Maven35Main.java:176)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at hudson.maven.Maven3Builder.call (Maven3Builder.java:139)
-    at hudson.maven.Maven3Builder.call (Maven3Builder.java:70)
-    at hudson.remoting.UserRequest.perform (UserRequest.java:212)
-    at hudson.remoting.UserRequest.perform (UserRequest.java:54)
-    at hudson.remoting.Request$2.run (Request.java:369)
-    at hudson.remoting.InterceptingExecutorService$1.call (InterceptingExecutorService.java:72)
-    at java.util.concurrent.FutureTask.run (FutureTask.java:266)
-    at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1149)
-    at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:624)
-    at java.lang.Thread.run (Thread.java:748)
-Caused by: org.apache.tools.ant.BuildException: exec returned: 2
-    at org.apache.tools.ant.taskdefs.ExecTask.runExecute (ExecTask.java:646)
-    at org.apache.tools.ant.taskdefs.ExecTask.runExec (ExecTask.java:672)
-    at org.apache.tools.ant.taskdefs.ExecTask.execute (ExecTask.java:498)
-    at org.apache.tools.ant.UnknownElement.execute (UnknownElement.java:291)
-    at sun.reflect.GeneratedMethodAccessor37.invoke (Unknown Source)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at org.apache.tools.ant.dispatch.DispatchUtils.execute (DispatchUtils.java:106)
-    at org.apache.tools.ant.Task.perform (Task.java:348)
-    at org.apache.tools.ant.Target.execute (Target.java:390)
-    at org.apache.tools.ant.Target.performTasks (Target.java:411)
-    at org.apache.tools.ant.Project.executeSortedTargets (Project.java:1399)
-    at org.apache.tools.ant.Project.executeTarget (Project.java:1368)
-    at org.apache.maven.plugin.antrun.AntRunMojo.execute (AntRunMojo.java:327)
-    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
-    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
-    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
-    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
-    at org.jvnet.hudson.maven3.launcher.Maven35Launcher.main (Maven35Launcher.java:130)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
-    at jenkins.maven3.agent.Maven35Main.launch (Maven35Main.java:176)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at hudson.maven.Maven3Builder.call (Maven3Builder.java:139)
-    at hudson.maven.Maven3Builder.call (Maven3Builder.java:70)
-    at hudson.remoting.UserRequest.perform (UserRequest.java:212)
-    at hudson.remoting.UserRequest.perform (UserRequest.java:54)
-    at hudson.remoting.Request$2.run (Request.java:369)
-    at hudson.remoting.InterceptingExecutorService$1.call (InterceptingExecutorService.java:72)
-    at java.util.concurrent.FutureTask.run (FutureTask.java:266)
-    at java.util.concurrent.ThreadPoolExecutor.runWorker (ThreadPoolExecutor.java:1149)
-    at java.util.concurrent.ThreadPoolExecutor$Worker.run (ThreadPoolExecutor.java:624)
-    at java.lang.Thread.run (Thread.java:748)
-[ERROR] 
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
-[ERROR] 
-[ERROR] After correcting the problems, you can resume the build with the command
-[ERROR]   mvn &lt;goals&gt; -rf :hadoop-kms
-</code></pre>
-<p>百度后发现是 tomcat 下载不完整导致的，只下载了2M。如下：</p>
-<pre><code># pwd
-/data/hadoop2.7.3/hadoop-common-project/hadoop-kms/downloads
-# ll
-总用量 1988
--rw-rw-r-- 1 jenkins jenkins 2035659 1月  26 16:07 apache-tomcat-6.0.44.tar.gz
-# du -sh *
-2.0M	apache-tomcat-6.0.44.tar.gz
-</code></pre>
-<p>下载完整的包并放到上面的目录后重试解决。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

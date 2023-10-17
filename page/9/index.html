@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">289</span>
+          <span class="site-state-item-count">290</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,112 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/" class="post-title-link" itemprop="url">Hive 3.1.2与Sqoop 1.4.6 Jackson包版本冲突</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-24 00:26:20" itemprop="dateCreated datePublished" datetime="2021-08-24T00:26:20+08:00">2021-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive 3.1.2与Sqoop 1.4.6 Jackson包版本冲突" href="/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7f126209acb6a1939ef1125146edc1a0" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Logging initialized using configuration in jar:file:/opt/apache-hive-3.1.2-bin/lib/hive-common-3.1.2.jar!/hive-log4j2.properties Async: true</span><br><span class="line">Hive Session ID = 6d309a0e-02c3-4ef7-b8a7-7d42415fcd10</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoSuchMethodError: com.fasterxml.jackson.databind.ObjectMapper.readerFor(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/ObjectReader;</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst$ColumnStatsAccurate.&lt;clinit&gt;(StatsSetupConst.java:166)</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst.parseStatsAcc(StatsSetupConst.java:314)</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst.areBasicStatsUptoDate(StatsSetupConst.java:206)</span><br><span class="line">	at org.apache.hadoop.hive.ql.stats.StatsUtils.areBasicStatsUptoDateForQueryAnswering(StatsUtils.java:2010)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer$MetaDataProcessor.getRowCnt(StatsOptimizer.java:915)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer$MetaDataProcessor.process(StatsOptimizer.java:299)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultRuleDispatcher.dispatch(DefaultRuleDispatcher.java:90)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.dispatchAndReturn(DefaultGraphWalker.java:105)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.dispatch(DefaultGraphWalker.java:89)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.walk(DefaultGraphWalker.java:158)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.startWalking(DefaultGraphWalker.java:120)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer.transform(StatsOptimizer.java:134)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.Optimizer.optimize(Optimizer.java:250)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.SemanticAnalyzer.analyzeInternal(SemanticAnalyzer.java:12295)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.CalcitePlanner.analyzeInternal(CalcitePlanner.java:330)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.BaseSemanticAnalyzer.analyze(BaseSemanticAnalyzer.java:285)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:659)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1826)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1773)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1768)</span><br><span class="line">	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.compileAndRespond(ReExecDriver.java:126)</span><br><span class="line">	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.run(ReExecDriver.java:214)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:239)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:188)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:402)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:335)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:787)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:759)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:683)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：删除${SQOOP_HOME}&#x2F;lib下的jackson开头的Jar包。因为这些Jar包版本较低。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -259,14 +365,14 @@
 <p>阿姆达尔定律常用于并行计算，以预测使用多处理器时的理论加速比。例如，如果一个程序使用单线程完成需要20小时，但程序的1小时部分无法并行化，因此只能并行化剩余的19小时（p&#x3D;0.95）执行时间，那么无论有多少线程专门用于并行执行该程序，最短执行时间不能少于一小时。因此，理论加速最多被限制为单线程性能的20倍：1 &#x2F; (1 - 0.95) &#x3D; 20。</p>
 <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>阿姆达尔定律可以用以下方式表述：</p>
 <p><img src="/images/20210825/amdahl.svg" alt="公式"></p>
-<ul>
-<li>S是整个任务的执行的理论加速；</li>
-<li>s是受益于系统资源改善的任务部分的加速；</li>
-<li>p为受益于改进资源的部分原先占用的执行时间比例。</li>
-</ul>
-<p>表明整个任务执行的理论加速比随着系统资源的改善而增加，无论改进的幅度如何，理论加速总是受限于不能从改进中受益的任务部分。</p>
-<p>阿姆达尔定律仅适用于问题大小固定的情况。在实践中，随着更多的计算资源变得可用，它们往往会被用于更大的问题（更大的数据集），并且在可并行化部分花费的时间通常比固有的串行工作增长得更快。在这种情况下，古斯塔夫森定律对并行性能给出了一个不那么悲观和更现实的评估。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/23/Amdahl-s-Law%EF%BC%88%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -376,10 +482,15 @@
 <li>Hive 3.1.2</li>
 <li>Tez 0.10.1</li>
 </ul>
-<h1 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h1><p>${HIVE_HOME}&#x2F;lib下的guava包与Hadoop的版本不一致。</p>
-<p>对比${HIVE_HOME}&#x2F;lib和${HADOOP_HOME}&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;lib下的guava包版本，用高版本的替换低版本的即可。</p>
-<h1 id="场景二"><a href="#场景二" class="headerlink" title="场景二"></a>场景二</h1><p>hive-exec模块在打包的时候会包含guava包，依赖hive-exec的地方就会引发版本冲突。修改hive-exec模块的pom.xml文件，注释以下内容，然后重新编译打包hive即可。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">include</span>&gt;</span>com.google.guava:guava<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="场景一"><a href="#场景一" class="headerlink" title="场景一"></a>场景一</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/19/Hive-On-Tez%E8%A7%A3%E5%86%B3Guava%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -487,29 +598,15 @@
 <li>Hadoop 3.2.2</li>
 <li>Tez 0.10.1</li>
 </ul>
-<h1 id="二进制包安装异常"><a href="#二进制包安装异常" class="headerlink" title="二进制包安装异常"></a>二进制包安装异常</h1><ul>
-<li>异常1：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">2021-08-18 18:51:15,362 [INFO] [main] |service.AbstractService|: Service org.apache.tez.dag.app.DAGAppMaster failed in state STARTED</span><br><span class="line">org.apache.hadoop.service.ServiceStateException: java.lang.NoClassDefFoundError: org/eclipse/jetty/servlet/ServletContextHandler</span><br><span class="line">  at org.apache.hadoop.service.ServiceStateException.convert(ServiceStateException.java:105)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.startServices(DAGAppMaster.java:1879)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.serviceStart(DAGAppMaster.java:1943)</span><br><span class="line">  at org.apache.hadoop.service.AbstractService.start(AbstractService.java:194)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster$9.run(DAGAppMaster.java:2626)</span><br><span class="line">  at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">  at javax.security.auth.Subject.doAs(Subject.java:422)</span><br><span class="line">  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.initAndStartAppMaster(DAGAppMaster.java:2622)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.main(DAGAppMaster.java:2409)</span><br><span class="line">Caused by: java.lang.NoClassDefFoundError: org/eclipse/jetty/servlet/ServletContextHandler</span><br><span class="line">  at org.apache.hadoop.yarn.webapp.WebApps.$for(WebApps.java:515)</span><br><span class="line">  at org.apache.hadoop.yarn.webapp.WebApps.$for(WebApps.java:521)</span><br><span class="line">  at org.apache.hadoop.yarn.webapp.WebApps.$for(WebApps.java:526)</span><br><span class="line">  at org.apache.tez.dag.app.web.WebUIService.serviceStart(WebUIService.java:92)</span><br><span class="line">  at org.apache.hadoop.service.AbstractService.start(AbstractService.java:194)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster$ServiceWithDependency.start(DAGAppMaster.java:1800)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster$ServiceThread.run(DAGAppMaster.java:1821)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.eclipse.jetty.servlet.ServletContextHandler</span><br><span class="line">  at java.net.URLClassLoader.findClass(URLClassLoader.java:381)</span><br><span class="line">  at java.lang.ClassLoader.loadClass(ClassLoader.java:424)</span><br><span class="line">  at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)</span><br><span class="line">  at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</span><br><span class="line">  ... 7 more</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>异常2：</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">2021-08-18 16:18:36,244 [INFO] [main] |service.AbstractService|: Service org.apache.tez.dag.app.DAGAppMaster failed in state STARTED</span><br><span class="line">org.apache.hadoop.service.ServiceStateException: java.lang.NoSuchMethodError: org.eclipse.jetty.server.session.SessionHandler.getSessionManager()Lorg/eclipse/jetty/server/SessionManager;</span><br><span class="line">  at org.apache.hadoop.service.ServiceStateException.convert(ServiceStateException.java:105)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.startServices(DAGAppMaster.java:1879)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.serviceStart(DAGAppMaster.java:1943)</span><br><span class="line">  at org.apache.hadoop.service.AbstractService.start(AbstractService.java:194)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster$9.run(DAGAppMaster.java:2626)</span><br><span class="line">  at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">  at javax.security.auth.Subject.doAs(Subject.java:422)</span><br><span class="line">  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1729)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.initAndStartAppMaster(DAGAppMaster.java:2622)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster.main(DAGAppMaster.java:2409)</span><br><span class="line">Caused by: java.lang.NoSuchMethodError: org.eclipse.jetty.server.session.SessionHandler.getSessionManager()Lorg/eclipse/jetty/server/SessionManager;</span><br><span class="line">  at org.apache.hadoop.http.HttpServer2.initializeWebServer(HttpServer2.java:569)</span><br><span class="line">  at org.apache.hadoop.http.HttpServer2.&lt;init&gt;(HttpServer2.java:550)</span><br><span class="line">  at org.apache.hadoop.http.HttpServer2.&lt;init&gt;(HttpServer2.java:117)</span><br><span class="line">  at org.apache.hadoop.http.HttpServer2$Builder.build(HttpServer2.java:425)</span><br><span class="line">  at org.apache.hadoop.yarn.webapp.WebApps$Builder.build(WebApps.java:341)</span><br><span class="line">  at org.apache.hadoop.yarn.webapp.WebApps$Builder.start(WebApps.java:432)</span><br><span class="line">  at org.apache.hadoop.yarn.webapp.WebApps$Builder.start(WebApps.java:428)</span><br><span class="line">  at org.apache.tez.dag.app.web.WebUIService.serviceStart(WebUIService.java:94)</span><br><span class="line">  at org.apache.hadoop.service.AbstractService.start(AbstractService.java:194)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster$ServiceWithDependency.start(DAGAppMaster.java:1800)</span><br><span class="line">  at org.apache.tez.dag.app.DAGAppMaster$ServiceThread.run(DAGAppMaster.java:1821)</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装说明"><a href="#安装说明" class="headerlink" title="安装说明"></a>安装说明</h1><h2 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><p>修改以下配置与使用的Hadoop版本一致：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hadoop.version</span>&gt;</span>3.2.2<span class="tag">&lt;/<span class="name">hadoop.version</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>修改以下配置与${HADOOP_HOME}&#x2F;share&#x2F;hadoop&#x2F;common&#x2F;lib&#x2F;guava-27.0-jre.jar版本一致。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">guava.version</span>&gt;</span>27.0-jre<span class="tag">&lt;/<span class="name">guava.version</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="tez-site-xml"><a href="#tez-site-xml" class="headerlink" title="tez-site.xml"></a>tez-site.xml</h2><p>需要注意两点：</p>
-<ul>
-<li>与官网不同，tez.use.cluster.hadoop-libs配置为true。</li>
-<li>该配置文件需要分发到Hadoop集群的所有节点。位置：${HADOOP_HOME}&#x2F;etc&#x2F;hadoop目录下。</li>
-</ul>
-<p>完整内容如下：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> standalone=<span class="string">&quot;no&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml-stylesheet type=<span class="string">&quot;text/xsl&quot;</span> href=<span class="string">&quot;configuration.xsl&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>tez.lib.uris<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>$&#123;fs.defaultFS&#125;/lib/tez/tez-0.10.1.tar.gz<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">type</span>&gt;</span>string<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>tez.use.cluster.hadoop-libs<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="二进制包安装异常"><a href="#二进制包安装异常" class="headerlink" title="二进制包安装异常"></a>二进制包安装异常</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/18/Tez-0-10-1%E5%AE%89%E8%A3%85/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -936,13 +1033,14 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">hive<span class="operator">&gt;</span> <span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> tbl_test;</span><br><span class="line">OK</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tbl_test`(</span><br><span class="line">  `channel_id` string, </span><br><span class="line">  `uuid` string, </span><br><span class="line">  `channel_name` string, </span><br><span class="line">  `channel_status` string, </span><br><span class="line">  `tv_channel_logo` string, </span><br><span class="line">  `phone_channel_logo` string, </span><br><span class="line">  `definition_type` string COMMENT <span class="string">&#x27;频道码率&#x27;</span>, </span><br><span class="line">  `create_datetime` string, </span><br><span class="line">  `update_datetime` string)</span><br><span class="line">PARTITIONED <span class="keyword">BY</span> ( </span><br><span class="line">  `province_alias` string, </span><br><span class="line">  `dt` string)</span><br><span class="line"><span class="type">ROW</span> FORMAT SERDE </span><br><span class="line">  <span class="string">&#x27;org.apache.hadoop.hive.ql.io.orc.OrcSerde&#x27;</span> </span><br><span class="line">STORED <span class="keyword">AS</span> INPUTFORMAT </span><br><span class="line">  <span class="string">&#x27;org.apache.hadoop.hive.ql.io.orc.OrcInputFormat&#x27;</span> </span><br><span class="line">OUTPUTFORMAT </span><br><span class="line">  <span class="string">&#x27;org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat&#x27;</span></span><br><span class="line">LOCATION</span><br><span class="line">  <span class="string">&#x27;hdfs://ycluster/user/hive/warehouse/ods.db/cos_channel_v2_bak_20210630&#x27;</span></span><br><span class="line">TBLPROPERTIES (</span><br><span class="line">  <span class="string">&#x27;last_modified_by&#x27;</span><span class="operator">=</span><span class="string">&#x27;data-platform&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;last_modified_time&#x27;</span><span class="operator">=</span><span class="string">&#x27;1628153252&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.create.version&#x27;</span><span class="operator">=</span><span class="string">&#x27;2.2 or prior&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.numPartCols&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.numParts&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.part.0&#x27;</span><span class="operator">=</span><span class="string">&#x27;&#123;\&quot;type\&quot;:\&quot;struct\&quot;,\&quot;fields\&quot;:[&#123;\&quot;name\&quot;:\&quot;channel_id\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;uuid\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;channel_name\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;channel_status\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;tv_channel_logo\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;phone_channel_logo\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;definition_type\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;\&quot;\u9891\u9053\u7801\u7387\&quot;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;create_datetime\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;update_datetime\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;province_alias\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;dt\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;]&#125;&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.partCol.0&#x27;</span><span class="operator">=</span><span class="string">&#x27;province_alias&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.partCol.1&#x27;</span><span class="operator">=</span><span class="string">&#x27;dt&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;transient_lastDdlTime&#x27;</span><span class="operator">=</span><span class="string">&#x27;1628650471&#x27;</span>)</span><br><span class="line"><span class="type">Time</span> taken: <span class="number">0.041</span> seconds, Fetched: <span class="number">31</span> <span class="type">row</span>(s)</span><br></pre></td></tr></table></figure>
 
 <p>发现在Table的属性中“spark.sql.sources.schema.part.0”中有Union Code编码，而我们的环境都是UTF8编码。跟踪源代码发现在添加分区时会将表的属性信息依次记录到分区的参数中。因此检查MySQL表字段编码：<img src="/images/20210811/partition_params_encoding.png" alt="partition params encoding"></p>
-<p>修改表字段编码后问题解决。参考SQL如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `hive`.`partition_params` CHANGE <span class="keyword">COLUMN</span> `PARAM_VALUE` `PARAM_VALUE` <span class="type">VARCHAR</span>(<span class="number">4000</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="string">&#x27;utf8&#x27;</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>遗留问题：为什么在Hive表的属性中新增了spark相关的属性？</p>
-</blockquote>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/10/Hive%E5%85%83%E6%95%B0%E6%8D%AEMySQL%E7%BC%96%E7%A0%81%E5%AF%BC%E8%87%B4Sqoop%E5%AF%BC%E5%85%A5%E9%94%99%E8%AF%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1050,52 +1148,14 @@
 <li>AM（Application Master）远程调试</li>
 </ul>
 <h1 id="MapReduce-Task远程调试"><a href="#MapReduce-Task远程调试" class="headerlink" title="MapReduce Task远程调试"></a>MapReduce Task远程调试</h1><h2 id="Map-Task远程调试"><a href="#Map-Task远程调试" class="headerlink" title="Map Task远程调试"></a>Map Task远程调试</h2><p>修改mapred-site.xml中的配置项：</p>
-<ul>
-<li>mapreduce.map.java.opts：Map Task JVM参数设置。此处设置为：-Xdebug -Xrunjdwp:transport&#x3D;dt_socket,address&#x3D;9091,server&#x3D;y,suspend&#x3D;y。</li>
-<li>mapreduce.map.maxattempts：Map Task失败重试的最大次数。此处设置为1。</li>
-<li>mapreduce.task.timeout：一个Task既没有读写数据也没有状态变化可持续的毫秒数。默认为600000毫秒，设置为0禁用超时。远程调试时通常需要持续的时间比较久，所以此处设置为0。</li>
-</ul>
-<h2 id="Reduce-Task远程调试"><a href="#Reduce-Task远程调试" class="headerlink" title="Reduce Task远程调试"></a>Reduce Task远程调试</h2><p>修改mapred-site.xml中的配置项：</p>
-<ul>
-<li>mapreduce.reduce.java.opts：Map Task JVM参数设置。此处设置为：-Xdebug -Xrunjdwp:transport&#x3D;dt_socket,address&#x3D;9091,server&#x3D;y,suspend&#x3D;y。</li>
-<li>mapreduce.reduce.maxattempts：Map Task失败重试的最大次数。此处设置为1。</li>
-<li>mapreduce.task.timeout：一个Task既没有读写数据也没有状态变化可持续的毫秒数。默认为600000毫秒，设置为0禁用超时。远程调试时通常需要持续的时间比较久，所以此处设置为0。</li>
-</ul>
-<h2 id="virtual-memory错误"><a href="#virtual-memory错误" class="headerlink" title="virtual memory错误"></a>virtual memory错误</h2><p>分为两种：</p>
-<ul>
-<li>AM管理进程virtual memory beyond错误</li>
-<li>Task Container virtual memory beyond错误</li>
-</ul>
-<h3 id="AM"><a href="#AM" class="headerlink" title="AM"></a>AM</h3><p>错误信息如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">21/08/09 16:38:37 INFO mapreduce.Job: Job job_1593052953461_29983110 failed with state FAILED due to: Application application_1593052953461_29983110 failed 2 times due to AM Container for appattempt_1593052953461_29983110_000002 exited with  exitCode: -103</span><br><span class="line">For more detailed output, check application tracking page:http://ycluster-resourcemanager1:50030/cluster/app/application_1593052953461_29983110Then, click on links to logs of each attempt.</span><br><span class="line">Diagnostics: Container [pid=4359,containerID=container_e32_1593052953461_29983110_02_000001] is running beyond virtual memory limits. Current usage: 121.7 MB of 2 GB physical memory used; 16.4 GB of 6.2 GB virtual memory used. Killing container.</span><br><span class="line">Dump of the process-tree for container_e32_1593052953461_29983110_02_000001 :</span><br><span class="line">	|- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE</span><br><span class="line">	|- 4598 4359 4359 4359 (java) 232 18 17444765696 30784 /opt/java/bin/java -Djava.io.tmpdir=/data5/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog -Xmx14336m org.apache.hadoop.mapreduce.v2.app.MRAppMaster </span><br><span class="line">	|- 4359 4355 4359 4359 (bash) 3 3 115908608 359 /bin/bash -c /opt/java/bin/java -Djava.io.tmpdir=/data5/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog  -Xmx14336m org.apache.hadoop.mapreduce.v2.app.MRAppMaster 1&gt;/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/stdout 2&gt;/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/stderr  </span><br><span class="line"></span><br><span class="line">Container killed on request. Exit code is 143</span><br><span class="line">Container exited with a non-zero exit code 143</span><br><span class="line">Failing this attempt. Failing the application.</span><br></pre></td></tr></table></figure>
-
-<p>修改yarn-site.xml以下配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.app.mapreduce.am.resource.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>14336<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Task-Container"><a href="#Task-Container" class="headerlink" title="Task Container"></a>Task Container</h3><p>错误信息如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2021-08-09 16:45:28,899 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Diagnostics report from attempt_1593052953461_29983142_m_000000_0: Container [pid=188730,containerID=container_e32_1593052953461_29983142_01_000002] is running beyond virtual memory limits. Current usage: 25.3 MB of 4 GB physical memory used; 32.9 GB of 12.4 GB virtual memory used. Killing container.</span><br><span class="line">Dump of the process-tree for container_e32_1593052953461_29983142_01_000002 :</span><br><span class="line">	|- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE</span><br><span class="line">	|- 188965 188730 188730 188730 (java) 8 2 35216101376 6116 /opt/java/bin/java -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN -Xdebug -Xrunjdwp:transport=dt_socket,address=9091,server=y,suspend=y -Djava.io.tmpdir=/data0/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog org.apache.hadoop.mapred.YarnChild 192.168.72.33 32492 attempt_1593052953461_29983142_m_000000_0 35184372088834 </span><br><span class="line">	|- 188730 188728 188730 188730 (bash) 2 4 115855360 358 /bin/bash -c /opt/java/bin/java -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN  -Xdebug -Xrunjdwp:transport=dt_socket,address=9091,server=y,suspend=y -Djava.io.tmpdir=/data0/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog org.apache.hadoop.mapred.YarnChild 192.168.72.33 32492 attempt_1593052953461_29983142_m_000000_0 35184372088834 1&gt;/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/stdout 2&gt;/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/stderr  </span><br><span class="line"></span><br><span class="line">Container killed on request. Exit code is 143</span><br><span class="line">Container exited with a non-zero exit code 143</span><br></pre></td></tr></table></figure>
-
-<p>修改yarn-site.xml以下配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.map.memory.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>14336<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.reduce.memory.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>14336<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>此处有一个很大的疑问：为什么物理内存占用很小，但虚拟内存占用会这么大？这个问题目前还未搞懂(&gt;﹏&lt;)<br>问题解决的关键是Container分配物理内存的值乘以“yarn.nodemanager.vmem-pmem-ratio”的值大于异常信息中的数据；另外一种思路是禁用虚拟内存的检查，这种方法我没有实际验证。</p>
-</blockquote>
-<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p>打开track url地址，查找到Task所在的服务器。如下：</p>
-<p><img src="/images/20210809/track-url.png" alt="track url"></p>
-<p><img src="/images/20210809/job-info.png" alt="job info"></p>
-<p><img src="/images/20210809/task-position.png" alt="task position"></p>
-<h1 id="AM（Application-Master）远程调试"><a href="#AM（Application-Master）远程调试" class="headerlink" title="AM（Application Master）远程调试"></a>AM（Application Master）远程调试</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>修改mapred-site.xml中的配置项：</p>
-<ul>
-<li>yarn.app.mapreduce.am.command-opts：AM JVM参数设置。可能出现的virtual memory异常解决方法同上。此处设置为：-Xdebug -Xrunjdwp:transport&#x3D;dt_socket,address&#x3D;9091,server&#x3D;y,suspend&#x3D;y。</li>
-<li>mapreduce.am.max-attempts：Application重试次数。此处设置为1。</li>
-</ul>
-<h2 id="定位-1"><a href="#定位-1" class="headerlink" title="定位"></a>定位</h2><p>在ResourceManager上根据提交的Application ID查找AM所在的服务器。如下：</p>
-<p><img src="/images/20210809/yarn-apps.png" alt="ResourceManager"></p>
-<p><img src="/images/20210809/am.png" alt="AM"></p>
-<h1 id="Eclipse配置"><a href="#Eclipse配置" class="headerlink" title="Eclipse配置"></a>Eclipse配置</h1><p>远程调试配置都一样，如下图：</p>
-<p><img src="/images/20210809/eclipse.png" alt="Eclipse远程调试"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/05/MapReduce%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1201,95 +1261,6 @@
 <p>此处假设一种场景：我们需遍历一个有1W个元素的集合，并对每个元素进行处理。但是处理过程中，某个元素的值触发了异常，而且我们知道是哪个元素引发的。想要调查清楚为什么这个值会引发异常，需要进入这个元素的处理逻辑单步调试跟踪。此时断点如何设置呢？幸运的是我们可以为断点设置条件（Conditional Breakpoints），当条件满足时或者当条件的值发生变化时让VM停下来让我们调试。真是太棒了！！！</p>
 <p>参考下图：<img src="/images/20210805/conditionalBreakpoints.png" alt="断点条件设置"></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">大道至简 - 奥卡姆剃刀理论</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-07-23 17:08:48" itemprop="dateCreated datePublished" datetime="2021-07-23T17:08:48+08:00">2021-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="大道至简 - 奥卡姆剃刀理论" href="/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::c34581874cc74cbd1b6951210021783d" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
       
     </div>
 
