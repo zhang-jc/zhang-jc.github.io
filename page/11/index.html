@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">288</span>
+          <span class="site-state-item-count">289</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,258 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/01/13/Hue%E5%AE%89%E8%A3%85ImportError%E9%94%99%E8%AF%AF%E4%B8%80%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/01/13/Hue%E5%AE%89%E8%A3%85ImportError%E9%94%99%E8%AF%AF%E4%B8%80%E4%BE%8B/" class="post-title-link" itemprop="url">Hue安装ImportError错误一例</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-13 11:50:09" itemprop="dateCreated datePublished" datetime="2021-01-13T11:50:09+08:00">2021-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hue/" itemprop="url" rel="index"><span itemprop="name">Hue</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hue安装ImportError错误一例" href="/2021/01/13/Hue%E5%AE%89%E8%A3%85ImportError%E9%94%99%E8%AF%AF%E4%B8%80%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::0f0c508d36b099fb4a594a1faed7e9c6" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>错误信息如下：</p>
+<pre><code>Traceback (most recent call last):
+  File &quot;/opt/hue-4.8.0/hue/build/env/bin/hue&quot;, line 11, in &lt;module&gt;
+    load_entry_point(&#39;desktop&#39;, &#39;console_scripts&#39;, &#39;hue&#39;)()
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/manage_entry.py&quot;, line 225, in entry
+    execute_from_command_line(sys.argv)
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/core/management/__init__.py&quot;, line 364, in execute_from_command_line
+    utility.execute()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/core/management/__init__.py&quot;, line 338, in execute
+    django.setup()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/__init__.py&quot;, line 27, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/apps/registry.py&quot;, line 108, in populate
+    app_config.import_models()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/apps/config.py&quot;, line 202, in import_models
+    self.models_module = import_module(models_module_name)
+  File &quot;/usr/lib64/python2.7/importlib/__init__.py&quot;, line 37, in import_module
+    __import__(name)
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/models.py&quot;, line 47, in &lt;module&gt;
+    from useradmin.models import User, Group, get_organization
+  File &quot;/opt/hue-4.8.0/hue/apps/useradmin/src/useradmin/models.py&quot;, line 56, in &lt;module&gt;
+    from desktop.lib.connectors.models import _get_installed_connectors, Connector
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/connectors/models.py&quot;, line 29, in &lt;module&gt;
+    from desktop.lib.connectors.types import get_connectors_types
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/connectors/types.py&quot;, line 24, in &lt;module&gt;
+    from desktop.lib.exceptions_renderable import PopupException
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/exceptions_renderable.py&quot;, line 31, in &lt;module&gt;
+    import desktop.lib.django_util
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/django_util.py&quot;, line 42, in &lt;module&gt;
+    import desktop.lib.thrift_util
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/thrift_util.py&quot;, line 49, in &lt;module&gt;
+    from desktop.lib.thrift_.http_client import THttpClient
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/thrift_/http_client.py&quot;, line 26, in &lt;module&gt;
+    from desktop.lib.rest.http_client import HttpClient
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/rest/http_client.py&quot;, line 32, in &lt;module&gt;
+    from urllib3.contrib import pyopenssl
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/urllib3-1.25.8-py2.7.egg/urllib3/contrib/pyopenssl.py&quot;, line 46, in &lt;module&gt;
+    import OpenSSL.SSL
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/__init__.py&quot;, line 8, in &lt;module&gt;
+    from OpenSSL import crypto, SSL
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/crypto.py&quot;, line 16, in &lt;module&gt;
+    from OpenSSL._util import (
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/_util.py&quot;, line 6, in &lt;module&gt;
+    from cryptography.hazmat.bindings.openssl.binding import Binding
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/cryptography-2.9-py2.7-linux-x86_64.egg/cryptography/hazmat/bindings/openssl/binding.py&quot;, line 16, in &lt;module&gt;
+    from cryptography.hazmat.bindings._openssl import ffi, lib
+ImportError: /opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/cryptography-2.9-py2.7-linux-x86_64.egg/cryptography/hazmat/bindings/_openssl.so: undefined symbol: RSA_set0_factors
+Running &#39;/opt/hue-4.8.0/hue/build/env/bin/hue migrate --fake-initial&#39; with None
+Traceback (most recent call last):
+  File &quot;/opt/hue-4.8.0/hue/build/env/bin/hue&quot;, line 11, in &lt;module&gt;
+    load_entry_point(&#39;desktop&#39;, &#39;console_scripts&#39;, &#39;hue&#39;)()
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/manage_entry.py&quot;, line 225, in entry
+    execute_from_command_line(sys.argv)
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/core/management/__init__.py&quot;, line 364, in execute_from_command_line
+    utility.execute()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/core/management/__init__.py&quot;, line 338, in execute
+    django.setup()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/__init__.py&quot;, line 27, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/apps/registry.py&quot;, line 108, in populate
+    app_config.import_models()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/apps/config.py&quot;, line 202, in import_models
+    self.models_module = import_module(models_module_name)
+  File &quot;/usr/lib64/python2.7/importlib/__init__.py&quot;, line 37, in import_module
+    __import__(name)
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/models.py&quot;, line 47, in &lt;module&gt;
+    from useradmin.models import User, Group, get_organization
+  File &quot;/opt/hue-4.8.0/hue/apps/useradmin/src/useradmin/models.py&quot;, line 56, in &lt;module&gt;
+    from desktop.lib.connectors.models import _get_installed_connectors, Connector
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/connectors/models.py&quot;, line 29, in &lt;module&gt;
+    from desktop.lib.connectors.types import get_connectors_types
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/connectors/types.py&quot;, line 24, in &lt;module&gt;
+    from desktop.lib.exceptions_renderable import PopupException
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/exceptions_renderable.py&quot;, line 31, in &lt;module&gt;
+    import desktop.lib.django_util
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/django_util.py&quot;, line 42, in &lt;module&gt;
+    import desktop.lib.thrift_util
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/thrift_util.py&quot;, line 49, in &lt;module&gt;
+    from desktop.lib.thrift_.http_client import THttpClient
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/thrift_/http_client.py&quot;, line 26, in &lt;module&gt;
+    from desktop.lib.rest.http_client import HttpClient
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/rest/http_client.py&quot;, line 32, in &lt;module&gt;
+    from urllib3.contrib import pyopenssl
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/urllib3-1.25.8-py2.7.egg/urllib3/contrib/pyopenssl.py&quot;, line 46, in &lt;module&gt;
+    import OpenSSL.SSL
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/__init__.py&quot;, line 8, in &lt;module&gt;
+    from OpenSSL import crypto, SSL
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/crypto.py&quot;, line 16, in &lt;module&gt;
+    from OpenSSL._util import (
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/_util.py&quot;, line 6, in &lt;module&gt;
+    from cryptography.hazmat.bindings.openssl.binding import Binding
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/cryptography-2.9-py2.7-linux-x86_64.egg/cryptography/hazmat/bindings/openssl/binding.py&quot;, line 16, in &lt;module&gt;
+    from cryptography.hazmat.bindings._openssl import ffi, lib
+ImportError: /opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/cryptography-2.9-py2.7-linux-x86_64.egg/cryptography/hazmat/bindings/_openssl.so: undefined symbol: RSA_set0_factors
+Running &#39;/opt/hue-4.8.0/hue/build/env/bin/hue collectstatic --noinput&#39; with None
+Traceback (most recent call last):
+  File &quot;/opt/hue-4.8.0/hue/build/env/bin/hue&quot;, line 11, in &lt;module&gt;
+    load_entry_point(&#39;desktop&#39;, &#39;console_scripts&#39;, &#39;hue&#39;)()
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/manage_entry.py&quot;, line 225, in entry
+    execute_from_command_line(sys.argv)
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/core/management/__init__.py&quot;, line 364, in execute_from_command_line
+    utility.execute()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/core/management/__init__.py&quot;, line 338, in execute
+    django.setup()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/__init__.py&quot;, line 27, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/apps/registry.py&quot;, line 108, in populate
+    app_config.import_models()
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/Django-1.11.29-py2.7.egg/django/apps/config.py&quot;, line 202, in import_models
+    self.models_module = import_module(models_module_name)
+  File &quot;/usr/lib64/python2.7/importlib/__init__.py&quot;, line 37, in import_module
+    __import__(name)
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/models.py&quot;, line 47, in &lt;module&gt;
+    from useradmin.models import User, Group, get_organization
+  File &quot;/opt/hue-4.8.0/hue/apps/useradmin/src/useradmin/models.py&quot;, line 56, in &lt;module&gt;
+    from desktop.lib.connectors.models import _get_installed_connectors, Connector
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/connectors/models.py&quot;, line 29, in &lt;module&gt;
+    from desktop.lib.connectors.types import get_connectors_types
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/connectors/types.py&quot;, line 24, in &lt;module&gt;
+    from desktop.lib.exceptions_renderable import PopupException
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/exceptions_renderable.py&quot;, line 31, in &lt;module&gt;
+    import desktop.lib.django_util
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/django_util.py&quot;, line 42, in &lt;module&gt;
+    import desktop.lib.thrift_util
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/thrift_util.py&quot;, line 49, in &lt;module&gt;
+    from desktop.lib.thrift_.http_client import THttpClient
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/thrift_/http_client.py&quot;, line 26, in &lt;module&gt;
+    from desktop.lib.rest.http_client import HttpClient
+  File &quot;/opt/hue-4.8.0/hue/desktop/core/src/desktop/lib/rest/http_client.py&quot;, line 32, in &lt;module&gt;
+    from urllib3.contrib import pyopenssl
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/urllib3-1.25.8-py2.7.egg/urllib3/contrib/pyopenssl.py&quot;, line 46, in &lt;module&gt;
+    import OpenSSL.SSL
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/__init__.py&quot;, line 8, in &lt;module&gt;
+    from OpenSSL import crypto, SSL
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/crypto.py&quot;, line 16, in &lt;module&gt;
+    from OpenSSL._util import (
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/pyOpenSSL-17.5.0-py2.7.egg/OpenSSL/_util.py&quot;, line 6, in &lt;module&gt;
+    from cryptography.hazmat.bindings.openssl.binding import Binding
+  File &quot;/opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/cryptography-2.9-py2.7-linux-x86_64.egg/cryptography/hazmat/bindings/openssl/binding.py&quot;, line 16, in &lt;module&gt;
+    from cryptography.hazmat.bindings._openssl import ffi, lib
+ImportError: /opt/hue-4.8.0/hue/build/env/lib/python2.7/site-packages/cryptography-2.9-py2.7-linux-x86_64.egg/cryptography/hazmat/bindings/_openssl.so: undefined symbol: RSA_set0_factors
+</code></pre>
+<p>错误原因是系统中有多个OpenSSL的版本，因为自己编译安装的版本未创建对应的软连接，导致编译时查找的版本不正确。通过以下方式解决：</p>
+<pre><code># ln -s /usr/local/openssl/lib/libssl.so.1.1 /usr/lib64/libssl.so.1.1
+# ln -s /usr/local/openssl/lib/libcrypto.so.1.1 /usr/lib64/libcrypto.so.1.1
+# export LDFLAGS=&quot;-L/usr/local/openssl/lib&quot;
+# export CPPFLAGS=&quot;-I/usr/local/openssl/include&quot;
+# export PKG_CONFIG_PATH=&quot;/usr/local/openssl/lib/pkgconfig&quot;
+</code></pre>
+<p>完成后再次编译安装成功。对于OpenSSL的处理可以参见我的另外一篇博文：<a target="_blank" rel="noopener" href="http://zhang-jc.github.io/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/">CentOS 6.8 安装 Python3 Could not build the ssl module</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1352,141 +1604,6 @@ org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal o
    
 </code></pre>
 <p>解决方法：增加 -Drat.skip&#x3D;true 参数 ，跳过licensing 检查。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Hue Load Balance配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-11-18 17:11:29" itemprop="dateCreated datePublished" datetime="2020-11-18T17:11:29+08:00">2020-11-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hue/" itemprop="url" rel="index"><span itemprop="name">Hue</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hue Load Balance配置" href="/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::7dc1f627b1ea9d9953cf00d310323812" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>直接上配置：</p>
-<pre><code>server &#123;
-  server_name 192.168.72.31;
-  listen 8001;
-  
-  charset utf-8;
-  
-  proxy_connect_timeout 600s;
-  proxy_read_timeout 600s;
-  proxy_send_timeout 600s;
-  
-  location / &#123;
-    proxy_set_header Host $http_x_forwarded_for;
-    proxy_set_header X-Forwarded-For $http_x_forwarded_for;
-    
-    proxy_pass http://hue;
-  &#125;
-&#125;
-
-upstream hue &#123;
-  hash $cookie_sessionid;
-  
-  server 192.168.72.22:8888 max_fails=3;
-  server 192.168.72.31:8888 max_fails=3;
-&#125;
-</code></pre>
-<p>重点是调整 upstream hash 的策略。因为 Hue 是需要保持 session 的，同一个 session 的请求需要发送到同一台后端服务器上。简单的可以采用 ip_hash 策略，这个策略存在两个重要的问题：</p>
-<ul>
-<li>对隐藏在局域网后的用户不起作用。</li>
-<li>ip_hash 只取 IPV4 的前三段值做 Hash，在非公网大并发场景下会出现负载非常不均衡的情况。参见：<a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash">http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash</a></li>
-</ul>
-<p>基于以上两点修改了 Nginx 的配置采用 $cookie_sessionid 做为 hash 值，达到 session 级别的负载均衡。</p>
-<p>主要的问题其实是这种方式未做到按照后端服务器实际负载再按照 session 级别来分配请求。后续打算研究 HAProxy 是否可以做到。</p>
 
       
     </div>

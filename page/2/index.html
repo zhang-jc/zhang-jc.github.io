@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">288</span>
+          <span class="site-state-item-count">289</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -170,6 +170,103 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2023/01/17/Window-10-%E9%85%8D%E7%BD%AE-PIP-%E4%BB%A3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/17/Window-10-%E9%85%8D%E7%BD%AE-PIP-%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">Window 10 配置 PIP 代理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-17 16:54:35" itemprop="dateCreated datePublished" datetime="2023-01-17T16:54:35+08:00">2023-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Window 10 配置 PIP 代理" href="/2023/01/17/Window-10-%E9%85%8D%E7%BD%AE-PIP-%E4%BB%A3%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::812c218ddd7d152a4409a215334865f4" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>简单的方式就是直接用命令，例如设置阿里代理：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">pip config set install.trusted-host mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+
+<p>配置信息会保存在下面路径的配置文件中，如果该文件不存在则会自动创建。另外一种方式是直接修改该配置文件内容。</p>
+<blockquote>
+<p>C:\Users{user}\AppData\Roaming\pip\pip.ini</p>
+</blockquote>
+<p>配置完成后，上面配置文件的内容如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span> = mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1299,116 +1396,6 @@
 <li><a target="_blank" rel="noopener" href="https://atlan.com/apache-atlas-alternatives/">Apache Atlas Alternatives — Amundsen, DataHub, Metacat, Databook (atlan.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/359295568">Github 1.9K Star的数据治理框架-Amundsen - 知乎 (zhihu.com)</a></li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/" class="post-title-link" itemprop="url">Spark宽依赖与窄依赖</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-05-17 10:49:32" itemprop="dateCreated datePublished" datetime="2022-05-17T10:49:32+08:00">2022-05-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Spark宽依赖与窄依赖" href="/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::3cf905c2054b3850356ced982703e98c" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Spark的宽依赖与窄依赖是跟数据分区关联的概念。我们知道Spark会将数据集</p>
-<ul>
-<li>窄依赖：每个输入分区仅决定一个输出分区。Spark窄依赖自动执行流水线处理，意味着多个过滤操作全部在内存中执行。</li>
-<li>宽依赖：每个输入分区决定多个输出分区。具有宽依赖关系的转换就是经常说的洗牌（shuffle）操作。执行shuffle操作时，Spark会将结果写入磁盘。</li>
-</ul>
-<p><img src="/images/20220517/Spark%E7%AA%84%E4%BE%9D%E8%B5%96%E4%B8%8E%E5%AE%BD%E4%BE%9D%E8%B5%96.png" alt="Spark宽依赖与窄依赖"></p>
-<p>针对宽依赖的优化是讨论比较多的话题。这也引出了惰性评估的主题。惰性评估的意思就是等到绝对需要时才执行计算。惰性评估的好处是Spark可以优化整个从输入到输出端的数据流。一个很好的例子就是Dataframe的谓词下推。</p>
-<p>其实，我们日常工作中会有很多惰性评估的场景，尤其是解决历史存量问题的时候。例如，我们经常会先收集某方面的存量问题，然后整体分析后提供完整的解决方案。这样更有助于从整体统筹考虑，从而提供更更高效、低成本的解决方案。</p>
 
       
     </div>
