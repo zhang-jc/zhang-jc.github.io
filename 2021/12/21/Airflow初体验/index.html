@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.css" integrity="sha256-vQkngPS8jiHHH0I6ABTZroZk8NPZ7b+MUReOFE9UsXQ=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="指定Airflow版本安装12&gt; pip install apache-airflow&#x3D;&#x3D;&#x3D;1.10.3&gt; airflow initdb  遇到的问题No such revision or branch ‘7b2661a43ba3’123456789101112131415161718192021222324frin-mac:~ zhangjc$ airflow initdb[2021">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Airflow初体验">
+<meta property="og:url" content="https://www.zhangjc.com/2021/12/21/Airflow%E5%88%9D%E4%BD%93%E9%AA%8C/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="指定Airflow版本安装12&gt; pip install apache-airflow&#x3D;&#x3D;&#x3D;1.10.3&gt; airflow initdb  遇到的问题No such revision or branch ‘7b2661a43ba3’123456789101112131415161718192021222324frin-mac:~ zhangjc$ airflow initdb[2021">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-21T08:29:43.000Z">
+<meta property="article:modified_time" content="2023-10-17T08:51:51.013Z">
+<meta property="article:author" content="Charles Zhang">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="调度系统">
+<meta property="article:tag" content="Airflow">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2021/12/21/Airflow%E5%88%9D%E4%BD%93%E9%AA%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2021/12/21/Airflow%E5%88%9D%E4%BD%93%E9%AA%8C/","path":"2021/12/21/Airflow初体验/","title":"Airflow初体验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Airflow初体验 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E5%AE%9AAirflow%E7%89%88%E6%9C%AC%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">指定Airflow版本安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#No-such-revision-or-branch-%E2%80%987b2661a43ba3%E2%80%99"><span class="nav-number">2.1.</span> <span class="nav-text">No such revision or branch ‘7b2661a43ba3’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#invalid-literal-for-int-with-base-10-%E2%80%9830-0%E2%80%99"><span class="nav-number">2.2.</span> <span class="nav-text">invalid literal for int() with base 10: ‘30.0’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%85%E5%86%B2%E7%AA%81"><span class="nav-number">2.3.</span> <span class="nav-text">包冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flask%E4%BE%9D%E8%B5%96%E5%8C%85%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3"><span class="nav-number">2.3.1.</span> <span class="nav-text">flask依赖包冲突解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#No-module-named-%E2%80%98pysqlite2%E2%80%99"><span class="nav-number">2.4.</span> <span class="nav-text">No module named ‘pysqlite2’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#No-module-named-%E2%80%98wtforms-compat%E2%80%99"><span class="nav-number">2.5.</span> <span class="nav-text">No module named ‘wtforms.compat’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception-Install-%E2%80%98email-validator%E2%80%99-for-email-validation-support"><span class="nav-number">2.6.</span> <span class="nav-text">Exception: Install ‘email_validator’ for email validation support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#no-such-table-ab-permission-view-role"><span class="nav-number">2.7.</span> <span class="nav-text">no such table: ab_permission_view_role</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Charles Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Charles Zhang</p>
+  <div class="site-description" itemprop="description">人一定要有梦想，万一实现了呢...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">288</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      聊天
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhang-jc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhang-jc" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/12/21/Airflow%E5%88%9D%E4%BD%93%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Airflow初体验 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Airflow初体验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-12-21 16:29:43" itemprop="dateCreated datePublished" datetime="2021-12-21T16:29:43+08:00">2021-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Airflow/" itemprop="url" rel="index"><span itemprop="name">Airflow</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Airflow初体验" href="/2021/12/21/Airflow%E5%88%9D%E4%BD%93%E9%AA%8C/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::5ec844f99de05ed955ee5c81d41c2881" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="指定Airflow版本安装"><a href="#指定Airflow版本安装" class="headerlink" title="指定Airflow版本安装"></a>指定Airflow版本安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">pip install apache-airflow===1.10.3</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">airflow initdb</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="No-such-revision-or-branch-‘7b2661a43ba3’"><a href="#No-such-revision-or-branch-‘7b2661a43ba3’" class="headerlink" title="No such revision or branch ‘7b2661a43ba3’"></a>No such revision or branch ‘7b2661a43ba3’</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">frin-mac:~ zhangjc$ airflow initdb</span><br><span class="line">[2021-12-21 17:01:31,062] &#123;__init__.py:51&#125; INFO - Using executor SequentialExecutor</span><br><span class="line">DB: sqlite:////Users/zhangjc/airflow/airflow.db</span><br><span class="line">[2021-12-21 17:01:31,779] &#123;db.py:350&#125; INFO - Creating tables</span><br><span class="line">INFO  [alembic.runtime.migration] Context impl SQLiteImpl.</span><br><span class="line">INFO  [alembic.runtime.migration] Will assume non-transactional DDL.</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/base.py&quot;, line 143, in _catch_revision_errors</span><br><span class="line">    yield</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/base.py&quot;, line 336, in _upgrade_revs</span><br><span class="line">    revs = list(revs)</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/revision.py&quot;, line 645, in _iterate_revisions</span><br><span class="line">    requested_lowers = self.get_revisions(lower)</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/revision.py&quot;, line 299, in get_revisions</span><br><span class="line">    return sum([self.get_revisions(id_elem) for id_elem in id_], ())</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/revision.py&quot;, line 299, in &lt;listcomp&gt;</span><br><span class="line">    return sum([self.get_revisions(id_elem) for id_elem in id_], ())</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/revision.py&quot;, line 304, in get_revisions</span><br><span class="line">    for rev_id in resolved_id)</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/revision.py&quot;, line 304, in &lt;genexpr&gt;</span><br><span class="line">    for rev_id in resolved_id)</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/alembic/script/revision.py&quot;, line 362, in _revision_for_ident</span><br><span class="line">    resolved_id)</span><br><span class="line">alembic.script.revision.ResolutionError: No such revision or branch &#x27;7b2661a43ba3&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：删除 ${AIRFLOW_HOME} 下的 airflow.db，然后再试。</p>
+<h2 id="invalid-literal-for-int-with-base-10-‘30-0’"><a href="#invalid-literal-for-int-with-base-10-‘30-0’" class="headerlink" title="invalid literal for int() with base 10: ‘30.0’"></a>invalid literal for int() with base 10: ‘30.0’</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ERROR [airflow.models.DagBag] invalid literal for int() with base 10: &#x27;30.0&#x27;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/airflow/models/__init__.py&quot;, line 584, in collect_dags</span><br><span class="line">    safe_mode=safe_mode)</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/airflow/models/__init__.py&quot;, line 411, in process_file</span><br><span class="line">    with timeout(configuration.conf.getint(&#x27;core&#x27;, &quot;DAGBAG_IMPORT_TIMEOUT&quot;)):</span><br><span class="line">  File &quot;/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/airflow/configuration.py&quot;, line 308, in getint</span><br><span class="line">    return int(self.get(section, key, **kwargs))</span><br><span class="line">ValueError: invalid literal for int() with base 10: &#x27;30.0&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>如果使用Python2安装会出现这个错误，请使用Python3.6。</p>
+<h2 id="包冲突"><a href="#包冲突" class="headerlink" title="包冲突"></a>包冲突</h2><p>安装过程会出现以下包冲突：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">flask 1.1.4 has requirement itsdangerous&lt;2.0,&gt;=0.24, but you&#x27;ll have itsdangerous 2.0.1 which is incompatible.</span><br><span class="line">flask 1.1.4 has requirement Jinja2&lt;3.0,&gt;=2.10.1, but you&#x27;ll have jinja2 2.10 which is incompatible.</span><br><span class="line">flask 1.1.4 has requirement Werkzeug&lt;2.0,&gt;=0.15, but you&#x27;ll have werkzeug 0.14.1 which is incompatible.</span><br><span class="line">pendulum 1.4.4 has requirement tzlocal&lt;2.0.0.0,&gt;=1.5.0.0, but you&#x27;ll have tzlocal 4.1 which is incompatible.</span><br></pre></td></tr></table></figure>
+
+<p>包冲突会导致Airflow安装失败，执行airflow命令出现异常：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">airflow</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/bin/airflow&quot;, line 21, in &lt;module&gt;</span><br><span class="line">    from airflow import configuration</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/__init__.py&quot;, line 40, in &lt;module&gt;</span><br><span class="line">    from flask_admin import BaseView</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_admin/__init__.py&quot;, line 6, in &lt;module&gt;</span><br><span class="line">    from .base import expose, expose_plugview, Admin, BaseView, AdminIndexView  # noqa: F401</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_admin/base.py&quot;, line 6, in &lt;module&gt;</span><br><span class="line">    from flask import Blueprint, current_app, render_template, abort, g, url_for</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask/__init__.py&quot;, line 21, in &lt;module&gt;</span><br><span class="line">    from .app import Flask</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask/app.py&quot;, line 69, in &lt;module&gt;</span><br><span class="line">    from .wrappers import Request</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask/wrappers.py&quot;, line 14, in &lt;module&gt;</span><br><span class="line">    from werkzeug.wrappers.json import JSONMixin as _JSONMixin</span><br><span class="line">ModuleNotFoundError: No module named &#x27;werkzeug.wrappers.json&#x27;; &#x27;werkzeug.wrappers&#x27; is not a package</span><br></pre></td></tr></table></figure>
+
+<h3 id="flask依赖包冲突解决"><a href="#flask依赖包冲突解决" class="headerlink" title="flask依赖包冲突解决"></a>flask依赖包冲突解决</h3><p>并安装flask 1.0.4版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask===1.0.4</span><br></pre></td></tr></table></figure>
+
+<h2 id="No-module-named-‘pysqlite2’"><a href="#No-module-named-‘pysqlite2’" class="headerlink" title="No module named ‘pysqlite2’"></a>No module named ‘pysqlite2’</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># airflow</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/dialects/sqlite/pysqlite.py&quot;, line 338, in dbapi</span><br><span class="line">    from pysqlite2 import dbapi2 as sqlite</span><br><span class="line">ModuleNotFoundError: No module named &#x27;pysqlite2&#x27;</span><br><span class="line"></span><br><span class="line">During handling of the above exception, another exception occurred:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/bin/airflow&quot;, line 21, in &lt;module&gt;</span><br><span class="line">    from airflow import configuration</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/__init__.py&quot;, line 44, in &lt;module&gt;</span><br><span class="line">    settings.initialize()</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/settings.py&quot;, line 290, in initialize</span><br><span class="line">    configure_orm()</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/settings.py&quot;, line 193, in configure_orm</span><br><span class="line">    engine = create_engine(SQL_ALCHEMY_CONN, **engine_args)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/__init__.py&quot;, line 443, in create_engine</span><br><span class="line">    return strategy.create(*args, **kwargs)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/strategies.py&quot;, line 87, in create</span><br><span class="line">    dbapi = dialect_cls.dbapi(**dbapi_args)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/dialects/sqlite/pysqlite.py&quot;, line 343, in dbapi</span><br><span class="line">    raise e</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/dialects/sqlite/pysqlite.py&quot;, line 341, in dbapi</span><br><span class="line">    from sqlite3 import dbapi2 as sqlite  # try 2.5+ stdlib name.</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/sqlite3/__init__.py&quot;, line 23, in &lt;module&gt;</span><br><span class="line">    from sqlite3.dbapi2 import *</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/sqlite3/dbapi2.py&quot;, line 27, in &lt;module&gt;</span><br><span class="line">    from _sqlite3 import *</span><br><span class="line">ModuleNotFoundError: No module named &#x27;_sqlite3&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>安装sqlite-devel并重新安装Python：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install sqlite-devel</span><br><span class="line">make</span><br><span class="line">make altinstall</span><br></pre></td></tr></table></figure>
+
+<h2 id="No-module-named-‘wtforms-compat’"><a href="#No-module-named-‘wtforms-compat’" class="headerlink" title="No module named ‘wtforms.compat’"></a>No module named ‘wtforms.compat’</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># airflow</span><br><span class="line">[2021-12-22 09:46:47,645] &#123;__init__.py:51&#125; INFO - Using executor SequentialExecutor</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/bin/airflow&quot;, line 22, in &lt;module&gt;</span><br><span class="line">    from airflow.bin.cli import CLIFactory</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/bin/cli.py&quot;, line 67, in &lt;module&gt;</span><br><span class="line">    from airflow.www.app import (cached_app, create_app)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www/app.py&quot;, line 37, in &lt;module&gt;</span><br><span class="line">    from airflow.www.blueprints import routes</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www/blueprints.py&quot;, line 29, in &lt;module&gt;</span><br><span class="line">    from airflow.www import utils as wwwutils</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www/utils.py&quot;, line 36, in &lt;module&gt;</span><br><span class="line">    from wtforms.compat import text_type</span><br><span class="line">ModuleNotFoundError: No module named &#x27;wtforms.compat&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>正解请参照：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/69879246/no-module-named-wtforms-compat">https://stackoverflow.com/questions/69879246/no-module-named-wtforms-compat</a></p>
+<h2 id="Exception-Install-‘email-validator’-for-email-validation-support"><a href="#Exception-Install-‘email-validator’-for-email-validation-support" class="headerlink" title="Exception: Install ‘email_validator’ for email validation support"></a>Exception: Install ‘email_validator’ for email validation support</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/opt/Python3.6.15/lib/python3.6/site-packages/flask_sqlalchemy/__init__.py:852: UserWarning: Neither SQLALCHEMY_DATABASE_URI nor SQLALCHEMY_BINDS is set. Defaulting SQLALCHEMY_DATABASE_URI to &quot;sqlite:///:memory:&quot;.</span><br><span class="line">  &#x27;Neither SQLALCHEMY_DATABASE_URI nor SQLALCHEMY_BINDS is set. &#x27;</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/bin/airflow&quot;, line 32, in &lt;module&gt;</span><br><span class="line">    args.func(args)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/utils/cli.py&quot;, line 74, in wrapper</span><br><span class="line">    return f(*args, **kwargs)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/bin/cli.py&quot;, line 1351, in create_user</span><br><span class="line">    appbuilder = cached_appbuilder()</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/app.py&quot;, line 229, in cached_appbuilder</span><br><span class="line">    cached_app(config=config, testing=testing)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/app.py&quot;, line 222, in cached_app</span><br><span class="line">    app, _ = create_app(config, session, testing)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/app.py&quot;, line 82, in create_app</span><br><span class="line">    from airflow.www_rbac.security import AirflowSecurityManager</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/security.py&quot;, line 23, in &lt;module&gt;</span><br><span class="line">    from flask_appbuilder.security.sqla.manager import SecurityManager</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_appbuilder/security/sqla/manager.py&quot;, line 8, in &lt;module&gt;</span><br><span class="line">    from ..manager import BaseSecurityManager</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_appbuilder/security/manager.py&quot;, line 11, in &lt;module&gt;</span><br><span class="line">    from .views import AuthDBView, AuthOIDView, ResetMyPasswordView, AuthLDAPView, AuthOAuthView, AuthRemoteUserView, \</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_appbuilder/security/views.py&quot;, line 17, in &lt;module&gt;</span><br><span class="line">    from .forms import LoginForm_db, LoginForm_oid, ResetPasswordForm, UserInfoEdit</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_appbuilder/security/forms.py&quot;, line 39, in &lt;module&gt;</span><br><span class="line">    class RegisterUserDBForm(DynamicForm):</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/flask_appbuilder/security/forms.py&quot;, line 43, in RegisterUserDBForm</span><br><span class="line">    email = StringField(lazy_gettext(&#x27;Email&#x27;), validators=[DataRequired(), Email()], widget=BS3TextFieldWidget())</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/wtforms/validators.py&quot;, line 332, in __init__</span><br><span class="line">    raise Exception(&quot;Install &#x27;email_validator&#x27; for email validation support.&quot;)</span><br><span class="line">Exception: Install &#x27;email_validator&#x27; for email validation support.</span><br></pre></td></tr></table></figure>
+
+<p>安装 email-validator：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install email-validator</span><br></pre></td></tr></table></figure>
+
+<h2 id="no-such-table-ab-permission-view-role"><a href="#no-such-table-ab-permission-view-role" class="headerlink" title="no such table: ab_permission_view_role"></a>no such table: ab_permission_view_role</h2><p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/base.py&quot;, line 1236, in _execute_context</span><br><span class="line">    cursor, statement, parameters, context</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/default.py&quot;, line 536, in do_execute</span><br><span class="line">    cursor.execute(statement, parameters)</span><br><span class="line">sqlite3.OperationalError: no such table: ab_permission_view_role</span><br><span class="line"></span><br><span class="line">The above exception was the direct cause of the following exception:</span><br><span class="line"></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/Python3.6.15/bin/airflow&quot;, line 32, in &lt;module&gt;</span><br><span class="line">    args.func(args)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/utils/cli.py&quot;, line 74, in wrapper</span><br><span class="line">    return f(*args, **kwargs)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/bin/cli.py&quot;, line 1351, in create_user</span><br><span class="line">    appbuilder = cached_appbuilder()</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/app.py&quot;, line 229, in cached_appbuilder</span><br><span class="line">    cached_app(config=config, testing=testing)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/app.py&quot;, line 222, in cached_app</span><br><span class="line">    app, _ = create_app(config, session, testing)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/app.py&quot;, line 182, in create_app</span><br><span class="line">    security_manager.sync_roles()</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/security.py&quot;, line 456, in sync_roles</span><br><span class="line">    self.create_custom_dag_permission_view()</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/utils/db.py&quot;, line 73, in wrapper</span><br><span class="line">    return func(*args, **kwargs)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/airflow/www_rbac/security.py&quot;, line 404, in create_custom_dag_permission_view</span><br><span class="line">    all_perm_views = set([role.permission_view_id for role in all_perm_view_by_user])</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/orm/query.py&quot;, line 3081, in __iter__</span><br><span class="line">    return self._execute_and_instances(context)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/orm/query.py&quot;, line 3106, in _execute_and_instances</span><br><span class="line">    result = conn.execute(querycontext.statement, self._params)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/base.py&quot;, line 980, in execute</span><br><span class="line">    return meth(self, multiparams, params)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/sql/elements.py&quot;, line 273, in _execute_on_connection</span><br><span class="line">    return connection._execute_clauseelement(self, multiparams, params)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/base.py&quot;, line 1099, in _execute_clauseelement</span><br><span class="line">    distilled_params,</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/base.py&quot;, line 1240, in _execute_context</span><br><span class="line">    e, statement, parameters, cursor, context</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/base.py&quot;, line 1458, in _handle_dbapi_exception</span><br><span class="line">    util.raise_from_cause(sqlalchemy_exception, exc_info)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/util/compat.py&quot;, line 296, in raise_from_cause</span><br><span class="line">    reraise(type(exception), exception, tb=exc_tb, cause=cause)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/util/compat.py&quot;, line 276, in reraise</span><br><span class="line">    raise value.with_traceback(tb)</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/base.py&quot;, line 1236, in _execute_context</span><br><span class="line">    cursor, statement, parameters, context</span><br><span class="line">  File &quot;/opt/Python3.6.15/lib/python3.6/site-packages/sqlalchemy/engine/default.py&quot;, line 536, in do_execute</span><br><span class="line">    cursor.execute(statement, parameters)</span><br><span class="line">sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: ab_permission_view_role [SQL: &#x27;SELECT ab_permission_view_role.id AS ab_permission_view_role_id, ab_permission_view_role.permission_view_id AS ab_permission_view_role_permission_view_id, ab_permission_view_role.role_id AS ab_permission_view_role_role_id \nFROM ab_permission_view_role JOIN ab_permission_view ON ab_permission_view.id = ab_permission_view_role.permission_view_id JOIN ab_view_menu ON ab_view_menu.id = ab_permission_view.view_menu_id \nWHERE ab_permission_view_role.role_id = ? AND ab_permission_view.view_menu_id != ?&#x27;] [parameters: (4, 51)] (Background on this error at: http://sqlalche.me/e/e3q8)</span><br></pre></td></tr></table></figure>
+
+<p> 正解参见：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/57068702/sqlite3-raised-an-error-after-running-airflow-command-line">https://stackoverflow.com/questions/57068702/sqlite3-raised-an-error-after-running-airflow-command-line</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Charles Zhang 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 调度系统</a>
+              <a href="/tags/Airflow/" rel="tag"><i class="fa fa-tag"></i> Airflow</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/07/Zookeeper%E6%A6%82%E8%A7%88/" rel="prev" title="Zookeeper概览">
+                  <i class="fa fa-angle-left"></i> Zookeeper概览
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/23/LibreSSL-SSL-connect-SSL-ERROR-SYSCALL-in-connection-to-github-com-443/" rel="next" title="LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443">
+                  LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="5ec844f99de05ed955ee5c81d41c2881"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Charles Zhang</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.umd.js" integrity="sha256-oyhjPiYRWGXaAt+ny/mTMWOnN1GBoZDUQnzzgC7FRI4=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="//code.tidio.co/yyhjledwypfyajtsvhrifr6yvg0m5wlf.js"></script>
+<script src="/js/third-party/chat/tidio.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

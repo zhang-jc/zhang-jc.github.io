@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.css" integrity="sha256-vQkngPS8jiHHH0I6ABTZroZk8NPZ7b+MUReOFE9UsXQ=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="错误信息如下; 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929321&#x2F;07&#x2F;20 11:09:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hive元数据MySQL编码导致Sqoop导入错误">
+<meta property="og:url" content="https://www.zhangjc.com/2021/08/10/Hive%E5%85%83%E6%95%B0%E6%8D%AEMySQL%E7%BC%96%E7%A0%81%E5%AF%BC%E8%87%B4Sqoop%E5%AF%BC%E5%85%A5%E9%94%99%E8%AF%AF/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="错误信息如下; 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929321&#x2F;07&#x2F;20 11:09:">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhangjc.com/images/20210811/partition_params_encoding.png">
+<meta property="article:published_time" content="2021-08-10T08:10:28.000Z">
+<meta property="article:modified_time" content="2023-10-17T08:51:51.017Z">
+<meta property="article:author" content="Charles Zhang">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Sqoop">
+<meta property="article:tag" content="Hive">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhangjc.com/images/20210811/partition_params_encoding.png">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2021/08/10/Hive%E5%85%83%E6%95%B0%E6%8D%AEMySQL%E7%BC%96%E7%A0%81%E5%AF%BC%E8%87%B4Sqoop%E5%AF%BC%E5%85%A5%E9%94%99%E8%AF%AF/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2021/08/10/Hive%E5%85%83%E6%95%B0%E6%8D%AEMySQL%E7%BC%96%E7%A0%81%E5%AF%BC%E8%87%B4Sqoop%E5%AF%BC%E5%85%A5%E9%94%99%E8%AF%AF/","path":"2021/08/10/Hive元数据MySQL编码导致Sqoop导入错误/","title":"Hive元数据MySQL编码导致Sqoop导入错误"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hive元数据MySQL编码导致Sqoop导入错误 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?94b1e62b5b593fa5e1e026e280b9db7e"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Charles Zhang"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Charles Zhang</p>
+  <div class="site-description" itemprop="description">人一定要有梦想，万一实现了呢...</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">288</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">66</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      聊天
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/zhang-jc" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;zhang-jc" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/10/Hive%E5%85%83%E6%95%B0%E6%8D%AEMySQL%E7%BC%96%E7%A0%81%E5%AF%BC%E8%87%B4Sqoop%E5%AF%BC%E5%85%A5%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hive元数据MySQL编码导致Sqoop导入错误 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hive元数据MySQL编码导致Sqoop导入错误
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-10 16:10:28" itemprop="dateCreated datePublished" datetime="2021-08-10T16:10:28+08:00">2021-08-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive元数据MySQL编码导致Sqoop导入错误" href="/2021/08/10/Hive%E5%85%83%E6%95%B0%E6%8D%AEMySQL%E7%BC%96%E7%A0%81%E5%AF%BC%E8%87%B4Sqoop%E5%AF%BC%E5%85%A5%E9%94%99%E8%AF%AF/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::681a2fc28ee6e149b29e88ffb08ba283" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>错误信息如下;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">21/07/20 11:09:06 INFO mapreduce.Job:  map 100% reduce 0%</span><br><span class="line">21/07/20 11:09:32 INFO mapreduce.Job: Job job_1593052953461_28645057 failed with state FAILED due to: Job commit failed: org.apache.hive.hcatalog.common.HCatException : 2006 : Error adding partition to metastore. Cause : MetaException(message:One or more instances could not be made persistent)</span><br><span class="line">	at org.apache.hive.hcatalog.mapreduce.FileOutputCommitterContainer.registerPartitions(FileOutputCommitterContainer.java:966)</span><br><span class="line">	at org.apache.hive.hcatalog.mapreduce.FileOutputCommitterContainer.commitJob(FileOutputCommitterContainer.java:250)</span><br><span class="line">	at org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler$EventProcessor.handleJobCommit(CommitterEventHandler.java:285)</span><br><span class="line">	at org.apache.hadoop.mapreduce.v2.app.commit.CommitterEventHandler$EventProcessor.run(CommitterEventHandler.java:237)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)</span><br><span class="line">	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line">Caused by: MetaException(message:One or more instances could not be made persistent)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:203)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:99)</span><br><span class="line">	at com.sun.proxy.$Proxy86.add_partitions(Unknown Source)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.add_partitions(HiveMetaStoreClient.java:608)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.invoke(RetryingMetaStoreClient.java:150)</span><br><span class="line">	at com.sun.proxy.$Proxy87.add_partitions(Unknown Source)</span><br><span class="line">	at org.apache.hive.hcatalog.mapreduce.FileOutputCommitterContainer.registerPartitions(FileOutputCommitterContainer.java:920)</span><br><span class="line">	... 6 more</span><br><span class="line">Caused by: javax.jdo.JDOUserException: One or more instances could not be made persistent</span><br><span class="line">NestedThrowables:</span><br><span class="line">org.datanucleus.exceptions.NucleusDataStoreException: Put request failed : INSERT INTO `PARTITION_PARAMS` (`PARAM_VALUE`,`PART_ID`,`PARAM_KEY`) VALUES (?,?,?) </span><br><span class="line">	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistentAll(JDOPersistenceManager.java:775)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.ObjectStore.addPartitions(ObjectStore.java:1774)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.RawStoreProxy.invoke(RawStoreProxy.java:101)</span><br><span class="line">	at com.sun.proxy.$Proxy84.addPartitions(Unknown Source)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.add_partitions_core(HiveMetaStore.java:2365)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.add_partitions(HiveMetaStore.java:2424)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:140)</span><br><span class="line">	... 16 more</span><br><span class="line">Caused by: org.datanucleus.exceptions.NucleusDataStoreException: Put request failed : INSERT INTO `PARTITION_PARAMS` (`PARAM_VALUE`,`PART_ID`,`PARAM_KEY`) VALUES (?,?,?) </span><br><span class="line">	at org.datanucleus.store.rdbms.scostore.JoinMapStore.putAll(JoinMapStore.java:233)</span><br><span class="line">	at org.datanucleus.store.rdbms.mapping.java.MapMapping.postInsert(MapMapping.java:135)</span><br><span class="line">	at org.datanucleus.store.rdbms.request.InsertRequest.execute(InsertRequest.java:522)</span><br><span class="line">	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertObjectInTable(RDBMSPersistenceHandler.java:162)</span><br><span class="line">	at org.datanucleus.store.rdbms.RDBMSPersistenceHandler.insertObject(RDBMSPersistenceHandler.java:138)</span><br><span class="line">	at org.datanucleus.state.StateManagerImpl.internalMakePersistent(StateManagerImpl.java:3363)</span><br><span class="line">	at org.datanucleus.state.StateManagerImpl.makePersistent(StateManagerImpl.java:3339)</span><br><span class="line">	at org.datanucleus.ExecutionContextImpl.persistObjectInternal(ExecutionContextImpl.java:2079)</span><br><span class="line">	at org.datanucleus.ExecutionContextImpl.persistObjectWork(ExecutionContextImpl.java:1922)</span><br><span class="line">	at org.datanucleus.ExecutionContextImpl.persistObjects(ExecutionContextImpl.java:1867)</span><br><span class="line">	at org.datanucleus.ExecutionContextThreadedImpl.persistObjects(ExecutionContextThreadedImpl.java:231)</span><br><span class="line">	at org.datanucleus.api.jdo.JDOPersistenceManager.makePersistentAll(JDOPersistenceManager.java:764)</span><br><span class="line">	... 30 more</span><br><span class="line">Caused by: org.datanucleus.store.rdbms.exceptions.MappedDatastoreException: INSERT INTO `PARTITION_PARAMS` (`PARAM_VALUE`,`PART_ID`,`PARAM_KEY`) VALUES (?,?,?) </span><br><span class="line">	at org.datanucleus.store.rdbms.scostore.JoinMapStore.internalPut(JoinMapStore.java:1056)</span><br><span class="line">	at org.datanucleus.store.rdbms.scostore.JoinMapStore.putAll(JoinMapStore.java:223)</span><br><span class="line">	... 41 more</span><br><span class="line">Caused by: java.sql.SQLException: Incorrect string value: &#x27;\xE9\xA2\x91\xE9\x81\x93...&#x27; for column &#x27;PARAM_VALUE&#x27; at row 1</span><br><span class="line">	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)</span><br><span class="line">	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3973)</span><br><span class="line">	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3909)</span><br><span class="line">	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2527)</span><br><span class="line">	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2680)</span><br><span class="line">	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2490)</span><br><span class="line">	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1858)</span><br><span class="line">	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2079)</span><br><span class="line">	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2013)</span><br><span class="line">	at com.mysql.jdbc.PreparedStatement.executeLargeUpdate(PreparedStatement.java:5104)</span><br><span class="line">	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:1998)</span><br><span class="line">	at com.jolbox.bonecp.PreparedStatementHandle.executeUpdate(PreparedStatementHandle.java:205)</span><br><span class="line">	at org.datanucleus.store.rdbms.ParamLoggingPreparedStatement.executeUpdate(ParamLoggingPreparedStatement.java:393)</span><br><span class="line">	at org.datanucleus.store.rdbms.SQLController.executeStatementUpdate(SQLController.java:431)</span><br><span class="line">	at org.datanucleus.store.rdbms.scostore.JoinMapStore.internalPut(JoinMapStore.java:1047)</span><br><span class="line">	... 42 more</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">21/07/20 11:09:32 INFO mapreduce.Job: Counters: 31</span><br><span class="line">	File System Counters</span><br><span class="line">		FILE: Number of bytes read=0</span><br><span class="line">		FILE: Number of bytes written=1367592</span><br><span class="line">		FILE: Number of read operations=0</span><br><span class="line">		FILE: Number of large read operations=0</span><br><span class="line">		FILE: Number of write operations=0</span><br><span class="line">		HDFS: Number of bytes read=476</span><br><span class="line">		HDFS: Number of bytes written=67625</span><br><span class="line">		HDFS: Number of read operations=16</span><br><span class="line">		HDFS: Number of large read operations=0</span><br><span class="line">		HDFS: Number of write operations=8</span><br><span class="line">	Job Counters </span><br><span class="line">		Killed map tasks=1</span><br><span class="line">		Launched map tasks=5</span><br></pre></td></tr></table></figure>
+
+<p>将异常信息中提示的字符串“\xE9\xA2\x91\xE9\x81\x93…”解码后为“频道”，因此怀疑是编码导致的问题。查看Hive表定义：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">hive<span class="operator">&gt;</span> <span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> tbl_test;</span><br><span class="line">OK</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `tbl_test`(</span><br><span class="line">  `channel_id` string, </span><br><span class="line">  `uuid` string, </span><br><span class="line">  `channel_name` string, </span><br><span class="line">  `channel_status` string, </span><br><span class="line">  `tv_channel_logo` string, </span><br><span class="line">  `phone_channel_logo` string, </span><br><span class="line">  `definition_type` string COMMENT <span class="string">&#x27;频道码率&#x27;</span>, </span><br><span class="line">  `create_datetime` string, </span><br><span class="line">  `update_datetime` string)</span><br><span class="line">PARTITIONED <span class="keyword">BY</span> ( </span><br><span class="line">  `province_alias` string, </span><br><span class="line">  `dt` string)</span><br><span class="line"><span class="type">ROW</span> FORMAT SERDE </span><br><span class="line">  <span class="string">&#x27;org.apache.hadoop.hive.ql.io.orc.OrcSerde&#x27;</span> </span><br><span class="line">STORED <span class="keyword">AS</span> INPUTFORMAT </span><br><span class="line">  <span class="string">&#x27;org.apache.hadoop.hive.ql.io.orc.OrcInputFormat&#x27;</span> </span><br><span class="line">OUTPUTFORMAT </span><br><span class="line">  <span class="string">&#x27;org.apache.hadoop.hive.ql.io.orc.OrcOutputFormat&#x27;</span></span><br><span class="line">LOCATION</span><br><span class="line">  <span class="string">&#x27;hdfs://ycluster/user/hive/warehouse/ods.db/cos_channel_v2_bak_20210630&#x27;</span></span><br><span class="line">TBLPROPERTIES (</span><br><span class="line">  <span class="string">&#x27;last_modified_by&#x27;</span><span class="operator">=</span><span class="string">&#x27;data-platform&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;last_modified_time&#x27;</span><span class="operator">=</span><span class="string">&#x27;1628153252&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.create.version&#x27;</span><span class="operator">=</span><span class="string">&#x27;2.2 or prior&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.numPartCols&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.numParts&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.part.0&#x27;</span><span class="operator">=</span><span class="string">&#x27;&#123;\&quot;type\&quot;:\&quot;struct\&quot;,\&quot;fields\&quot;:[&#123;\&quot;name\&quot;:\&quot;channel_id\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;uuid\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;channel_name\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;channel_status\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;tv_channel_logo\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;phone_channel_logo\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;definition_type\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;\&quot;\u9891\u9053\u7801\u7387\&quot;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;create_datetime\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;update_datetime\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;province_alias\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;,&#123;\&quot;name\&quot;:\&quot;dt\&quot;,\&quot;type\&quot;:\&quot;string\&quot;,\&quot;nullable\&quot;:true,\&quot;metadata\&quot;:&#123;&#125;&#125;]&#125;&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.partCol.0&#x27;</span><span class="operator">=</span><span class="string">&#x27;province_alias&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;spark.sql.sources.schema.partCol.1&#x27;</span><span class="operator">=</span><span class="string">&#x27;dt&#x27;</span>, </span><br><span class="line">  <span class="string">&#x27;transient_lastDdlTime&#x27;</span><span class="operator">=</span><span class="string">&#x27;1628650471&#x27;</span>)</span><br><span class="line"><span class="type">Time</span> taken: <span class="number">0.041</span> seconds, Fetched: <span class="number">31</span> <span class="type">row</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p>发现在Table的属性中“spark.sql.sources.schema.part.0”中有Union Code编码，而我们的环境都是UTF8编码。跟踪源代码发现在添加分区时会将表的属性信息依次记录到分区的参数中。因此检查MySQL表字段编码：<img src="/images/20210811/partition_params_encoding.png" alt="partition params encoding"></p>
+<p>修改表字段编码后问题解决。参考SQL如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `hive`.`partition_params` CHANGE <span class="keyword">COLUMN</span> `PARAM_VALUE` `PARAM_VALUE` <span class="type">VARCHAR</span>(<span class="number">4000</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="string">&#x27;utf8&#x27;</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>遗留问题：为什么在Hive表的属性中新增了spark相关的属性？</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Charles Zhang 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+              <a href="/tags/Sqoop/" rel="tag"><i class="fa fa-tag"></i> Sqoop</a>
+              <a href="/tags/Hive/" rel="tag"><i class="fa fa-tag"></i> Hive</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/05/MapReduce%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/" rel="prev" title="MapReduce远程调试">
+                  <i class="fa fa-angle-left"></i> MapReduce远程调试
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/11/HiveServer2%E6%9C%AA%E5%90%AF%E7%94%A8%E6%9C%8D%E5%8A%A1%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0%E4%BD%86%E6%8A%A5%E8%BF%9E%E6%8E%A5Zookeeper%E8%B6%85%E6%97%B6%E9%94%99%E8%AF%AF/" rel="next" title="HiveServer2未启用服务自动发现但报连接Zookeeper超时错误">
+                  HiveServer2未启用服务自动发现但报连接Zookeeper超时错误 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="681a2fc28ee6e149b29e88ffb08ba283"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Charles Zhang</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.24/fancybox/fancybox.umd.js" integrity="sha256-oyhjPiYRWGXaAt+ny/mTMWOnN1GBoZDUQnzzgC7FRI4=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="//code.tidio.co/yyhjledwypfyajtsvhrifr6yvg0m5wlf.js"></script>
+<script src="/js/third-party/chat/tidio.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
