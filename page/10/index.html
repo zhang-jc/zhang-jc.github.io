@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">290</span>
+          <span class="site-state-item-count">291</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -165,6 +165,111 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/05/Eclipse%E8%AE%BE%E7%BD%AE%E6%9D%A1%E4%BB%B6%E6%96%AD%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/05/Eclipse%E8%AE%BE%E7%BD%AE%E6%9D%A1%E4%BB%B6%E6%96%AD%E7%82%B9/" class="post-title-link" itemprop="url">Eclipse设置条件断点</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-05 15:28:23" itemprop="dateCreated datePublished" datetime="2021-08-05T15:28:23+08:00">2021-08-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Eclipse设置条件断点" href="/2021/08/05/Eclipse%E8%AE%BE%E7%BD%AE%E6%9D%A1%E4%BB%B6%E6%96%AD%E7%82%B9/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::c4440e6df7e9df69c6d893bd6bfe0371" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在开发过程中单步调试是我们经常用的一种排查问题的手段。调试过程中断点设置是必不可少的。常规的断点非常容易设置，可以满足大部分的调试需求。</p>
+<p>此处假设一种场景：我们需遍历一个有1W个元素的集合，并对每个元素进行处理。但是处理过程中，某个元素的值触发了异常，而且我们知道是哪个元素引发的。想要调查清楚为什么这个值会引发异常，需要进入这个元素的处理逻辑单步调试跟踪。此时断点如何设置呢？幸运的是我们可以为断点设置条件（Conditional Breakpoints），当条件满足时或者当条件的值发生变化时让VM停下来让我们调试。真是太棒了！！！</p>
+<p>参考下图：<img src="/images/20210805/conditionalBreakpoints.png" alt="断点条件设置"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1174,142 +1279,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/" class="post-title-link" itemprop="url">HiveServer2 Load Data To Table AccessControlException</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-03-05 15:54:29" itemprop="dateCreated datePublished" datetime="2021-03-05T15:54:29+08:00">2021-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="HiveServer2 Load Data To Table AccessControlException" href="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e5bc4728d1e519ff2dd62d294443f731" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在用HiveServer2执行语句”load data inpath ‘&#x2F;user&#x2F;test&#x2F;test.csv’ into table dev.load_test_tbl;“时报错信息如下：</p>
-<pre><code>Failed with exception org.apache.hadoop.security.AccessControlException: User does not belong to data-dev
-    at org.apache.hadoop.hdfs.server.namenode.FSDirAttrOp.setOwner(FSDirAttrOp.java:86)
-    at org.apache.hadoop.hdfs.server.namenode.FSNamesystem.setOwner(FSNamesystem.java:1676)
-    at org.apache.hadoop.hdfs.server.namenode.NameNodeRpcServer.setOwner(NameNodeRpcServer.java:703)
-    at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolServerSideTranslatorPB.setOwner(ClientNamenodeProtocolServerSideTranslatorPB.java:464)
-    at org.apache.hadoop.hdfs.protocol.proto.ClientNamenodeProtocolProtos$ClientNamenodeProtocol$2.callBlockingMethod(ClientNamenodeProtocolProtos.java)
-    at org.apache.hadoop.ipc.ProtobufRpcEngine$Server$ProtoBufRpcInvoker.call(ProtobufRpcEngine.java:616)
-    at org.apache.hadoop.ipc.RPC$Server.call(RPC.java:982)
-    at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2049)
-    at org.apache.hadoop.ipc.Server$Handler$1.run(Server.java:2045)
-    at java.security.AccessController.doPrivileged(Native Method)
-    at javax.security.auth.Subject.doAs(Subject.java:422)
-    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1698)
-    at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2045)
-
-FAILED: Operation cancelled
-</code></pre>
-<p>原因是Hive默认在Load数据时会修改HDFS上目的地下的数据文件与目的地目录的属主及组等权限信息一致，而提交任务的用户信息与目标目录的信息不一致，所以抛出如上异常。</p>
-<p>解决方法：在hiveserver2-site.xml中增加以下配置：</p>
-<pre><code>&lt;property&gt;
-    &lt;name&gt;hive.warehouse.subdir.inherit.perms&lt;/name&gt;
-    &lt;value&gt;false&lt;/value&gt;
-&lt;/property&gt;
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/05/HiveServer2-Load-Data-To-Table-AccessControlException/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/29/">29</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
