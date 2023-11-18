@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">295</span>
+          <span class="site-state-item-count">296</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-count">100</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,6 +167,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2016/07/12/Emacs-%E7%A6%81%E7%94%A8%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E5%8F%8A%E4%BF%AE%E6%94%B9%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/07/12/Emacs-%E7%A6%81%E7%94%A8%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E5%8F%8A%E4%BF%AE%E6%94%B9%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">Emacs 禁用自动备份及修改备份目录</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-07-12 15:17:48" itemprop="dateCreated datePublished" datetime="2016-07-12T15:17:48+08:00">2016-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Emacs 禁用自动备份及修改备份目录" href="/2016/07/12/Emacs-%E7%A6%81%E7%94%A8%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E5%8F%8A%E4%BF%AE%E6%94%B9%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::9a5ebbe3533fa9d41012f99f9eda8c77" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Emacs-禁用自动备份"><a href="#Emacs-禁用自动备份" class="headerlink" title="Emacs 禁用自动备份"></a>Emacs 禁用自动备份</h3><p>在 ~&#x2F;.emacs 文件中添加配置：</p>
+<pre><code>;; disable auto backup
+(setq make-backup-files nil)
+</code></pre>
+<h3 id="修改备份目录"><a href="#修改备份目录" class="headerlink" title="修改备份目录"></a>修改备份目录</h3><p>在 ~&#x2F;.emacs 文件中添加配置：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/07/12/Emacs-%E7%A6%81%E7%94%A8%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD%E5%8F%8A%E4%BF%AE%E6%94%B9%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1142,117 +1256,6 @@ done
 <li>区域截屏：command + shift + 4</li>
 </ul>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2016/06/05/Socket-IO-%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/06/05/Socket-IO-%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B/" class="post-title-link" itemprop="url">Socket.IO 聊天应用实例</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2016-06-05 03:17:11" itemprop="dateCreated datePublished" datetime="2016-06-05T03:17:11+08:00">2016-06-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/" itemprop="url" rel="index"><span itemprop="name">工具箱</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AE%B1/Socket-IO/" itemprop="url" rel="index"><span itemprop="name">Socket.IO</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Socket.IO 聊天应用实例" href="/2016/06/05/Socket-IO-%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::c8c248d723ad3ae9736ddbbab222cb88" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本篇翻译自 Socket.IO 官网的入门实例：<a target="_blank" rel="noopener" href="http://socket.io/get-started/chat/">http://socket.io/get-started/chat/</a></p>
-<p>在本篇指导中，我们将创建一个基本的聊天应用。这个应用几乎不要求事先具有 Node.JS 或 Socket.IO 的基础知识，因此对任意知识水平的用户它都是适合的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/06/05/Socket-IO-%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
