@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">299</span>
+          <span class="site-state-item-count">300</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,112 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/" class="post-title-link" itemprop="url">Hive 3.1.2与Sqoop 1.4.6 Jackson包版本冲突</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-24 00:26:20" itemprop="dateCreated datePublished" datetime="2021-08-24T00:26:20+08:00">2021-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive 3.1.2与Sqoop 1.4.6 Jackson包版本冲突" href="/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7f126209acb6a1939ef1125146edc1a0" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Logging initialized using configuration in jar:file:/opt/apache-hive-3.1.2-bin/lib/hive-common-3.1.2.jar!/hive-log4j2.properties Async: true</span><br><span class="line">Hive Session ID = 6d309a0e-02c3-4ef7-b8a7-7d42415fcd10</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoSuchMethodError: com.fasterxml.jackson.databind.ObjectMapper.readerFor(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/ObjectReader;</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst$ColumnStatsAccurate.&lt;clinit&gt;(StatsSetupConst.java:166)</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst.parseStatsAcc(StatsSetupConst.java:314)</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst.areBasicStatsUptoDate(StatsSetupConst.java:206)</span><br><span class="line">	at org.apache.hadoop.hive.ql.stats.StatsUtils.areBasicStatsUptoDateForQueryAnswering(StatsUtils.java:2010)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer$MetaDataProcessor.getRowCnt(StatsOptimizer.java:915)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer$MetaDataProcessor.process(StatsOptimizer.java:299)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultRuleDispatcher.dispatch(DefaultRuleDispatcher.java:90)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.dispatchAndReturn(DefaultGraphWalker.java:105)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.dispatch(DefaultGraphWalker.java:89)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.walk(DefaultGraphWalker.java:158)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.startWalking(DefaultGraphWalker.java:120)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer.transform(StatsOptimizer.java:134)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.Optimizer.optimize(Optimizer.java:250)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.SemanticAnalyzer.analyzeInternal(SemanticAnalyzer.java:12295)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.CalcitePlanner.analyzeInternal(CalcitePlanner.java:330)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.BaseSemanticAnalyzer.analyze(BaseSemanticAnalyzer.java:285)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:659)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1826)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1773)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1768)</span><br><span class="line">	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.compileAndRespond(ReExecDriver.java:126)</span><br><span class="line">	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.run(ReExecDriver.java:214)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:239)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:188)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:402)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:335)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:787)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:759)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:683)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：删除${SQOOP_HOME}&#x2F;lib下的jackson开头的Jar包。因为这些Jar包版本较低。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1152,95 +1258,6 @@
 <p>此处假设一种场景：我们需遍历一个有1W个元素的集合，并对每个元素进行处理。但是处理过程中，某个元素的值触发了异常，而且我们知道是哪个元素引发的。想要调查清楚为什么这个值会引发异常，需要进入这个元素的处理逻辑单步调试跟踪。此时断点如何设置呢？幸运的是我们可以为断点设置条件（Conditional Breakpoints），当条件满足时或者当条件的值发生变化时让VM停下来让我们调试。真是太棒了！！！</p>
 <p>参考下图：<img src="/images/20210805/conditionalBreakpoints.png" alt="断点条件设置"></p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">大道至简 - 奥卡姆剃刀理论</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-07-23 17:08:48" itemprop="dateCreated datePublished" datetime="2021-07-23T17:08:48+08:00">2021-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="大道至简 - 奥卡姆剃刀理论" href="/2021/07/23/%E5%A4%A7%E9%81%93%E8%87%B3%E7%AE%80-%E5%A5%A5%E5%8D%A1%E5%A7%86%E5%89%83%E5%88%80%E7%90%86%E8%AE%BA/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::c34581874cc74cbd1b6951210021783d" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
       
     </div>
 
