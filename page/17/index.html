@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">303</span>
+          <span class="site-state-item-count">304</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,116 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/" class="post-title-link" itemprop="url">GitLab + Jenkins + Nginx + Lua 实现代码自动分发</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-13 22:48:30" itemprop="dateCreated datePublished" datetime="2019-03-13T22:48:30+08:00">2019-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/CI/" itemprop="url" rel="index"><span itemprop="name">CI</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="GitLab + Jenkins + Nginx + Lua 实现代码自动分发" href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::55fc1614c3b6bc5238f7700101893ee8" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在大数据 Hive 数据仓库的开发中，主要是 shell + HQL 的脚本开发。脚本的测试需要放到适当的大数据环境中进行。如果大家共用 GitLab 项目上的同一个 Branch 进行测试需要代码频繁合并，影响效率。我的思路是每个 Developer 在自己的 Branch 开发并经过测试后发起 Merge Request。<br>在我的开发场景中 GitLab 在内网中通过端口映射后允许从外网访问，GitLab 中的 IP 都是内网的，GitLab 上的项目链接地址都是内网的，如（ssh:&#x2F;&#x2F;<a href="mailto:&#103;&#x69;&#x74;&#64;&#x31;&#57;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#49;&#48;">&#103;&#x69;&#x74;&#64;&#x31;&#57;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#49;&#48;</a>:50022&#x2F;test&#x2F;test.git）。并且我的 Jenkins 也是在内网中的，所以需要通过一层代理接收外部的 REST API 请求。这一点给最终的实现带来一些难点。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1126,127 +1236,6 @@ LibreSSL 2.6.4 and earlier do not provide the necessary APIs,     https://github
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Centos 6.8 No package libffi-devel available 问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-11-27 19:08:16" itemprop="dateCreated datePublished" datetime="2018-11-27T19:08:16+08:00">2018-11-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Centos 6.8 No package libffi-devel available 问题解决" href="/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::dd3396dc989a85a656cd3a5eed1dae5b" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 CentOS 6.8 安装 libffi-devel 的时候出现以下问题：</p>
-<pre><code>#yum install -y libffi-devel
-Loaded plugins: product-id, refresh-packagekit, search-disabled-repos, security, subscription-manager
-This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
-Setting up Install Process
-cdrom                                                                                                                                         | 4.1 kB     00:00 ...
-No package libffi-devel available.
-Error: Nothing to do
-</code></pre>
-<p>可以通过以下方式解决。</p>
-<p>第一步，从以下地址找到对应的 libffi-bedel 版本：<a target="_blank" rel="noopener" href="https://rpmfind.net/linux/rpm2html/search.php?query=libffi-devel">https://rpmfind.net/linux/rpm2html/search.php?query=libffi-devel</a></p>
-<p>第二步，通过以下命令安装：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
