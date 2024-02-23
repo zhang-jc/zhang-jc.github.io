@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">304</span>
+          <span class="site-state-item-count">305</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,130 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/" class="post-title-link" itemprop="url">Linux Iptables 示例一则</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-30 14:06:24" itemprop="dateCreated datePublished" datetime="2020-11-30T14:06:24+08:00">2020-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux Iptables 示例一则" href="/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b2071c8eb3bf07492ade2bd6fc7e08ca" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>关于 Iptables 的介绍个人强烈推荐：<a target="_blank" rel="noopener" href="http://www.zsythink.net/archives/tag/iptables/page/2/%E3%80%82%E8%BF%99%E4%BD%8D%E5%85%84%E5%BC%9F%E4%BB%8B%E7%BB%8D%E7%9A%84%E5%BE%88%E8%AF%A6%E7%BB%86%E3%80%82">http://www.zsythink.net/archives/tag/iptables/page/2/。这位兄弟介绍的很详细。</a></p>
+<p>我个人的需求是在同一个网络内从网络上把测试主机与正式环境主机间的网络进行隔离。我的思路是采用 OUTPUT filter 表，采用黑名单方式禁用正式环境网络的访问。如果确实需要访问正式环境的某个IP和端口，则添加特殊规则放行。根据 Iptables 的规则匹配顺序原则，放行特定IP和端口的规则要在网段禁用规则之前。以下是我的名列列表：</p>
+<pre><code>iptables -t filter -P OUTPUT ACCEPT
+iptables -F OUTPUT
+iptables -t filter -I OUTPUT -d 192.168.72.0/24 -j DROP
+iptables -t filter -I OUTPUT -d 192.168.72.1/32 -j ACCEPT
+service iptables save
+</code></pre>
+<ol>
+<li>第一条命令是修改OUTPUT链的默认策略为ACCEPT，这样做的优点是方便通过yum安装软件时不需要设置一堆放行规则，当然网络入口的防火墙需要做好安全防护。</li>
+<li>第二条命令是情况OUTPUT链的所有规则，重新进行配置。</li>
+<li>第三条命令是插入一条filter规则，禁用当前服务器对192.168.72网段的访问。</li>
+<li>第四条命令是在filter表插入放行规则，允许当前服务器访问网关192.168.72.1。</li>
+</ol>
+<p>注意，因为filter规则添加采用的是 -I 插入模式，每次都是在表的最前名插入，所有第三、四的顺序不能颠倒。如果采用的是 -A 追加模式，则第三、四命令需要颠倒。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1314,111 +1438,6 @@ $ yarn rmadmin -refreshSuperUserGroupsConfiguration
 </code></pre>
 <p>执行完成后需要重启HiveServer2。然后问题解决。</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">CentOS 7.3 Python 3.7.2 编译 Hue 问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-06-24 14:43:18" itemprop="dateCreated datePublished" datetime="2020-06-24T14:43:18+08:00">2020-06-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="CentOS 7.3 Python 3.7.2 编译 Hue 问题解决" href="/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::12243d811e7ac094e03485fe1802dac8" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h3><ul>
-<li>CentOS 7.3</li>
-<li>Python 3.7.2，我服务器上的安装是直接从其他服务器拷贝过来，然后配置环境变量的版本。正式因为这样我才遇到如下的问题。</li>
-</ul>
-<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><h4 id="python3-7-devel"><a href="#python3-7-devel" class="headerlink" title="python3.7-devel"></a>python3.7-devel</h4><pre><code>$ make apps
-&quot;PYTHON_VER is python3.7.&quot;
-&quot;Python 3 module install via pip&quot;
-/opt/hue-4.7.1/Makefile.vars:65: *** &quot;Error: must have python development packages for python3.7. Could not find Python.h. Please install python3.7-devel&quot;.  Stop.
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
