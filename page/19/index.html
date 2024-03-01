@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">305</span>
+          <span class="site-state-item-count">306</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,125 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/" class="post-title-link" itemprop="url">MongoDB：listDatabases failed : not master and slaveOk=false</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-27 20:14:24" itemprop="dateCreated datePublished" datetime="2018-09-27T20:14:24+08:00">2018-09-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="MongoDB：listDatabases failed : not master and slaveOk=false" href="/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::6c10c0c89c97a8ffc25c5f022db0a427" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="异常描述"><a href="#异常描述" class="headerlink" title="异常描述"></a>异常描述</h4><p>如果在 MongoDB 的 SECONDARY 上查询数据时会报如下错误信息：</p>
+<pre><code>&gt; show databases;
+2018-09-20T17:40:55.377+0800 E QUERY [thread1] Error: listDatabases failed:&#123; &quot;ok&quot; : 0, &quot;errmsg&quot; : &quot;not master and slaveOk=false&quot;, &quot;code&quot; : 13435 &#125; :
+_getErrorWithCode@src/mongo/shell/utils.js:25:13
+Mongo.prototype.getDBs@src/mongo/shell/mongo.js:62:1
+shellHelper.show@src/mongo/shell/utils.js:781:19
+shellHelper@src/mongo/shell/utils.js:671:15
+@(shellhelp2):1:1
+</code></pre>
+<h4 id="Mongo-Shell-设置"><a href="#Mongo-Shell-设置" class="headerlink" title="Mongo Shell 设置"></a>Mongo Shell 设置</h4><p>如果在 Mongo Shell 中可以通过下面的命令允许从 SECONDARY 上查询数据：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1184,122 +1303,6 @@ UUID=12921ad4-88da-469d-94df-1aa2eaec6db4 /boot                   xfs     defaul
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/10/19/Hadoop-distcp-%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/10/17/CentOS-%E6%8C%82%E8%BD%BD%E6%8E%89%E4%BA%86%E7%9A%84%E7%A1%AC%E7%9B%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/10/17/CentOS-%E6%8C%82%E8%BD%BD%E6%8E%89%E4%BA%86%E7%9A%84%E7%A1%AC%E7%9B%98/" class="post-title-link" itemprop="url">CentOS 挂载掉了的硬盘</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-10-17 14:03:19" itemprop="dateCreated datePublished" datetime="2017-10-17T14:03:19+08:00">2017-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="CentOS 挂载掉了的硬盘" href="/2017/10/17/CentOS-%E6%8C%82%E8%BD%BD%E6%8E%89%E4%BA%86%E7%9A%84%E7%A1%AC%E7%9B%98/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e04b07d8c6cd7d2e12090d50163c6fd7" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果服务器硬盘因为某种原因掉了（例如服务器搬迁后），此时使用 df 命令看不到需要的磁盘：</p>
-<pre><code>$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/sda3       267G   14G  240G   6% /
-tmpfs            63G     0   63G   0% /dev/shm
-/dev/sda1       194M   28M  157M  15% /boot
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/10/17/CentOS-%E6%8C%82%E8%BD%BD%E6%8E%89%E4%BA%86%E7%9A%84%E7%A1%AC%E7%9B%98/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">305</span>
+          <span class="site-state-item-count">306</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,6 +167,105 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/30/CentOS-6-8-Python3-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/30/CentOS-6-8-Python3-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/" class="post-title-link" itemprop="url">CentOS 6.8 Python3 遇到的坑</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-30 15:46:37" itemprop="dateCreated datePublished" datetime="2018-11-30T15:46:37+08:00">2018-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="CentOS 6.8 Python3 遇到的坑" href="/2018/11/30/CentOS-6-8-Python3-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::eb349a643ce974d4c9239429c91286aa" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h5 id="python3-error-while-loading-shared-libraries-libssl-so-1-1"><a href="#python3-error-while-loading-shared-libraries-libssl-so-1-1" class="headerlink" title="python3: error while loading shared libraries: libssl.so.1.1"></a>python3: error while loading shared libraries: libssl.so.1.1</h5><p>这个问题是因为安装 OpenSSL 时是用 root 用户安装，对于其他用户没有读和执行的权限。解决方法是将 OpenSSL 安装目录及下面的文件权限改为 755。</p>
+<p>CentOS 6.8 下安装 Python3 并启用 SSL 模块请参考另外一篇博文：<a target="_blank" rel="noopener" href="http://zhang-jc.github.io/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/">CentOS 6.8 安装 Python3 Could not build the ssl module</a>。</p>
+<h5 id="ModuleNotFoundError-No-module-named-‘mysql’"><a href="#ModuleNotFoundError-No-module-named-‘mysql’" class="headerlink" title="ModuleNotFoundError: No module named ‘mysql’"></a>ModuleNotFoundError: No module named ‘mysql’</h5><p>使用 pip3 安装完 mysql-connector-python-8.0.13 后，在 root 用户下测试没问题，但是其他用户使用时出现找不到的错误。所以还是权限的问题。将 Python3 整个安装目录及下面的文件和子目录权限都改为 755 问题解决。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/30/CentOS-6-8-Python3-%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1247,125 +1346,6 @@ ERROR 1146 (42S02): Table &#39;azkaban3.execution_logs&#39; doesn&#39;t exist
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/09/28/Azkaban-3-52-0-%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/" class="post-title-link" itemprop="url">MongoDB：listDatabases failed : not master and slaveOk=false</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-09-27 20:14:24" itemprop="dateCreated datePublished" datetime="2018-09-27T20:14:24+08:00">2018-09-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="MongoDB：listDatabases failed : not master and slaveOk=false" href="/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::6c10c0c89c97a8ffc25c5f022db0a427" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="异常描述"><a href="#异常描述" class="headerlink" title="异常描述"></a>异常描述</h4><p>如果在 MongoDB 的 SECONDARY 上查询数据时会报如下错误信息：</p>
-<pre><code>&gt; show databases;
-2018-09-20T17:40:55.377+0800 E QUERY [thread1] Error: listDatabases failed:&#123; &quot;ok&quot; : 0, &quot;errmsg&quot; : &quot;not master and slaveOk=false&quot;, &quot;code&quot; : 13435 &#125; :
-_getErrorWithCode@src/mongo/shell/utils.js:25:13
-Mongo.prototype.getDBs@src/mongo/shell/mongo.js:62:1
-shellHelper.show@src/mongo/shell/utils.js:781:19
-shellHelper@src/mongo/shell/utils.js:671:15
-@(shellhelp2):1:1
-</code></pre>
-<h4 id="Mongo-Shell-设置"><a href="#Mongo-Shell-设置" class="headerlink" title="Mongo Shell 设置"></a>Mongo Shell 设置</h4><p>如果在 Mongo Shell 中可以通过下面的命令允许从 SECONDARY 上查询数据：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/09/27/MongoDB%EF%BC%9AlistDatabases-failed-not-master-and-slaveOk-false/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
