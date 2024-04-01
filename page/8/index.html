@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">306</span>
+          <span class="site-state-item-count">307</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-count">101</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,6 +167,123 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/11/09/DataX%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0sqljdbc4-4-0-jar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/09/DataX%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0sqljdbc4-4-0-jar/" class="post-title-link" itemprop="url">DataX编译找不到sqljdbc4-4.0.jar</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-09 11:38:01" itemprop="dateCreated datePublished" datetime="2021-11-09T11:38:01+08:00">2021-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/DataX/" itemprop="url" rel="index"><span itemprop="name">DataX</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="DataX编译找不到sqljdbc4-4.0.jar" href="/2021/11/09/DataX%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0sqljdbc4-4-0-jar/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::33d31e2af6704603cb0cbb157adce0a5" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这个问题的发生是因为我从GitHub克隆并转存到内部GitLab后发生的。检查转存后GitLab上项目源文件发现确实不存在。原因是从GitHub克隆源项目中.gitignore配置文件中配置了忽略规则，所以这些Jar不会提交到转存后的项目中。.gitignore中需要修改两个地方。</p>
+<ul>
+<li>第一处：</li>
+</ul>
+<p>修改前：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.jar</span><br></pre></td></tr></table></figure>
+
+<p>修改后：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/11/09/DataX%E7%BC%96%E8%AF%91%E6%89%BE%E4%B8%8D%E5%88%B0sqljdbc4-4-0-jar/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1155,106 +1272,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/10/19/Ansible%E6%8C%87%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%A7%E8%A1%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/" class="post-title-link" itemprop="url">Docker容器：Can't attach to the process: ptrace(PTRACE_ATTACH, ..) failed for XX</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-06 00:02:48" itemprop="dateCreated datePublished" datetime="2021-10-06T00:02:48+08:00">2021-10-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker容器：Can't attach to the process: ptrace(PTRACE_ATTACH, ..) failed for XX" href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::03f06926c3c149e426664f0e437626e2" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="异常信息"><a href="#异常信息" class="headerlink" title="异常信息"></a>异常信息</h1><p>在Docker容器中使用jmap查看JVM内存时出现以下错误：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">[root@ebd4ba8d5b72]# </span><span class="language-bash">ps -ef|grep java</span></span><br><span class="line">root        18     1  0 23:50 pts/0    00:00:00 java -jar math-game.jar</span><br><span class="line">root       136    69  0 23:52 pts/1    00:00:00 grep --color=auto java</span><br><span class="line"><span class="meta prompt_">[root@ebd4ba8d5b72]# </span><span class="language-bash">jmap -heap 18</span></span><br><span class="line">Attaching to process ID 18, please wait...</span><br><span class="line">ERROR: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">Error attaching to process: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">sun.jvm.hotspot.debugger.DebuggerException: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.execute(LinuxDebuggerLocal.java:163)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.attach(LinuxDebuggerLocal.java:278)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.attachDebugger(HotSpotAgent.java:671)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.setupDebuggerLinux(HotSpotAgent.java:611)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.setupDebugger(HotSpotAgent.java:337)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.go(HotSpotAgent.java:304)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.attach(HotSpotAgent.java:140)</span><br><span class="line">	at sun.jvm.hotspot.tools.Tool.start(Tool.java:185)</span><br><span class="line">	at sun.jvm.hotspot.tools.Tool.execute(Tool.java:118)</span><br><span class="line">	at sun.jvm.hotspot.tools.HeapSummary.main(HeapSummary.java:49)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at sun.tools.jmap.JMap.runTool(JMap.java:201)</span><br><span class="line">	at sun.tools.jmap.JMap.main(JMap.java:130)</span><br><span class="line">Caused by: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.attach0(Native Method)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.access$100(LinuxDebuggerLocal.java:62)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$1AttachTask.doit(LinuxDebuggerLocal.java:269)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.run(LinuxDebuggerLocal.java:138)</span><br></pre></td></tr></table></figure>
-
-<h1 id="方法一（已验证Ok）"><a href="#方法一（已验证Ok）" class="headerlink" title="方法一（已验证Ok）"></a>方法一（已验证Ok）</h1><p>在容器启动时添加–cap-add&#x3D;SYS_PTRACE，如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
