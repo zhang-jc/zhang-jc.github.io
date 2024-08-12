@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">296</span>
+          <span class="site-state-item-count">292</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">100</span>
+        <span class="site-state-item-count">98</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,440 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/06/30/Hive-Metastore-User-XX-is-not-allowed-to-perform-this-API-call/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/06/30/Hive-Metastore-User-XX-is-not-allowed-to-perform-this-API-call/" class="post-title-link" itemprop="url">Hive Metastore: User XX is not allowed to perform this API call</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-30 16:21:53" itemprop="dateCreated datePublished" datetime="2021-06-30T16:21:53+08:00">2021-06-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hive Metastore: User XX is not allowed to perform this API call" href="/2021/06/30/Hive-Metastore-User-XX-is-not-allowed-to-perform-this-API-call/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::75bcf1e364d778c72407373e23356ac3" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>HiveServer2启动错误信息如下：</p>
-<pre><code><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">2021-06-30T11:47:08,197  WARN [main] server.HiveServer2: Error starting HiveServer2 on attempt 22, will retry in 60000ms</span><br><span class="line">java.lang.RuntimeException: Error initializing notification event poll</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2.init(HiveServer2.java:275) ~[hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2.startHiveServer2(HiveServer2.java:1036) [hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2.access$1600(HiveServer2.java:140) [hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2$StartOptionExecutor.execute(HiveServer2.java:1305) [hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2.main(HiveServer2.java:1149) [hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_281]</span><br><span class="line">  at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_281]</span><br><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">  at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.util.RunJar.run(RunJar.java:323) [hadoop-common-3.2.2.jar:?]</span><br><span class="line">  at org.apache.hadoop.util.RunJar.main(RunJar.java:236) [hadoop-common-3.2.2.jar:?]</span><br><span class="line">Caused by: java.io.IOException: org.apache.thrift.TApplicationException: Internal error processing get_current_notificationEventId</span><br><span class="line">  at org.apache.hadoop.hive.metastore.messaging.EventUtils$MSClientNotificationFetcher.getCurrentNotificationEventId(EventUtils.java:75) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.ql.metadata.events.NotificationEventPoll.&lt;init&gt;(NotificationEventPoll.java:103) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.ql.metadata.events.NotificationEventPoll.initialize(NotificationEventPoll.java:59) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2.init(HiveServer2.java:273) ~[hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  ... 10 more</span><br><span class="line">Caused by: org.apache.thrift.TApplicationException: Internal error processing get_current_notificationEventId</span><br><span class="line">  at org.apache.thrift.TApplicationException.read(TApplicationException.java:111) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.thrift.TServiceClient.receiveBase(TServiceClient.java:79) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Client.recv_get_current_notificationEventId(ThriftHiveMetastore.java:5575) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Client.get_current_notificationEventId(ThriftHiveMetastore.java:5563) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStoreClient.getCurrentNotificationEventId(HiveMetaStoreClient.java:2723) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at sun.reflect.GeneratedMethodAccessor5.invoke(Unknown Source) ~[?:?]</span><br><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">  at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.RetryingMetaStoreClient.invoke(RetryingMetaStoreClient.java:212) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at com.sun.proxy.$Proxy27.getCurrentNotificationEventId(Unknown Source) ~[?:?]</span><br><span class="line">  at sun.reflect.GeneratedMethodAccessor5.invoke(Unknown Source) ~[?:?]</span><br><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">  at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStoreClient$SynchronizedHandler.invoke(HiveMetaStoreClient.java:2773) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at com.sun.proxy.$Proxy27.getCurrentNotificationEventId(Unknown Source) ~[?:?]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.messaging.EventUtils$MSClientNotificationFetcher.getCurrentNotificationEventId(EventUtils.java:73) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.ql.metadata.events.NotificationEventPoll.&lt;init&gt;(NotificationEventPoll.java:103) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.ql.metadata.events.NotificationEventPoll.initialize(NotificationEventPoll.java:59) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hive.service.server.HiveServer2.init(HiveServer2.java:273) ~[hive-service-3.1.2.jar:3.1.2]</span><br><span class="line">  ... 10 more</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>查看Metastore日志错误信息如下：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">2021-06-30T11:44:45,568 ERROR [pool-6-thread-77] thrift.ProcessFunction: Internal error processing get_current_notificationEventId</span><br><span class="line">org.apache.thrift.TException: MetaException(message:User root is not allowed to perform this API call)</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.get_current_notificationEventId(HiveMetaStore.java:7481) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at sun.reflect.GeneratedMethodAccessor6.invoke(Unknown Source) ~[?:?]</span><br><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">  at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:147) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:108) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at com.sun.proxy.$Proxy26.get_current_notificationEventId(Unknown Source) ~[?:?]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$get_current_notificationEventId.getResult(ThriftHiveMetastore.java:18364) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$get_current_notificationEventId.getResult(ThriftHiveMetastore.java:18349) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:111) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:107) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at java.security.AccessController.doPrivileged(Native Method) [?:1.8.0_281]</span><br><span class="line">  at javax.security.auth.Subject.doAs(Subject.java:422) [?:1.8.0_281]</span><br><span class="line">  at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762) [hadoop-common-3.2.2.jar:?]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.TUGIBasedProcessor.process(TUGIBasedProcessor.java:119) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_281]</span><br><span class="line">  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_281]</span><br><span class="line">  at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281]</span><br><span class="line">Caused by: org.apache.hadoop.hive.metastore.api.MetaException: User root is not allowed to perform this API call</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.authorizeProxyPrivilege(HiveMetaStore.java:7517) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.get_current_notificationEventId(HiveMetaStore.java:7477) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">  ... 19 more</span><br></pre></td></tr></table></figure>
-
-<p>解决方法如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/06/30/Hive-Metastore-User-XX-is-not-allowed-to-perform-this-API-call/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/06/23/Hive-NoSuchMethodError-Preconditions-checkArgument/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/06/23/Hive-NoSuchMethodError-Preconditions-checkArgument/" class="post-title-link" itemprop="url">Hive NoSuchMethodError Preconditions.checkArgument</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-06-23 17:49:50" itemprop="dateCreated datePublished" datetime="2021-06-23T17:49:50+08:00">2021-06-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hive NoSuchMethodError Preconditions.checkArgument" href="/2021/06/23/Hive-NoSuchMethodError-Preconditions-checkArgument/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::1c6867666317781ecab6a049771aec1a" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>异常信息如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.NoSuchMethodError: com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;Ljava/lang/Object;)V</span><br><span class="line">  at org.apache.hadoop.conf.Configuration.set(Configuration.java:1357)</span><br><span class="line">  at org.apache.hadoop.conf.Configuration.set(Configuration.java:1338)</span><br><span class="line">  at org.apache.hadoop.conf.Configuration.setBoolean(Configuration.java:1679)</span><br><span class="line">  at org.apache.hadoop.hive.metastore.conf.MetastoreConf.setBoolVar(MetastoreConf.java:1379)</span><br><span class="line">  at org.apache.hadoop.hive.metastore.conf.MetastoreConf.newMetastoreConf(MetastoreConf.java:1196)</span><br><span class="line">  at org.apache.hadoop.hive.metastore.HiveMetaStore.main(HiveMetaStore.java:8770)</span><br><span class="line">  at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">  at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">  at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">  at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">  at org.apache.hadoop.util.RunJar.run(RunJar.java:323)</span><br><span class="line">  at org.apache.hadoop.util.RunJar.main(RunJar.java:236)</span><br></pre></td></tr></table></figure>
-
-<p>这个异常是Hive和Hadoop依赖的guava版本不一致造成的。解决方法是查看Hadoop安装目录下share&#x2F;hadoop&#x2F;common&#x2F;lib和Hive安装目录下lib中guava的版本，删除版本低的，并拷贝高版本的。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/05/20/Flume1-9%E6%94%AF%E6%8C%81Kafka-Record%E7%9A%84Header%E4%BF%A1%E6%81%AF%E8%AF%BB%E5%8F%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/05/20/Flume1-9%E6%94%AF%E6%8C%81Kafka-Record%E7%9A%84Header%E4%BF%A1%E6%81%AF%E8%AF%BB%E5%8F%96/" class="post-title-link" itemprop="url">Flume1.9支持Kafka Record的Header信息读取</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-05-20 11:46:23" itemprop="dateCreated datePublished" datetime="2021-05-20T11:46:23+08:00">2021-05-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Flume/" itemprop="url" rel="index"><span itemprop="name">Flume</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Flume1.9支持Kafka Record的Header信息读取" href="/2021/05/20/Flume1-9%E6%94%AF%E6%8C%81Kafka-Record%E7%9A%84Header%E4%BF%A1%E6%81%AF%E8%AF%BB%E5%8F%96/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::ece27ba79387f20e70ea89a8e660d5e5" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在新版本Kafka中为了更好的支持业务扩展，消息格式增加了消息级别的Header信息。但是Flume从Kafka中读取数据时只处理了Avro格式中的Header信息。解决这一问题修改Flume源代码如下：</p>
-<p>org.apache.flume.source.kafka.KafkaSource.java类中的doProcess方法第280行处添加以下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Headers</span> <span class="variable">messageHeaders</span> <span class="operator">=</span> message.headers();</span><br><span class="line"><span class="keyword">for</span> (Header header : messageHeaders) &#123;</span><br><span class="line">  <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> header.key();</span><br><span class="line">  <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(header.value());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!headers.containsKey(key)) &#123;</span><br><span class="line">    headers.put(key, value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="/uploads/20210520/KafkaSource.java">完整的Java文件</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/04/26/sed%E5%8F%98%E9%87%8F%E4%B8%AD%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6-%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/04/26/sed%E5%8F%98%E9%87%8F%E4%B8%AD%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6-%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">sed变量中特殊字符/处理方式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-04-26 14:07:31" itemprop="dateCreated datePublished" datetime="2021-04-26T14:07:31+08:00">2021-04-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="sed变量中特殊字符/处理方式" href="/2021/04/26/sed%E5%8F%98%E9%87%8F%E4%B8%AD%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6-%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::76fc62ac78ac53451fa54a74cbd05b5c" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果变量值中包含斜杠（&#x2F;）特殊字符，在使用sed命令的做行内字符串替换时可以使用井号（#）做为sed语法分隔符，如下：</p>
-<pre><code><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GITLAB_PROJECT_CLONE_URL=ssh://git@192.168.1.10:50022/test/Documentation.git</span><br><span class="line">sed -i &quot;11s#GITLAB_PROJECT_CLONE_URL#$GITLAB_PROJECT_CLONE_URL#&quot; config.xml</span><br></pre></td></tr></table></figure>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1592,6 +1158,497 @@ rm: cannot remove `i_20201108_CONTENTINFO_xy_001.dat&#39;: Permission denied
 <p>按照以下方式处理即可：</p>
 <pre><code>$ sudo sh -c &#39;find ../*/exportFiles -mtime +15 -name &quot;*&quot; | xargs -I &#123;&#125; rm -rf &#123;&#125;&#39;
 </code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Ranger Hive Service连接测试失败问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-02 10:56:59" itemprop="dateCreated datePublished" datetime="2020-12-02T10:56:59+08:00">2020-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Ranger/" itemprop="url" rel="index"><span itemprop="name">Ranger</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Ranger Hive Service连接测试失败问题解决" href="/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::e9a62167c8a4ca6ede87a50faf765390" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常信息如下：</p>
+<pre><code>org.apache.ranger.plugin.client.HadoopException: Unable to connect to Hive Thrift Server instance..
+Unable to connect to Hive Thrift Server instance..
+Could not open client transport with JDBC Uri: jdbc:hive2://192.168.72.212:10000: Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &#39;client_protocol&#39; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;).
+Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &#39;client_protocol&#39; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;).
+Required field &#39;client_protocol&#39; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;). 
+</code></pre>
+<p>百度后是因为Hive版本不匹配导致的。我的测试环境Hive版本是2.1.1，通过下面的命令发现确实版本不一致：</p>
+<pre><code># find . -name &quot;*hive*&quot;
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/ranger-hive-plugin-1.2.0.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-common-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-service-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-exec-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-metastore-2.3.2.jar
+./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-jdbc-2.3.2.jar
+</code></pre>
+<p>问题解决方法就显而易见了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Ranger Admin安装MySQL初始化问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-01 16:47:49" itemprop="dateCreated datePublished" datetime="2020-12-01T16:47:49+08:00">2020-12-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Ranger/" itemprop="url" rel="index"><span itemprop="name">Ranger</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Ranger Admin安装MySQL初始化问题解决" href="/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::9c3a29b465cf784d13e6e59c680e0bf8" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>告警信息及如何解决见我的另外一篇博客：<a target="_blank" rel="noopener" href="http://zhang-jc.github.io/2020/11/27/MySQL-JDBC-%E8%BF%9E%E6%8E%A5%E5%BC%82%E5%B8%B8%EF%BC%9Ajavax-net-ssl-SSLException-closing-inbound-before-receiving-peer-s-close-notify/">http://zhang-jc.github.io/2020/11/27/MySQL-JDBC-%E8%BF%9E%E6%8E%A5%E5%BC%82%E5%B8%B8%EF%BC%9Ajavax-net-ssl-SSLException-closing-inbound-before-receiving-peer-s-close-notify/</a></p>
+<p>但是Ranger的安装配置install.properties中未启用ssl，配置信息如下：</p>
+<pre><code>#SSL config
+db_ssl_enabled=false
+db_ssl_required=false
+db_ssl_verifyServerCertificate=false
+#db_ssl_auth_type=1-way|2-way, where 1-way represents standard one way ssl authentication and 2-way represents mutual ssl authentication
+db_ssl_auth_type=2-way
+javax_net_ssl_keyStore=
+javax_net_ssl_keyStorePassword=
+javax_net_ssl_trustStore=
+javax_net_ssl_trustStorePassword=
+</code></pre>
+<p>跟踪源代码发现安装过程只处理了启用ssl的情况，但是新版本的mysql默认是需要启用ssl的。修改Ranger安装源代码（apache-ranger-1.2.0&#x2F;security-admin&#x2F;scripts&#x2F;db_setup.py）增加下面代码中的221、222行，如下：</p>
+<pre><code>210         def get_jisql_cmd(self, user, password ,db_name):
+211                 path = RANGER_ADMIN_HOME
+212                 db_ssl_param=&#39;&#39;
+213                 db_ssl_cert_param=&#39;&#39;
+214                 if self.db_ssl_enabled == &#39;true&#39;:
+215                         db_ssl_param=&quot;?useSSL=%s&amp;requireSSL=%s&amp;verifyServerCertificate=%s&quot; %(self.db_ssl_enabled,self.db_ssl_required,self.db_ssl_verifyServerCertificate)
+216                         if self.db_ssl_verifyServerCertificate == &#39;true&#39;:
+217                                 if self.db_ssl_auth_type == &#39;1-way&#39;:
+218                                         db_ssl_cert_param=&quot; -Djavax.net.ssl.trustStore=%s -Djavax.net.ssl.trustStorePassword=%s &quot; %(self.javax_net_ssl_trustStore,self.javax_net_ssl_trustStorePassword)
+219                                 else:
+220                                         db_ssl_cert_param=&quot; -Djavax.net.ssl.keyStore=%s -Djavax.net.ssl.keyStorePassword=%s -Djavax.net.ssl.trustStore=%s -Djavax.net.ssl.trustStorePassword=%s &quot; %(self.javax_net_ssl_keyStore,self.javax_net_ssl_keyStorePassword,self.javax_net_ssl_trustStore,self.javax_net_ssl_trustStorePassword)
+221                 else:
+222                         db_ssl_param=&#39;?useSSL=false&#39;
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/" class="post-title-link" itemprop="url">Linux Iptables 示例一则</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-30 14:06:24" itemprop="dateCreated datePublished" datetime="2020-11-30T14:06:24+08:00">2020-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux Iptables 示例一则" href="/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b2071c8eb3bf07492ade2bd6fc7e08ca" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>关于 Iptables 的介绍个人强烈推荐：<a target="_blank" rel="noopener" href="http://www.zsythink.net/archives/tag/iptables/page/2/%E3%80%82%E8%BF%99%E4%BD%8D%E5%85%84%E5%BC%9F%E4%BB%8B%E7%BB%8D%E7%9A%84%E5%BE%88%E8%AF%A6%E7%BB%86%E3%80%82">http://www.zsythink.net/archives/tag/iptables/page/2/。这位兄弟介绍的很详细。</a></p>
+<p>我个人的需求是在同一个网络内从网络上把测试主机与正式环境主机间的网络进行隔离。我的思路是采用 OUTPUT filter 表，采用黑名单方式禁用正式环境网络的访问。如果确实需要访问正式环境的某个IP和端口，则添加特殊规则放行。根据 Iptables 的规则匹配顺序原则，放行特定IP和端口的规则要在网段禁用规则之前。以下是我的名列列表：</p>
+<pre><code>iptables -t filter -P OUTPUT ACCEPT
+iptables -F OUTPUT
+iptables -t filter -I OUTPUT -d 192.168.72.0/24 -j DROP
+iptables -t filter -I OUTPUT -d 192.168.72.1/32 -j ACCEPT
+service iptables save
+</code></pre>
+<ol>
+<li>第一条命令是修改OUTPUT链的默认策略为ACCEPT，这样做的优点是方便通过yum安装软件时不需要设置一堆放行规则，当然网络入口的防火墙需要做好安全防护。</li>
+<li>第二条命令是情况OUTPUT链的所有规则，重新进行配置。</li>
+<li>第三条命令是插入一条filter规则，禁用当前服务器对192.168.72网段的访问。</li>
+<li>第四条命令是在filter表插入放行规则，允许当前服务器访问网关192.168.72.1。</li>
+</ol>
+<p>注意，因为filter规则添加采用的是 -I 插入模式，每次都是在表的最前名插入，所有第三、四的顺序不能颠倒。如果采用的是 -A 追加模式，则第三、四命令需要颠倒。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/30/Linux-Iptables-%E7%A4%BA%E4%BE%8B%E4%B8%80%E5%88%99/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/30/Ubuntu-%E7%BB%88%E7%AB%AF-CTRL-S-%E8%A2%AB%E9%94%81%E5%AE%9A%E5%90%8E%E8%A7%A3%E9%94%81%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/11/30/Ubuntu-%E7%BB%88%E7%AB%AF-CTRL-S-%E8%A2%AB%E9%94%81%E5%AE%9A%E5%90%8E%E8%A7%A3%E9%94%81%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">Ubuntu 终端 CTRL+S 被锁定后解锁快捷键</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-30 11:59:51" itemprop="dateCreated datePublished" datetime="2020-11-30T11:59:51+08:00">2020-11-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Ubuntu 终端 CTRL+S 被锁定后解锁快捷键" href="/2020/11/30/Ubuntu-%E7%BB%88%E7%AB%AF-CTRL-S-%E8%A2%AB%E9%94%81%E5%AE%9A%E5%90%8E%E8%A7%A3%E9%94%81%E5%BF%AB%E6%8D%B7%E9%94%AE/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::2855f1f0756191f1e4e7482516b16328" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>CTRL + S 表示暂停终端的作用，停止终端输入。使用快捷键 CTRL + Q 恢复，可以继续向终端输入。</p>
 
       
     </div>
