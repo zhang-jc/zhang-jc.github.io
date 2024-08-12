@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">305</span>
+          <span class="site-state-item-count">296</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,901 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/" class="post-title-link" itemprop="url">Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-28 00:31:09" itemprop="dateCreated datePublished" datetime="2022-08-28T00:31:09+08:00">2022-08-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass" href="/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::252a573079806c8d3c1c2129b110c7b4" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>错误信息如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">2022-08-28 00:29:37.447 ERROR 123200 --- [           main] o.s.boot.SpringApplication               : Application startup failed</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: Cannot load configuration class: org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:403) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:249) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:281) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:125) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br><span class="line">Caused by: java.lang.ExceptionInInitializerError: null</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassEnhancer.newEnhancer(ConfigurationClassEnhancer.java:122) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:110) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:393) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 12 common frames omitted</span><br><span class="line">Caused by: org.springframework.cglib.core.CodeGenerationException: java.lang.reflect.InaccessibleObjectException--&gt;Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @7a4ccb53</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:464) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:336) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:93) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:91) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:54) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:116) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:291) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory$Generator.create(KeyFactory.java:221) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:174) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:153) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.proxy.Enhancer.&lt;clinit&gt;(Enhancer.java:73) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 15 common frames omitted</span><br><span class="line">Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @7a4ccb53</span><br><span class="line">	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:199) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.Method.setAccessible(Method.java:193) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils$1.run(ReflectUtils.java:61) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils.&lt;clinit&gt;(ReflectUtils.java:52) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:243) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:329) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 27 common frames omitted</span><br><span class="line"></span><br><span class="line">2022-08-28 00:29:37.448  INFO 123200 --- [           main] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">2022-08-28 00:29:37.449  WARN 123200 --- [           main] ationConfigEmbeddedWebApplicationContext : Exception thrown from LifecycleProcessor on context close</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: LifecycleProcessor not initialized - call &#x27;refresh&#x27; before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br><span class="line"></span><br><span class="line">2022-08-28 00:29:37.449 ERROR 123200 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Destroy method on bean with name &#x27;org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory&#x27; threw an exception</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call &#x27;refresh&#x27; before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br></pre></td></tr></table></figure>
-
-<p>这是由于 JDK 8 中有关反射相关的功能自从 JDK 9 开始就被限制了，两种方法解决：</p>
-<ul>
-<li>为了兼容之前的版本，在运行项目时添加以下参数：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--add-opens java.base/java.lang=ALL-UNNAMED</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/07/22/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/22/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/" class="post-title-link" itemprop="url">运行yarn config异常：No such file or directory: 'config'</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-22 18:21:30" itemprop="dateCreated datePublished" datetime="2022-07-22T18:21:30+08:00">2022-07-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="运行yarn config异常：No such file or directory: 'config'" href="/2022/07/22/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::b36c6018f48a507583fcfd86c823afd3" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt remove cmdtest</span><br><span class="line">sudo apt remove yarn</span><br><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install yarn -y</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/07/22/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/22/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/" class="post-title-link" itemprop="url">Linux从用户组中删除用户</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-22 10:39:54" itemprop="dateCreated datePublished" datetime="2022-07-22T10:39:54+08:00">2022-07-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Linux从用户组中删除用户" href="/2022/07/22/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::a0f8d657fe6aaa2d4160b4fb08b8c58b" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>使用 gpasswd，如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd -d test docker</span><br></pre></td></tr></table></figure>
-
-<p>将test用户从docker用户组中删除。其他用法参见gpasswd手册。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/07/21/Ubuntu%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E8%BF%90%E8%A1%8CDocker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/21/Ubuntu%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E8%BF%90%E8%A1%8CDocker/" class="post-title-link" itemprop="url">Ubuntu非root用户运行Docker</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-21 09:27:43" itemprop="dateCreated datePublished" datetime="2022-07-21T09:27:43+08:00">2022-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Ubuntu非root用户运行Docker" href="/2022/07/21/Ubuntu%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E8%BF%90%E8%A1%8CDocker/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::57ac4ca09b266149154b078d65a56b47" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>创建Docker用户组。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd docker</span><br></pre></td></tr></table></figure>
-
-<p>将用户添加至docker用户组：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -G docker -a $&#123;USERNAME&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/07/20/DataHub%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/20/DataHub%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">DataHub编译问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-20 09:27:45" itemprop="dateCreated datePublished" datetime="2022-07-20T09:27:45+08:00">2022-07-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="DataHub编译问题" href="/2022/07/20/DataHub%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::76e51e05c244c91187151268595cbdb3" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h1><p>OS：Linux frin 5.15.0-41-generic #44~20.04.1-Ubuntu SMP Fri Jun 24 13:27:29 UTC 2022 x86_64 x86_64 x86_64 GNU&#x2F;Linux</p>
-<h1 id="问题列表"><a href="#问题列表" class="headerlink" title="问题列表"></a>问题列表</h1><h2 id="sasl-sasl-h-没有那个文件或目录"><a href="#sasl-sasl-h-没有那个文件或目录" class="headerlink" title="sasl&#x2F;sasl.h: 没有那个文件或目录"></a>sasl&#x2F;sasl.h: 没有那个文件或目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># apt get install libsasl2-dev libsasl2-modules</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/07/20/DataHub%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/07/19/docker-ps%E4%BF%A1%E6%81%AF%E5%B1%95%E7%A4%BA%E4%B8%8D%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/19/docker-ps%E4%BF%A1%E6%81%AF%E5%B1%95%E7%A4%BA%E4%B8%8D%E5%85%A8/" class="post-title-link" itemprop="url">docker ps信息展示不全</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-19 16:49:22" itemprop="dateCreated datePublished" datetime="2022-07-19T16:49:22+08:00">2022-07-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="docker ps信息展示不全" href="/2022/07/19/docker-ps%E4%BF%A1%E6%81%AF%E5%B1%95%E7%A4%BA%E4%B8%8D%E5%85%A8/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::7fe5c05508774c2abdaa21975976182f" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>命令添加以下选项：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps --no-trunc</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/06/06/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/06/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/" class="post-title-link" itemprop="url">数据发现开源工具调研</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-06-06 14:23:06" itemprop="dateCreated datePublished" datetime="2022-06-06T14:23:06+08:00">2022-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="数据发现开源工具调研" href="/2022/06/06/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::a5b62ffb89a4ce6024a2b3bae69623eb" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h1><p>数据发现平台的目是帮助更好的发现、理解和使用数据。就是解决以下问题：数据存在哪里？如何使用这些数据？数据做什么？数据是如何创建的？数据是如何更新的？</p>
-<p>通过 Amundsen，Lyft 将其数据团队的生产力提高了20%。同样，DataHub 帮助 LinkedIn 实现了数据大众化——每周有1,500 名员工访问 DataHub，以搜索、发现和使用数据来完成他们的工作。</p>
-<h1 id="开源工具"><a href="#开源工具" class="headerlink" title="开源工具"></a>开源工具</h1><ul>
-<li>Atlas（Apache，Cloudera）</li>
-<li>Amundsen（LF AI &amp; Data，Lyft）</li>
-<li>DataHub（Apache，Linkedin</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/06/06/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/" class="post-title-link" itemprop="url">Spark宽依赖与窄依赖</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-05-17 10:49:32" itemprop="dateCreated datePublished" datetime="2022-05-17T10:49:32+08:00">2022-05-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Spark宽依赖与窄依赖" href="/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::3cf905c2054b3850356ced982703e98c" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Spark的宽依赖与窄依赖是跟数据分区关联的概念。我们知道Spark会将数据集</p>
-<ul>
-<li>窄依赖：每个输入分区仅决定一个输出分区。Spark窄依赖自动执行流水线处理，意味着多个过滤操作全部在内存中执行。</li>
-<li>宽依赖：每个输入分区决定多个输出分区。具有宽依赖关系的转换就是经常说的洗牌（shuffle）操作。执行shuffle操作时，Spark会将结果写入磁盘。</li>
-</ul>
-<p><img src="/images/20220517/Spark%E7%AA%84%E4%BE%9D%E8%B5%96%E4%B8%8E%E5%AE%BD%E4%BE%9D%E8%B5%96.png" alt="Spark宽依赖与窄依赖"></p>
-<p>针对宽依赖的优化是讨论比较多的话题。这也引出了惰性评估的主题。惰性评估的意思就是等到绝对需要时才执行计算。惰性评估的好处是Spark可以优化整个从输入到输出端的数据流。一个很好的例子就是Dataframe的谓词下推。</p>
-<p>其实，我们日常工作中会有很多惰性评估的场景，尤其是解决历史存量问题的时候。例如，我们经常会先收集某方面的存量问题，然后整体分析后提供完整的解决方案。这样更有助于从整体统筹考虑，从而提供更更高效、低成本的解决方案。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/05/17/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/05/17/git-status%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/17/git-status%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="post-title-link" itemprop="url">git status中文乱码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-05-17 10:28:28" itemprop="dateCreated datePublished" datetime="2022-05-17T10:28:28+08:00">2022-05-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="git status中文乱码" href="/2022/05/17/git-status%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::bf8655af6234f6e101b6e6a1a55205fc" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>我的环境信息：Ubuntu20.04、git 2.25.1</p>
-<p>问题现象如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git status</span></span><br><span class="line">位于分支 master</span><br><span class="line">您的分支与上游分支 &#x27;origin/master&#x27; 一致。</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 以包含要提交的内容）</span><br><span class="line">	&quot;source/_posts/git-status\344\270\255\346\226\207\344\271\261\347\240\201.md&quot;</span><br><span class="line"></span><br><span class="line">提交为空，但是存在尚未跟踪的文件（使用 &quot;git add&quot; 建立跟踪）</span><br></pre></td></tr></table></figure>
-
-<p>执行以下命令解决：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git config --global core.quotepath <span class="literal">false</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git status</span></span><br><span class="line">位于分支 master</span><br><span class="line">您的分支与上游分支 &#x27;origin/master&#x27; 一致。</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 以包含要提交的内容）</span><br><span class="line">	source/_posts/git-status中文乱码.md</span><br><span class="line"></span><br><span class="line">提交为空，但是存在尚未跟踪的文件（使用 &quot;git add&quot; 建立跟踪）</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1180,8 +285,981 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/04/15/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/15/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Hive 3.1.0编译ldap-client-api-0.1-SNAPSHOT.jar问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-15 15:17:16" itemprop="dateCreated datePublished" datetime="2022-04-15T15:17:16+08:00">2022-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive 3.1.0编译ldap-client-api-0.1-SNAPSHOT.jar问题解决" href="/2022/04/15/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::996f5e4b3fe12d61d87219a969e77e2e" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>问题解决参考：<a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/HIVE-21777">HIVE-21777</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/04/13/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/13/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Linux下^M处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-13 13:52:58" itemprop="dateCreated datePublished" datetime="2022-04-13T13:52:58+08:00">2022-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux下^M处理" href="/2022/04/13/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7068c9347074cef023ba1b97bade7ee2" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>此处针对shell脚本运行时报^M引起的异常，但是通过vi查看未显示^M的情况下如何处理。针对这种情况可以使用sed命令进行替换，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/^M//g&#x27; file1.txt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：^M其实是CTRL+V与CTRL+M的组合。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/04/02/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/02/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Spark SQL查询HBase表异常解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-02 17:06:42" itemprop="dateCreated datePublished" datetime="2022-04-02T17:06:42+08:00">2022-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Spark SQL查询HBase表异常解决" href="/2022/04/02/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::02581685f2ad179b69aaa99070e70665" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="hbase-default-xml-file-seems-to-be-for-an-older-version"><a href="#hbase-default-xml-file-seems-to-be-for-an-older-version" class="headerlink" title="hbase-default.xml file seems to be for an older version"></a>hbase-default.xml file seems to be for an older version</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">spark-sql&gt;SELECT FROM test.test_hbase_table LIMIT 100;</span><br><span class="line">java.lang.RuntimeException:java.lang.RuntimeException:hbase-default.xml file seems to be for an older version of HBase (1.2.3),this version is 2.0.0.3.0.1.0.187</span><br><span class="line">        at org,apache.hadoop.hive.ql.metadata.Table.getStorageHandler(Table.java:292)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplsSanon funSgetTableOptions1ssanon funSapplys7.apply(HiveClientImpl.scala:407)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplsSanon funsgetTableOptions1ssanon funsapplys7.apply(HiveClientImpl.scala:374)</span><br><span class="line">        at scala.Option.map(Option.scala:146)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplssanon funSgetTableOptions1.apply(HiveClientImpl.scala:374)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplssanon funSgetTableOptions1.apply(HiveClientImpl.scala:372)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplsSanonfunSwithHiveStates1.apply(HiveClientImpl.scala:281)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.liftedTreels1(HiveClientImpl.scala:219)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.retryLocked(HiveClientImpl.scala:218)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.withHiveState(HiveClientImpl.scala:264)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.getTableOption(HiveClientImpl.scala:372)</span><br><span class="line">        at org.apache.spark.sql.hive.client.Hiveclientsclass.getTable(Hiveclient.scala:81)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.getTable(HiveClientImpl.scala:84)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalog.getRawTable(HiveExternalCatalog.scala:118)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalogssanon funSgetTables1.apply(HiveExternalCatalog.scala:700)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalogssanon funSgetTables1.apply(HiveExternalCatalog.scala:700)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalog.withClient(HiveExternalCatalog.scala:97)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalog.getTable(HiveExternalCatalog.scala:699)</span><br></pre></td></tr></table></figure>
+
+<p>解决方法是在hbase-site.xml文件中添加如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.defaults.for.version.skip<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">description</span>&gt;</span></span><br><span class="line">    Set to true to skip the &#x27;hbase.defaults.for.version&#x27; check. Setting this to true can be useful in contexts other than the other side of a maven generation; i.e. running in an ide. You&#x27;ll want to set this boolean to true to avoid seeing the RuntimException complaint: &quot;hbase-default.xml file seems to be for and old version of HBase (0.92.1), this version is X.X.X-SNAPSHOT&quot;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注意，hbase-site.xml必须在SPARK_CLASSPATH中，简单方法是将该文件放到spark的conf目录下。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/04/02/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/03/26/Docker%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%9C%89%E5%AE%B9%E5%99%A8%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/26/Docker%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%9C%89%E5%AE%B9%E5%99%A8%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/" class="post-title-link" itemprop="url">Docker修改已有容器的端口映射</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-26 20:00:12" itemprop="dateCreated datePublished" datetime="2022-03-26T20:00:12+08:00">2022-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">云计算</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%91%E8%AE%A1%E7%AE%97/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Docker修改已有容器的端口映射" href="/2022/03/26/Docker%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%9C%89%E5%AE%B9%E5%99%A8%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::71fa4743283278eeaa32a05b6d17a06b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>此文是在现在容器实例上修改端口映射，并不希望创建新的容器，这样可以保持原有容器中的数据。</p>
+<p>方法是修改容器目录下 hostconfig.json 配置文件中的 PortBindings 配置项内容。如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;PortBindings&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;8080/tcp&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;HostIp&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span><span class="punctuation">,</span><span class="attr">&quot;HostPort&quot;</span><span class="punctuation">:</span><span class="string">&quot;8080&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>前一个数字是容器端口，后一个是宿主机端口。将宿主机的8080端口映射到容器的8080端口。如修改现有端口映射则把端口号改掉就OK。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/03/21/MySQL-Workbench-CSV%E5%AF%BC%E5%85%A5%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/21/MySQL-Workbench-CSV%E5%AF%BC%E5%85%A5%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">MySQL Workbench CSV导入编码问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-21 13:50:43" itemprop="dateCreated datePublished" datetime="2022-03-21T13:50:43+08:00">2022-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Mysql/" itemprop="url" rel="index"><span itemprop="name">Mysql</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="MySQL Workbench CSV导入编码问题" href="/2022/03/21/MySQL-Workbench-CSV%E5%AF%BC%E5%85%A5%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::fe8f93590f7043d6f064ef478661ae6a" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常信息：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unhandled exception: &#x27;gbk&#x27; codec can&#x27;t decode byte 0xa2 in position 43; illegal multibyte sequence</span><br></pre></td></tr></table></figure>
+
+<p>如图：<img src="/images/20220321/mysql-workbench-codec-error.jpg" alt="MySQL Workbench Error"></p>
+<p>因为Windows环境下Mysql Workbench编码器只有gbk，而csv文件是utf-8编码的，所以导致该问题。如图：<img src="/images/20220321/csv-utf8.png" alt="CSV UTF8"></p>
+<p>将csv编码改为gbk后再次导入成功。如图：<img src="/images/20220321/csv-gbk.png" alt="CSV UTF8"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/21/MySQL-Workbench-CSV%E5%AF%BC%E5%85%A5%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/03/14/%E5%9C%A8%E5%88%97%E8%A1%A8%E6%AF%8F%E8%A1%8C%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/14/%E5%9C%A8%E5%88%97%E8%A1%A8%E6%AF%8F%E8%A1%8C%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">在列表每行末尾追加字符串的命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-14 17:46:26" itemprop="dateCreated datePublished" datetime="2022-03-14T17:46:26+08:00">2022-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="在列表每行末尾追加字符串的命令" href="/2022/03/14/%E5%9C%A8%E5%88%97%E8%A1%A8%E6%AF%8F%E8%A1%8C%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%BD%E4%BB%A4/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::54c0c9e41523e0ca856a8df36583855b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>命令样例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">_config.next.yml  _config.yml  db.json  node_modules  package.json  package-lock.json  public  scaffolds  source  themes</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> | grep json</span></span><br><span class="line">db.json</span><br><span class="line">package.json</span><br><span class="line">package-lock.json</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> | grep json | sed <span class="string">&quot;s:$: abc:&quot;</span></span></span><br><span class="line">db.json abc</span><br><span class="line">package.json abc</span><br><span class="line">package-lock.json abc</span><br></pre></td></tr></table></figure>
+
+<p>以上命令是在末尾追加“ abc”。关键就是sed工具的使用，详细的可以查看sed使用手册。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/03/09/%E4%B8%80%E6%AC%A1DataNode%E8%B4%9F%E8%BD%BD%E4%B8%A5%E9%87%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/09/%E4%B8%80%E6%AC%A1DataNode%E8%B4%9F%E8%BD%BD%E4%B8%A5%E9%87%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">一次DataNode负载严重不均衡问题的排查过程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-09 17:35:21" itemprop="dateCreated datePublished" datetime="2022-03-09T17:35:21+08:00">2022-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="一次DataNode负载严重不均衡问题的排查过程" href="/2022/03/09/%E4%B8%80%E6%AC%A1DataNode%E8%B4%9F%E8%BD%BD%E4%B8%A5%E9%87%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::425a859dcb30a110de04894ae14cda1c" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近两天发现Hadoop集群中的Datanode存储严重不均衡，有一台DN存储增长非常快，远远超出了其他节点。即使启动了Balance进城也无法解决问题。</p>
+<p>经过排查发现是因一个异常任务停留在reduce阶段，在不停的向HDFS写数据。而这个Reduce Task就是在存储增长非常快的节点上运行的。分析原因是Reduce Task会优先向运行在的节点本地写数据，副本会分布在其他节点上。所以，问题节点增长非常快，而其他节点并看不出明显异常。</p>
+<p>以下是排查过程的图片：</p>
+<p><img src="/images/20220309/applications.jpg" alt="异常Application"></p>
+<p><img src="/images/20220309/user-directory.jpg" alt="异常用户目录"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/09/%E4%B8%80%E6%AC%A1DataNode%E8%B4%9F%E8%BD%BD%E4%B8%A5%E9%87%8D%E4%B8%8D%E5%9D%87%E8%A1%A1%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E8%BF%87%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/03/09/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/09/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Linux查看服务器是否重启过的一种方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-03-09 17:27:06" itemprop="dateCreated datePublished" datetime="2022-03-09T17:27:06+08:00">2022-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux查看服务器是否重启过的一种方法" href="/2022/03/09/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::aea96d0bc8703b2304f051451e1c9b59" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用 uptime 命令可以方便检查服务器是否发生了重启。uptime 命令手册中说：uptime会在一行中显示下列信息：当前时间、系统运行了多久时间、当前登录的用户有多少，以及前 1、5 和 15 分钟系统的平均负载。当然可以添加参数以不同的方式展示信息，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uptime</span></span></span><br><span class="line"> 17:30:22 up 23 min,  1 user,  load average: 0.55, 0.63, 0.46</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uptime</span> -p</span></span><br><span class="line">up 25 minutes</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">uptime</span> -s</span></span><br><span class="line">2022-03-09 17:06:48</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/02/24/SourceForge%E4%B8%8B%E8%BD%BD%E5%8A%A0%E9%80%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/02/24/SourceForge%E4%B8%8B%E8%BD%BD%E5%8A%A0%E9%80%9F/" class="post-title-link" itemprop="url">SourceForge下载加速</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-02-24 16:14:46" itemprop="dateCreated datePublished" datetime="2022-02-24T16:14:46+08:00">2022-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index"><span itemprop="name">开发环境</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="SourceForge下载加速" href="/2022/02/24/SourceForge%E4%B8%8B%E8%BD%BD%E5%8A%A0%E9%80%9F/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::a0f005df640c06bb22e75e36cca3ff49" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>记录一个加速镜像网站“liquidtelecom”，以TCL下载为例，原下载地址如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://jaist.dl.sourceforge.net/project/tcl/Tcl/8.6.11/tcl8.6.11-src.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>替换后的下载地址：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://liquidtelecom.dl.sourceforge.net/project/tcl/Tcl/8.6.11/tcl8.6.11-src.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>下载速度非常快。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/24/SourceForge%E4%B8%8B%E8%BD%BD%E5%8A%A0%E9%80%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

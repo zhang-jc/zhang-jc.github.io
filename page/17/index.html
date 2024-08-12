@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">305</span>
+          <span class="site-state-item-count">296</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,996 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/" class="post-title-link" itemprop="url">使用 Rsyslog 将 Nginx Access Log 写入 Kafka</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-03-15 09:41:45" itemprop="dateCreated datePublished" datetime="2019-03-15T09:41:45+08:00">2019-03-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Rsyslog/" itemprop="url" rel="index"><span itemprop="name">Rsyslog</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="使用 Rsyslog 将 Nginx Access Log 写入 Kafka" href="/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::642b7b790569f56a2e48b6b7c192ffac" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h3><ul>
-<li>CentOS Linux release 7.3.1611</li>
-<li>kafka_2.12-0.10.2.2</li>
-<li>nginx&#x2F;1.12.2</li>
-<li>rsyslog-8.24.0-34.el7.x86_64.rpm</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/" class="post-title-link" itemprop="url">GitLab + Jenkins + Nginx + Lua 实现代码自动分发</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-03-13 22:48:30" itemprop="dateCreated datePublished" datetime="2019-03-13T22:48:30+08:00">2019-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91/CI/" itemprop="url" rel="index"><span itemprop="name">CI</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="GitLab + Jenkins + Nginx + Lua 实现代码自动分发" href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::55fc1614c3b6bc5238f7700101893ee8" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在大数据 Hive 数据仓库的开发中，主要是 shell + HQL 的脚本开发。脚本的测试需要放到适当的大数据环境中进行。如果大家共用 GitLab 项目上的同一个 Branch 进行测试需要代码频繁合并，影响效率。我的思路是每个 Developer 在自己的 Branch 开发并经过测试后发起 Merge Request。<br>在我的开发场景中 GitLab 在内网中通过端口映射后允许从外网访问，GitLab 中的 IP 都是内网的，GitLab 上的项目链接地址都是内网的，如（ssh:&#x2F;&#x2F;<a href="mailto:&#103;&#x69;&#x74;&#64;&#x31;&#57;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#49;&#48;">&#103;&#x69;&#x74;&#64;&#x31;&#57;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#49;&#48;</a>:50022&#x2F;test&#x2F;test.git）。并且我的 Jenkins 也是在内网中的，所以需要通过一层代理接收外部的 REST API 请求。这一点给最终的实现带来一些难点。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">Nginx 配置支持 HTTPS 代理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-03-12 15:39:01" itemprop="dateCreated datePublished" datetime="2019-03-12T15:39:01+08:00">2019-03-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Nginx 配置支持 HTTPS 代理" href="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::564602b4ef4ed6502a9687962b063aca" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文描述的是 Nginx HTTPS 反向代理的情况（即后端服务是 HTTP 的）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/01/Jenkins-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/03/01/Jenkins-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Jenkins 安装插件网络错误问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-03-01 14:24:20" itemprop="dateCreated datePublished" datetime="2019-03-01T14:24:20+08:00">2019-03-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Jenkins 安装插件网络错误问题解决" href="/2019/03/01/Jenkins-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::d772e955efcbcf9687e501785d4ca106" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Jenkins 安装插件时报网络不通的错误，根据错误信息看是连接 <a target="_blank" rel="noopener" href="https://www.google.com/">https://www.google.com</a> 网络不通。解决这个问题的方法是修改“Update Site”的URL地址，将默认地址由 https 改为 http。<br>“Update Site”配置项位置在 “插件管理-&gt;Advanced”中，修改后如下图：<br><img src="/uploads/20190301/jenkinsUpdateSite.png" alt="Jenkins Update Site"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/01/13/Python3-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/13/Python3-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">Python3 创建虚拟环境</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-13 20:09:35" itemprop="dateCreated datePublished" datetime="2019-01-13T20:09:35+08:00">2019-01-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Python3 创建虚拟环境" href="/2019/01/13/Python3-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e22dea9ef559111cc3d2d3c61909201b" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Python 虚拟环境主要是为了解决 Python 多版本及模块间版本兼容的问题。创建虚拟环境的方法很简单，使用下面的命令即可：</p>
-<pre><code>python3 -m venv PySparkEnv
-</code></pre>
-<p>PySparkEnv 即虚拟环境的主目录。如果要启用这个虚拟环境的话，使用以下命令：</p>
-<pre><code>source PySparkEnv/bin/activate
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/" class="post-title-link" itemprop="url">Sqoop 源码修改：增加落地 HDFS 文件数与 MapTask 数量一致性检查</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-30 17:04:29" itemprop="dateCreated datePublished" datetime="2018-12-30T17:04:29+08:00">2018-12-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Sqoop/" itemprop="url" rel="index"><span itemprop="name">Sqoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Sqoop 源码修改：增加落地 HDFS 文件数与 MapTask 数量一致性检查" href="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::889195087671f22b586589765ab66590" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本篇是对<a target="_blank" rel="noopener" href="http://zhang-jc.github.io/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/">记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过</a>的补充。</p>
-<p>Sqoop 命令通过 bin 下面的脚本调用，调用如下：</p>
-<pre><code>exec $&#123;HADOOP_COMMON_HOME&#125;/bin/hadoop org.apache.sqoop.Sqoop &quot;$@&quot;
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/12/28/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AF%BC%E5%87%BA-Emacs-ORG-%E6%96%87%E6%A1%A3%E4%B8%BA-HTML/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/28/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AF%BC%E5%87%BA-Emacs-ORG-%E6%96%87%E6%A1%A3%E4%B8%BA-HTML/" class="post-title-link" itemprop="url">Linux 命令行导出 Emacs ORG 文档为 HTML</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-28 01:44:30" itemprop="dateCreated datePublished" datetime="2018-12-28T01:44:30+08:00">2018-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Linux 命令行导出 Emacs ORG 文档为 HTML" href="/2018/12/28/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AF%BC%E5%87%BA-Emacs-ORG-%E6%96%87%E6%A1%A3%E4%B8%BA-HTML/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::f9307164eee48459ae1c7aec6ad23348" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Emacs 版本 25.2。使用以下命令将 org 文档导出 html：</p>
-<pre><code>emacs &#123;orgFile&#125; --batch --eval &quot;(require &#39;ox)&quot; --eval &quot;(org-html-export-to-html)&quot;
-</code></pre>
-<p>批量导出目录下的 org 文档：</p>
-<pre><code>for orgFile in `ls *.org`
-do
-  emacs $&#123;orgFile&#125; --batch --eval &quot;(require &#39;ox)&quot; --eval &quot;(org-html-export-to-html)&quot;
-done
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" class="post-title-link" itemprop="url">Sqoop 支持 ORC 文件格式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-28 01:18:34" itemprop="dateCreated datePublished" datetime="2018-12-28T01:18:34+08:00">2018-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Sqoop 支持 ORC 文件格式" href="/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::4f69ca65b669e29d5f4356bddc85e8d6" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="ORC-介绍"><a href="#ORC-介绍" class="headerlink" title="ORC 介绍"></a>ORC 介绍</h3><p>   ORC 文件格式是 Hive 0.11.0 版本引入的一种文件格式。ORC 的引入是为了解决其他 Hive 文件格式的局限性。使用 ORC 文件格式提升 Hive 读取、写入及处理数据的性能。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/" class="post-title-link" itemprop="url">记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-11 19:07:03" itemprop="dateCreated datePublished" datetime="2018-12-11T19:07:03+08:00">2018-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Sqoop/" itemprop="url" rel="index"><span itemprop="name">Sqoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="记录一次 Sqoop 从 MySQL 导入数据到 Hive 问题的排查经过" href="/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::311f8d7053ba015f2f10a9780ad48068" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>MySQL 中原始数据有 790W+ 的记录数，在 Sqoop 抽取作业成功的情况下在 Hive 中只有 500W 左右的记录数。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1257,8 +267,1109 @@ done
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/" class="post-title-link" itemprop="url">CentOS 6.8 安装 Python3 Could not build the ssl module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-27 19:27:13" itemprop="dateCreated datePublished" datetime="2018-11-27T19:27:13+08:00">2018-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="CentOS 6.8 安装 Python3 Could not build the ssl module" href="/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::e2536ee7d557f4621c7123093a8fcf35" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 CentOS 6.8 下编译安装 Python3 时出现以下提示信息：</p>
+<pre><code>Could not build the ssl module!
+Python requires an OpenSSL 1.0.2 or 1.1 compatible libssl with X509_VERIFY_PARAM_set1_host().
+LibreSSL 2.6.4 and earlier do not provide the necessary APIs,     https://github.com/libressl-portable/portable/issues/38
+</code></pre>
+<p><em>注意，其实这个只是提示信息，按照下面的步骤可以成功支持 SSL</em></p>
+<h6 id="第一步：安装-OpenSSL"><a href="#第一步：安装-OpenSSL" class="headerlink" title="第一步：安装 OpenSSL"></a>第一步：安装 OpenSSL</h6><p>从 OpenSSL 的官方网站 <a target="_blank" rel="noopener" href="https://www.openssl.org/">https://www.openssl.org/</a> 下载源代码。此处使用“openssl-1.1.1a.tar.gz”。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/27/CentOS-6-8-%E5%AE%89%E8%A3%85-Python3-Could-not-build-the-ssl-module/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Centos 6.8 No package libffi-devel available 问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-27 19:08:16" itemprop="dateCreated datePublished" datetime="2018-11-27T19:08:16+08:00">2018-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Centos 6.8 No package libffi-devel available 问题解决" href="/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::dd3396dc989a85a656cd3a5eed1dae5b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 CentOS 6.8 安装 libffi-devel 的时候出现以下问题：</p>
+<pre><code>#yum install -y libffi-devel
+Loaded plugins: product-id, refresh-packagekit, search-disabled-repos, security, subscription-manager
+This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+Setting up Install Process
+cdrom                                                                                                                                         | 4.1 kB     00:00 ...
+No package libffi-devel available.
+Error: Nothing to do
+</code></pre>
+<p>可以通过以下方式解决。</p>
+<p>第一步，从以下地址找到对应的 libffi-bedel 版本：<a target="_blank" rel="noopener" href="https://rpmfind.net/linux/rpm2html/search.php?query=libffi-devel">https://rpmfind.net/linux/rpm2html/search.php?query=libffi-devel</a></p>
+<p>第二步，通过以下命令安装：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/27/Centos-6-8-No-package-libffi-devel-available-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/23/CentOS-curl-%E6%B2%A1%E6%9C%89%E5%88%B0%E4%B8%BB%E6%9C%BA%E7%9A%84%E8%B7%AF%E7%94%B1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/23/CentOS-curl-%E6%B2%A1%E6%9C%89%E5%88%B0%E4%B8%BB%E6%9C%BA%E7%9A%84%E8%B7%AF%E7%94%B1/" class="post-title-link" itemprop="url">CentOS curl 没有到主机的路由</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-23 16:25:09" itemprop="dateCreated datePublished" datetime="2018-11-23T16:25:09+08:00">2018-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="CentOS curl 没有到主机的路由" href="/2018/11/23/CentOS-curl-%E6%B2%A1%E6%9C%89%E5%88%B0%E4%B8%BB%E6%9C%BA%E7%9A%84%E8%B7%AF%E7%94%B1/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::6729e670496e60f84317494f42b175f6" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天在 yum 安装时遇到网路不通的问题，使用 curl 命令测试如下：</p>
+<pre><code># curl www.baidu.com
+curl: (7) Failed connect to 172.16.72.69:443; 没有到主机的路由
+</code></pre>
+<p>通过查找发现是服务器设置了代理导致的，代理配置在 &#x2F;etc&#x2F;profile 中，如下：</p>
+<pre><code>http_proxy=http://172.16.72.69:80
+http_proxy=http://172.16.72.69:443
+ftp_proxy=http://172.16.72.69:80
+export http_proxy
+export ftp_prox    
+</code></pre>
+<p>该配置也可能会在其他环境变量配置文件中，可自行检查。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/23/CentOS-curl-%E6%B2%A1%E6%9C%89%E5%88%B0%E4%B8%BB%E6%9C%BA%E7%9A%84%E8%B7%AF%E7%94%B1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/19/CentOS7-3-%E5%AE%89%E8%A3%85-Python3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/19/CentOS7-3-%E5%AE%89%E8%A3%85-Python3/" class="post-title-link" itemprop="url">CentOS7.3 安装 Python3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-19 18:26:32" itemprop="dateCreated datePublished" datetime="2018-11-19T18:26:32+08:00">2018-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">环境搭建</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="CentOS7.3 安装 Python3" href="/2018/11/19/CentOS7-3-%E5%AE%89%E8%A3%85-Python3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::cd6811c70e3fee1f60801cbb5ed860c1" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>采用源代码构建的方式安装。此处安装的是 Python3.7.1 版本。源代码下载地址：<a target="_blank" rel="noopener" href="https://www.python.org/downloads/release/python-371/">https://www.python.org/downloads/release/python-371/</a>。</p>
+<pre><code># wget https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tar.xz
+--2018-11-19 17:13:28--  https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tar.xz
+正在解析主机 www.python.org (www.python.org)... 151.101.40.223, 2a04:4e42:2d::223
+正在连接 www.python.org (www.python.org)|151.101.40.223|:443... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：16960060 (16M) [application/octet-stream]
+正在保存至: “Python-3.7.1.tar.xz”
+
+100%[======================================================================================================&gt;] 16,960,060  4.67MB/s 用时 4.6s   
+
+2018-11-19 17:13:34 (3.51 MB/s) - 已保存 “Python-3.7.1.tar.xz” [16960060/16960060])
+
+# xz -d Python-3.7.1.tar.xz
+# tar xvf Python-3.7.1.tar
+# ./configure --prefix=/opt/Python-3.7.1
+# make
+Failed to build these modules:
+_ctypes
+</code></pre>
+<p>以上异常信息是因为 Python3.7.1 需要安装包 libffi-devel：</p>
+<pre><code># yum install libffi-devel -y
+</code></pre>
+<p>安装完成后重新执行 make 成功。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/19/CentOS7-3-%E5%AE%89%E8%A3%85-Python3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/19/Python3-%E6%93%8D%E4%BD%9C-MongoDB-%E6%89%B9%E9%87%8F-upsert/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/19/Python3-%E6%93%8D%E4%BD%9C-MongoDB-%E6%89%B9%E9%87%8F-upsert/" class="post-title-link" itemprop="url">Python3 操作 MongoDB 批量 upsert</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-19 16:18:25" itemprop="dateCreated datePublished" datetime="2018-11-19T16:18:25+08:00">2018-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Python3 操作 MongoDB 批量 upsert" href="/2018/11/19/Python3-%E6%93%8D%E4%BD%9C-MongoDB-%E6%89%B9%E9%87%8F-upsert/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::ad165103973de59cb3b7e8d3550fa6f9" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>代码如下：</p>
+<pre><code>mongoClient = MongoClient(&#39;mongodb://172.16.72.213:27017/&#39;)
+opsDb = mongoClient.ops
+azScheduled = opsDb.azScheduledFlow
+
+bulkOpers = []
+for flow in scheduledFlows.values():
+    bulkOpers.append(UpdateOne(&#123;&#39;opsDt&#39;: opsDt, &#39;projectId&#39;: flow[&#39;projectId&#39;], &#39;projectName&#39;: flow[&#39;projectName&#39;], &#39;flowName&#39;: flow[&#39;flowName&#39;]&#125;, &#123;&#39;$set&#39;: &#123;&#39;opsDateTime&#39;: opsDtStr, &#39;status&#39;: flow[&#39;status&#39;], &#39;startTime&#39;: flow[&#39;startTime&#39;], &#39;endTime&#39;: flow[&#39;endTime&#39;], &#39;elapsed&#39;: flow[&#39;elapsed&#39;]&#125;&#125;, upsert=True))
+
+azScheduled.bulk_write(bulkOpers)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">Python3连接MongoDB并写入数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-15 17:09:30" itemprop="dateCreated datePublished" datetime="2018-11-15T17:09:30+08:00">2018-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Python3连接MongoDB并写入数据" href="/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::0e4759f247d629c9b81b89d8d6c2a878" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="安装-PyMongo"><a href="#安装-PyMongo" class="headerlink" title="安装 PyMongo"></a>安装 PyMongo</h4><pre><code>$ pip3 install pymongo
+Successfully installed pymongo-3.7.2
+</code></pre>
+<h4 id="连接MongoDB并且批量插入操作"><a href="#连接MongoDB并且批量插入操作" class="headerlink" title="连接MongoDB并且批量插入操作"></a>连接MongoDB并且批量插入操作</h4><pre><code>#!/usr/bin/python3
+
+import mysql.connector
+import gzip
+import json
+from pymongo import MongoClient
+from datetime import datetime
+
+opsDateTime = datetime.now().isoformat(timespec=&#39;seconds&#39;)
+
+config = &#123;
+    &#39;user&#39;: &#39;roHive&#39;,
+    &#39;password&#39;: &#39;hive@bigdata!23&#39;,
+    &#39;host&#39;: &#39;172.16.72.22&#39;,
+    &#39;database&#39;: &#39;azkaban3&#39;,
+    &#39;raise_on_warnings&#39;: True,
+    &#39;charset&#39;: &#39;latin1&#39;
+&#125;
+
+cnx = mysql.connector.connect(**config)
+cursor = cnx.cursor()
+query = (&quot;SELECT trigger_id, data FROM azkaban3.triggers&quot;)
+cursor.execute(query)
+
+scheduledList = []
+for (triggerId, triggerData) in cursor:
+    triggerJson = json.loads(gzip.decompress(bytes(triggerData, encoding=&#39;latin1&#39;)))
+    actionJson = triggerJson[&#39;actions&#39;][0][&#39;actionJson&#39;]
+    projectName = actionJson[&#39;projectName&#39;]
+    flowName = actionJson[&#39;flowName&#39;]
+    scheduledFlow = &#123;&#39;opsDateTime&#39;: opsDateTime, &#39;projectName&#39;: projectName, &#39;flowName&#39;: flowName&#125;
+    scheduledList.append(scheduledFlow)
+
+cursor.close()
+cnx.close()
+
+mongoClient = MongoClient(&#39;mongodb://172.16.72.213:27017/&#39;)
+opsDb = mongoClient.ops
+azScheduled = opsDb.azScheduledFlow
+azScheduled.insert_many(scheduledList)
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/" class="post-title-link" itemprop="url">Python3 连接 MySQL 并且读取 Blob 字段信息</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-15 14:33:28" itemprop="dateCreated datePublished" datetime="2018-11-15T14:33:28+08:00">2018-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Python3 连接 MySQL 并且读取 Blob 字段信息" href="/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::ef6adec70b0faaebcdfca2f01457aafa" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h4><pre><code>$ pip3 install mysql-connector-python
+Command &#39;pip3&#39; not found, but can be installed with:
+sudo apt install python3-pip
+</code></pre>
+<p>根据提示信息安装 pip3。</p>
+<p>根据 MySQL 官网建议应该安装 8.0 的驱动。我的安装：mysql-connector-python-8.0.13、protobuf-3.6.1、setuptools-40.6.2、six-1.11.0。</p>
+<h4 id="读取MySQL数据"><a href="#读取MySQL数据" class="headerlink" title="读取MySQL数据"></a>读取MySQL数据</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/" class="post-title-link" itemprop="url">MySQL 修改 max_allowed_packet</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-10-12 01:25:22" itemprop="dateCreated datePublished" datetime="2018-10-12T01:25:22+08:00">2018-10-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="MySQL 修改 max_allowed_packet" href="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::70cc5cd9a69ce471630ff87e703e8c2f" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>通过 global 参数设置：</p>
+<pre><code>set global max_allowed_packet = 32*1024*1024;
+</code></pre>
+<p>注意，下面的写法是不正确的：</p>
+<pre><code>set global max_allowed_packet = 32m;
+</code></pre>
+<p>如果要重启也生效的话，在 my.cnf 中添加如下配置：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/09/28/Azkaban-3-52-0-%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/09/28/Azkaban-3-52-0-%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Azkaban 3.52.0 搭建遇到的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-28 14:21:00" itemprop="dateCreated datePublished" datetime="2018-09-28T14:21:00+08:00">2018-09-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Azkaban/" itemprop="url" rel="index"><span itemprop="name">Azkaban</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Azkaban 3.52.0 搭建遇到的问题" href="/2018/09/28/Azkaban-3-52-0-%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::69dfc0d3b50076de53c92931f0aa37a0" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Mysql数据初始化"><a href="#Mysql数据初始化" class="headerlink" title="Mysql数据初始化"></a>Mysql数据初始化</h3><p>如果 MySQL 使用库表字符集使用 UTF-8，在初始化 Azkaban 的 MySQL 库时报错如下：</p>
+<pre><code>ERROR 1071 (42000): Specified key was too long; max key length is 767 bytes
+ERROR 1146 (42S02): Table &#39;azkaban3.execution_jobs&#39; doesn&#39;t exist
+ERROR 1071 (42000): Specified key was too long; max key length is 767 bytes
+ERROR 1146 (42S02): Table &#39;azkaban3.execution_logs&#39; doesn&#39;t exist
+ERROR 1146 (42S02): Table &#39;azkaban3.execution_logs&#39; doesn&#39;t exist
+ERROR 1146 (42S02): Table &#39;azkaban3.execution_logs&#39; doesn&#39;t exist
+</code></pre>
+<p>这个是因为表 execution_logs 的主键总的长度字符超过 767 个字节导致的。解决方法是将该表的编码改为 Latin1。</p>
+<h3 id="通过-curl-激活-executor"><a href="#通过-curl-激活-executor" class="headerlink" title="通过 curl 激活 executor"></a>通过 curl 激活 executor</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/09/28/Azkaban-3-52-0-%E6%90%AD%E5%BB%BA%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/30/">30</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
