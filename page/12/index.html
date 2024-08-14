@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">290</span>
+          <span class="site-state-item-count">287</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -167,416 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/26/Shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%8A%80%E5%B7%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/11/26/Shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">Shell 字符串截取技巧</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-11-26 15:55:22" itemprop="dateCreated datePublished" datetime="2020-11-26T15:55:22+08:00">2020-11-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Shell 字符串截取技巧" href="/2020/11/26/Shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%8A%80%E5%B7%A7/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::2e8d799c8f7bebeaae38bdbcb1607a5d" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li># 号截取：删除左边字符，保留右边字符。</li>
-<li>## 号截取：删除左边字符，保留右边字符。</li>
-<li>%号截取：删除右边字符，保留左边字符</li>
-<li>%% 号截取：删除右边字符，保留左边字符</li>
-</ul>
-<p>示例一：</p>
-<pre><code>$ var=&#39;abcbd&#39;
-$ echo $&#123;var#*b&#125;
-cbd
-$ echo $&#123;var##*b&#125;
-d
-$ echo $&#123;var%b*&#125;
-abc
-$ echo $&#123;var%%b*&#125;
-a
-</code></pre>
-<p>示例二：</p>
-<pre><code>$ cat /etc/passwd
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-bin:x:2:2:bin:/bin:/usr/sbin/nologin
-sys:x:3:3:sys:/dev:/usr/sbin/nologin
-sync:x:4:65534:sync:/bin:/bin/sync
-$ for line in `cat /etc/passwd`; do echo $&#123;line%%:*&#125;; done
-root
-daemon
-bin
-sys
-sync
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/26/Shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%8A%80%E5%B7%A7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/25/Maven-Too-many-files-with-unapproved-license/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/11/25/Maven-Too-many-files-with-unapproved-license/" class="post-title-link" itemprop="url">Maven: Too many files with unapproved license</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-11-25 15:15:35" itemprop="dateCreated datePublished" datetime="2020-11-25T15:15:35+08:00">2020-11-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Maven/" itemprop="url" rel="index"><span itemprop="name">Maven</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Maven: Too many files with unapproved license" href="/2020/11/25/Maven-Too-many-files-with-unapproved-license/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::9a5d44c975755ed9003a9b9abc55bff2" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>异常信息如下：</p>
-<pre><code>[ERROR] Failed to execute goal org.apache.rat:apache-rat-plugin:0.11:check (default) on project ranger: Too many files with unapproved license: 1 See RAT report in: /home/zhangjc/ysten/git/apache-ranger-1.2.0/target/rat.txt -&gt; [Help 1]
-org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.rat:apache-rat-plugin:0.11:check (default) on project ranger: Too many files with unapproved license: 1 See RAT report in: /home/zhangjc/ysten/git/apache-ranger-1.2.0/target/rat.txt
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:215)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
-    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
-    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
-    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
-    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
-    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
-    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
-    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:957)
-    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:289)
-    at org.apache.maven.cli.MavenCli.main (MavenCli.java:193)
-    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
-    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
-    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
-    at java.lang.reflect.Method.invoke (Method.java:498)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
-    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
-   
-</code></pre>
-<p>解决方法：增加 -Drat.skip&#x3D;true 参数 ，跳过licensing 检查。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Hue Load Balance配置</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-11-18 17:11:29" itemprop="dateCreated datePublished" datetime="2020-11-18T17:11:29+08:00">2020-11-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hue/" itemprop="url" rel="index"><span itemprop="name">Hue</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hue Load Balance配置" href="/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::7dc1f627b1ea9d9953cf00d310323812" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>直接上配置：</p>
-<pre><code>server &#123;
-  server_name 192.168.72.31;
-  listen 8001;
-  
-  charset utf-8;
-  
-  proxy_connect_timeout 600s;
-  proxy_read_timeout 600s;
-  proxy_send_timeout 600s;
-  
-  location / &#123;
-    proxy_set_header Host $http_x_forwarded_for;
-    proxy_set_header X-Forwarded-For $http_x_forwarded_for;
-    
-    proxy_pass http://hue;
-  &#125;
-&#125;
-
-upstream hue &#123;
-  hash $cookie_sessionid;
-  
-  server 192.168.72.22:8888 max_fails=3;
-  server 192.168.72.31:8888 max_fails=3;
-&#125;
-</code></pre>
-<p>重点是调整 upstream hash 的策略。因为 Hue 是需要保持 session 的，同一个 session 的请求需要发送到同一台后端服务器上。简单的可以采用 ip_hash 策略，这个策略存在两个重要的问题：</p>
-<ul>
-<li>对隐藏在局域网后的用户不起作用。</li>
-<li>ip_hash 只取 IPV4 的前三段值做 Hash，在非公网大并发场景下会出现负载非常不均衡的情况。参见：<a target="_blank" rel="noopener" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash">http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash</a></li>
-</ul>
-<p>基于以上两点修改了 Nginx 的配置采用 $cookie_sessionid 做为 hash 值，达到 session 级别的负载均衡。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1353,6 +943,353 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>人们在决定是否去做一件事情的时候，不仅是看这件事对自己有没有好处，而且也看过去是不是已经在这件事情上有过投入。我们把这些已经发生不可收回的支出，如时间、金钱、精力等称为“沉没成本”。在经济学和商业决策制定过程中会用到“沉没成本”的概念，代指已经付出且不可收回的成本。沉没成本常用来和可变成本作比较，可变成本可以被改变，而沉没成本则不能被改变。</p>
 <p>例如，买了一张电影票，不能退票的那种，那么买这张电影票的钱就属于沉没成本。电影开场后，在看电影的过程中发现电影不是自己喜欢的类型，现在有两个选择继续看完还是中间退场。不管坐哪个选择，票钱都不应该做为做出选择的依据，因为不管那种选择票钱都是没法挽回的。</p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/12/19/%E6%9C%BA%E4%BC%9A%E6%88%90%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/19/%E6%9C%BA%E4%BC%9A%E6%88%90%E6%9C%AC/" class="post-title-link" itemprop="url">机会成本</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-19 12:58:50" itemprop="dateCreated datePublished" datetime="2019-12-19T12:58:50+08:00">2019-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">经济学</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BB%8F%E6%B5%8E%E5%AD%A6/%E6%88%90%E6%9C%AC/" itemprop="url" rel="index"><span itemprop="name">成本</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="机会成本" href="/2019/12/19/%E6%9C%BA%E4%BC%9A%E6%88%90%E6%9C%AC/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::80745c536d5bab3f8b7745b8dbc70e42" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>机会成本（Opportunity Cost）是指在面临多方案择一决策时，被舍弃的选项中的最高价值者是本次决策的机会成本。</p>
+<p>机会成本又称为择一成本、替代性成本。机会成本对商业公司来说，可以是利用一定的时间或资源生产一种商品时，而失去的利用这些资源生产其他最佳替代品的机会就是机会成本。</p>
+<h3 id="涵盖内容"><a href="#涵盖内容" class="headerlink" title="涵盖内容"></a>涵盖内容</h3><ul>
+<li>使用他人资源的机会成本，即付给资源拥有者的货币代价被称作显性成本。</li>
+<li>因为使用自有资源而放弃其他可能性中得到的最大回报的那个代价，也被称为隐性成本。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/19/%E6%9C%BA%E4%BC%9A%E6%88%90%E6%9C%AC/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/12/11/Python3-ImportError-cannot-import-name-XXX-from-XXX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/11/Python3-ImportError-cannot-import-name-XXX-from-XXX/" class="post-title-link" itemprop="url">Python3 ImportError: cannot import name 'XXX' from 'XXX'</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-11 18:52:53" itemprop="dateCreated datePublished" datetime="2019-12-11T18:52:53+08:00">2019-12-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Python3 ImportError: cannot import name 'XXX' from 'XXX'" href="/2019/12/11/Python3-ImportError-cannot-import-name-XXX-from-XXX/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::c9db58f530cc7ec5dd42dcc2a76ea327" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>例如如下错误：</p>
+<pre><code>$ python3 git.py 
+Traceback (most recent call last):
+  File &quot;git.py&quot;, line 1, in &lt;module&gt;
+    from git import Repo
+  File &quot;/home/a/git.py&quot;, line 1, in &lt;module&gt;
+    from git import Repo
+ImportError: cannot import name &#39;Repo&#39; from &#39;git&#39; (/home/a/git.py)
+</code></pre>
+<p>这种错误基本都是因为 python 脚本的名称与模块的名称重复导致的。像我这个例子中就是因为 git.py 与 GitPython 模块中的文件名一样导致的。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/12/10/no-matching-cipher-found-%E9%97%AE%E9%A2%98%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%BB%8F%E5%8E%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/10/no-matching-cipher-found-%E9%97%AE%E9%A2%98%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%BB%8F%E5%8E%86/" class="post-title-link" itemprop="url">no matching cipher found 问题一次解决经历</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-10 15:27:10" itemprop="dateCreated datePublished" datetime="2019-12-10T15:27:10+08:00">2019-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="no matching cipher found 问题一次解决经历" href="/2019/12/10/no-matching-cipher-found-%E9%97%AE%E9%A2%98%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%BB%8F%E5%8E%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::cd4fa3b4fba76b79c1e7d2fdba080d20" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本次问题解决纯属蒙对了，原理不清楚。</p>
+<p>当我从一台 CentOS 7.3 的服务器通过 ssh 登录另外一台 CentOS 6.8 的服务器时出现以下错误信息：</p>
+<pre><code>[root@192-168-72-75 .ssh]# ssh -p65522 bddev@192.168.72.208
+no matching cipher found: client arcfour server chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+</code></pre>
+<p>解决方法是在“192-168-72-75”服务器上修改 &#x2F;etc&#x2F;ssh&#x2F;ssh_config 配置文件，添加以下内容：</p>
+<pre><code>Host *
+     GSSAPIAuthentication yes
+     Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
+     MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/10/no-matching-cipher-found-%E9%97%AE%E9%A2%98%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%BB%8F%E5%8E%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
