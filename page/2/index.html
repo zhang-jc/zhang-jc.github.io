@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">286</span>
+          <span class="site-state-item-count">283</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-count">94</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,315 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/11/15/Hive-Spark-SQL%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/15/Hive-Spark-SQL%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="post-title-link" itemprop="url">Hive/Spark SQL数字格式化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-11-15 11:24:54" itemprop="dateCreated datePublished" datetime="2022-11-15T11:24:54+08:00">2022-11-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hive/Spark SQL数字格式化" href="/2022/11/15/Hive-Spark-SQL%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%8C%96/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e3fa148c1106eef54dc43cc7c5175228" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果数字长度过大，则会以科学技术法的方式展现。通过一下例子可以复现，如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t1 (d <span class="type">decimal</span>(<span class="number">18</span>,<span class="number">8</span>)) stored <span class="keyword">as</span> orc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t1 <span class="keyword">values</span>(<span class="number">0.00000001</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1;</span><br></pre></td></tr></table></figure>
-
-<p>如果需要按照原始数值展示，则可以用使用format_number函数，如下：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> format_number(d, <span class="number">8</span>) <span class="keyword">from</span> t1;</span><br></pre></td></tr></table></figure>
-
-<p>format_number的说明参见Hive官网：<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-StringFunctions">https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-StringFunctions</a>。该函数在Spark SQL下也可使用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/11/15/Hive-Spark-SQL%E6%95%B0%E5%AD%97%E6%A0%BC%E5%BC%8F%E5%8C%96/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/" class="post-title-link" itemprop="url">Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-28 00:31:09" itemprop="dateCreated datePublished" datetime="2022-08-28T00:31:09+08:00">2022-08-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass" href="/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::252a573079806c8d3c1c2129b110c7b4" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>错误信息如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">2022-08-28 00:29:37.447 ERROR 123200 --- [           main] o.s.boot.SpringApplication               : Application startup failed</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: Cannot load configuration class: org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:403) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:249) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:281) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:125) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br><span class="line">Caused by: java.lang.ExceptionInInitializerError: null</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassEnhancer.newEnhancer(ConfigurationClassEnhancer.java:122) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:110) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:393) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 12 common frames omitted</span><br><span class="line">Caused by: org.springframework.cglib.core.CodeGenerationException: java.lang.reflect.InaccessibleObjectException--&gt;Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @7a4ccb53</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:464) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:336) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:93) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:91) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:54) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:116) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:291) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory$Generator.create(KeyFactory.java:221) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:174) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:153) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.proxy.Enhancer.&lt;clinit&gt;(Enhancer.java:73) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 15 common frames omitted</span><br><span class="line">Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @7a4ccb53</span><br><span class="line">	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:199) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.Method.setAccessible(Method.java:193) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils$1.run(ReflectUtils.java:61) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils.&lt;clinit&gt;(ReflectUtils.java:52) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:243) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:329) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 27 common frames omitted</span><br><span class="line"></span><br><span class="line">2022-08-28 00:29:37.448  INFO 123200 --- [           main] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">2022-08-28 00:29:37.449  WARN 123200 --- [           main] ationConfigEmbeddedWebApplicationContext : Exception thrown from LifecycleProcessor on context close</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: LifecycleProcessor not initialized - call &#x27;refresh&#x27; before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br><span class="line"></span><br><span class="line">2022-08-28 00:29:37.449 ERROR 123200 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Destroy method on bean with name &#x27;org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory&#x27; threw an exception</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call &#x27;refresh&#x27; before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br></pre></td></tr></table></figure>
-
-<p>这是由于 JDK 8 中有关反射相关的功能自从 JDK 9 开始就被限制了，两种方法解决：</p>
-<ul>
-<li>为了兼容之前的版本，在运行项目时添加以下参数：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--add-opens java.base/java.lang=ALL-UNNAMED</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/08/28/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/07/22/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/22/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/" class="post-title-link" itemprop="url">运行yarn config异常：No such file or directory: 'config'</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-07-22 18:21:30" itemprop="dateCreated datePublished" datetime="2022-07-22T18:21:30+08:00">2022-07-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="运行yarn config异常：No such file or directory: 'config'" href="/2022/07/22/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::b36c6018f48a507583fcfd86c823afd3" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt remove cmdtest</span><br><span class="line">sudo apt remove yarn</span><br><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -</span><br><span class="line">echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install yarn -y</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1149,6 +840,334 @@
 
 <p>执行以下命令解决：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git config --global core.quotepath <span class="literal">false</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git status</span></span><br><span class="line">位于分支 master</span><br><span class="line">您的分支与上游分支 &#x27;origin/master&#x27; 一致。</span><br><span class="line"></span><br><span class="line">未跟踪的文件:</span><br><span class="line">  （使用 &quot;git add &lt;文件&gt;...&quot; 以包含要提交的内容）</span><br><span class="line">	source/_posts/git-status中文乱码.md</span><br><span class="line"></span><br><span class="line">提交为空，但是存在尚未跟踪的文件（使用 &quot;git add&quot; 建立跟踪）</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/05/16/Spark%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/16/Spark%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">Spark架构</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-16 11:12:44" itemprop="dateCreated datePublished" datetime="2022-05-16T11:12:44+08:00">2022-05-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Spark架构" href="/2022/05/16/Spark%E6%9E%B6%E6%9E%84/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::ee0946753318f1ea48bea49b6fedea13" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Spark架构非常简洁。简洁的架构是良好开放性、兼容性的基础。</p>
+<p><img src="/images/20211025/spark-cluster-overview.png" alt="Spark架构"></p>
+<ul>
+<li>驱动器（驱动进程）：运行main()函数，负责三件事。<ul>
+<li>维护Spark应用程序相关信息</li>
+<li>回应用户程序或输入</li>
+<li>分析任务并分发给若干执行器处理</li>
+</ul>
+</li>
+<li>执行器：执行驱动器分配的实际计算工作，负责两件事。<ul>
+<li>执行驱动器分配的代码</li>
+<li>报告执行器的计算状态给驱动器</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/04/15/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/15/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Hive 3.1.0编译ldap-client-api-0.1-SNAPSHOT.jar问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-15 15:17:16" itemprop="dateCreated datePublished" datetime="2022-04-15T15:17:16+08:00">2022-04-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive 3.1.0编译ldap-client-api-0.1-SNAPSHOT.jar问题解决" href="/2022/04/15/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::996f5e4b3fe12d61d87219a969e77e2e" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>问题解决参考：<a target="_blank" rel="noopener" href="https://issues.apache.org/jira/browse/HIVE-21777">HIVE-21777</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/04/13/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/04/13/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Linux下^M处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-04-13 13:52:58" itemprop="dateCreated datePublished" datetime="2022-04-13T13:52:58+08:00">2022-04-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux下^M处理" href="/2022/04/13/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7068c9347074cef023ba1b97bade7ee2" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>此处针对shell脚本运行时报^M引起的异常，但是通过vi查看未显示^M的情况下如何处理。针对这种情况可以使用sed命令进行替换，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s/^M//g&#x27; file1.txt</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：^M其实是CTRL+V与CTRL+M的组合。</p>
+</blockquote>
+
       
     </div>
 
