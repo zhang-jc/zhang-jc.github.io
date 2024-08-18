@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">277</span>
+          <span class="site-state-item-count">274</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">92</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,379 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/12/03/shell-c/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/12/03/shell-c/" class="post-title-link" itemprop="url">shell -c</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-03 10:57:48" itemprop="dateCreated datePublished" datetime="2020-12-03T10:57:48+08:00">2020-12-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="shell -c" href="/2020/12/03/shell-c/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::0ecc3fe3af9d675fbe570077c165977a" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>shell -c {string}：表示命令从-c后的字符串读取。在需要使用管道或者重定向需要sudo时很有用，如下：</p>
-<pre><code>$ sudo find ../*/exportFiles -mtime +15 -name &quot;*&quot; | xargs -I &#123;&#125; rm -rf &#123;&#125;
-rm: cannot remove `i_20201108_CONTENTINFO_xy_001.dat&#39;: Permission denied
-</code></pre>
-<p>按照以下方式处理即可：</p>
-<pre><code>$ sudo sh -c &#39;find ../*/exportFiles -mtime +15 -name &quot;*&quot; | xargs -I &#123;&#125; rm -rf &#123;&#125;&#39;
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Ranger Hive Service连接测试失败问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-02 10:56:59" itemprop="dateCreated datePublished" datetime="2020-12-02T10:56:59+08:00">2020-12-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Ranger/" itemprop="url" rel="index"><span itemprop="name">Ranger</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Ranger Hive Service连接测试失败问题解决" href="/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e9a62167c8a4ca6ede87a50faf765390" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>异常信息如下：</p>
-<pre><code>org.apache.ranger.plugin.client.HadoopException: Unable to connect to Hive Thrift Server instance..
-Unable to connect to Hive Thrift Server instance..
-Could not open client transport with JDBC Uri: jdbc:hive2://192.168.72.212:10000: Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &#39;client_protocol&#39; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;).
-Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &#39;client_protocol&#39; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;).
-Required field &#39;client_protocol&#39; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;). 
-</code></pre>
-<p>百度后是因为Hive版本不匹配导致的。我的测试环境Hive版本是2.1.1，通过下面的命令发现确实版本不一致：</p>
-<pre><code># find . -name &quot;*hive*&quot;
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive/ranger-hive-plugin-1.2.0.jar
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-common-2.3.2.jar
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-service-2.3.2.jar
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-exec-2.3.2.jar
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-metastore-2.3.2.jar
-./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-jdbc-2.3.2.jar
-</code></pre>
-<p>问题解决方法就显而易见了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Ranger Admin安装MySQL初始化问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-12-01 16:47:49" itemprop="dateCreated datePublished" datetime="2020-12-01T16:47:49+08:00">2020-12-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Ranger/" itemprop="url" rel="index"><span itemprop="name">Ranger</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Ranger Admin安装MySQL初始化问题解决" href="/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::9c3a29b465cf784d13e6e59c680e0bf8" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>告警信息及如何解决见我的另外一篇博客：<a target="_blank" rel="noopener" href="http://zhang-jc.github.io/2020/11/27/MySQL-JDBC-%E8%BF%9E%E6%8E%A5%E5%BC%82%E5%B8%B8%EF%BC%9Ajavax-net-ssl-SSLException-closing-inbound-before-receiving-peer-s-close-notify/">http://zhang-jc.github.io/2020/11/27/MySQL-JDBC-%E8%BF%9E%E6%8E%A5%E5%BC%82%E5%B8%B8%EF%BC%9Ajavax-net-ssl-SSLException-closing-inbound-before-receiving-peer-s-close-notify/</a></p>
-<p>但是Ranger的安装配置install.properties中未启用ssl，配置信息如下：</p>
-<pre><code>#SSL config
-db_ssl_enabled=false
-db_ssl_required=false
-db_ssl_verifyServerCertificate=false
-#db_ssl_auth_type=1-way|2-way, where 1-way represents standard one way ssl authentication and 2-way represents mutual ssl authentication
-db_ssl_auth_type=2-way
-javax_net_ssl_keyStore=
-javax_net_ssl_keyStorePassword=
-javax_net_ssl_trustStore=
-javax_net_ssl_trustStorePassword=
-</code></pre>
-<p>跟踪源代码发现安装过程只处理了启用ssl的情况，但是新版本的mysql默认是需要启用ssl的。修改Ranger安装源代码（apache-ranger-1.2.0&#x2F;security-admin&#x2F;scripts&#x2F;db_setup.py）增加下面代码中的221、222行，如下：</p>
-<pre><code>210         def get_jisql_cmd(self, user, password ,db_name):
-211                 path = RANGER_ADMIN_HOME
-212                 db_ssl_param=&#39;&#39;
-213                 db_ssl_cert_param=&#39;&#39;
-214                 if self.db_ssl_enabled == &#39;true&#39;:
-215                         db_ssl_param=&quot;?useSSL=%s&amp;requireSSL=%s&amp;verifyServerCertificate=%s&quot; %(self.db_ssl_enabled,self.db_ssl_required,self.db_ssl_verifyServerCertificate)
-216                         if self.db_ssl_verifyServerCertificate == &#39;true&#39;:
-217                                 if self.db_ssl_auth_type == &#39;1-way&#39;:
-218                                         db_ssl_cert_param=&quot; -Djavax.net.ssl.trustStore=%s -Djavax.net.ssl.trustStorePassword=%s &quot; %(self.javax_net_ssl_trustStore,self.javax_net_ssl_trustStorePassword)
-219                                 else:
-220                                         db_ssl_cert_param=&quot; -Djavax.net.ssl.keyStore=%s -Djavax.net.ssl.keyStorePassword=%s -Djavax.net.ssl.trustStore=%s -Djavax.net.ssl.trustStorePassword=%s &quot; %(self.javax_net_ssl_keyStore,self.javax_net_ssl_keyStorePassword,self.javax_net_ssl_trustStore,self.javax_net_ssl_trustStorePassword)
-221                 else:
-222                         db_ssl_param=&#39;?useSSL=false&#39;
-</code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1476,6 +1103,333 @@ upstream hue &#123;
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/09/17/Hue-UI-%E5%B1%95%E7%A4%BA%E4%B8%AD%E6%96%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/17/Hue-UI-%E5%B1%95%E7%A4%BA%E4%B8%AD%E6%96%87/" class="post-title-link" itemprop="url">Hue UI 展示中文</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-17 17:14:19" itemprop="dateCreated datePublished" datetime="2020-09-17T17:14:19+08:00">2020-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hue/" itemprop="url" rel="index"><span itemprop="name">Hue</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hue UI 展示中文" href="/2020/09/17/Hue-UI-%E5%B1%95%E7%A4%BA%E4%B8%AD%E6%96%87/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7b93ef21c2d67c7db689c1852f341891" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如果使用开发分支代码（如master分支）编译安装，需要自己编译语言文件。例如Hue安装目录为“&#x2F;opt&#x2F;hue”，则安装后执行以下命令：</p>
+<pre><code>$ cd /opt/hue
+$ make locales
+</code></pre>
+<p>如果需要则重启Hue即可。是否需要重启我没有验证：）</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/09/17/npm-%E4%BB%A3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/17/npm-%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">npm 代理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-09-17 11:25:50" itemprop="dateCreated datePublished" datetime="2020-09-17T11:25:50+08:00">2020-09-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91/Node-js/" itemprop="url" rel="index"><span itemprop="name">Node.js</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="npm 代理" href="/2020/09/17/npm-%E4%BB%A3%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::efcf7c25d166216ee7541d0ecdab1275" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>加快 npm 安装的代理设置：</p>
+<p>使用以下命令查看当前的库：</p>
+<pre><code>npm config get registry
+</code></pre>
+<p>默认为：<a target="_blank" rel="noopener" href="https://registry.npmjs.org/%E3%80%82%E5%9B%A0%E4%B8%BA%E6%98%AF%E5%9B%BD%E5%A4%96%E7%9A%84%E7%AB%99%E7%82%B9%EF%BC%8C%E6%89%80%E4%BB%A5%E4%BC%9A%E5%BE%88%E6%85%A2%E3%80%82">https://registry.npmjs.org/。因为是国外的站点，所以会很慢。</a></p>
+<p>用set命令换成阿里的镜像：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/17/npm-%E4%BB%A3%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">CentOS 7.3 Python 3.7.2 编译 Hue 问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-24 14:43:18" itemprop="dateCreated datePublished" datetime="2020-06-24T14:43:18+08:00">2020-06-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="CentOS 7.3 Python 3.7.2 编译 Hue 问题解决" href="/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::12243d811e7ac094e03485fe1802dac8" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h3><ul>
+<li>CentOS 7.3</li>
+<li>Python 3.7.2，我服务器上的安装是直接从其他服务器拷贝过来，然后配置环境变量的版本。正式因为这样我才遇到如下的问题。</li>
+</ul>
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><h4 id="python3-7-devel"><a href="#python3-7-devel" class="headerlink" title="python3.7-devel"></a>python3.7-devel</h4><pre><code>$ make apps
+&quot;PYTHON_VER is python3.7.&quot;
+&quot;Python 3 module install via pip&quot;
+/opt/hue-4.7.1/Makefile.vars:65: *** &quot;Error: must have python development packages for python3.7. Could not find Python.h. Please install python3.7-devel&quot;.  Stop.
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/24/CentOS-7-3-Python-3-7-2-%E7%BC%96%E8%AF%91-Hue-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
