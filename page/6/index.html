@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">270</span>
+          <span class="site-state-item-count">267</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,342 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/09/03/Hue-Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%BC%82%E5%B8%B8%EF%BC%9Agnutls-handshake-failed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/03/Hue-Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%BC%82%E5%B8%B8%EF%BC%9Agnutls-handshake-failed/" class="post-title-link" itemprop="url">Hue Docker镜像构建异常：gnutls_handshake() failed</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-03 10:02:25" itemprop="dateCreated datePublished" datetime="2021-09-03T10:02:25+08:00">2021-09-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hue/" itemprop="url" rel="index"><span itemprop="name">Hue</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hue Docker镜像构建异常：gnutls_handshake() failed" href="/2021/09/03/Hue-Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%BC%82%E5%B8%B8%EF%BC%9Agnutls-handshake-failed/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::fa4e5aa381ac5211ae368c704ffe69e4" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>错误信息如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  Cloning https://github.com/gethue/PyHive to /tmp/pip-req-build-86w_hwe4</span><br><span class="line">  Running command git clone -q https://github.com/gethue/PyHive /tmp/pip-req-build-86w_hwe4</span><br><span class="line">  fatal: unable to access &#x27;https://github.com/gethue/PyHive/&#x27;: gnutls_handshake() failed: The TLS connection was non-properly terminated.</span><br><span class="line">WARNING: Discarding git+https://github.com/gethue/PyHive. Command errored out with exit status 128: git clone -q https://github.com/gethue/PyHive /tmp/pip-req-build-86w_hwe4 Check the logs for full command output.</span><br><span class="line">ERROR: Command errored out with exit status 128: git clone -q https://github.com/gethue/PyHive /tmp/pip-req-build-86w_hwe4 Check the logs for full command output.</span><br><span class="line">The command &#x27;/bin/sh -c ./build/env/bin/pip install --no-cache-dir   psycopg2-binary   django_redis==4.11.0   flower   git+https://github.com/gethue/PyHive   git+https://github.com/bryanyang0528/ksql-python   pydruid   pybigquery   elasticsearch-dbapi   pyasn1==0.4.1   python-snappy==0.5.4   threadloop   sqlalchemy-clickhouse   infi.clickhouse_orm==1.0.4&#x27; returned a non-zero code: 1</span><br></pre></td></tr></table></figure>
-
-<p>网上大都是说因为代理的问题，对我这个场景没用。通过搜索找到一个很好的代理：<a target="_blank" rel="noopener" href="https://mirror.ghproxy.com/">https://mirror.ghproxy.com</a></p>
-<p>desktop&#x2F;core&#x2F;requirements.txt中以下位置：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git+https://github.com/gethue/django-babel.git</span><br><span class="line">git+https://github.com/gethue/django-mako.git</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/03/Hue-Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%BC%82%E5%B8%B8%EF%BC%9Agnutls-handshake-failed/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/09/02/Connection-to-pypi-python-org-timed-out/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/02/Connection-to-pypi-python-org-timed-out/" class="post-title-link" itemprop="url">Connection to pypi.python.org timed out</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-02 10:49:32" itemprop="dateCreated datePublished" datetime="2021-09-02T10:49:32+08:00">2021-09-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Python3/" itemprop="url" rel="index"><span itemprop="name">Python3</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Connection to pypi.python.org timed out" href="/2021/09/02/Connection-to-pypi-python-org-timed-out/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e96d7579fd15246881d243c233469ef0" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果出现以下错误信息说明采用了默认的pypi源（国外的pypi源），这个很容易出现这种连接超时的问题，应当采用国内的镜像源。下面以阿里提供的镜像源为例。</p>
-<p>一般配置参照阿里官网说明：<a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/pypi?spm=a2c6h.13651102.0.0.3e221b11xoeg2M">PyPI 镜像</a></p>
-<p>下面主要说明Docker中如何设置。首先创建pip.conf文件并添加以下内容：</p>
-<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[global]</span></span><br><span class="line"><span class="attr">index-url</span> = https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line"></span><br><span class="line"><span class="section">[install]</span></span><br><span class="line"><span class="attr">trusted-host</span>=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
-
-<p>将以下内容添加至Dockerfile中：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/02/Connection-to-pypi-python-org-timed-out/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/27/%E6%9F%A5%E7%9C%8BJVM%E9%BB%98%E8%AE%A4%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/27/%E6%9F%A5%E7%9C%8BJVM%E9%BB%98%E8%AE%A4%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">查看JVM默认垃圾回收器的方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-08-27 16:02:18" itemprop="dateCreated datePublished" datetime="2021-08-27T16:02:18+08:00">2021-08-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="查看JVM默认垃圾回收器的方法" href="/2021/08/27/%E6%9F%A5%E7%9C%8BJVM%E9%BB%98%E8%AE%A4%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::7dfa30d5df48f605895b124312e4b659" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在JVM启动未指定垃圾回收器的情况下，使用以下命令查看默认的垃圾回收器：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">java -XX:+PrintCommandLineFlags -version</span></span><br><span class="line">-XX:InitialHeapSize=251658240 -XX:MaxHeapSize=4026531840 -XX:+PrintCommandLineFlags -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC</span><br><span class="line">java version &quot;1.8.0_281&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_281-b09)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.281-b09, mixed mode)</span><br></pre></td></tr></table></figure>
-
-<p>以上信息中-XX:+UseParallelGC表明用的是并行垃圾收集器。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1273,6 +937,342 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/08/25/Gustafson-s-Law%EF%BC%88%E5%8F%A4%E6%96%AF%E5%A1%94%E5%A4%AB%E6%A3%AE%E5%AE%9A%E5%BE%8B%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/24/Hive-java-lang-ClassCastException/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/24/Hive-java-lang-ClassCastException/" class="post-title-link" itemprop="url">Hive java.lang.ClassCastException</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-24 16:31:21" itemprop="dateCreated datePublished" datetime="2021-08-24T16:31:21+08:00">2021-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive java.lang.ClassCastException" href="/2021/08/24/Hive-java-lang-ClassCastException/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::42baf3596a2564217741a3bae654f492" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="部署信息"><a href="#部署信息" class="headerlink" title="部署信息"></a>部署信息</h1><ul>
+<li>Hive 3.1.2</li>
+<li>Hive Metastore Standalone 3.0.0</li>
+<li>Remote Metastore模式</li>
+</ul>
+<h1 id="错误信息"><a href="#错误信息" class="headerlink" title="错误信息"></a>错误信息</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">2021-08-24T10:24:39,471 ERROR [pool-6-thread-181] metastore.RetryingHMSHandler: java.lang.ClassCastException: org.apache.hadoop.hive.metastore.api.StringColumnStatsData cannot be cast to org.apache.hadoop.hive.metastore.columnstats.cache.StringColumnStatsDataInspector</span><br><span class="line">    at org.apache.hadoop.hive.metastore.columnstats.merge.StringColumnStatsMerger.merge(StringColumnStatsMerger.java:30)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.mergeColStats(MetaStoreUtils.java:1066)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.set_aggr_stats_for(HiveMetaStore.java:7433)</span><br><span class="line">    at sun.reflect.GeneratedMethodAccessor76.invoke(Unknown Source)</span><br><span class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">    at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:147)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:108)</span><br><span class="line">    at com.sun.proxy.$Proxy32.set_aggr_stats_for(Unknown Source)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17017)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17001)</span><br><span class="line">    at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:111)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:107)</span><br><span class="line">    at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">    at javax.security.auth.Subject.doAs(Subject.java:422)</span><br><span class="line">    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor.process(TUGIBasedProcessor.java:119)</span><br><span class="line">    at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">    at java.lang.Thread.run(Thread.java:748)</span><br><span class="line"></span><br><span class="line">2021-08-24T10:24:39,472 ERROR [pool-6-thread-181] server.TThreadPoolServer: Error occurred during processing of message.</span><br><span class="line">java.lang.ClassCastException: org.apache.hadoop.hive.metastore.api.StringColumnStatsData cannot be cast to org.apache.hadoop.hive.metastore.columnstats.cache.StringColumnStatsDataInspector</span><br><span class="line">    at org.apache.hadoop.hive.metastore.columnstats.merge.StringColumnStatsMerger.merge(StringColumnStatsMerger.java:30) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.mergeColStats(MetaStoreUtils.java:1066) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.set_aggr_stats_for(HiveMetaStore.java:7433) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at sun.reflect.GeneratedMethodAccessor76.invoke(Unknown Source) ~[?:?]</span><br><span class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">    at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:147) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:108) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at com.sun.proxy.$Proxy32.set_aggr_stats_for(Unknown Source) ~[?:?]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17017) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17001) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:111) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:107) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_281]</span><br><span class="line">    at javax.security.auth.Subject.doAs(Subject.java:422) ~[?:1.8.0_281]</span><br><span class="line">    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762) ~[hadoop-common-3.2.2.jar:?]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor.process(TUGIBasedProcessor.java:119) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_281]</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_281]</span><br><span class="line">    at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281]</span><br><span class="line">2021-08-24T10:24:39,473  INFO [pool-6-thread-181] metastore.HiveMetaStore: 182: Cleaning up thread local RawStore...</span><br><span class="line">2021-08-24T10:24:39,473  INFO [pool-6-thread-181] HiveMetaStore.audit: ugi=hive ip=10.255.0.137 cmd=Cleaning up thread local RawStore...</span><br><span class="line">2021-08-24T10:24:39,474  INFO [pool-6-thread-181] metastore.HiveMetaStore: 182: Done cleaning up thread local RawStore</span><br><span class="line">2021-08-24T10:24:39,474  INFO [pool-6-thread-181] HiveMetaStore.audit: ugi=hive ip=10.255.0.137 cmd=Done cleaning up threadlocal RawStore</span><br><span class="line">2021-08-24T10:24:40,480  INFO [pool-6-thread-181] metastore.HiveMetaStore: 182: Opening raw store with implementation class:org.apache.hadoop.hive.metastore.ObjectStore</span><br><span class="line">2021-08-24T10:24:40,480  INFO [pool-6-thread-181] metastore.ObjectStore: ObjectStore, initialize called</span><br><span class="line">2021-08-24T10:24:40,488  INFO [pool-6-thread-181] metastore.MetaStoreDirectSql: Using direct SQL, underlying DB is MYSQL</span><br><span class="line">2021-08-24T10:24:40,488  INFO [pool-6-thread-181] metastore.ObjectStore: Initialized ObjectStore</span><br><span class="line">2021-08-24T10:24:40,526 ERROR [pool-6-thread-181] metastore.RetryingHMSHandler: java.lang.ClassCastException: org.apache.hadoop.hive.metastore.api.StringColumnStatsData cannot be cast to org.apache.hadoop.hive.metastore.columnstats.cache.StringColumnStatsDataInspector</span><br><span class="line">    at org.apache.hadoop.hive.metastore.columnstats.merge.StringColumnStatsMerger.merge(StringColumnStatsMerger.java:30)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.mergeColStats(MetaStoreUtils.java:1066)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.set_aggr_stats_for(HiveMetaStore.java:7433)</span><br><span class="line">    at sun.reflect.GeneratedMethodAccessor76.invoke(Unknown Source)</span><br><span class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">    at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:147)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:108)</span><br><span class="line">    at com.sun.proxy.$Proxy32.set_aggr_stats_for(Unknown Source)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17017)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17001)</span><br><span class="line">    at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:111)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:107)</span><br><span class="line">    at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">    at javax.security.auth.Subject.doAs(Subject.java:422)</span><br><span class="line">    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762)</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor.process(TUGIBasedProcessor.java:119)</span><br><span class="line">    at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)</span><br><span class="line">    at java.lang.Thread.run(Thread.java:748)</span><br><span class="line"></span><br><span class="line">2021-08-24T10:24:40,526 ERROR [pool-6-thread-181] server.TThreadPoolServer: Error occurred during processing of message.</span><br><span class="line">java.lang.ClassCastException: org.apache.hadoop.hive.metastore.api.StringColumnStatsData cannot be cast to org.apache.hadoop.hive.metastore.columnstats.cache.StringColumnStatsDataInspector</span><br><span class="line">    at org.apache.hadoop.hive.metastore.columnstats.merge.StringColumnStatsMerger.merge(StringColumnStatsMerger.java:30) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.mergeColStats(MetaStoreUtils.java:1066) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.HiveMetaStore$HMSHandler.set_aggr_stats_for(HiveMetaStore.java:7433) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at sun.reflect.GeneratedMethodAccessor76.invoke(Unknown Source) ~[?:?]</span><br><span class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_281]</span><br><span class="line">    at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_281]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invokeInternal(RetryingHMSHandler.java:147) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.RetryingHMSHandler.invoke(RetryingHMSHandler.java:108) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at com.sun.proxy.$Proxy32.set_aggr_stats_for(Unknown Source) ~[?:?]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17017) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.api.ThriftHiveMetastore$Processor$set_aggr_stats_for.getResult(ThriftHiveMetastore.java:17001) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.thrift.ProcessFunction.process(ProcessFunction.java:39) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:111) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor$1.run(TUGIBasedProcessor.java:107) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_281]</span><br><span class="line">    at javax.security.auth.Subject.doAs(Subject.java:422) ~[?:1.8.0_281]</span><br><span class="line">    at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1762) ~[hadoop-common-3.2.2.jar:?]</span><br><span class="line">    at org.apache.hadoop.hive.metastore.TUGIBasedProcessor.process(TUGIBasedProcessor.java:119) ~[hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at org.apache.thrift.server.TThreadPoolServer$WorkerProcess.run(TThreadPoolServer.java:286) [hive-exec-3.1.2.jar:3.1.2]</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [?:1.8.0_281]</span><br><span class="line">    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [?:1.8.0_281]</span><br><span class="line">    at java.lang.Thread.run(Thread.java:748) [?:1.8.0_281]</span><br><span class="line">2021-08-24T10:24:40,528  INFO [pool-6-thread-181] metastore.HiveMetaStore: 182: Cleaning up thread local RawStore...</span><br><span class="line">2021-08-24T10:24:40,528  INFO [pool-6-thread-181] HiveMetaStore.audit: ugi=hive ip=10.255.0.135 cmd=Cleaning up thread local RawStore...</span><br><span class="line">2021-08-24T10:24:40,529  INFO [pool-6-thread-181] metastore.HiveMetaStore: 182: Done cleaning up thread local RawStore</span><br><span class="line">2021-08-24T10:24:40,529  INFO [pool-6-thread-181] HiveMetaStore.audit: ugi=hive ip=10.255.0.135 cmd=Done cleaning up threadlocal RawStore</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/24/Hive-java-lang-ClassCastException/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/" class="post-title-link" itemprop="url">Hive 3.1.2与Sqoop 1.4.6 Jackson包版本冲突</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-24 00:26:20" itemprop="dateCreated datePublished" datetime="2021-08-24T00:26:20+08:00">2021-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hive/" itemprop="url" rel="index"><span itemprop="name">Hive</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hive 3.1.2与Sqoop 1.4.6 Jackson包版本冲突" href="/2021/08/24/Hive-3-1-2%E4%B8%8ESqoop-1-4-6-Jackson%E5%8C%85%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7f126209acb6a1939ef1125146edc1a0" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Logging initialized using configuration in jar:file:/opt/apache-hive-3.1.2-bin/lib/hive-common-3.1.2.jar!/hive-log4j2.properties Async: true</span><br><span class="line">Hive Session ID = 6d309a0e-02c3-4ef7-b8a7-7d42415fcd10</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoSuchMethodError: com.fasterxml.jackson.databind.ObjectMapper.readerFor(Ljava/lang/Class;)Lcom/fasterxml/jackson/databind/ObjectReader;</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst$ColumnStatsAccurate.&lt;clinit&gt;(StatsSetupConst.java:166)</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst.parseStatsAcc(StatsSetupConst.java:314)</span><br><span class="line">	at org.apache.hadoop.hive.common.StatsSetupConst.areBasicStatsUptoDate(StatsSetupConst.java:206)</span><br><span class="line">	at org.apache.hadoop.hive.ql.stats.StatsUtils.areBasicStatsUptoDateForQueryAnswering(StatsUtils.java:2010)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer$MetaDataProcessor.getRowCnt(StatsOptimizer.java:915)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer$MetaDataProcessor.process(StatsOptimizer.java:299)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultRuleDispatcher.dispatch(DefaultRuleDispatcher.java:90)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.dispatchAndReturn(DefaultGraphWalker.java:105)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.dispatch(DefaultGraphWalker.java:89)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.walk(DefaultGraphWalker.java:158)</span><br><span class="line">	at org.apache.hadoop.hive.ql.lib.DefaultGraphWalker.startWalking(DefaultGraphWalker.java:120)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.StatsOptimizer.transform(StatsOptimizer.java:134)</span><br><span class="line">	at org.apache.hadoop.hive.ql.optimizer.Optimizer.optimize(Optimizer.java:250)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.SemanticAnalyzer.analyzeInternal(SemanticAnalyzer.java:12295)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.CalcitePlanner.analyzeInternal(CalcitePlanner.java:330)</span><br><span class="line">	at org.apache.hadoop.hive.ql.parse.BaseSemanticAnalyzer.analyze(BaseSemanticAnalyzer.java:285)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:659)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1826)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1773)</span><br><span class="line">	at org.apache.hadoop.hive.ql.Driver.compileAndRespond(Driver.java:1768)</span><br><span class="line">	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.compileAndRespond(ReExecDriver.java:126)</span><br><span class="line">	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.run(ReExecDriver.java:214)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:239)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:188)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:402)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:335)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:787)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:759)</span><br><span class="line">	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:683)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)</span><br><span class="line">	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：删除${SQOOP_HOME}&#x2F;lib下的jackson开头的Jar包。因为这些Jar包版本较低。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/23/Amdahl-s-Law%EF%BC%88%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/23/Amdahl-s-Law%EF%BC%88%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B%EF%BC%89/" class="post-title-link" itemprop="url">Amdahl's Law（阿姆达尔定律）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-23 17:32:06" itemprop="dateCreated datePublished" datetime="2021-08-23T17:32:06+08:00">2021-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">计算机理论</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%AE%BA/%E5%AE%9A%E5%BE%8B/" itemprop="url" rel="index"><span itemprop="name">定律</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Amdahl's Law（阿姆达尔定律）" href="/2021/08/23/Amdahl-s-Law%EF%BC%88%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B%EF%BC%89/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::c787f3a6b2c40949f7fb4c215a7eae7b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>阿姆达尔定律是计算机科学家Gene Amdahl提出而命名的。该定律给出了一个在固定工作负载下执行任务的延迟的理论加速的公式。</p>
+<p>阿姆达尔定律常用于并行计算，以预测使用多处理器时的理论加速比。例如，如果一个程序使用单线程完成需要20小时，但程序的1小时部分无法并行化，因此只能并行化剩余的19小时（p&#x3D;0.95）执行时间，那么无论有多少线程专门用于并行执行该程序，最短执行时间不能少于一小时。因此，理论加速最多被限制为单线程性能的20倍：1 &#x2F; (1 - 0.95) &#x3D; 20。</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>阿姆达尔定律可以用以下方式表述：</p>
+<p><img src="/images/20210825/amdahl.svg" alt="公式"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/23/Amdahl-s-Law%EF%BC%88%E9%98%BF%E5%A7%86%E8%BE%BE%E5%B0%94%E5%AE%9A%E5%BE%8B%EF%BC%89/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
