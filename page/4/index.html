@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">257</span>
+          <span class="site-state-item-count">254</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">65</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">80</span>
+        <span class="site-state-item-count">78</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -167,326 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/10/19/Ansible%E6%8C%87%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%A7%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/19/Ansible%E6%8C%87%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">Ansible指定服务器执行</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-19 23:19:03" itemprop="dateCreated datePublished" datetime="2021-10-19T23:19:03+08:00">2021-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Ansible指定服务器执行" href="/2021/10/19/Ansible%E6%8C%87%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%A7%E8%A1%8C/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::240b030ff9f44b8d0fae0e991442c618" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Inventory内容如下：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[namenode]</span></span><br><span class="line">10.0.0.42</span><br><span class="line">10.0.0.51</span><br><span class="line"></span><br><span class="line"><span class="section">[resourcemanager]</span></span><br><span class="line">10.0.0.55</span><br><span class="line">10.0.0.65</span><br></pre></td></tr></table></figure>
-
-<p>如果只需要对10.0.0.55这台服务进行操作应该如何做呢？如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible -i hosts &quot;10.0.0.55&quot; -m shell -a &quot;ls -l /&quot;</span><br></pre></td></tr></table></figure>
-
-<p>详细信息参见Ansible官方文档：<a target="_blank" rel="noopener" href="https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html#intro-patterns">https://docs.ansible.com/ansible/latest/user_guide&#x2F;intro_patterns.html#intro-patterns</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/19/Ansible%E6%8C%87%E5%AE%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%A7%E8%A1%8C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/" class="post-title-link" itemprop="url">Docker容器：Can't attach to the process: ptrace(PTRACE_ATTACH, ..) failed for XX</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-06 00:02:48" itemprop="dateCreated datePublished" datetime="2021-10-06T00:02:48+08:00">2021-10-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Docker容器：Can't attach to the process: ptrace(PTRACE_ATTACH, ..) failed for XX" href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::03f06926c3c149e426664f0e437626e2" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="异常信息"><a href="#异常信息" class="headerlink" title="异常信息"></a>异常信息</h1><p>在Docker容器中使用jmap查看JVM内存时出现以下错误：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">[root@ebd4ba8d5b72]# </span><span class="language-bash">ps -ef|grep java</span></span><br><span class="line">root        18     1  0 23:50 pts/0    00:00:00 java -jar math-game.jar</span><br><span class="line">root       136    69  0 23:52 pts/1    00:00:00 grep --color=auto java</span><br><span class="line"><span class="meta prompt_">[root@ebd4ba8d5b72]# </span><span class="language-bash">jmap -heap 18</span></span><br><span class="line">Attaching to process ID 18, please wait...</span><br><span class="line">ERROR: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">Error attaching to process: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">sun.jvm.hotspot.debugger.DebuggerException: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.execute(LinuxDebuggerLocal.java:163)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.attach(LinuxDebuggerLocal.java:278)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.attachDebugger(HotSpotAgent.java:671)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.setupDebuggerLinux(HotSpotAgent.java:611)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.setupDebugger(HotSpotAgent.java:337)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.go(HotSpotAgent.java:304)</span><br><span class="line">	at sun.jvm.hotspot.HotSpotAgent.attach(HotSpotAgent.java:140)</span><br><span class="line">	at sun.jvm.hotspot.tools.Tool.start(Tool.java:185)</span><br><span class="line">	at sun.jvm.hotspot.tools.Tool.execute(Tool.java:118)</span><br><span class="line">	at sun.jvm.hotspot.tools.HeapSummary.main(HeapSummary.java:49)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at sun.tools.jmap.JMap.runTool(JMap.java:201)</span><br><span class="line">	at sun.tools.jmap.JMap.main(JMap.java:130)</span><br><span class="line">Caused by: sun.jvm.hotspot.debugger.DebuggerException: Can&#x27;t attach to the process: ptrace(PTRACE_ATTACH, ..) failed for 18: Operation not permitted</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.attach0(Native Method)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal.access$100(LinuxDebuggerLocal.java:62)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$1AttachTask.doit(LinuxDebuggerLocal.java:269)</span><br><span class="line">	at sun.jvm.hotspot.debugger.linux.LinuxDebuggerLocal$LinuxDebuggerLocalWorkerThread.run(LinuxDebuggerLocal.java:138)</span><br></pre></td></tr></table></figure>
-
-<h1 id="方法一（已验证Ok）"><a href="#方法一（已验证Ok）" class="headerlink" title="方法一（已验证Ok）"></a>方法一（已验证Ok）</h1><p>在容器启动时添加–cap-add&#x3D;SYS_PTRACE，如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/06/Docker%E5%AE%B9%E5%99%A8%EF%BC%9ACan-t-attach-to-the-process-ptrace-PTRACE-ATTACH-failed-for-XX/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/09/28/Hadoop-HTTPFS%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/28/Hadoop-HTTPFS%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Hadoop HTTPFS部署问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-28 17:41:51" itemprop="dateCreated datePublished" datetime="2021-09-28T17:41:51+08:00">2021-09-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hadoop HTTPFS部署问题" href="/2021/09/28/Hadoop-HTTPFS%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::da972004b84188eb0dae0e7eb4a1ff9b" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>官网参考地址：<a target="_blank" rel="noopener" href="https://hadoop.apache.org/docs/r3.2.2/hadoop-hdfs-httpfs/ServerSetup.html">Hadoop HDFS over HTTP - Server Setup</a>。</p>
-<p>除了官网配置步骤外，还需要注意在httpfs-site.xml中添加以下配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>httpfs.proxyuser.&#123;proxyuser&#125;.groups<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>httpfs.proxyuser.&#123;proxyuser&#125;.hosts<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意，该配置项跟core-site.xml中的很像，但是开头部分不一样。</p>
-</blockquote>
-<p>这个问题我是通过跟踪Hadoop源代码解决的：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/28/Hadoop-HTTPFS%E9%83%A8%E7%BD%B2%E9%97%AE%E9%A2%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1225,6 +905,349 @@
 
 <p>以上信息中-XX:+UseParallelGC表明用的是并行垃圾收集器。</p>
 
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/27/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/27/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">并行与并发的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-27 14:46:13" itemprop="dateCreated datePublished" datetime="2021-08-27T14:46:13+08:00">2021-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">计算机理论</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%90%86%E8%AE%BA/%E6%A6%82%E5%BF%B5/" itemprop="url" rel="index"><span itemprop="name">概念</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="并行与并发的区别" href="/2021/08/27/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::bc4145ebde65af1dc7a398f5396a5706" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>从CUP资源占用角度考虑并发与并行：</p>
+<ul>
+<li>并发：单个CPU的操作系统在进行多线程操作时，将CPU运行时间划分成若干个时间片，再将时间片分配给各个线程执行，在一个时间片内只运行一个线程，其他线程处于挂起状态。</li>
+<li>并行：对于多CPU系统进行多线程操作，一个CPU在执行一个线程时，另一个CPU执行另一个线程。两个线程互不挣抢CPU资源，可以同时进行。</li>
+</ul>
+<p>区别：并行是指两个或者多个线程在同一时刻发生；并发是指两个或者多个线程在同一时间间隔内发生。在单处理机系统中的多道程序环境下，并发性是指在一段时间内宏观上有多个程序在同时运行，微观上只是在分时交替执行。</p>
+<p>下面的例子更容易理解：</p>
+<ul>
+<li>吃饭吃到一半，电话来了，直到吃完饭后才去查看处理，说明不支持并发也不支持并行。</li>
+<li>吃饭吃到一半，电话来了，停下来接电话，接完后继续吃饭，说明支持并发。</li>
+<li>吃饭吃到一半，电话来了，一边打电话一边吃饭，说明支持并行。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/27/%E5%B9%B6%E8%A1%8C%E4%B8%8E%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/27/vi%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/27/vi%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99%E6%90%9C%E7%B4%A2/" class="post-title-link" itemprop="url">vi忽略大小写搜索</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-27 14:23:53" itemprop="dateCreated datePublished" datetime="2021-08-27T14:23:53+08:00">2021-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="vi忽略大小写搜索" href="/2021/08/27/vi%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99%E6%90%9C%E7%B4%A2/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::15e92dc2cac5a15c4bb57ada91d3f120" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>先set ignorecase，如下图：</p>
+<p><img src="/images/20210827/setIgnorecase.png" alt="set ignorecase"></p>
+<p>然后再进行搜索：</p>
+<p><img src="/images/20210827/search.png" alt="search"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/08/27/JVM%E5%8F%AF%E7%94%A8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/27/JVM%E5%8F%AF%E7%94%A8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" class="post-title-link" itemprop="url">JVM可用的垃圾回收器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-08-27 11:06:04" itemprop="dateCreated datePublished" datetime="2021-08-27T11:06:04+08:00">2021-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="JVM可用的垃圾回收器" href="/2021/08/27/JVM%E5%8F%AF%E7%94%A8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::c278467ce27636fbc0747733d1e5cbe9" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="垃圾收集器分类"><a href="#垃圾收集器分类" class="headerlink" title="垃圾收集器分类"></a>垃圾收集器分类</h1><p>Java HotSpot VM有三种不同类型的收集器，每种收集器具有不同的性能特征。</p>
+<ul>
+<li>串行收集器使用单个线程来执行所有垃圾收集工作，这使得它相对高效，因为线程之间没有通信开销。它最适合单处理器机器，因为它不能利用多处理器硬件，尽管它对于具有小数据集（最多约100MB）的应用程序在多处理器上很有用。在某些硬件和操作系统配置上默认选择串行收集器，或者可以使用选项显式启用-XX:+UseSerialGC。</li>
+<li>并行收集器（也称为吞吐量收集器）并行执行次要收集，这可以显著减少垃圾收集开销。它适用于在多处理器或多线程硬件上运行的具有中型到大型数据集的应用程序。并行收集器在某些硬件和操作系统配置上默认选择，或者可以使用选项显式启用-XX:+UseParallelGC。并行压缩是一个特性，它使并行收集器能够并行执行主要收集。如果没有并行压缩，主要收集是使用单个线程执行的，这会显着限制可伸缩性。如果-XX:+UseParallelGC已指定该选项，则默认情况下启用并行压缩。关闭它的选项是-XX:-UseParallelOldGC。</li>
+<li>大多数并发收集器并发地执行其大部分工作（例如，当应用程序仍在运行时）以保持垃圾收集暂停较短。它专为具有中型到大型数据集的应用程序而设计，其中响应时间比总吞吐量更重要，因为用于最小化暂停的技术会降低应用程序性能。Java HotSpot VM提供了两个主要并发收集器之间的选择；请参阅<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/concurrent.html#mostly_concurrent">主要的并发收集器</a>。使用该选项-XX:+UseConcMarkSweepGC启用CMS收集器或-XX:+UseG1GC启用G1收集器。</li>
+</ul>
+<h1 id="选择垃圾收集器"><a href="#选择垃圾收集器" class="headerlink" title="选择垃圾收集器"></a>选择垃圾收集器</h1><p>除非您的应用程序对暂停时间有相当严格的要求，否则首先运行您的应用程序并允许VM选择垃圾收集器。如有必要，调整堆大小以提高性能。如果性能仍不能满足您的目标，请使用以下指南作为选择收集器的起点。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/27/JVM%E5%8F%AF%E7%94%A8%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
