@@ -128,13 +128,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">254</span>
+          <span class="site-state-item-count">251</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -167,352 +167,6 @@
     </div>
 
     <div class="main-inner index posts-expand">
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/05/31/HDFS-getmerge-Operation-not-permitted/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/31/HDFS-getmerge-Operation-not-permitted/" class="post-title-link" itemprop="url">HDFS getmerge: Operation not permitted</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-05-31 21:16:50" itemprop="dateCreated datePublished" datetime="2017-05-31T21:16:50+08:00">2017-05-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="HDFS getmerge: Operation not permitted" href="/2017/05/31/HDFS-getmerge-Operation-not-permitted/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::cfd91080e49a946865f9591d251e9997" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 hadoop fs -getmerge 时报了不被允许的错误。检查发现是因为权限条件不满足。getmerge 操作会对应数据文件在本地目录下生成一个隐藏的以 crc 结尾的文件。我遇到的场景是，用户 A 首先执行了以下命令：</p>
-<pre><code>hadoop fs -getmerge /data/log_001.txt /data/logs/log_001.txt
-</code></pre>
-<p>此时，在本地目录 &#x2F;data&#x2F;logs&#x2F; 下会对应生成以下文件：</p>
-<pre><code>-rw-r--r-- 1 userA data-platform    0 May 31 21:00 log_001.txt
--rw-r--r-- 1 userA data-platform   16 May 31 20:56 .log_001.txt.crc
-</code></pre>
-<p>然而，当用户 B 再执行相同的命令时就会报 Operation not permitted 错误。原因是用户 B 没有删除 .log_001.txt.crc 文件的权限。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/31/HDFS-getmerge-Operation-not-permitted/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/05/21/Hadoop-%E9%9B%86%E7%BE%A4%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%BB%91%E5%AE%9A%E5%9C%B0%E5%9D%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/21/Hadoop-%E9%9B%86%E7%BE%A4%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%BB%91%E5%AE%9A%E5%9C%B0%E5%9D%80/" class="post-title-link" itemprop="url">Hadoop 集群修改服务绑定地址</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-05-21 11:54:35" itemprop="dateCreated datePublished" datetime="2017-05-21T11:54:35+08:00">2017-05-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Hadoop 集群修改服务绑定地址" href="/2017/05/21/Hadoop-%E9%9B%86%E7%BE%A4%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%BB%91%E5%AE%9A%E5%9C%B0%E5%9D%80/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::1ccbdaa260c35beda22f1fbbb575d7fa" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>有时集群服务器会有多个网卡，例如一个网卡用户服务器管理，一个网卡用于数据交换。一般这种情况下，数据交换网是不对终端用户开放的。所以，如果服务进程监听地址绑定到这个地址的话，通过管理地址是无法访问到该服务的。Hadoop 提供了以下配置项，可以将服务监听地址绑定到 0.0.0.0，这样通过任一地址都可以访问到服务了。如下：</p>
-<p><strong>hdfs-site.xml 中的配置项</strong></p>
-<ul>
-<li>dfs.namenode.rpc-bind-host</li>
-<li>dfs.namenode.http-bind-host</li>
-</ul>
-<p><strong>yarn-site.xml 中的配置项</strong></p>
-<ul>
-<li>yarn.resourcemanager.bind-host</li>
-<li>yarn.nodemanager.bind-host</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/05/21/Hadoop-%E9%9B%86%E7%BE%A4%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%BB%91%E5%AE%9A%E5%9C%B0%E5%9D%80/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/05/21/HDFS-NameNode-HA-sshfence-%E7%AB%AF%E5%8F%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Charles Zhang">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/05/21/HDFS-NameNode-HA-sshfence-%E7%AB%AF%E5%8F%A3/" class="post-title-link" itemprop="url">HDFS NameNode HA sshfence 端口</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-05-21 08:17:18" itemprop="dateCreated datePublished" datetime="2017-05-21T08:17:18+08:00">2017-05-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-        </span>
-    </span>
-
-  
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="HDFS NameNode HA sshfence 端口" href="/2017/05/21/HDFS-NameNode-HA-sshfence-%E7%AB%AF%E5%8F%A3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::49222fafbdee6d472dd71075d6b88ce7" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>当 HDFS NameNode 发生 Failover 时，为了防止发生“脑裂”现象，需要对原 Active 的 NameNode 采用防护措施。当两个 NameNode 节点直接互相 SSH 使用非默认端口 22 时，需要在配置中指定使用的端口。例如，使用端口 2222，则配置如下：</p>
-<pre><code>&lt;property&gt;
-  &lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;
-  &lt;value&gt;sshfence(hadoop:2222)&lt;/value&gt;
-&lt;/property&gt;
-</code></pre>
-<p>其中，小括号中的 hadoop 为 SSH 的用户名，2222 为端口号。采用 SSH 方式需要先打通两台 NameNode 间互相 SSH 的白名单。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
 
     
 
@@ -1277,6 +931,342 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/03/14/Hadoop-%E9%9B%86%E7%BE%A4%E5%90%84%E6%9C%8D%E5%8A%A1%E8%BF%9B%E7%A8%8B-PID-%E6%96%87%E4%BB%B6%E4%BD%8D%E7%BD%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/03/14/Linux-%E8%BF%9C%E7%A8%8B-kill-%E8%BF%9B%E7%A8%8B%E5%8F%8A-%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/14/Linux-%E8%BF%9C%E7%A8%8B-kill-%E8%BF%9B%E7%A8%8B%E5%8F%8A-%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">Linux 远程 kill 进程及 $ 处理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-14 14:40:03" itemprop="dateCreated datePublished" datetime="2017-03-14T14:40:03+08:00">2017-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux 远程 kill 进程及 $ 处理" href="/2017/03/14/Linux-%E8%BF%9C%E7%A8%8B-kill-%E8%BF%9B%E7%A8%8B%E5%8F%8A-%E5%A4%84%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::734a595e8282fa62afff35bd520b6af9" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在远程执行的命令中如果包含 $ 时需要转义，如下：</p>
+<pre><code>ssh root@remote_host &quot;ps -ef|grep process_name | grep -v &#39;grep &#39; | awk &#39;&#123;print $2&#125;&#39;&quot;
+</code></pre>
+<p>以上语句的本意是得到进程的 ID，但实际输出会是进程的信息。应该使用如下形式：</p>
+<pre><code>ssh root@remote_host &quot;ps -ef|grep process_name | grep -v &#39;grep &#39; | awk &#39;&#123;print \$2&#125;&#39;&quot;
+</code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/14/Linux-%E8%BF%9C%E7%A8%8B-kill-%E8%BF%9B%E7%A8%8B%E5%8F%8A-%E5%A4%84%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/03/12/Hadoop-2-7-3-%E6%96%87%E6%A1%A3-expunge-%E5%91%BD%E4%BB%A4%E6%8E%92%E7%89%88%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/12/Hadoop-2-7-3-%E6%96%87%E6%A1%A3-expunge-%E5%91%BD%E4%BB%A4%E6%8E%92%E7%89%88%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">Hadoop 2.7.3 文档 expunge 命令排版错误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-12 06:57:58" itemprop="dateCreated datePublished" datetime="2017-03-12T06:57:58+08:00">2017-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Hadoop 2.7.3 文档 expunge 命令排版错误" href="/2017/03/12/Hadoop-2-7-3-%E6%96%87%E6%A1%A3-expunge-%E5%91%BD%E4%BB%A4%E6%8E%92%E7%89%88%E9%94%99%E8%AF%AF/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::fdb71821270d93eb8d284193fad54c05" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 Hadoop 2.7.3 版本的官方文档中 File System Shell 中的 expunge 命令描述中以下位置存在错误：</p>
+<p>When checkpoint is created, recently deleted files in trash are moved under the checkpoint. Files in checkpoints older than <span style="color:red;"><strong>fs.trash.checkpoint.interval</strong></span> will be permanently deleted on the next invocation of -expunge command.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/12/Hadoop-2-7-3-%E6%96%87%E6%A1%A3-expunge-%E5%91%BD%E4%BB%A4%E6%8E%92%E7%89%88%E9%94%99%E8%AF%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/03/09/Emacs-Shell-%E4%B8%8A%E4%B8%8B%E9%94%AE%E5%88%87%E6%8D%A2%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Charles Zhang">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="人一定要有梦想，万一实现了呢...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/09/Emacs-Shell-%E4%B8%8A%E4%B8%8B%E9%94%AE%E5%88%87%E6%8D%A2%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Emacs Shell 上下键切换历史命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-09 23:51:27" itemprop="dateCreated datePublished" datetime="2017-03-09T23:51:27+08:00">2017-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-10-17 16:51:51" itemprop="dateModified" datetime="2023-10-17T16:51:51+08:00">2023-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
+        </span>
+    </span>
+
+  
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Emacs Shell 上下键切换历史命令" href="/2017/03/09/Emacs-Shell-%E4%B8%8A%E4%B8%8B%E9%94%AE%E5%88%87%E6%8D%A2%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::fa32f797c2a807e469c8cde34c570ad2" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Emacs 开启 Shell 模式，UP 键默认是上一行，而不是上一条执行过的命令。为了方便，通过以下方式实现 UP 键和 DOWN 键切换历史命令。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/09/Emacs-Shell-%E4%B8%8A%E4%B8%8B%E9%94%AE%E5%88%87%E6%8D%A2%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
