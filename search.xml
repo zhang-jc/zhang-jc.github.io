@@ -62,7 +62,7 @@
     <title>Python 版本管理</title>
     <url>/2024/12/17/Python-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<p>Python的版本管理是在实践中一定会面对的问题。Pyenv是一个简单的Python版本管理程序。使用Pyenv可以在多个Python版本间进行切换。本文主要参考项目文档进行翻译和编写。大概的使用效果如下图所示：</p>
-<p><img src="/images/20241217/01.png"></p>
+<p><img src="/images/202412/06.png"></p>
 <h1 id="Pyenv可以做什么…"><a href="#Pyenv可以做什么…" class="headerlink" title="Pyenv可以做什么…"></a>Pyenv可以做什么…</h1><ul>
 <li>允许您根据每个用户更改全局Python版本。</li>
 <li>提供对每个项目Python版本的支持。</li>
@@ -178,6 +178,32 @@
       <tags>
         <tag>Python</tag>
         <tag>Pyenv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo Next主题集成百度统计</title>
+    <url>/2024/12/20/Hexo-Next%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1/</url>
+    <content><![CDATA[<p>首先，需要在百度统计控制台新增自己的站点。</p>
+<p><img src="/images/202412/01.png"></p>
+<p>点击“新增网站”按钮：</p>
+<p><img src="/images/202412/02.png"></p>
+<p>按照要求输入相关信息并保存，页面跳转至代码获取页面。从代码页面中拷贝网站的ID：</p>
+<p><img src="/images/202412/03.png"></p>
+<p>打开Next主题配置文件，并找到百度统计配置，参数值为上一步百度统计分类的网站ID。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Baidu Analytics</span><br><span class="line"># See: https://tongji.baidu.com</span><br><span class="line">baidu_analytics: 5c46************************e1de</span><br></pre></td></tr></table></figure>
+
+<p>重新部署网站。</p>
+<p>以上操作完成后，在百度统计控制台进行验证。</p>
+<p><img src="/images/202412/04.png"></p>
+<p>如下图，出现“代码安装正确”提示，则说明成功。</p>
+<p><img src="/images/202412/05.png"></p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>
