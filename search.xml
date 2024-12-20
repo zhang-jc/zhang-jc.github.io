@@ -33,6 +33,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Hexo Next主题集成百度统计</title>
+    <url>/2024/12/20/Hexo-Next%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1/</url>
+    <content><![CDATA[<p>首先，需要在百度统计控制台新增自己的站点。</p>
+<p><img src="/images/202412/01.png"></p>
+<p>点击“新增网站”按钮：</p>
+<p><img src="/images/202412/02.png"></p>
+<p>按照要求输入相关信息并保存，页面跳转至代码获取页面。从代码页面中拷贝网站的ID：</p>
+<p><img src="/images/202412/03.png"></p>
+<p>打开Next主题配置文件，并找到百度统计配置，参数值为上一步百度统计分类的网站ID。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Baidu Analytics</span><br><span class="line"># See: https://tongji.baidu.com</span><br><span class="line">baidu_analytics: 5c46************************e1de</span><br></pre></td></tr></table></figure>
+
+<p>重新部署网站。</p>
+<p>以上操作完成后，在百度统计控制台进行验证。</p>
+<p><img src="/images/202412/04.png"></p>
+<p>如下图，出现“代码安装正确”提示，则说明成功。</p>
+<p><img src="/images/202412/05.png"></p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo博客生成标签和分类页</title>
     <url>/2024/12/17/Hexo%E5%8D%9A%E5%AE%A2%E7%94%9F%E6%88%90%E6%A0%87%E7%AD%BE%E5%92%8C%E5%88%86%E7%B1%BB%E9%A1%B5/</url>
     <content><![CDATA[<h1 id="标签页"><a href="#标签页" class="headerlink" title="标签页"></a>标签页</h1><p>默认情况下，Hexo站点创建后，需手动生成标签页。如不生成，在点击“标签”菜单时会出现以下错误：</p>
@@ -178,32 +204,6 @@
       <tags>
         <tag>Python</tag>
         <tag>Pyenv</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo Next主题集成百度统计</title>
-    <url>/2024/12/20/Hexo-Next%E4%B8%BB%E9%A2%98%E9%9B%86%E6%88%90%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1/</url>
-    <content><![CDATA[<p>首先，需要在百度统计控制台新增自己的站点。</p>
-<p><img src="/images/202412/01.png"></p>
-<p>点击“新增网站”按钮：</p>
-<p><img src="/images/202412/02.png"></p>
-<p>按照要求输入相关信息并保存，页面跳转至代码获取页面。从代码页面中拷贝网站的ID：</p>
-<p><img src="/images/202412/03.png"></p>
-<p>打开Next主题配置文件，并找到百度统计配置，参数值为上一步百度统计分类的网站ID。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Baidu Analytics</span><br><span class="line"># See: https://tongji.baidu.com</span><br><span class="line">baidu_analytics: 5c46************************e1de</span><br></pre></td></tr></table></figure>
-
-<p>重新部署网站。</p>
-<p>以上操作完成后，在百度统计控制台进行验证。</p>
-<p><img src="/images/202412/04.png"></p>
-<p>如下图，出现“代码安装正确”提示，则说明成功。</p>
-<p><img src="/images/202412/05.png"></p>
-]]></content>
-      <categories>
-        <category>开发框架</category>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
