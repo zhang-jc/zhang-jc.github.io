@@ -225,7 +225,7 @@
   <entry>
     <title>Hexo自动生成摘要</title>
     <url>/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/</url>
-    <content><![CDATA[<p>Hexo首页默认展示整篇内容，会导致首页非常冗长。虽然可以在头设置中指定摘要 excerpt: 值，或者在文章中使用 <span id="more"></span>，那么 <!-- more --> 之前的文字将会作为摘要。如下：</p>
+    <content><![CDATA[<p>Hexo首页默认展示整篇内容，会导致首页非常冗长。虽然可以在头设置中指定摘要 excerpt: 值，或者在文章中使用 &lt;!– more –&gt;，那么 &lt;!– more –&gt; 之前的文字将会作为摘要。如下：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><br><span class="line"><span class="comment">&lt;!-- more --&gt;</span></span><br><span class="line">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br></pre></td></tr></table></figure>
 
 <p>更好的选项是，使用摘要自动生成插件 hexo-excerpt。</p>
