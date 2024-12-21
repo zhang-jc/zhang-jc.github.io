@@ -222,4 +222,26 @@
         <tag>Git</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Hexo自动生成摘要</title>
+    <url>/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/</url>
+    <content><![CDATA[<p>Hexo首页默认展示整篇内容，会导致首页非常冗长。虽然可以在头设置中指定摘要 excerpt: 值，或者在文章中使用 <span id="more"></span>，那么 <!-- more --> 之前的文字将会作为摘要。如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><br><span class="line"><span class="comment">&lt;!-- more --&gt;</span></span><br><span class="line">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br></pre></td></tr></table></figure>
+
+<p>更好的选项是，使用摘要自动生成插件 hexo-excerpt。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-excerpt --save</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>可以通过在配置中设置深度（默认为10）来指定摘录的大小。</p>
+<p>还可以使用 css 选择器从生成的摘录中排除某些标记。与任何选择器匹配的标记将被排除在外。</p>
+<p>默认行为是只显示一个摘录，如果它不会是整篇文章。将 hideWholePostExcerpts 设置为 false 以覆盖它并显示整个文章摘要。</p>
+<p>在站点配置文件中添加以下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">excerpt:</span><br><span class="line">  depth: 5</span><br><span class="line">  excerpt_excludes: []</span><br><span class="line">  more_excludes: []</span><br><span class="line">  hideWholePostExcerpts: true</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
 </search>
