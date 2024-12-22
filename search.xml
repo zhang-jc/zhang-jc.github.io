@@ -244,4 +244,23 @@
         <tag>Hexo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin安装完成后无线网无法使用问题</title>
+    <url>/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>在安装完Deepin 23后，无线网络用不了。自己安装无线网卡驱动后，重启电脑，登陆系统时电脑一直黑屏状态。重新安装Deepin 20.9也是相同的情况。</p>
+<p>后来发现是因为Deepin系统安装时，需要选择高版本内核，对于Deepin 20.9和Deepin 23版本都一样：</p>
+<p><strong>Deepin 20.9</strong></p>
+<p><img src="/images/202412/07.png"></p>
+<p><strong>Deepin 23</strong></p>
+<p><img src="/images/202412/08.png"></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Deepin</tag>
+      </tags>
+  </entry>
 </search>
