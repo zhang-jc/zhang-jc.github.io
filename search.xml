@@ -263,4 +263,74 @@
         <tag>Deepin</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python虚拟环境管理</title>
+    <url>/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<p>在另外一篇文章已经讲了<a href="https://www.zhangjc.com/2024/12/17/Python-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">Python版本管理</a>。本文主要讲Python虚拟环境管理。有了这两个方面的工具，就可以实现在Python的不同版本不同虚拟环境间方便地切换。</p>
+<p>pyenv-virtualenv一般会随pyenv一起安装，也可以通过下文方式独立安装。</p>
+<h1 id="什么是虚拟环境"><a href="#什么是虚拟环境" class="headerlink" title="什么是虚拟环境"></a>什么是虚拟环境</h1><p>一种采用协作式隔离的运行时环境，允许Python用户和应用程序在安装和升级Python分发包时不会干扰到同一系统上运行的其他Python应用程序的行为。</p>
+<p>虚拟环境其实是一个目录树，其中安装有特定Python版本，以及许多其他包。</p>
+<h1 id="为什么需要虚拟环境"><a href="#为什么需要虚拟环境" class="headerlink" title="为什么需要虚拟环境"></a>为什么需要虚拟环境</h1><p>Python应用程序通常会使用非标准库内的软件包和模块。因为可能需要修复特定的错误，或者使用库的过时版本的接口，应用程序有时需要特定版本的库。</p>
+<p>这意味着一个Python安装可能无法满足每个应用程序的要求。如果应用程序A需要特定模块的1.0版本，但应用程序B需要2.0版本，则需求存在冲突，安装版本1.0或2.0将导致某一个应用程序无法运行。</p>
+<p>这个问题的解决方案就是创建一个虚拟环境。然后，不同的应用将可以使用不同的虚拟环境。 要解决先前需求相冲突的例子，应用程序A可以拥有自己的安装了1.0版本的虚拟环境，而应用程序B则拥有安装了2.0版本的另一个虚拟环境。如果应用程序B要求将某个库升级到3.0版本，也不会影响应用程序A的环境。</p>
+<h1 id="pyenv-virtualenv"><a href="#pyenv-virtualenv" class="headerlink" title="pyenv-virtualenv"></a>pyenv-virtualenv</h1><p>pyenv-viralenv是一个pyenv插件，它提供了在类UNIX系统上管理虚拟环境和conda环境的特性。</p>
+<blockquote>
+<p>pyenv-virtualenvwrapper是pyenv的另外一个管理虚拟环境的插件。选择pyenv-virtualenv的原因是，pyenv-virtualenvwrapper有助于与virtualenvwrapper进行交互，但是pyenv-virtualenv提供了更方便的命令，其中virtualenvs是第一种pyenv版本，可以（反）激活。也就是说，pyenv和virtualenvwrapper仍然是分开的，而pyenv-virtualenv是一个很好的组合。</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下面将把最新开发版本的pyenv-virtualenv安装到$(pyenv root)&#x2F;plugins&#x2F;pyenv-virtualenv目录中。</p>
+<blockquote>
+<p><strong>重要提示</strong>: 如果将pyenv安装到一个非标准目录中，请确保将该仓库克隆到安装位置的“plugins”目录中。</p>
+</blockquote>
+<p>在这个目录中可以：</p>
+<ul>
+<li>检出特定的发布版标签。</li>
+<li>通过运行git pull来下载最新的更改，从而获得最新的开发版本。<ol>
+<li>检出pyenv-virtualenv至插件目录<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv</span><br></pre></td></tr></table></figure></li>
+<li>（可选）添加pyenv virtualenv-init至shell来自动激活虚拟环境。这完全是可选的，但是非常有用。请参阅下面的“激活虚拟环境”。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;eval &quot;$(pyenv virtualenv-init -)&quot;&#x27; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+<li>重启shell以启用pyenv-virtualenv<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exec &quot;$SHELL&quot;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="与pyenv一起使用pyenv-virtualenv"><a href="#与pyenv一起使用pyenv-virtualenv" class="headerlink" title="与pyenv一起使用pyenv virtualenv"></a>与pyenv一起使用pyenv virtualenv</h2><p>要与pyenv一起使用创建Python版本的虚拟环境，运行pyenv virtualenv，指定所需的Python版本和虚拟环境目录的名称。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ pyenv virtualenv 3.13.1 scrat</span><br></pre></td></tr></table></figure>
+
+<p>将在$(pyenv root)&#x2F;versions目录下一个名为scrat的文件夹中，创建一个基于Python 3.13.1的虚拟环境。</p>
+<p>pyenv virtualenv将任何选项转发给实际创建虚拟环境的底层命令（conda、 virtualenv或python -m venv)。有关详细信息，请参阅pyenv virtualenv –help的输出。</p>
+<h2 id="从当前版本创建虚拟环境"><a href="#从当前版本创建虚拟环境" class="headerlink" title="从当前版本创建虚拟环境"></a>从当前版本创建虚拟环境</h2><p>如果只有一个参数提供给pyenv virtualenv，那么将根据当前pyenv的Python版本并使用给定的名称创建虚拟环境。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ pyenv version</span><br><span class="line">3.13.1 (set by /home/zhangjc/.pyenv/version)</span><br><span class="line">$ pyenv virtualenv venv3.13.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="列出已有的虚拟环境"><a href="#列出已有的虚拟环境" class="headerlink" title="列出已有的虚拟环境"></a>列出已有的虚拟环境</h2><p>pyenv virtualenvs显示已有的虚拟环境和conda环境列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ pyenv virtualenvs</span><br><span class="line">  3.13.1/envs/scrat (created from /home/zhangjc/.pyenv/versions/3.13.1)</span><br><span class="line">  scrat (created from /home/zhangjc/.pyenv/versions/3.13.1)</span><br></pre></td></tr></table></figure>
+
+<p>每个虚拟环境有两个条目，较短的条目只是一个符号链接。</p>
+<h2 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h2><p>一些外部工具（例如<a href="https://github.com/davidhalter/jedi">jedi</a>）可能需要您激活虚拟环境和conda环境。</p>
+<p>如果eval “$(pyenv virtualenv-init -)”在shell中配置，当进入&#x2F;离开包含.python-version文件时会自动激活对应的虚拟环境，前提是.python-version中的虚拟环境的名称是有效的。使用pyenv virtualenvs命令查看有效虚拟环境清单，如上例中的scrat。pyenv使用.python-version文件来表示本地Python版本，可以使用pyenv local命令创建和删除这些文件。</p>
+<p>可以手动激活和停用一个pyenv虚拟环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pyenv activate &lt;name&gt;</span><br><span class="line">pyenv deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除已有的虚拟环境"><a href="#删除已有的虚拟环境" class="headerlink" title="删除已有的虚拟环境"></a>删除已有的虚拟环境</h2><p>删除$(pyenv root)&#x2F;versions和$(pyenv root)&#x2F;versions&#x2F;{version}&#x2F;envs中的目录将删除虚拟环境，或者您可以运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用virtualenv-delete命令删除已有的虚拟环境，例如，可以运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pyenv virtualenv-delete my-virtual-env</span><br></pre></td></tr></table></figure>
+
+<p>这将删除名为my-virtual-env的虚拟环境。</p>
+<h2 id="特殊环境变量"><a href="#特殊环境变量" class="headerlink" title="特殊环境变量"></a>特殊环境变量</h2><p>可以设置某些环境变量来控制pyenv-virtualenv。</p>
+<ul>
+<li>PYENV_VIRTUALENV_CACHE_PATH：如果设置了，则指定一个目录用于缓存下载的包文件。</li>
+<li>VIRTUALENV_VERSION：如果设置了，则强制pyenv-virtualenv安装所需的virtualenv版本。如果没有安装virtualenv，pyenv-virtualenv将尝试安装给定版本的virtualenv。</li>
+<li>GET_PIP：如果设置了并且venv优于virtualenv，则从指定位置使用get_pip.py。</li>
+<li>GET_PIP_URL：如果设置了并且venv优于virtualenv，则从指定的URL下载get_pip.py。</li>
+<li>PIP_VERSION：如果设置了并且venv优于virtualenv，则安装指定版本的pip。</li>
+<li>PYENV_VIRTUALENV_VERBOSE_ACTIVATE：如果设置了，则显示一些关于激活和停用的详细输出。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
