@@ -286,7 +286,7 @@
 <li>检出特定的发布版标签。</li>
 <li>通过运行git pull来下载最新的更改，从而获得最新的开发版本。<ol>
 <li>检出pyenv-virtualenv至插件目录<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv</span><br></pre></td></tr></table></figure></li>
-<li>（可选）添加pyenv virtualenv-init至shell来自动激活虚拟环境。这完全是可选的，但是非常有用。请参阅下面的“激活虚拟环境”。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;eval &quot;$(pyenv virtualenv-init -)&quot;&#x27; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+<li>（可选）添加pyenv virtualenv-init至shell来自动激活虚拟环境。这完全是可选的，但是非常有用。请参阅下面的“<a href="https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/#%E6%BF%80%E6%B4%BB%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">激活虚拟环境</a>”。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &#x27;eval &quot;$(pyenv virtualenv-init -)&quot;&#x27; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure></li>
 <li>重启shell以启用pyenv-virtualenv<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exec &quot;$SHELL&quot;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
