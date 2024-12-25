@@ -621,7 +621,7 @@
 <ul>
 <li>MySQL服务：<ul>
 <li>MySQL服务是否运行正常。</li>
-<li>MySQL启动没有指定<code>[skip_networking](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_networking)</code>参数，这会导致MySQL不会接受任何TCP&#x2F;IP连接。</li>
+<li>MySQL启动没有指定<a href="https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_networking">skip_networking</a>参数，这会导致MySQL不会接受任何TCP&#x2F;IP连接。</li>
 <li>MySQL服务绑定的IP地址，如果设置了127.0.0.1，则只允许本机访问，不接受远程访问。</li>
 </ul>
 </li>
