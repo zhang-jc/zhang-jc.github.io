@@ -437,6 +437,21 @@
 <li><a href="https://www.zhangjc.com/2024/12/17/Python-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">Python版本管理</a></li>
 <li><a href="https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/">Python虚拟环境管理</a></li>
 </ul>
+<p>Superset目前不支持Python3.12。具体错误信息和原因见我的另外一篇博客：<a href="https://www.zhangjc.com/2024/12/25/Superset%E6%9A%82%E4%B8%8D%E6%94%AF%E6%8C%81Python3-12/">Superset暂不支持Python 3.12</a>。</p>
+<h1 id="操作系统依赖"><a href="#操作系统依赖" class="headerlink" title="操作系统依赖"></a>操作系统依赖</h1><p>Superset 在其元数据库中存储数据库连接信息。为此，我们使用加密 Python 库对连接密码进行加密。不幸的是，这个库具有操作系统级别的依赖。</p>
+<h2 id="Debian-and-Ubuntu"><a href="#Debian-and-Ubuntu" class="headerlink" title="Debian and Ubuntu"></a>Debian and Ubuntu</h2><p>下面的命令将确保安装所需的依赖：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install build-essential libssl-dev libffi-dev python-dev python-pip libsasl2-dev libldap2-dev default-libmysqlclient-dev</span><br></pre></td></tr></table></figure>
+
+<p>在Ubuntu 20.04中，以下命令将确保安装所需的依赖：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install build-essential libssl-dev libffi-dev python3-dev python3-pip libsasl2-dev libldap2-dev default-libmysqlclient-dev</span><br></pre></td></tr></table></figure>
+
+<h1 id="Python-虚拟环境"><a href="#Python-虚拟环境" class="headerlink" title="Python 虚拟环境"></a>Python 虚拟环境</h1><p>创建并激活虚拟环境：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 使用 Python 3.11版本</span></span><br><span class="line">$ python -V</span><br><span class="line">Python 3.11.9</span><br><span class="line">$ pyenv virtualenv superset</span><br><span class="line">created virtual environment CPython3.11.9.final.0-64 <span class="keyword">in</span> 268ms</span><br><span class="line">  creator CPython3Posix(dest=/home/zhangjc/.pyenv/versions/3.11.9/envs/superset, clear=False, no_vcs_ignore=False, global=False)</span><br><span class="line">  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/zhangjc/.local/share/virtualenv)</span><br><span class="line">    added seed packages: pip==24.2, setuptools==72.2.0, wheel==0.44.0</span><br><span class="line">  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator</span><br><span class="line">$ pyenv activate superset</span><br><span class="line">(superset) zhangjc@frin:~$ python -V</span><br><span class="line">Python 3.11.9</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装和初始化Superset"><a href="#安装和初始化Superset" class="headerlink" title="安装和初始化Superset"></a>安装和初始化Superset</h1><blockquote>
+<p>如果选择使用MySQL作为Superset的元数据库，参见我的另外一篇博客进行配置：<a href="https://flowus.cn/5969561a-2400-4279-b5e1-ff258698c951">Superset 配置</a>。连接 MySQL 时可能会出现异常，见我的另外一篇博客：<a href="https://flowus.cn/ea4ebf65-b8bd-4830-af15-9a206fb918d5">连接 MySQL 异常</a>。</p>
+</blockquote>
+<p>首先，从安装 apache-superset 开始：</p>
 ]]></content>
       <categories>
         <category>大数据</category>
@@ -462,6 +477,101 @@
 
 <p>上面的报错信息很长，其实核心问题就出在“distutils”模块上。根据Python官方文档，<a href="https://docs.python.org/zh-cn/3.11/library/distutils.html#module-distutils">distutils</a>已被弃用并计划在Python 3.12中移除。</p>
 <p>Superset 4.0.2在Python 3.11下可以正常使用，参见我的另外一篇博客：<a href="https://www.zhangjc.com/2024/12/25/%E4%BB%8EPyPI%E5%AE%89%E8%A3%85Superset/">从PyPI安装Superset</a>。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据可视化</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Superset</tag>
+        <tag>大数据</tag>
+        <tag>数据可视化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Superset连接MySQL异常</title>
+    <url>/2024/12/25/Superset%E8%BF%9E%E6%8E%A5MySQL%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Superset</tag>
+        <tag>大数据</tag>
+        <tag>数据可视化</tag>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Superset配置</title>
+    <url>/2024/12/25/Superset%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="superset-config-py"><a href="#superset-config-py" class="headerlink" title="superset_config.py"></a>superset_config.py</h1><p>通过config.py模块，Superset对外暴露上百个配置参数。在这个模块中，可以找到这些参数，和这些参数的默认值。以注释的方式，这个模块也可以作为一个丰富的文档。</p>
+<p>为了配置自己的应用，需要创建自己的配置模块，用来重载改写这些参数的默认值。为了不改变核心模块，一般需要创建自己的配置模块（通常是一个名称为superset_config.py的文件）。添加这个文件到PYTHONPATH或创建环境变量SUPERSET_CONFIG_PATH并指定superset_config.py的完整路径。</p>
+<p>例如，在Linux系统下部署Superset，superset_config.py文件在&#x2F;app目录下，环境变量如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> SUPERSET_CONFIG_PATH=/app/superset_config.py</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通常只拷贝核心模块<a href="https://github.com/apache/superset/blob/master/superset/config.py">superset&#x2F;config.py</a>中需要修改的参数及注释到自己的superset_config.py文件中。</p>
+</blockquote>
+<p><a href="https://github.com/apache/superset/blob/master/superset/config.py">superset&#x2F;config.py</a>中定义的所有参数和默认值都可以在自己的superset_config.py中修改。</p>
+<p>因为superset_config.py作为一个Flask的配置模块，它也可以用来修改Flask本身的设置，包括Superset绑定的Flask扩展，如flask-wtf、flask-caching、flask-migrate、和flask-appbuilder。每个扩展都提供了复杂的配置项。Flask App Builder是Superset使用的Web框架，也提供了很多配置。可以查阅<a href="https://flask-appbuilder.readthedocs.org/en/latest/config.html">Flask App Builder</a>文档获取如何配置的信息。</p>
+<h1 id="指定SECRET-KEY"><a href="#指定SECRET-KEY" class="headerlink" title="指定SECRET_KEY"></a>指定SECRET_KEY</h1><h2 id="初始化SECRET-KEY"><a href="#初始化SECRET-KEY" class="headerlink" title="初始化SECRET_KEY"></a>初始化SECRET_KEY</h2><p>Superset需要一个用户设置的SECRET_KEY值才可以启动。这个必要条件是在 <a href="https://preset.io/blog/superset-security-update-default-secret_key-vulnerability/">2.1.0 版本的强制安全配置中添加的。</a>在superset_config.py中添加一个强SECRET_KEY，如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SECRET_KEY = <span class="string">&#x27;YOUR_OWN_RANDOM_GENERATED_SECRET_KEY&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>用以下命令生成一个强安全key值：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl rand -<span class="built_in">base64</span> 42</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>使用强安全key值</strong><br>这个key值被用来为会话的cookies签名，以及把存储在Superset应用元数据库中的敏感信息加密。自己的部署必须使用一个复杂、唯一的key值。</p>
+</blockquote>
+<h2 id="更换SECRET-KEY"><a href="#更换SECRET-KEY" class="headerlink" title="更换SECRET_KEY"></a>更换SECRET_KEY</h2><p>如果想修改SECRET_KEY的值，添加已经已经存在的SECRET_KEY值到superset_config.py文件中的PREVIOUS_SECRET_KEY&#x3D;中，并且赋新值给SECRET_KEY&#x3D;。可以用下面的命令查看SECRET_KEY的当前值：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">superset shell</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> current_app; <span class="built_in">print</span>(current_app.config[<span class="string">&quot;SECRET_KEY&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>设置完后保存superset_config.py文件，并执行命令superset re-encrypt-secrets。</p>
+<h1 id="配置元数据库"><a href="#配置元数据库" class="headerlink" title="配置元数据库"></a>配置元数据库</h1><p>Superset需要数据库来存储它管理的信息，如图表、面板及其他很多东西的定义。</p>
+<p>默认的，Superset使用SQLite。SQLite是一个独立的、单个文件的数据库，提供简单且快速开始使用Superset的方式（不需要任何额外安装）。但是，由于安全、扩展性及数据完整性的原因，SQLite不推荐用作生产环境。在生产环境中使用支持的数据库非常重要。</p>
+<p>Superset支持以下数据库引擎&#x2F;版本：</p>
+<table>
+<thead>
+<tr>
+<th>数据库引擎</th>
+<th>支持的版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.postgresql.org/">PostgreSQL</a></td>
+<td>10.X, 11.X, 12.X, 13.X, 14.X, 15.X</td>
+</tr>
+<tr>
+<td><a href="https://www.mysql.com/">MySQL</a></td>
+<td>5.7, 8.X</td>
+</tr>
+</tbody></table>
+<p>使用下面的数据库驱动和连接设置：</p>
+<table>
+<thead>
+<tr>
+<th>数据库</th>
+<th>PyPI包</th>
+<th>连接串</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://www.postgresql.org/">PostgreSQL</a></td>
+<td>pip install psycopg2</td>
+<td>postgresql:&#x2F;&#x2F;<UserName>:<DBPassword>@<Database Host>&#x2F;<Database Name></td>
+</tr>
+<tr>
+<td><a href="https://www.mysql.com/">MySQL</a></td>
+<td>pip install mysqlclient</td>
+<td>mysql:&#x2F;&#x2F;<UserName>:<DBPassword>@<Database Host>&#x2F;<Database Name></td>
+</tr>
+</tbody></table>
+<p>要设置Superset的元数据库，在superset_config.py配置文件中设置SQLALCHEMY_DATABASE_URI配置项。</p>
 ]]></content>
       <categories>
         <category>大数据</category>
