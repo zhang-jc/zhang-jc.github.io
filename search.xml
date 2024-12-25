@@ -492,7 +492,11 @@
   <entry>
     <title>Superset连接MySQL异常</title>
     <url>/2024/12/25/Superset%E8%BF%9E%E6%8E%A5MySQL%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<p>将Superset的元数据库配置为MySQL，配置方法见<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>。配置完成后，在启动Superset的时候，出现以下异常信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">2024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.OperationalError) (2002, <span class="string">&quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;</span>)</span><br><span class="line">(Background on this error at: https://sqlalche.me/e/14/e3q8)</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br></pre></td></tr></table></figure>
+
+<p>这个错误跟连接MySQL的方式有关，详细信息见<a href="">无法连接本地MySQL</a>。我的连接配置信息如下：</p>
+]]></content>
       <categories>
         <category>数据库</category>
         <category>MySQL</category>
@@ -582,6 +586,67 @@
         <tag>Superset</tag>
         <tag>大数据</tag>
         <tag>数据可视化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>无法连接本地MySQL</title>
+    <url>/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/</url>
+    <content><![CDATA[<p>在Linux系统下，MySQL客户端有两种不同的方法连接本地<strong>mysqld</strong>服务：</p>
+<ul>
+<li>通过Unix socket文件。这是一个在文件系统中的文件，默认**&#x2F;tmp&#x2F;mysql.sock**。</li>
+<li>使用TCP&#x2F;IP连接。TCP&#x2F;IP需要个网络端口，默认3306。</li>
+</ul>
+<p>Unix socket文件比TCP&#x2F;IP连接速度快，但只能连接客户端所在的同一台服务器上的MySQL。连接MySQL时不指定主机名，或者指定特定的主机名<strong>localhost</strong>，则使用Unix socket文件连接。</p>
+<p>error (2002) <code>Can&#39;t connect to ...</code>错误一般可能是以下原因导致的：</p>
+<ul>
+<li>MySQL服务未启动。</li>
+<li>连接使用了错误的Unix socket文件。</li>
+<li>连接使用了错误的TCP&#x2F;IP端口号。</li>
+</ul>
+<p>原因知道了，排查起来也就简单了。</p>
+<p>首先检查服务器上是否有<strong>mysqld</strong>进程，确定MySQL服务已启动。如果没有这个进程，则说明MySQL服务未启动。Linux系统查看方式如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ps xa | grep mysqld</span><br><span class="line">  13974 ?        S      0:01 /bin/sh /usr/bin/mysqld_safe</span><br><span class="line">  14051 ?        Sl   112:17 /opt/mysql/bin/mysqld --basedir=/opt/mysql --datadir=/opt/mysql/data --plugin-dir=/opt/mysql/lib/plugin --user=mysql --log-error=frin.err --pid-file=frin.pid</span><br><span class="line"> 151147 pts/4    S+     0:00 grep mysqld</span><br></pre></td></tr></table></figure>
+
+<p>如果<strong>mysqld</strong>进程在运行，可以用下面两种连接MySQL的方式，使用<strong>mysqladmin</strong>工具查看MySQL端口或Unix socket文件信息。</p>
+<p>执行以下命令，用户是superset，可以看出连接方式是通过Unix socket（Localhost via UNIX socket），Unix socket文件是&#x2F;tmp&#x2F;mysql.sock。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mysqladmin -hlocalhost -usuperset -p version</span><br><span class="line">Enter password: </span><br><span class="line">mysqladmin  Ver 8.0.34 <span class="keyword">for</span> Linux on x86_64 (MySQL Community Server - GPL)</span><br><span class="line">Copyright (c) 2000, 2023, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Server version          8.0.34</span><br><span class="line">Protocol version        10</span><br><span class="line">Connection              Localhost via UNIX socket</span><br><span class="line">UNIX socket             /tmp/mysql.sock</span><br><span class="line">Uptime:                 31 min 49 sec</span><br><span class="line"></span><br><span class="line">Threads: 2  Questions: 3537  Slow queries: 0  Opens: 191  Flush tables: 3  Open tables: 110  Queries per second avg: 1.852</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在Linux中临时目录&#x2F;tmp下的文件会被定期清理，所以&#x2F;tmp&#x2F;mysql.sock也会被清理掉，导致MySQL无法访问。关于如何保护或修改MySQL的Unix socket文件以后的文章再分项。</p>
+</blockquote>
+<p>执行以下命令，用户同样是superset，可以看出连接方式是TCP&#x2F;IP（127.0.0.1 via TCP&#x2F;IP），端口是3306。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mysqladmin -h127.0.0.1 -usuperset -p version</span><br><span class="line">Enter password: </span><br><span class="line">mysqladmin  Ver 8.0.34 <span class="keyword">for</span> Linux on x86_64 (MySQL Community Server - GPL)</span><br><span class="line">Copyright (c) 2000, 2023, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Server version          8.0.34</span><br><span class="line">Protocol version        10</span><br><span class="line">Connection              127.0.0.1 via TCP/IP</span><br><span class="line">TCP port                3306</span><br><span class="line">Uptime:                 38 min 34 sec</span><br><span class="line"></span><br><span class="line">Threads: 2  Questions: 4252  Slow queries: 0  Opens: 191  Flush tables: 3  Open tables: 110  Queries per second avg: 1.837</span><br></pre></td></tr></table></figure>
+
+<p>理解了MySQL连接的两种方式，出现连接不上的问题基本可以从以下几个方面排查：</p>
+<ul>
+<li>MySQL服务：<ul>
+<li>MySQL服务是否运行正常。</li>
+<li>MySQL启动没有指定<code>[skip_networking](https://dev.mysql.com/doc/refman/8.4/en/server-system-variables.html#sysvar_skip_networking)</code>参数，这会导致MySQL不会接受任何TCP&#x2F;IP连接。</li>
+<li>MySQL服务绑定的IP地址，如果设置了127.0.0.1，则只允许本机访问，不接受远程访问。</li>
+</ul>
+</li>
+<li>Unix socket文件相关：<ul>
+<li>文件是否存在。</li>
+<li>文件权限是否适当。</li>
+<li>客户端用的Unix socket文件是否正确。</li>
+</ul>
+</li>
+<li>网络相关：<ul>
+<li>检查网络是否连通，可以用ping命令。</li>
+<li>检查端口是否可访问，可以用telnet命令。</li>
+<li>检查是否防火墙屏蔽了访问。</li>
+</ul>
+</li>
+</ul>
+<p>参考文档：<a href="https://dev.mysql.com/doc/refman/8.4/en/can-not-connect-to-server.html">dev.mysql.com</a></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
 </search>
