@@ -21,27 +21,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Hexo首页默认展示整篇内容，会导致首页非常冗长。虽然可以在头设置中指定摘要 excerpt: 值，或者在文章中使用 &lt;!-- more --&gt;，那么 &lt;!-- more --&gt; 之前的文字将会作为摘要。如下： 123Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor">
+    <meta name="description" content="将Superset的元数据库配置为MySQL，配置方法见Superset配置。配置完成后，在启动Superset的时候，出现以下异常信息： 1232024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.Operationa">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo自动生成摘要">
-<meta property="og:url" content="https://www.zhangjc.com/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/index.html">
+<meta property="og:title" content="Superset配置数据库连接串密码不能包含@">
+<meta property="og:url" content="https://www.zhangjc.com/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/index.html">
 <meta property="og:site_name" content="一张假钞的真实世界">
-<meta property="og:description" content="Hexo首页默认展示整篇内容，会导致首页非常冗长。虽然可以在头设置中指定摘要 excerpt: 值，或者在文章中使用 &lt;!-- more --&gt;，那么 &lt;!-- more --&gt; 之前的文字将会作为摘要。如下： 123Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor">
+<meta property="og:description" content="将Superset的元数据库配置为MySQL，配置方法见Superset配置。配置完成后，在启动Superset的时候，出现以下异常信息： 1232024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.Operationa">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-12-21T14:34:41.000Z">
-<meta property="article:modified_time" content="2024-12-21T15:57:58.668Z">
+<meta property="og:image" content="https://www.zhangjc.com/images/202412/10.png">
+<meta property="article:published_time" content="2024-12-28T02:34:46.000Z">
+<meta property="article:modified_time" content="2024-12-28T02:49:11.102Z">
 <meta property="article:author" content="徂徕山人">
-<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Superset">
+<meta property="article:tag" content="数据可视化">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhangjc.com/images/202412/10.png">
 
 
-<link rel="canonical" href="https://www.zhangjc.com/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/">
+<link rel="canonical" href="https://www.zhangjc.com/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/","path":"2024/12/21/Hexo自动生成摘要/","title":"Hexo自动生成摘要"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/","path":"2024/12/28/Superset配置数据库连接串密码不能包含/","title":"Superset配置数据库连接串密码不能包含@"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hexo自动生成摘要 | 一张假钞的真实世界</title>
+<title>Superset配置数据库连接串密码不能包含@ | 一张假钞的真实世界</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -130,7 +136,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,7 +149,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -217,12 +222,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hexo自动生成摘要 | 一张假钞的真实世界">
+      <meta itemprop="name" content="Superset配置数据库连接串密码不能包含@ | 一张假钞的真实世界">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo自动生成摘要
+          Superset配置数据库连接串密码不能包含@
         </h1>
 
         <div class="post-meta-container">
@@ -234,7 +239,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-12-21 22:34:41 / 修改时间：23:57:58" itemprop="dateCreated datePublished" datetime="2024-12-21T22:34:41+08:00">2024-12-21</time>
+      <time title="创建时间：2024-12-28 10:34:46 / 修改时间：10:49:11" itemprop="dateCreated datePublished" datetime="2024-12-28T10:34:46+08:00">2024-12-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,16 +247,16 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">开发框架</span></a>
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">数据可视化</span></a>
         </span>
     </span>
 
   
-    <span id="/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/" class="post-meta-item leancloud_visitors" data-flag-title="Hexo自动生成摘要" title="阅读次数">
+    <span id="/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/" class="post-meta-item leancloud_visitors" data-flag-title="Superset配置数据库连接串密码不能包含@" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -266,8 +271,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="Hexo自动生成摘要" href="/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::5ecd941cadc66f1842e0c7cee096a241" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Superset配置数据库连接串密码不能包含@" href="/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::55efc6aa4c0b5b38fb14ae3c313080f4" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -280,17 +285,29 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Hexo首页默认展示整篇内容，会导致首页非常冗长。虽然可以在头设置中指定摘要 excerpt: 值，或者在文章中使用 &lt;!-- more --&gt;，那么 &lt;!-- more --&gt; 之前的文字将会作为摘要。如下：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span><br><span class="line"><span class="comment">&lt;!-- more --&gt;</span></span><br><span class="line">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><p>将Superset的元数据库配置为MySQL，配置方法见<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset</a>配置。配置完成后，在启动Superset的时候，出现以下异常信息：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.OperationalError) (2002, &quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;)</span><br><span class="line">(Background on this error at: https://sqlalche.me/e/14/e3q8)</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br></pre></td></tr></table></figure>
 
-<p>更好的选项是，使用摘要自动生成插件 hexo-excerpt。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-excerpt --save</span><br></pre></td></tr></table></figure>
+<p>这个错误跟连接MySQL的方式有关，详细信息见<a href="https://www.zhangjc.com/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/">无法连接本地MySQL</a>。我的连接配置信息如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>可以通过在配置中设置深度（默认为10）来指定摘录的大小。</p>
-<p>还可以使用 css 选择器从生成的摘录中排除某些标记。与任何选择器匹配的标记将被排除在外。</p>
-<p>默认行为是只显示一个摘录，如果它不会是整篇文章。将 hideWholePostExcerpts 设置为 false 以覆盖它并显示整个文章摘要。</p>
-<p>在站点配置文件中添加以下配置：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">excerpt:</span><br><span class="line">  depth: 5</span><br><span class="line">  excerpt_excludes: []</span><br><span class="line">  more_excludes: []</span><br><span class="line">  hideWholePostExcerpts: true</span><br></pre></td></tr></table></figure>
+<p>根据<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>中的描述，连接MySQL用的是mysqlclient驱动，问题可能出现在该驱动上。用以下方式进行验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ python</span><br><span class="line">Python 3.11.9 (main, Aug 28 2024, 23:13:21) [GCC 8.3.0] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import MySQLdb</span><br><span class="line">&gt;&gt;&gt; from MySQLdb import _mysql</span><br><span class="line">&gt;&gt;&gt; db=_mysql.connect(host=<span class="string">&quot;localhost&quot;</span>,user=<span class="string">&quot;superset&quot;</span>, password=<span class="string">&quot;superset@01&quot;</span>, database=<span class="string">&quot;superset&quot;</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">MySQLdb.OperationalError: (2002, <span class="string">&quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; db=_mysql.connect(host=<span class="string">&quot;localhost&quot;</span>,user=<span class="string">&quot;superset&quot;</span>, password=<span class="string">&quot;superset@01&quot;</span>, database=<span class="string">&quot;superset&quot;</span>, unix_socket=<span class="string">&#x27;/tmp/mysql.sock&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从上面的验证可以看出，问题出在<strong>mysqlclient</strong>默认使用的<strong>Unix socket</strong>文件与MySQL服务的不同，在指定正确的<strong>Unix socket</strong>文件后，问题解决。</p>
+<p>如何在superset中配置指定MySQL连接的Unix socket文件呢？查看MySQL官方文档，可以看到在连接串中通过<strong>socket</strong>参数设置。参见：<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.4/en/connecting-using-uri-or-key-value-pairs.html#connection-parameters-base">Base Connection Parameters</a>。</p>
+<p>修改Superset元数据库连接串配置，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset?socket=(/tmp/mysql.sock)&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>启动Superset出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ superset run -p 8088 --with-threads --reload --debugger</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br><span class="line">logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,426:INFO:superset.utils.logging_configurator:logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,433:INFO:root:Configured event logger of type &lt;class &#x27;superset.utils.log.DBEventLogger&#x27;&gt;</span><br><span class="line">/home/zhangjc/frin/python/venvs/superset/lib/python3.11/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.</span><br><span class="line">  warnings.warn(</span><br><span class="line">2024-09-05 11:45:16,438:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: &#x27;socket&#x27; is an invalid keyword argument for connect()</span><br></pre></td></tr></table></figure>
+
+<p>说明mysqlclient模块使用的参数名与MySQL文档中的不一致。但查询mysqlclient文档并未发现Unix socket文件参数的说明😂。没办法，只能使用码农基本能力 - 读源代码了😁。原来mysqlclient中的名称是unix_socket：<img src="/images/202412/10.png"></p>
+<p>修改连接串如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset?unix_socket=/tmp/mysql.sock&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>再次启动Superset，Done！✌️✌️✌️</p>
+
     </div>
 
     
@@ -313,21 +330,22 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/Superset/" rel="tag"><i class="fa fa-tag"></i> Superset</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"><i class="fa fa-tag"></i> 数据可视化</a>
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/12/20/git-bash%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" rel="prev" title="git bash中文显示问题">
-                  <i class="fa fa-angle-left"></i> git bash中文显示问题
+                <a href="/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/" rel="prev" title="无法连接本地MySQL">
+                  <i class="fa fa-angle-left"></i> 无法连接本地MySQL
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/" rel="next" title="Deepin安装完成后无线网无法使用问题">
-                  Deepin安装完成后无线网无法使用问题 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -339,7 +357,7 @@
 
 
 
-    <div class="comments" id="SOHUCS" sid="5ecd941cadc66f1842e0c7cee096a241"></div>
+    <div class="comments" id="SOHUCS" sid="55efc6aa4c0b5b38fb14ae3c313080f4"></div>
 </div>
   </main>
 
