@@ -472,8 +472,12 @@
 <p>superset_config.py文件内容如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:Superset123@localhost/superset?unix_socket=/tmp/mysql.sock&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>在连接串中的密码部分带有特殊字符“@”时，执行 superset db upgrade 时会出现错误。这是因为[</p>
-]]></content>
+<p>在连接串中的密码部分带有特殊字符“@”时，执行superset db upgrade时会出现错误。这是因为<a href="https://www.zhangjc.com/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/">Superset配置数据库连接串密码不能包含@</a>。</p>
+<p>安装MySQL驱动并初始化数据库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pip install mysqlclient</span><br><span class="line">$ superset db upgrade</span><br></pre></td></tr></table></figure>
+
+<p>通过运行以下命令完成安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在元数据库中创建一个管理用户（使用“admin”作为用户名加载示例）,根据提示输入信息即可创建完毕。</span></span><br><span class="line">superset fab create-admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载样例</span></span><br><span class="line">superset load_examples</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建默认的角色和权限</span></span><br><span class="line">superset init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动调试模式的服务器</span></span><br><span class="line">superset run -p 8088 --with-threads --reload --debugger</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>大数据</category>
         <category>数据可视化</category>
