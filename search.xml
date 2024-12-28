@@ -639,7 +639,7 @@
     <url>/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/</url>
     <content><![CDATA[<p>在Linux系统下，MySQL客户端有两种不同的方法连接本地<strong>mysqld</strong>服务：</p>
 <ul>
-<li>通过Unix socket文件。这是一个在文件系统中的文件，默认**&#x2F;tmp&#x2F;mysql.sock**。</li>
+<li>通过Unix socket文件。这是一个在文件系统中的文件，默认&#x2F;tmp&#x2F;mysql.sock。</li>
 <li>使用TCP&#x2F;IP连接。TCP&#x2F;IP需要个网络端口，默认3306。</li>
 </ul>
 <p>Unix socket文件比TCP&#x2F;IP连接速度快，但只能连接客户端所在的同一台服务器上的MySQL。连接MySQL时不指定主机名，或者指定特定的主机名<strong>localhost</strong>，则使用Unix socket文件连接。</p>
