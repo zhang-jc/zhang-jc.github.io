@@ -515,48 +515,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Superset连接MySQL异常</title>
-    <url>/2024/12/25/Superset%E8%BF%9E%E6%8E%A5MySQL%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<p>将Superset的元数据库配置为MySQL，配置方法见<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>。配置完成后，在启动Superset的时候，出现以下异常信息：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">2024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.OperationalError) (2002, <span class="string">&quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;</span>)</span><br><span class="line">(Background on this error at: https://sqlalche.me/e/14/e3q8)</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br></pre></td></tr></table></figure>
-
-<p>这个错误跟连接MySQL的方式有关，详细信息见<a href="https://www.zhangjc.com/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/">无法连接本地MySQL</a>。我的连接配置信息如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果想快速解决问题，可将连接串中的<strong>localhost</strong>改为<strong>127.0.0.1</strong>。但作为技术人，还是需要深究下。</p>
-<p>根据<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>中的描述，连接MySQL用的是<strong>mysqlclient</strong>驱动，问题可能出现在该驱动上。用以下方式进行验证：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ python</span><br><span class="line">Python 3.11.9 (main, Aug 28 2024, 23:13:21) [GCC 8.3.0] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import MySQLdb</span><br><span class="line">&gt;&gt;&gt; from MySQLdb import _mysql</span><br><span class="line">&gt;&gt;&gt; db=_mysql.connect(host=<span class="string">&quot;localhost&quot;</span>,user=<span class="string">&quot;superset&quot;</span>, password=<span class="string">&quot;superset@01&quot;</span>, database=<span class="string">&quot;superset&quot;</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">MySQLdb.OperationalError: (2002, <span class="string">&quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; db=_mysql.connect(host=<span class="string">&quot;localhost&quot;</span>,user=<span class="string">&quot;superset&quot;</span>, password=<span class="string">&quot;superset@01&quot;</span>, database=<span class="string">&quot;superset&quot;</span>, unix_socket=<span class="string">&#x27;/tmp/mysql.sock&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>从上面的验证可以看出，问题出在<strong>mysqlclient</strong>默认使用的<strong>Unix socket</strong>文件与MySQL服务的不同，在指定正确的<strong>Unix socket</strong>文件后，问题解决。</p>
-<p>如何在superset中配置指定MySQL连接的Unix socket文件呢？查看MySQL官方文档，可以看到在连接串中通过<strong>socket</strong>参数设置。</p>
-<p>参见：<a href="https://dev.mysql.com/doc/refman/8.4/en/connecting-using-uri-or-key-value-pairs.html#connection-parameters-base">Base Connection Parameters</a></p>
-<p>修改Superset元数据库连接串配置，如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset?socket=(/tmp/mysql.sock)&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>启动Superset出现以下错误：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ superset run -p 8088 --with-threads --reload --debugger</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br><span class="line">logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,426:INFO:superset.utils.logging_configurator:logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,433:INFO:root:Configured event logger of <span class="built_in">type</span> &lt;class <span class="string">&#x27;superset.utils.log.DBEventLogger&#x27;</span>&gt;</span><br><span class="line">/home/zhangjc/frin/python/venvs/superset/lib/python3.11/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage <span class="keyword">for</span> tracking rate limits as no storage was explicitly specified. This is not recommended <span class="keyword">for</span> production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend <span class="keyword">for</span> documentation about configuring the storage backend.</span><br><span class="line">  warnings.warn(</span><br><span class="line">2024-09-05 11:45:16,438:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: <span class="string">&#x27;socket&#x27;</span> is an invalid keyword argument <span class="keyword">for</span> connect()</span><br></pre></td></tr></table></figure>
-
-<p>说明mysqlclient模块使用的参数名与MySQL文档中的不一致。但查询mysqlclient文档并未发现Unix socket文件参数的说明😂。没办法，只能使用码农基本能力 - 读源代码了😁。原来mysqlclient中的名称是unix_socket：</p>
-<p><img src="/images/202412/09.png"></p>
-<p>修改连接串如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset?unix_socket=/tmp/mysql.sock&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>再次启动Superset，Done！✌️✌️✌️</p>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>Python</tag>
-        <tag>Superset</tag>
-        <tag>大数据</tag>
-        <tag>数据可视化</tag>
-        <tag>MySQL</tag>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Superset配置</title>
     <url>/2024/12/25/Superset%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h1 id="superset-config-py"><a href="#superset-config-py" class="headerlink" title="superset_config.py"></a>superset_config.py</h1><p>通过config.py模块，Superset对外暴露上百个配置参数。在这个模块中，可以找到这些参数，和这些参数的默认值。以注释的方式，这个模块也可以作为一个丰富的文档。</p>
@@ -696,38 +654,42 @@
       </tags>
   </entry>
   <entry>
-    <title>Superset配置数据库连接串密码不能包含@</title>
-    <url>/2024/12/28/Superset%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E4%B8%B2%E5%AF%86%E7%A0%81%E4%B8%8D%E8%83%BD%E5%8C%85%E5%90%AB/</url>
-    <content><![CDATA[<p>将Superset的元数据库配置为MySQL，配置方法见<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset</a>配置。配置完成后，在启动Superset的时候，出现以下异常信息：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">2024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.OperationalError) (2002, &quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;)</span><br><span class="line">(Background on this error at: https://sqlalche.me/e/14/e3q8)</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br></pre></td></tr></table></figure>
+    <title>Superset连接本地MySQL异常</title>
+    <url>/2024/12/25/Superset%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p>将Superset的元数据库配置为MySQL，配置方法见<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>。配置完成后，在启动Superset的时候，出现以下异常信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">2024-09-01 16:28:36,614:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: (MySQLdb.OperationalError) (2002, <span class="string">&quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;</span>)</span><br><span class="line">(Background on this error at: https://sqlalche.me/e/14/e3q8)</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br></pre></td></tr></table></figure>
 
 <p>这个错误跟连接MySQL的方式有关，详细信息见<a href="https://www.zhangjc.com/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/">无法连接本地MySQL</a>。我的连接配置信息如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset&#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>根据<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>中的描述，连接MySQL用的是mysqlclient驱动，问题可能出现在该驱动上。用以下方式进行验证：</p>
+<p>如果想快速解决问题，可将连接串中的<strong>localhost</strong>改为<strong>127.0.0.1</strong>。但作为技术人，还是需要深究下。</p>
+<p>根据<a href="https://www.zhangjc.com/2024/12/25/Superset%E9%85%8D%E7%BD%AE/">Superset配置</a>中的描述，连接MySQL用的是<strong>mysqlclient</strong>驱动，问题可能出现在该驱动上。用以下方式进行验证：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ python</span><br><span class="line">Python 3.11.9 (main, Aug 28 2024, 23:13:21) [GCC 8.3.0] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import MySQLdb</span><br><span class="line">&gt;&gt;&gt; from MySQLdb import _mysql</span><br><span class="line">&gt;&gt;&gt; db=_mysql.connect(host=<span class="string">&quot;localhost&quot;</span>,user=<span class="string">&quot;superset&quot;</span>, password=<span class="string">&quot;superset@01&quot;</span>, database=<span class="string">&quot;superset&quot;</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">MySQLdb.OperationalError: (2002, <span class="string">&quot;Can&#x27;t connect to local MySQL server through socket &#x27;/var/run/mysqld/mysqld.sock&#x27; (2)&quot;</span>)</span><br><span class="line">&gt;&gt;&gt; db=_mysql.connect(host=<span class="string">&quot;localhost&quot;</span>,user=<span class="string">&quot;superset&quot;</span>, password=<span class="string">&quot;superset@01&quot;</span>, database=<span class="string">&quot;superset&quot;</span>, unix_socket=<span class="string">&#x27;/tmp/mysql.sock&#x27;</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
 
 <p>从上面的验证可以看出，问题出在<strong>mysqlclient</strong>默认使用的<strong>Unix socket</strong>文件与MySQL服务的不同，在指定正确的<strong>Unix socket</strong>文件后，问题解决。</p>
-<p>如何在superset中配置指定MySQL连接的Unix socket文件呢？查看MySQL官方文档，可以看到在连接串中通过<strong>socket</strong>参数设置。参见：<a href="https://dev.mysql.com/doc/refman/8.4/en/connecting-using-uri-or-key-value-pairs.html#connection-parameters-base">Base Connection Parameters</a>。</p>
+<p>如何在superset中配置指定MySQL连接的Unix socket文件呢？查看MySQL官方文档，可以看到在连接串中通过<strong>socket</strong>参数设置。</p>
+<p>参见：<a href="https://dev.mysql.com/doc/refman/8.4/en/connecting-using-uri-or-key-value-pairs.html#connection-parameters-base">Base Connection Parameters</a></p>
 <p>修改Superset元数据库连接串配置，如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset?socket=(/tmp/mysql.sock)&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>启动Superset出现以下错误：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">$ superset run -p 8088 --with-threads --reload --debugger</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br><span class="line">logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,426:INFO:superset.utils.logging_configurator:logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,433:INFO:root:Configured event logger of type &lt;class &#x27;superset.utils.log.DBEventLogger&#x27;&gt;</span><br><span class="line">/home/zhangjc/frin/python/venvs/superset/lib/python3.11/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage for tracking rate limits as no storage was explicitly specified. This is not recommended for production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend for documentation about configuring the storage backend.</span><br><span class="line">  warnings.warn(</span><br><span class="line">2024-09-05 11:45:16,438:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: &#x27;socket&#x27; is an invalid keyword argument for connect()</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ superset run -p 8088 --with-threads --reload --debugger</span><br><span class="line">Loaded your LOCAL configuration at [/home/zhangjc/github/superset/superset_config.py]</span><br><span class="line">logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,426:INFO:superset.utils.logging_configurator:logging was configured successfully</span><br><span class="line">2024-09-05 11:45:16,433:INFO:root:Configured event logger of <span class="built_in">type</span> &lt;class <span class="string">&#x27;superset.utils.log.DBEventLogger&#x27;</span>&gt;</span><br><span class="line">/home/zhangjc/frin/python/venvs/superset/lib/python3.11/site-packages/flask_limiter/extension.py:333: UserWarning: Using the in-memory storage <span class="keyword">for</span> tracking rate limits as no storage was explicitly specified. This is not recommended <span class="keyword">for</span> production use. See: https://flask-limiter.readthedocs.io#configuring-a-storage-backend <span class="keyword">for</span> documentation about configuring the storage backend.</span><br><span class="line">  warnings.warn(</span><br><span class="line">2024-09-05 11:45:16,438:ERROR:flask_appbuilder.security.sqla.manager:DB Creation and initialization failed: <span class="string">&#x27;socket&#x27;</span> is an invalid keyword argument <span class="keyword">for</span> connect()</span><br></pre></td></tr></table></figure>
 
-<p>说明mysqlclient模块使用的参数名与MySQL文档中的不一致。但查询mysqlclient文档并未发现Unix socket文件参数的说明😂。没办法，只能使用码农基本能力 - 读源代码了😁。原来mysqlclient中的名称是unix_socket：<img src="/images/202412/10.png"></p>
+<p>说明mysqlclient模块使用的参数名与MySQL文档中的不一致。但查询mysqlclient文档并未发现Unix socket文件参数的说明😂。没办法，只能使用码农基本能力 - 读源代码了😁。原来mysqlclient中的名称是unix_socket：</p>
+<p><img src="/images/202412/09.png"></p>
 <p>修改连接串如下：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SQLALCHEMY_DATABASE_URI = <span class="string">&#x27;mysql://superset:superset%4001@localhost/superset?unix_socket=/tmp/mysql.sock&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <p>再次启动Superset，Done！✌️✌️✌️</p>
 ]]></content>
       <categories>
-        <category>大数据</category>
-        <category>数据可视化</category>
+        <category>数据库</category>
+        <category>MySQL</category>
       </categories>
       <tags>
         <tag>Python</tag>
         <tag>Superset</tag>
+        <tag>大数据</tag>
         <tag>数据可视化</tag>
         <tag>MySQL</tag>
         <tag>数据库</tag>
