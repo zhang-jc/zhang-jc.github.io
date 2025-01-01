@@ -733,4 +733,36 @@
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windos PySide6 MySQL驱动问题</title>
+    <url>/2025/01/01/Windos-PySide6-MySQL%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h1><ul>
+<li>Windows 11 家庭中文版 64 位操作系统 23H2</li>
+<li>Python 3.12.4</li>
+<li>PySide 6.6.0</li>
+<li>MySQL 8.0.38</li>
+</ul>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>安装PySide 6.6.0后连接MySQL时出现以下错误信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">D:\gitee\Scrat&gt; &amp; d:/gitee/Scrat/.venv/Scripts/python.exe d:/gitee/Scrat/main.py</span><br><span class="line">QSqlDatabase: QMYSQL driver not loaded</span><br><span class="line">QSqlDatabase: available drivers: QSQLITE QMIMER QODBC QPSQL</span><br></pre></td></tr></table></figure>
+
+<p>根据错误信息可以清晰看出，在可获取的驱动中中没有MySQL，这是因为PySide6没有内置MySQL的驱动。官方或网上通常的解决方案是自行编译。</p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>这里介绍一个不需要自行编译的解决方法，参考网址：<a href="https://github.com/thecodemonkey86/qt_mysql_driver">https://github.com/thecodemonkey86/qt_mysql_driver</a>。注意，一定要下载跟自己安装的PySide一致的版本。</p>
+<p>按照说明将驱动文件拷贝至个人安装目录，如我在虚拟环境下安装的位置：<img src="/images/202501/01.png"></p>
+<p>完成后，再次运行出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">D:\gitee\Scrat&gt; &amp; d:/gitee/Scrat/.venv/Scripts/python.exe d:/gitee/Scrat/main.py</span><br><span class="line">QSqlDatabase: QMYSQL driver not loaded</span><br><span class="line">QSqlDatabase: available drivers: QSQLITE QMIMER QMARIADB QMYSQL QODBC QPSQL</span><br></pre></td></tr></table></figure>
+
+<p>可以看出MySQL驱动已经存在，未加载成功是因为缺少其他库。从MySQL安装目录下，拷贝以下3个动态库到PySide安装目录，如下图：<br><img src="/images/202501/02.png"><br><img src="/images/202501/03.png"></p>
+<p>拷贝后的目录截图：<img src="/images/202501/04.png"></p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>QT</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>MySQL</tag>
+        <tag>PySide6</tag>
+        <tag>QT</tag>
+      </tags>
+  </entry>
 </search>
