@@ -734,8 +734,8 @@
       </tags>
   </entry>
   <entry>
-    <title>Windos PySide6 MySQL驱动问题</title>
-    <url>/2025/01/01/Windos-PySide6-MySQL%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</url>
+    <title>Windows PySide6 MySQL驱动问题</title>
+    <url>/2025/01/01/Windows-PySide6-MySQL%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h1 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h1><ul>
 <li>Windows 11 家庭中文版 64 位操作系统 23H2</li>
 <li>Python 3.12.4</li>
