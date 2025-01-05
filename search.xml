@@ -905,7 +905,7 @@
 <ol>
 <li>要启用端口，打开<code>sshd_config</code>配置文件（Linux服务器在<code>/etc/ssh/</code>下，Windows在<code>%programfiles(x86)%/openssh/etc</code>下），添加或修改以下内容：</li>
 </ol>
-  <figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="code"><pre><span class="line">AllowTcpForwarding yes</span><br></pre></td></tr></table></figure>
+  <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">AllowTcpForwarding yes</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p><strong>提示</strong>：AllowTcpForwarding默认值为yes，可能不需要修改。</p>
