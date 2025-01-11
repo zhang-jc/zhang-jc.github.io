@@ -960,9 +960,8 @@
 <p>具体设置将在下面的章节中描述。也可以添加其他不在标准配置中的设置，如<code>args</code>。</p>
 <blockquote>
 <p><strong>提示</strong>：在项目中，创建一个运行特定启动文件的配置会很有帮助。例如，启动调试器时总是使用参数<code>--port 1593</code>调用<code>startup.py</code>，如下创建一个配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;Python Debugger: startup.py&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">    &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">    &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/startup.py&quot;,</span><br><span class="line">    &quot;args&quot; : [&quot;--port&quot;, &quot;1593&quot;]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 </blockquote>
-<figure class="highlight plaintext"><figcaption><span>Text</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;Python Debugger: startup.py&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">    &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">    &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/startup.py&quot;,</span><br><span class="line">    &quot;args&quot; : [&quot;--port&quot;, &quot;1593&quot;]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
 <p><strong>name</strong></p>
 <p>给展示在VS Code调试配置下拉列表中的配置命名。</p>
 <p><strong>type</strong></p>
@@ -1139,6 +1138,38 @@
       <tags>
         <tag>Python</tag>
         <tag>VS Code</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx 配置支持 HTTPS 代理</title>
+    <url>/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<p>本文描述的是Nginx HTTPS反向代理的情况（即后端服务是HTTP的）。</p>
+<h1 id="使用openssl配置ssl证书"><a href="#使用openssl配置ssl证书" class="headerlink" title="使用openssl配置ssl证书"></a>使用openssl配置ssl证书</h1><h2 id="生成服务器端的私钥（key-文件）："><a href="#生成服务器端的私钥（key-文件）：" class="headerlink" title="生成服务器端的私钥（key 文件）："></a>生成服务器端的私钥（key 文件）：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># openssl genrsa -des3 -out server.key 2048</span></span><br><span class="line">Generating RSA private key, 2048 bit long modulus</span><br><span class="line">.............+++</span><br><span class="line">..........+++</span><br><span class="line">e is 65537 (0x10001)</span><br><span class="line">Enter pass phrase <span class="keyword">for</span> server.key:</span><br></pre></td></tr></table></figure>
+
+<p>输入两次密码后key文件生成完毕。</p>
+<h2 id="生成CSR（Certificate-Signing-Request）文件："><a href="#生成CSR（Certificate-Signing-Request）文件：" class="headerlink" title="生成CSR（Certificate Signing Request）文件："></a>生成CSR（Certificate Signing Request）文件：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># openssl req -new -key server.key -out server.crs</span></span><br></pre></td></tr></table></figure>
+
+<p>根据提示输入需要的信息后CSR文件生成完毕。</p>
+<h2 id="生成自签名的CA文件："><a href="#生成自签名的CA文件：" class="headerlink" title="生成自签名的CA文件："></a>生成自签名的CA文件：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># openssl x509 -req -days 3650 -in server.crs -signkey server.key -out ca.crt</span></span><br><span class="line">Signature ok</span><br><span class="line">subject=/C=cn/ST=beijing/L=beijing/O=<span class="built_in">test</span>/OU=<span class="built_in">test</span>/CN=<span class="built_in">test</span>/emailAddress=<span class="built_in">test</span>@test.com</span><br><span class="line">Getting Private key</span><br><span class="line">Enter pass phrase <span class="keyword">for</span> server.key:</span><br></pre></td></tr></table></figure>
+
+<p>输入key文件的密码后CA文件生成完毕。</p>
+<h1 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h1><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 443;</span><br><span class="line">    ssl on;</span><br><span class="line">    ssl_certificate ca.crt;</span><br><span class="line">    ssl_certificate_key server.key;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://192.168.36.144:11000;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新加载Nginx配置文件后，发现Nginx代理的443端口未正常启动。查看Nginx error日志发现以下异常信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">2019/03/12 16:49:26 [emerg] 85175#0: SSL_CTX_use_PrivateKey_file(&quot;/etc/nginx/server.key&quot;) failed (SSL: error:0906406D:PEM routines:PEM_def_callback:problems getting password error:0906A068:PEM routines:PEM_do_header:bad password read error:140B0009:SSL routines:SSL_CTX_use_PrivateKey_file:PEM lib)</span><br></pre></td></tr></table></figure>
+
+<p>通过以下方式解决：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># mv server.key server.key.org</span></span><br><span class="line"><span class="comment"># openssl rsa -in server.key.org -out server.key</span></span><br></pre></td></tr></table></figure>
+
+<p>重新加载Nginx配置文件。此时也不需要再输入key文件的密码了。</p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>HTTPS</tag>
       </tags>
   </entry>
 </search>
