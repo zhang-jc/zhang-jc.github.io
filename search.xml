@@ -756,13 +756,13 @@
 ]]></content>
       <categories>
         <category>开发框架</category>
-        <category>QT</category>
+        <category>Qt</category>
       </categories>
       <tags>
         <tag>Python</tag>
         <tag>MySQL</tag>
         <tag>PySide6</tag>
-        <tag>QT</tag>
+        <tag>Qt</tag>
       </tags>
   </entry>
   <entry>
@@ -1225,6 +1225,59 @@
         <tag>Linux</tag>
         <tag>Nginx</tag>
         <tag>CentOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用RSyslog将Nginx Access Log写入Kafka</title>
+    <url>/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/</url>
+    <content><![CDATA[<h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><ul>
+<li>CentOS Linux release 7.3.1611</li>
+<li>kafka_2.12-0.10.2.2</li>
+<li>nginx&#x2F;1.12.2</li>
+<li>rsyslog-8.24.0-34.el7.x86_64.rpm</li>
+</ul>
+<h1 id="创建测试Topic"><a href="#创建测试Topic" class="headerlink" title="创建测试Topic"></a>创建测试Topic</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ./kafka-topics.sh --zookeeper 192.168.72.25:2181/kafka --create --topic develop-test-topic --partitions 10 --replication-factor 3</span><br></pre></td></tr></table></figure>
+
+<h1 id="RSyslog安装"><a href="#RSyslog安装" class="headerlink" title="RSyslog安装"></a>RSyslog安装</h1><p>一般系统自带RSyslog服务无需另外安装。但是因为数据需要通过RSyslog的omkafka模块写入到Kafka，而omkafka在RSyslog的v8.7.0+版本才支持，所以要看当前系统中RSyslog的版本是否需要升级。使用以下命令查看：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># rsyslogd -v</span></span><br><span class="line">rsyslogd 7.4.7, compiled with:</span><br><span class="line">	FEATURE_REGEXP:				Yes</span><br><span class="line">	FEATURE_LARGEFILE:			No</span><br><span class="line">	GSSAPI Kerberos 5 support:		Yes</span><br><span class="line">	FEATURE_DEBUG (debug build, slow code):	No</span><br><span class="line">	32bit Atomic operations supported:	Yes</span><br><span class="line">	64bit Atomic operations supported:	Yes</span><br><span class="line">	Runtime Instrumentation (slow code):	No</span><br><span class="line">	uuid support:				Yes</span><br><span class="line"></span><br><span class="line">See http://www.rsyslog.com <span class="keyword">for</span> more information.</span><br></pre></td></tr></table></figure>
+
+<p>执行以下命令安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># sudo yum install rsyslog</span></span><br></pre></td></tr></table></figure>
+
+<p>安装依赖关系如下：<img src="/images/202501/RSyslog%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB.png"></p>
+<h1 id="添加omkafka模块"><a href="#添加omkafka模块" class="headerlink" title="添加omkafka模块"></a>添加omkafka模块</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum install rsyslog-kafka</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="RSyslog-Client-Nginx配置"><a href="#RSyslog-Client-Nginx配置" class="headerlink" title="RSyslog Client Nginx配置"></a>RSyslog Client Nginx配置</h1><p>注意，Nginx 1.7.1之后才支持syslog的方式处理日志。具体配置项参见官网文档<a href="https://nginx.org/en/docs/syslog.html">Logging to syslog</a>。</p>
+<p>Nginx配置主要是日志格式和Access Log配置项：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span><br><span class="line">                  &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span><br><span class="line">                  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 11000;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_pass http://10.16.0.144:11000;</span><br><span class="line">        access_log syslog:server=localhost,facility=local7,tag=nginx11000Root,severity=info main;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="RSyslog-Server端配置"><a href="#RSyslog-Server端配置" class="headerlink" title="RSyslog Server端配置"></a>RSyslog Server端配置</h1><p>RSyslog的主配置文件<code>/etc/rsyslog.conf</code>，其中会包含引入<code>/etc/rsyslog.d</code>下扩展名为<code>conf</code>的配置文件。</p>
+<p>修改配置文件<code>/etc/rsyslog.conf</code>将下面两行前面的注释去掉：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ModLoad imudp</span><br><span class="line">$ UDPServerRun 514</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/etc/rsyslog.d</code>目录下创建<code>rsyslog_nginx_kafka_cluster.conf</code>，配置内容如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">module(load=&quot;imudp&quot;)</span><br><span class="line">input(type=&quot;imudp&quot; port=&quot;514&quot;)</span><br><span class="line"></span><br><span class="line"># nginx access log ==&gt; rsyslog server(local) ==&gt; kafka</span><br><span class="line">module(load=&quot;omkafka&quot;)</span><br><span class="line"></span><br><span class="line">template(name=&quot;nginx-11000-root&quot; type=&quot;string&quot; string=&quot;%msg%&quot;)</span><br><span class="line"></span><br><span class="line">if $inputname == &quot;imudp&quot; then &#123;</span><br><span class="line">    if ($programname == &quot;nginx11000Root&quot;) then</span><br><span class="line">        action(type=&quot;omkafka&quot;</span><br><span class="line">            template=&quot;nginx-11000-root&quot;</span><br><span class="line">            broker=[&quot;192.168.72.10:9092&quot;,&quot;192.168.72.20:9092&quot;,&quot;192.168.72.25:9092&quot;,&quot;192.168.72.26:9092&quot;,&quot;192.168.72.27:9092&quot;,&quot;192.168.72.48:9092&quot;,&quot;192.168.72.55:9092&quot;,&quot;192.168.72.80:9092&quot;,&quot;192.168.72.81:9092&quot;,&quot;192.168.72.97:9092&quot;]</span><br><span class="line">            topic=&quot;develop-test-topic&quot;</span><br><span class="line">            partitions.auto=&quot;on&quot;</span><br><span class="line">            confParam=[</span><br><span class="line">                &quot;socket.keepalive.enable=true&quot;</span><br><span class="line">            ]</span><br><span class="line">        )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">:rawmsg, contains, &quot;nginx11000Root&quot; ~</span><br></pre></td></tr></table></figure>
+
+<h1 id="联调测试"><a href="#联调测试" class="headerlink" title="联调测试"></a>联调测试</h1><p>启动RSyslog服务：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># service rsyslog start</span><br><span class="line">Redirecting to /bin/systemctl start  rsyslog.service</span><br></pre></td></tr></table></figure>
+
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><h2 id="syslog-tag-只能包含字母和数字"><a href="#syslog-tag-只能包含字母和数字" class="headerlink" title="syslog tag 只能包含字母和数字"></a>syslog tag 只能包含字母和数字</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># nginx -t</span><br><span class="line">nginx: [emerg] syslog &quot;tag&quot; only allows alphanumeric characters and underscore in     /etc/nginx/conf.d/jx-11000-jenkins149-36-144.conf:7</span><br><span class="line">nginx: configuration file /etc/nginx/nginx.conf test failed</span><br></pre></td></tr></table></figure>
+
+<h2 id="‘omkafka’-is-unknown"><a href="#‘omkafka’-is-unknown" class="headerlink" title="‘omkafka’ is unknown"></a>‘omkafka’ is unknown</h2><p>RSyslog中没有包含omkafka模块，需要另外安装。查看<code>/var/log/messages</code>日志信息会有以下提示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tail -f messages</span></span><br><span class="line">Mar 15 15:13:40 192-168-72-29 systemd: Started System Logging Service.</span><br><span class="line">Mar 15 15:13:40 192-168-72-29 rsyslogd: could not load module <span class="string">&#x27;/usr/lib64/rsyslog/omkafka.so&#x27;</span>, dlopen:     /usr/lib64/rsyslog/omkafka.so: cannot open shared object file: No such file or directory  [v8.24.0-34.el7 try     http://www.rsyslog.com/e/2066 ]</span><br><span class="line">Mar 15 15:13:40 192-168-72-29 rsyslogd: could not load module <span class="string">&#x27;/usr/lib64/rsyslog/omkafka.so&#x27;</span>, dlopen:     /usr/lib64/rsyslog/omkafka.so: cannot open shared object file: No such file or directory  [v8.24.0-34.el7 try     http://www.rsyslog.com/e/2066 ]</span><br><span class="line">Mar 15 15:13:40 192-168-72-29 rsyslogd: module name <span class="string">&#x27;omkafka&#x27;</span> is unknown [v8.24.0-34.el7 try     http://www.rsyslog.com/e/2209 ]</span><br><span class="line">Mar 15 15:13:40 192-168-72-29 rsyslogd: module name <span class="string">&#x27;omkafka&#x27;</span> is unknown [v8.24.0-34.el7 try     http://www.rsyslog.com/e/2209 ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS-6-5升级Rsyslog"><a href="#CentOS-6-5升级Rsyslog" class="headerlink" title="CentOS 6.5升级Rsyslog"></a>CentOS 6.5升级Rsyslog</h2><p>CentOS 6.5自带的RSyslog版本是<code>rsyslogd 5.8.10</code>。按照以下方式安装新版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd /etc/yum.repos.d/</span></span><br><span class="line"><span class="comment"># wget http://rpms.adiscon.com/v8-stable/rsyslog.repo</span></span><br><span class="line"><span class="comment"># yum install rsyslog</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Nginx</tag>
+        <tag>RSyslog</tag>
+        <tag>Kafka</tag>
+        <tag>数据采集</tag>
       </tags>
   </entry>
 </search>
