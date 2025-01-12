@@ -1280,4 +1280,23 @@
         <tag>数据采集</tag>
       </tags>
   </entry>
+  <entry>
+    <title>解决HTTP POST请求Nginx静态内容405错误</title>
+    <url>/2019/04/04/%E8%A7%A3%E5%86%B3-HTTP-POST-%E8%AF%B7%E6%B1%82-Nginx-%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9-405-%E9%94%99%E8%AF%AF/</url>
+    <content><![CDATA[<p>Nginx是不支持POST请求静态内容的，通过POST请求时出现以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># curl -d &quot;a=b&quot; &quot;http://192.16.36.15:11013/upgrade&quot;</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;&lt;title&gt;405 Not Allowed&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=<span class="string">&quot;white&quot;</span>&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;405 Not Allowed&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx/1.14.2&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法是在Nginx配置中添加以下配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">error_page 405 =200 $uri;</span><br></pre></td></tr></table></figure>
+
+<p>完整配置示例如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location /upgrade &#123;</span><br><span class="line">        empty_gif;</span><br><span class="line">        access_log /data/nginx/upgrade.log;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    error_page 405 =200 $uri;</span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
 </search>
