@@ -1382,4 +1382,62 @@
         <tag>Zookeeper</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Zookeeper单机操作</title>
+    <url>/2017/03/29/Zookeeper-%E5%8D%95%E6%9C%BA%E6%93%8D%E4%BD%9C/</url>
+    <content><![CDATA[<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>从Apache下载镜像站点下载当前稳定<a href="http://zookeeper.apache.org/releases.html">发布版</a>。</p>
+<h1 id="单机操作"><a href="#单机操作" class="headerlink" title="单机操作"></a>单机操作</h1><p>安装单机模式的Zookeeper服务器是简单明了的。服务器包含在一个单独的JAR文件中，因此安装包含创建配置。</p>
+<p>下载稳定的ZooKeeper发布版后，解压并切换到包的根目录。</p>
+<p>启动ZooKeeper前需要一个配置文件。下面是示例配置文件，创建<code>conf/zoo.cfg</code>：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line"># The number of milliseconds of each tick</span><br><span class="line">tickTime=2000</span><br><span class="line"># The number of ticks that the initial </span><br><span class="line"># synchronization phase can take</span><br><span class="line">initLimit=10</span><br><span class="line"># The number of ticks that can pass between </span><br><span class="line"># sending a request and getting an acknowledgement</span><br><span class="line">syncLimit=5</span><br><span class="line"># the directory where the snapshot is stored.</span><br><span class="line"># do not use /tmp for storage, /tmp here is just </span><br><span class="line"># example sakes.</span><br><span class="line">dataDir=/data/zookeeper</span><br><span class="line"># the port at which the clients will connect</span><br><span class="line">clientPort=2181</span><br></pre></td></tr></table></figure>
+
+<p>这个配置文件可以叫任意名字，在此我们叫它<code>conf/zoo.cfg</code>。创建目录<code>/data/zookeeper</code>，并修改dataDir为该目录。</p>
+<p><strong>tickTime</strong></p>
+<p>Zookeeper使用的单位为毫秒的基本时间。用来做心跳，会话超时的最小时间是两次tickTime。</p>
+<p><strong>dataDir</strong></p>
+<p>目录位置用来保存内存数据库快照及数据库更新的事务日志，除非另有规定。</p>
+<p><strong>clientPort</strong></p>
+<p>监听客户端连接的端口号。</p>
+<p>创建配置文件后就可以启动ZooKeeper了：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/zkServer.sh start</span><br></pre></td></tr></table></figure>
+
+<p>ZooKeeper用log4j记录日志消息 – 可以在程序员指导手册中的<a href="http://zookeeper.apache.org/doc/trunk/zookeeperProgrammers.html#Logging">Logging</a> 一节获取更多详细信息。可以从控制台（默认）并且&#x2F;或者看到日志信息，这依赖log4j的配置。</p>
+<p>这里列出的步骤是运行单机模式ZooKeeper的。单机模式没有副本，因此，如果ZooKeeper进程失败，则服务就会宕掉。这对于大多数开发场景是没问题的，运行副本模式的ZooKeeper，请参见<a href="http://zookeeper.apache.org/doc/trunk/zookeeperStarted.html#sc_RunningReplicatedZooKeeper">运行副本模式的Zookeeper</a>。</p>
+<h1 id="管理ZooKeeper存储"><a href="#管理ZooKeeper存储" class="headerlink" title="管理ZooKeeper存储"></a>管理ZooKeeper存储</h1><p>对于长期运行的生产系统，ZooKeeper存储必须从外部进行管理（dataDir和logs）。参见在 <a href="http://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html#sc_maintenance">maintenance</a> 中的章节获取更多信息。</p>
+<h1 id="连接到ZooKeeper"><a href="#连接到ZooKeeper" class="headerlink" title="连接到ZooKeeper"></a>连接到ZooKeeper</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bin/zkCli.sh -server 127.0.0.1:2181</span><br></pre></td></tr></table></figure>
+
+<p>这使你可以执行简单的、像文件一样的操作。</p>
+<p>当建立了连接，应该可以看到像下面的一些信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Connecting to localhost:2181</span><br><span class="line">log4j:WARN No appenders could be found for logger (org.apache.zookeeper.ZooKeeper).</span><br><span class="line">log4j:WARN Please initialize the log4j system properly.</span><br><span class="line">Welcome to ZooKeeper!</span><br><span class="line">JLine support is enabled</span><br><span class="line">[zkshell: 0]</span><br></pre></td></tr></table></figure>
+
+<p>在shell中，输入help获取可以从客户端执行的命令列表，像下面：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">help</span></span><br><span class="line">ZooKeeper -server host:port cmd args</span><br><span class="line">        connect host:port</span><br><span class="line">        get path [watch]</span><br><span class="line">        <span class="built_in">ls</span> path [watch]</span><br><span class="line">        <span class="built_in">set</span> path data [version]</span><br><span class="line">        rmr path</span><br><span class="line">        delquota [-n|-b] path</span><br><span class="line">        quit </span><br><span class="line">        printwatches on|off</span><br><span class="line">        create [-s] [-e] path data acl</span><br><span class="line">        <span class="built_in">stat</span> path [watch]</span><br><span class="line">        close </span><br><span class="line">        ls2 path [watch]</span><br><span class="line">        <span class="built_in">history</span> </span><br><span class="line">        listquota path</span><br><span class="line">        setAcl path acl</span><br><span class="line">        getAcl path</span><br><span class="line">        <span class="built_in">sync</span> path</span><br><span class="line">        redo cmdno</span><br><span class="line">        addauth scheme auth</span><br><span class="line">        delete path [version]</span><br><span class="line">        setquota -n|-b val path</span><br></pre></td></tr></table></figure>
+
+<p>从这里，可以尝试几个简单的命令来体验简单的命令行接口。首先，从命令列表开始，像ls：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 1] <span class="built_in">ls</span> /</span><br><span class="line">[zookeeper]</span><br></pre></td></tr></table></figure>
+
+<p>接下来，通过运行<code>create /zk_test my_data</code>创建一个新的znode。这会创建一个新的znode并与这个节点关联字符串“my_data”：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 2] create /zk_test my_data</span><br><span class="line">Created /zk_test</span><br></pre></td></tr></table></figure>
+
+<p>输入<code>ls /</code>命令查看目录结构：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 3] <span class="built_in">ls</span> /</span><br><span class="line">[zookeeper, zk_test]</span><br></pre></td></tr></table></figure>
+
+<p>现在zk_test目录被创建了。</p>
+<p>接下来，通过get命令确认数据已经与znode关联，像：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 4] get /zk_test</span><br><span class="line">my_data</span><br><span class="line">cZxid = 0x2</span><br><span class="line">ctime = Tue Mar 28 23:37:16 CST 2017</span><br><span class="line">mZxid = 0x2</span><br><span class="line">mtime = Tue Mar 28 23:37:16 CST 2017</span><br><span class="line">pZxid = 0x2</span><br><span class="line">cversion = 0</span><br><span class="line">dataVersion = 0</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 7</span><br><span class="line">numChildren = 0</span><br></pre></td></tr></table></figure>
+
+<p>可以输入set命令修改与zk_test关联的数据，像：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 5] <span class="built_in">set</span> /zk_test junk</span><br><span class="line">cZxid = 0x2</span><br><span class="line">ctime = Tue Mar 28 23:37:16 CST 2017</span><br><span class="line">mZxid = 0x3</span><br><span class="line">mtime = Tue Mar 28 23:46:12 CST 2017</span><br><span class="line">pZxid = 0x2</span><br><span class="line">cversion = 0</span><br><span class="line">dataVersion = 1</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 4</span><br><span class="line">numChildren = 0</span><br><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 6] get /zk_test</span><br><span class="line">junk</span><br><span class="line">cZxid = 0x2</span><br><span class="line">ctime = Tue Mar 28 23:37:16 CST 2017</span><br><span class="line">mZxid = 0x3</span><br><span class="line">mtime = Tue Mar 28 23:46:12 CST 2017</span><br><span class="line">pZxid = 0x2</span><br><span class="line">cversion = 0</span><br><span class="line">dataVersion = 1</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 4</span><br><span class="line">numChildren = 0</span><br></pre></td></tr></table></figure>
+
+<p>最后，输入以下命令删除节点：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 7] delete /zk_test</span><br><span class="line">[zk: 127.0.0.1:2181(CONNECTED) 8] <span class="built_in">ls</span> /</span><br><span class="line">[zookeeper]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>常用组件</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Zookeeper</tag>
+      </tags>
+  </entry>
 </search>
