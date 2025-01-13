@@ -1440,4 +1440,36 @@
         <tag>Zookeeper</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windows7 Emacs设置及中文乱码解决</title>
+    <url>/2017/01/08/Windows7-Emacs-%E8%AE%BE%E7%BD%AE%E5%8F%8A%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><ul>
+<li>Windows7</li>
+<li>GNU Emacs 25.1.1</li>
+<li>安装路径：D:&#x2F;apps&#x2F;emacs&#x2F;</li>
+</ul>
+<h1 id="配置Emacs"><a href="#配置Emacs" class="headerlink" title="配置Emacs"></a>配置Emacs</h1><p>在Windows7下安装完Emacs后，默认情况下Emacs不会在一启动的时候就生成.emacs配置文件和.emacs.d目录。为了生成配置文件需要做如下操作：</p>
+<ul>
+<li>启动Emacs</li>
+<li>在Options菜单中随便更改一下设置，如选中“Highlight Matching Parentheses”</li>
+<li>点Save Options保存</li>
+</ul>
+<p>生成的.emacs目录还是在<code>C:\Users\&lt;username&gt;\AppData\Roaming</code>下。打开<code>C:\Users\&lt;username&gt;\AppData\Roaming\.emacs</code>配置文件，添加如下配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">(load-file &quot;D:/apps/emacs/.emacs&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>Emacs在启动的时候会加载<code>C:\Users\&lt;username&gt;\AppData\Roaming\.emacs</code>这个配置文件，而该文件又加载<code>D:/apps/emacs/.emacs</code>配置文件。这样不用进入<code>C:\Users\&lt;username&gt;\AppData\Roaming\.emacs</code>这个冗的路径了。</p>
+<p>使用以下配置修改<code>HOME PATH</code>配置项：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">(setenv &quot;HOME&quot; &quot;D:/emacs-23.2&quot;)</span><br><span class="line">(setenv &quot;PATH&quot; &quot;D:/emacs-23.2&quot;)</span><br><span class="line">;;set the default file path</span><br><span class="line">(setq default-directory &quot;~/&quot;)</span><br><span class="line">(setq load-path (cons &quot;~/.emacs.d/elisp&quot; load-path))</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决中文乱码"><a href="#解决中文乱码" class="headerlink" title="解决中文乱码"></a>解决中文乱码</h1><p>在.emacs文件中加入如下配置：</p>
+<figure class="highlight lisp"><table><tr><td class="code"><pre><span class="line"><span class="comment">;; 编码设置 begin</span></span><br><span class="line">(<span class="name">set-language-environment</span> &#x27;Chinese-GB)</span><br><span class="line"></span><br><span class="line"><span class="comment">;; default-buffer-file-coding-system变量在emacs23.2之后已被废弃，使用buffer-file-coding-system代替</span></span><br><span class="line">(<span class="name">set-default</span> buffer-file-coding-system &#x27;utf-8-unix)</span><br><span class="line">(<span class="name">set-default-coding-systems</span> &#x27;utf-8-unix)</span><br><span class="line">(<span class="name">setq-default</span> pathname-coding-system &#x27;euc-cn)</span><br><span class="line">(<span class="name">setq</span> file-name-coding-system &#x27;euc-cn)</span><br><span class="line"></span><br><span class="line"><span class="comment">;; 另外建议按下面的先后顺序来设置中文编码识别方式。</span></span><br><span class="line"><span class="comment">;; 重要提示:写在最后一行的，实际上最优先使用; 最前面一行，反而放到最后才识别。</span></span><br><span class="line"><span class="comment">;; utf-16le-with-signature 相当于 Windows 下的 Unicode 编码，这里也可写成</span></span><br><span class="line"><span class="comment">;; utf-16 (utf-16 实际上还细分为 utf-16le, utf-16be, utf-16le-with-signature等多种)</span></span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;cp950)</span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;gb2312)</span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;cp936)</span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;gb18030)</span><br><span class="line"></span><br><span class="line"><span class="comment">;(prefer-coding-system &#x27;utf-16le-with-signature)</span></span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;utf-16)</span><br><span class="line"></span><br><span class="line"><span class="comment">;; 新建文件使用utf-8-unix方式</span></span><br><span class="line"><span class="comment">;; 如果不写下面两句，只写</span></span><br><span class="line"><span class="comment">;; (prefer-coding-system &#x27;utf-8)</span></span><br><span class="line"><span class="comment">;; 这一句的话，新建文件以utf-8编码，行末结束符平台相关</span></span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;utf-8-dos)</span><br><span class="line">(<span class="name">prefer-coding-system</span> &#x27;utf-8-unix)</span><br><span class="line"><span class="comment">;; 编码设置 end</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Emacs</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+        <tag>Emacs</tag>
+      </tags>
+  </entry>
 </search>
