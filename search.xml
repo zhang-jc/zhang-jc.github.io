@@ -1483,7 +1483,7 @@
 <li>cmake version 3.7.2 win64 x64</li>
 <li>Windows SDK 7.1</li>
 </ul>
-<p>构建过程参照源代码目录下<code>BUILDING.txt</code>说明文件中的“Building on Windows”中的内容；以及我的另外一篇文章：<a href="http://zhang-jc.github.io/2016/08/29/%E6%90%AD%E5%BB%BA-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83/">搭建Hadoop源代码阅读环境</a>。</p>
+<p>构建过程参照源代码目录下<code>BUILDING.txt</code>说明文件中的“Building on Windows”中的内容；以及我的另外一篇文章：<a href="">搭建Hadoop源代码阅读环境</a>。</p>
 <h1 id="LINK-fatal-error-LNK1123-转换到-COFF-期间失败"><a href="#LINK-fatal-error-LNK1123-转换到-COFF-期间失败" class="headerlink" title="LINK : fatal error LNK1123: 转换到 COFF 期间失败"></a>LINK : fatal error LNK1123: 转换到 COFF 期间失败</h1><p>错误信息如下：</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">LINK : fatal error LNK1123: 转换到 COFF 期间失败: 文件无效或损坏 [C:\hadoop-2.7.3\hadoop-common-project\hadoop-common\src\main\winutils\winutils.vcxproj]</span><br></pre></td></tr></table></figure>
 
@@ -1588,6 +1588,122 @@
         <tag>大数据</tag>
         <tag>Windows</tag>
         <tag>Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建Hadoop源代码阅读环境</title>
+    <url>/2016/08/29/%E6%90%AD%E5%BB%BA-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><ul>
+<li>Mac OS X EI Capitan 10.11.6</li>
+<li>java version “1.7.0_80”</li>
+<li>git version 2.7.4 (Apple Git-66)</li>
+<li>Apache Maven 3.3.9</li>
+</ul>
+<h1 id="下载源代码"><a href="#下载源代码" class="headerlink" title="下载源代码"></a>下载源代码</h1><p>从Git上下载最新源代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git://git.apache.org/hadoop-common.git</span><br></pre></td></tr></table></figure>
+
+<h1 id="构建代码"><a href="#构建代码" class="headerlink" title="构建代码"></a>构建代码</h1><p>构建代码，使项目可以导入到Eclipse中。切换目录到hadoop-common，执行以下命令：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">$ mvn install -DskipTests</span><br><span class="line">$ mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个过程时间比较久，最好有内部的Nexus服务器，不然可能会不够顺畅。</p>
+</blockquote>
+<h1 id="Hadoop-2-7-3源码环境"><a href="#Hadoop-2-7-3源码环境" class="headerlink" title="Hadoop 2.7.3源码环境"></a>Hadoop 2.7.3源码环境</h1><p>下载地址：<a href="http://hadoop.apache.org/releases.html">http://hadoop.apache.org/releases.html</a>。下载2.7.3源代码包到本地。使用以下命令解压：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ tar xzvf hadoop-2.7.3-src.tar.gz</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解压目录下的<code>hadoop-2.7.3-src/BUILDING.txt</code>文件提供了很多信息。</p>
+</blockquote>
+<p>源码构建方式同上。</p>
+<h1 id="Eclipse中的操作"><a href="#Eclipse中的操作" class="headerlink" title="Eclipse中的操作"></a>Eclipse中的操作</h1><h2 id="Common"><a href="#Common" class="headerlink" title="Common"></a>Common</h2><ul>
+<li>File -&gt; Import…</li>
+<li>Choose “Existing Projects into Workspace”</li>
+<li>Select the hadoop-common-project directory as the root directory</li>
+<li>Select the hadoop-annotations, hadoop-auth, hadoop-auth-examples, hadoop-nfs and hadoop-common projects</li>
+<li>Click “Finish”</li>
+<li>File -&gt; Import…</li>
+<li>Choose “Existing Projects into Workspace”</li>
+<li>Select the hadoop-assemblies directory as the root directory</li>
+<li>Select the hadoop-assemblies project</li>
+<li>Click “Finish”</li>
+<li>To get the projects to build cleanly:</li>
+<li><ul>
+<li>Add target&#x2F;generated-test-sources&#x2F;java as a source directory for hadoop-common</li>
+</ul>
+</li>
+<li><ul>
+<li>You may have to add then remove the JRE System Library to avoid errors due to access restrictions</li>
+</ul>
+</li>
+</ul>
+<p>最后一个操作的步骤：</p>
+<ol>
+<li>Go to the Build Path settings in the project properties.</li>
+<li>Remove the JRE System Library</li>
+<li>Add it back; Select “Add Library” and select the JRE System Library. The default worked for me.</li>
+</ol>
+<h2 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h2><ul>
+<li>File -&gt; Import…</li>
+<li>Choose “Existing Projects into Workspace”</li>
+<li>Select the hadoop-hdfs-project directory as the root directory</li>
+<li>Select the hadoop-hdfs project</li>
+<li>Click “Finish”</li>
+</ul>
+<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><ul>
+<li>File -&gt; Import…</li>
+<li>Choose “Existing Projects into Workspace”</li>
+<li>Select the hadoop-yarn-project directory as the root directory</li>
+<li>Select the hadoop-yarn-project project</li>
+<li>Click “Finish”</li>
+</ul>
+<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><ul>
+<li>File -&gt; Import…</li>
+<li>Choose “Existing Projects into Workspace”</li>
+<li>Select the hadoop-mapreduce-project directory as the root directory</li>
+<li>Select the hadoop-mapreduce-project project</li>
+<li>Click “Finish”</li>
+</ul>
+<h1 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h1><h2 id="错误-程序包com-sun-javadoc不存在"><a href="#错误-程序包com-sun-javadoc不存在" class="headerlink" title="错误: 程序包com.sun.javadoc不存在"></a>错误: 程序包com.sun.javadoc不存在</h2><p>如果使用JDK8执行<code>mvn install -DskipTests</code>的话会报一下错误，需要替换为JDK7后再执行。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INFO] -------------------------------------------------------------</span><br><span class="line">[ERROR] COMPILATION ERROR :</span><br><span class="line">[INFO] -------------------------------------------------------------</span><br><span class="line">[ERROR] /Users/ling/work/git/hadoop-common/hadoop-common-project/hadoop-annotations/src/main/java/org/apache/hadoop/classification/tools/ExcludePrivateAnnotationsStandardDoclet.java:[20,22] 错误: 程序包com.sun.javadoc不存在</span><br></pre></td></tr></table></figure>
+
+<h2 id="‘protoc-–version’-did-not-return-a-version"><a href="#‘protoc-–version’-did-not-return-a-version" class="headerlink" title="‘protoc –version’ did not return a version"></a>‘protoc –version’ did not return a version</h2><p>错误信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.apache.hadoop:hadoop-maven-plugins:3.0.0-SNAPSHOT:protoc (compile-protoc) on project hadoop-common: org.apache.maven.plugin.MojoExecutionException: &#x27;protoc --version&#x27; did not return a version -&gt; [Help 1]</span><br></pre></td></tr></table></figure>
+
+<p>这是因为没有安装protoc的缘故。我安装了最新版的protoc3.0.0重新执行报错信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.apache.hadoop:hadoop-maven-plugins:3.0.0-SNAPSHOT:protoc (compile-protoc) on project hadoop-common: org.apache.maven.plugin.MojoExecutionException: protoc version is &#x27;libprotoc 3.0.0&#x27;, expected version is &#x27;2.5.0&#x27; -&gt; [Help 1]</span><br></pre></td></tr></table></figure>
+
+<p>安装protoc2.5.0版本后重新执行成功。</p>
+<h2 id="hadoop-common编译错误：Type-AvroRecord-cannot-be-resolved-to-a-type"><a href="#hadoop-common编译错误：Type-AvroRecord-cannot-be-resolved-to-a-type" class="headerlink" title="hadoop-common编译错误：Type AvroRecord cannot be resolved to a type"></a>hadoop-common编译错误：Type AvroRecord cannot be resolved to a type</h2><ul>
+<li>下载<a href="http://mirrors.cnnic.cn/apache/avro/avro-1.7.7/java/avro-tools-1.7.7.jar">avro-tools</a>最新版。</li>
+<li>进入源码目录<code>hadoop-2.7.3-src/hadoop-common-project/hadoop-common/src/test/avro</code>，执行以下命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ java -jar &lt;所在目录&gt;/avro-tools-1.7.7.jar compile schema avroRecord.avsc ../java/</span><br></pre></td></tr></table></figure>
+
+<p>其中avsc文件是avro的模式文件，上面命令是要通过模式文件生成相应的<code>.java</code>文件。</p>
+<p>右键单击eclipse中的hadoop-common项目，然后refresh。</p>
+<blockquote>
+<p>注意，avro-tools不要下载最新版，要下载1.7.7版本；最新1.8.1版本测试失败。</p>
+</blockquote>
+<h2 id="hadoop-common编译错误：Type-EchoRequestProto-cannot-be-resolved"><a href="#hadoop-common编译错误：Type-EchoRequestProto-cannot-be-resolved" class="headerlink" title="hadoop-common编译错误：Type EchoRequestProto cannot be resolved"></a>hadoop-common编译错误：Type EchoRequestProto cannot be resolved</h2><ul>
+<li>进入源码目录<code>hadoop-2.7.3-src/hadoop-common-project/hadoop-common/src/test/proto</code>，执行以下命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ protoc \-\-java_out=../java *.proto</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>右键单击eclipse中的hadoop-common，然后refresh。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>Eclipse</tag>
+        <tag>Maven</tag>
+        <tag>分布式计算</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
 </search>
