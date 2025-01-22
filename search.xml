@@ -1730,4 +1730,35 @@
         <tag>分布式计算</tag>
       </tags>
   </entry>
+  <entry>
+    <title>VirtualBox can&#39;t enable the AMD-V extension</title>
+    <url>/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/</url>
+    <content><![CDATA[<p>最近一次完成Deepin的系统更新后，进入VirtualBox创建的虚拟机（Widows10）时，出现以下错误：<img src="/images/202501/20.png"></p>
+<p>根据网址“<a href="https://askubuntu.com/questions/403591/amd-v-is-being-used-by-another-hypervisor-verr-svm-in-use">https://askubuntu.com/questions/403591/amd-v-is-being-used-by-another-hypervisor-verr-svm-in-use</a>”对问题的提示，检查我的问题，是因为同时安装了Virtualbox和KVM冲突导致的。如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#Virtualbox modules</span></span><br><span class="line">$ <span class="built_in">sudo</span> lsmod | grep vbox</span><br><span class="line">vboxnetadp             28672  0</span><br><span class="line">vboxnetflt             32768  0</span><br><span class="line">vboxdrv               638976  2 vboxnetadp,vboxnetflt</span><br><span class="line"></span><br><span class="line"><span class="comment">#kvm</span></span><br><span class="line">$ <span class="built_in">sudo</span> lsmod| grep kvm</span><br><span class="line">kvm_amd               200704  0</span><br><span class="line">kvm                  1232896  1 kvm_amd</span><br><span class="line">ccp                   147456  2 i2c_designware_platform,kvm_amd</span><br></pre></td></tr></table></figure>
+
+<p>从上面的信息可以看出，VirtualBox模块和KVM模块都存在。运行一下命令移除KVM模块：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> rmmod kvm_amd</span><br><span class="line">$ <span class="built_in">sudo</span> rmmod kvm</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，执行移除命令的顺序，首先移除依赖kvm的kvm_amd模块，否则会提示以下信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> rmmod kvm</span><br><span class="line">rmmod: ERROR: Module kvm is <span class="keyword">in</span> use by: kvm_amd</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>再次启动虚拟机，问题解决。</p>
+<p>但是，还存在一个问题，每次重启电脑都需要按照以上步骤操作才行，未免太麻烦了。解决方法是，将kvm和kvm_amt加入黑名单模块列表：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;blacklist kvm&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/modprobe.d/blacklist.conf</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;blacklist kvm_amd&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> -a /etc/modprobe.d/blacklist.conf</span><br><span class="line">$ <span class="built_in">sudo</span> update-initramfs -u</span><br></pre></td></tr></table></figure>
+
+<p>执行完成后，重启后再试，问题解决。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Deepin</tag>
+        <tag>Windows</tag>
+        <tag>VirtualBox</tag>
+      </tags>
+  </entry>
 </search>
