@@ -1761,4 +1761,20 @@
         <tag>VirtualBox</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windows10安装MySQL找不到MSVCR120.dll和MSVCP120.dll问题解决</title>
+    <url>/2022/01/18/Windows10%E5%AE%89%E8%A3%85MySQL%E6%89%BE%E4%B8%8D%E5%88%B0MSVCR120-dll%E5%92%8CMSVCP120-dll%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>msvcp120.dll、msvcr120.dll、vcomp120.dll属于VC++2013版中的动态链接库，如果丢失重新安装VC++2013即可。下载地址：<a href="https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=40784">https://www.microsoft.com/zh-cn/download/confirmation.aspx?id=40784</a>。</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+        <tag>Windows</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
