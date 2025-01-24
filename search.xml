@@ -1777,4 +1777,18 @@
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Visual Studio Code修改terminal字体</title>
+    <url>/2019/10/17/Visual-Studio-Code-%E4%BF%AE%E6%94%B9-terminal-%E5%AD%97%E4%BD%93/</url>
+    <content><![CDATA[<p>默认打开中断后字体显示如下：<img src="/images/202501/vs-code-terminal.png" alt="VS 字体设置前效果"></p>
+<p>打开设置，搜索配置项<code>terminal.integrated.fontFamily</code>，修改配置为<code>monospace</code>。修改后效果如下：<img src="/images/202501/vs-code-terminal-font.png" alt="VS 字体设置后效果"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>VS Code</category>
+      </categories>
+      <tags>
+        <tag>VS Code</tag>
+      </tags>
+  </entry>
 </search>
