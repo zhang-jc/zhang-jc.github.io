@@ -1791,4 +1791,20 @@
         <tag>VS Code</tag>
       </tags>
   </entry>
+  <entry>
+    <title>vi忽略大小写搜索</title>
+    <url>/2021/08/27/vi%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<p>先set ignorecase，如下图：</p>
+<p><img src="/images/202501/setIgnorecase.png" alt="set ignorecase"></p>
+<p>然后再进行搜索：</p>
+<p><img src="/images/202501/search.png" alt="search"></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
 </search>
