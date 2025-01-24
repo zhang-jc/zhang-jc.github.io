@@ -1807,4 +1807,19 @@
         <tag>Linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu终端CTRL+S被锁定后解锁快捷键</title>
+    <url>/2020/11/30/Ubuntu-%E7%BB%88%E7%AB%AF-CTRL-S-%E8%A2%AB%E9%94%81%E5%AE%9A%E5%90%8E%E8%A7%A3%E9%94%81%E5%BF%AB%E6%8D%B7%E9%94%AE/</url>
+    <content><![CDATA[<p><code>CTRL + S</code>表示暂停终端的作用，停止终端输入。使用快捷键<code>CTRL + Q</code>恢复，可以继续向终端输入。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
