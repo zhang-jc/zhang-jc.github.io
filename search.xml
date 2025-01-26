@@ -1849,4 +1849,25 @@
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>安装Office自定义项，安装期间出错</title>
+    <url>/2025/01/26/%E5%AE%89%E8%A3%85Office%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B9%EF%BC%8C%E5%AE%89%E8%A3%85%E6%9C%9F%E9%97%B4%E5%87%BA%E9%94%99/</url>
+    <content><![CDATA[<p>卸载PowerDesigner后，打开“WPS文字”时出现下图错误：<img src="/images/202501/21.png"></p>
+<p><strong>解决方法：</strong></p>
+<ol>
+<li>按“Win+R”快捷键，打开【运行】框，在对话框中输入“regedit”，打开注册表。</li>
+<li>按“Ctrl+F”，在搜索对话框中输入“YDWordAddIn.vsto”。</li>
+<li>找到下图中的地址栏中红色框圈中的注册表项，并删除【Manifest】项中的数据。<br>删除前，如下图：<img src="/images/202501/22.png"><br>删除后，如下图：<img src="/images/202501/23.png"></li>
+</ol>
+<p>重新打开“WPS文字”时不再报错。</p>
+<p>错误原因是，卸载PowerDesigner后，调用Office插件的注册表没有清理干净。</p>
+]]></content>
+      <categories>
+        <category>办公软件</category>
+        <category>WPS</category>
+      </categories>
+      <tags>
+        <tag>WPS</tag>
+      </tags>
+  </entry>
 </search>
