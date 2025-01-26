@@ -1822,4 +1822,31 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin开机SMBus Timeout</title>
+    <url>/2025/01/26/Deepin%E5%BC%80%E6%9C%BASMBus-Timeout/</url>
+    <content><![CDATA[<p>Deepin 23在开机启动时，出现以下错误信息。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[    1.368406] i2c i2c-0: SMBus Timeout!</span><br><span class="line">[    1.368428] i2c i2c-0: Failed reset at end of transaction (01)</span><br><span class="line">[    1.368478] i2c i2c-0:Failed! (01)</span><br></pre></td></tr></table></figure>
+
+<p>虽然不影响开机和使用，但开着还是不太爽。可以用以下方法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vi /etc/default/grub</span><br></pre></td></tr></table></figure>
+
+<p>将以下内容：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;splash quiet &quot;</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;splash quiet loglevel=3&quot;</span><br></pre></td></tr></table></figure>
+
+<p>保存退出后，运行<code>update-grub</code>更新Grub配置。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Deepin</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
