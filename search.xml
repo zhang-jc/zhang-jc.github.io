@@ -1883,7 +1883,7 @@
 <li>PySide版本：PySide 6.6.3</li>
 </ul>
 <p>快速解决方法是，在VS Code配置中设置如下环境变量：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">QT_QPA_PLATFORM=offscreen</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">QT_QPA_PLATFORM=xcb</span><br></pre></td></tr></table></figure>
 
 <p>打开设置，搜索env，找到Linux的Env设置，如下图：<img src="/images/202501/24.png"></p>
 <p>点击<code>Edit in settings.json</code>，在配置文件中添加以下配置：</p>
