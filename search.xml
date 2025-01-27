@@ -1925,4 +1925,51 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu 20.04安装Protocol Buffers 2.5.0</title>
+    <url>/2021/07/01/Ubuntu-20-04%E5%AE%89%E8%A3%85Protocol-Buffers-2-5-0/</url>
+    <content><![CDATA[<h1 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h1><p>Protocol Buffers 2.5.0源码下载：<a href="https://github.com/protocolbuffers/protobuf/tree/v2.5.0">https://github.com/protocolbuffers/protobuf/tree/v2.5.0</a>。下载并解压。</p>
+<p>将autogen.sh文件中以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2 | tar jx</span><br><span class="line">mv gtest-1.5.0 gtest</span><br></pre></td></tr></table></figure>
+
+<p>替换为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://github.com/google/googletest/archive/release-1.5.0.tar.gz</span><br><span class="line">tar xzvf release-1.5.0.tar.gz</span><br><span class="line">mv googletest-release-1.5.0 gtest</span><br></pre></td></tr></table></figure>
+
+<p>执行以下命令进行安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make check</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装问题"><a href="#安装问题" class="headerlink" title="安装问题"></a>安装问题</h1><h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><p>执行 autogen.sh 时出现一下错误：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">configure.ac:29: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br><span class="line">      If this token and others are legitimate, please use m4_pattern_allow.</span><br><span class="line">      See the Autoconf documentation.</span><br><span class="line">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h3><p>安装 libtool：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get install libtool</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><h3 id="问题现象-1"><a href="#问题现象-1" class="headerlink" title="问题现象"></a>问题现象</h3><p>安装完成后验证出现以下错误：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">protoc --version</span></span><br><span class="line">protoc: error while loading shared libraries: libprotoc.so.8: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题解决-1"><a href="#问题解决-1" class="headerlink" title="问题解决"></a>问题解决</h3><ul>
+<li>使用find命令找到libprotoc.so.8文件位置。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> /usr/local/</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">find . -name libprotoc.so.8</span></span><br><span class="line">./lib/libprotoc.so.8</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建<code>/etc/ld.so.conf.d/libprotobuf.conf</code>文件，并输入以下内容：</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">/usr/local/lib</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>执行命令：<code>sudo ldconfig</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>常用组件</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
