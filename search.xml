@@ -1870,4 +1870,39 @@
         <tag>WPS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>qt.qpa.plugin: Could not find the Qt platform plugin &quot;dxcb&quot; in &quot;&quot;</title>
+    <url>/2025/01/27/qt-qpa-plugin-Could-not-find-the-Qt-platform-plugin-dxcb-in/</url>
+    <content><![CDATA[<p>我遇到的场景是，在Deepin系统终端中运行PySide应用时，没有错误提示，但在VS Code中运行时，出现以下错误信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">qt.qpa.plugin: Could not find the Qt platform plugin &quot;dxcb&quot; in &quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我本地的环境信息如下：</p>
+<ul>
+<li>操作系统：Deepin 23社区版</li>
+<li>Python版本：Python 3.12.8</li>
+<li>PySide版本：PySide 6.6.3</li>
+</ul>
+<p>快速解决方法是，在VS Code配置中设置如下环境变量：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">QT_QPA_PLATFORM=offscreen</span><br></pre></td></tr></table></figure>
+
+<p>打开设置，搜索env，找到Linux的Env设置，如下图：<img src="/images/202501/24.png"></p>
+<p>点击<code>Edit in settings.json</code>，在配置文件中添加以下配置：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;QT_QPA_PLATFORM&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xcb&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>添加后的效果如下图：<img src="/images/202501/25.png"></p>
+<p>再次运行PySide应用，没有错误信息了。</p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Deepin</tag>
+        <tag>Python</tag>
+        <tag>PySide6</tag>
+        <tag>VS Code</tag>
+        <tag>Qt</tag>
+      </tags>
+  </entry>
 </search>
