@@ -8,7 +8,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;ls -l&#x27;</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>操作系统</category>
-        <category>Linux</category>
+        <category>Deepin</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -256,7 +256,7 @@
 ]]></content>
       <categories>
         <category>操作系统</category>
-        <category>Linux</category>
+        <category>Deepin</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -1752,7 +1752,7 @@
 ]]></content>
       <categories>
         <category>操作系统</category>
-        <category>Linux</category>
+        <category>Deepin</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -1814,7 +1814,7 @@
 ]]></content>
       <categories>
         <category>操作系统</category>
-        <category>Linux</category>
+        <category>Ubuntu</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -1841,7 +1841,7 @@
 ]]></content>
       <categories>
         <category>操作系统</category>
-        <category>Linux</category>
+        <category>Deepin</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -1903,6 +1903,26 @@
         <tag>PySide6</tag>
         <tag>VS Code</tag>
         <tag>Qt</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 20.04 Realtek 8852无线网卡驱动</title>
+    <url>/2022/01/05/Ubuntu-20-04-Realtek-8852-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</url>
+    <content><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git</span><br><span class="line"></span><br><span class="line">git clone https://github.com/lwfinger/rtw89.git -b v5</span><br><span class="line">cd rtw89 &amp;&amp; make &amp;&amp; sudo make install</span><br><span class="line"></span><br><span class="line">sudo modprobe rtw89pci</span><br></pre></td></tr></table></figure>
+
+<p>执行完成后重启。</p>
+<blockquote>
+<p>参考链接：<a href="https://askubuntu.com/questions/1352731/ubuntu-20-04-no-wifi-adapter-found-lenovo-ideapad-realtek">https://askubuntu.com/questions/1352731/ubuntu-20-04-no-wifi-adapter-found-lenovo-ideapad-realtek</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
 </search>
