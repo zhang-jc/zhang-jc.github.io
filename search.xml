@@ -1991,4 +1991,49 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu 16.04用APT安装MySQL</title>
+    <url>/2017/06/11/Ubuntu-16-04-%E7%94%A8-APT-%E5%AE%89%E8%A3%85-MySQL/</url>
+    <content><![CDATA[<h1 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h1><p>用以下命令安装MySQL:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install mysql-server</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会安装MySQL服务器、客户端和公共文件。安装过程会出现两个要求输入的对话框：</p>
+<ul>
+<li>输入MySQL root用户的密码。</li>
+<li>指明是否创建test数据库。</li>
+</ul>
+<h1 id="启动-停止MySQL"><a href="#启动-停止MySQL" class="headerlink" title="启动&#x2F;停止MySQL"></a>启动&#x2F;停止MySQL</h1><p>安装之后，MySQL服务器会自动启动。用下面的命令检查MySQL服务器状态：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> service mysql status</span><br><span class="line">● mysql.service - MySQL Community Server</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since 日 2017-06-11 17:05:11 CST; 14min ago</span><br><span class="line"> Main PID: 11970 (mysqld)</span><br><span class="line">   CGroup: /system.slice/mysql.service</span><br><span class="line">           └─11970 /usr/sbin/mysqld</span><br><span class="line"></span><br><span class="line">6月 11 17:05:09 frin systemd[1]: Starting MySQL Community Server...</span><br><span class="line">6月 11 17:05:11 frin systemd[1]: Started MySQL Community Server.</span><br></pre></td></tr></table></figure>
+
+<p>使用下面的命令停止MySQL：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service mysql stop</span><br></pre></td></tr></table></figure>
+
+<p>使用下面的命令启动MySQL：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service mysql start</span><br></pre></td></tr></table></figure>
+
+<h1 id="连接-断开MySQL服务器："><a href="#连接-断开MySQL服务器：" class="headerlink" title="连接&#x2F;断开MySQL服务器："></a>连接&#x2F;断开MySQL服务器：</h1><p>使用root用户连接MySQL服务器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mysql -h 127.0.0.1 -u root -p</span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection <span class="built_in">id</span> is 4</span><br><span class="line">Server version: 5.7.18-0ubuntu0.16.04.1 (Ubuntu)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">&#x27;help;&#x27;</span> or <span class="string">&#x27;\h&#x27;</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">&#x27;\c&#x27;</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令断开连接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql&gt; quit</span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+
+<h1 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h1><p>创建Hive元数据使用的数据库hive。使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql&gt; CREATE DATABASE hive;</span><br><span class="line">Query OK, 1 row affected (0.03 sec)</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令切换到hive数据库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql&gt; use hive;</span><br><span class="line">Database changed</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令创建用户hive，并授权：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line"></span><br><span class="line">mysql&gt; CREATE USER <span class="string">&#x27;hive&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;hive@mysql123&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON hive.* TO <span class="string">&#x27;hive&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; CREATE USER <span class="string">&#x27;hive&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;hive@mysql123&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.12 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL ON hive.* TO <span class="string">&#x27;hive&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span>;</span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
