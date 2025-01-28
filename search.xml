@@ -1972,4 +1972,23 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu 18.04安装Emacs 26.2问题解决</title>
+    <url>/2019/06/04/Ubuntu-18-04-%E5%AE%89%E8%A3%85-Emacs-26-2-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<h1 id="no-X-development-libraries-were-found"><a href="#no-X-development-libraries-were-found" class="headerlink" title="no X development libraries were found"></a>no X development libraries were found</h1><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">checking for X... no</span><br><span class="line">checking for X... true</span><br><span class="line">configure: error: You seem to be running X, but no X development libraries</span><br><span class="line">were found.  You should install the relevant development files for X</span><br><span class="line">and for the toolkit you want, such as Gtk+ or Motif.  Also make</span><br><span class="line">sure you have development files for image handling, i.e.</span><br><span class="line">tiff, gif, jpeg, png and xpm.</span><br><span class="line">If you are sure you want Emacs compiled without X window support, pass</span><br><span class="line">  --without-x</span><br><span class="line">to configure.</span><br></pre></td></tr></table></figure>
+
+<p>安装libgtk开发包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get install libgtk2.0-dev</span><br></pre></td></tr></table></figure>
+
+<h1 id="libXpm-libjpeg-libgif-libungif-libtiff-gnutls-were-not-found"><a href="#libXpm-libjpeg-libgif-libungif-libtiff-gnutls-were-not-found" class="headerlink" title="libXpm libjpeg libgif&#x2F;libungif libtiff gnutls were not found"></a>libXpm libjpeg libgif&#x2F;libungif libtiff gnutls were not found</h1><figure class="highlight text"><table><tr><td class="code"><pre><span class="line">configure: error: The following required libraries were not found:</span><br><span class="line">    libXpm libjpeg libgif/libungif libtiff gnutls</span><br><span class="line">Maybe some development libraries/packages are missing?</span><br><span class="line">If you don&#x27;t want to link with them give</span><br><span class="line">    --with-xpm=no --with-jpeg=no --with-gif=no --with-tiff=no --with-gnutls=no</span><br><span class="line">as options to configure</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">安装对应的包：</span><br><span class="line"></span><br><span class="line">````Bash</span><br><span class="line">sudo apt-get install libxpm-dev</span><br><span class="line">sudo apt-get install libjpeg62-dev</span><br><span class="line">sudo apt-get install libgif-dev</span><br><span class="line">sudo apt-get install libtiff5-dev</span><br><span class="line">sudo apt-get install libgnutls28-dev</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Emacs</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Emacs</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
