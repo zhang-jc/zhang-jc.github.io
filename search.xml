@@ -2036,4 +2036,50 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu 16.04安装Lua</title>
+    <url>/2016/07/23/Ubuntu-16-04-%E5%AE%89%E8%A3%85-Lua/</url>
+    <content><![CDATA[<p>在Linux系统上使用以下命令编译安装Lua：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl -R -O http://www.lua.org/ftp/lua-5.3.3.tar.gz</span><br><span class="line">tar zxf lua-5.3.3.tar.gz</span><br><span class="line"><span class="built_in">cd</span> lua-5.3.3</span><br><span class="line">make linux <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="安装make"><a href="#安装make" class="headerlink" title="安装make"></a>安装make</h1><p>编译过程如果提示以下信息则需要先安装make：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># make linux test</span></span><br><span class="line">The program <span class="string">&#x27;make&#x27;</span> can be found <span class="keyword">in</span> the following packages:</span><br><span class="line"> * make</span><br><span class="line"> * make-guile</span><br><span class="line">Try: apt install &lt;selected package&gt;</span><br></pre></td></tr></table></figure>
+
+<p>安装make</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># apt-get install make</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="安装gcc"><a href="#安装gcc" class="headerlink" title="安装gcc"></a>安装gcc</h1><p>编译过程提示以下信息则需要安装gcc：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># make linux test</span></span><br><span class="line"><span class="built_in">cd</span> src &amp;&amp; make linux</span><br><span class="line">make[1]: Entering directory <span class="string">&#x27;/root/lua/lua-5.3.3/src&#x27;</span></span><br><span class="line">make all SYSCFLAGS=<span class="string">&quot;-DLUA_USE_LINUX&quot;</span> SYSLIBS=<span class="string">&quot;-Wl,-E -ldl -lreadline&quot;</span></span><br><span class="line">make[2]: Entering directory <span class="string">&#x27;/root/lua/lua-5.3.3/src&#x27;</span></span><br><span class="line">gcc -std=gnu99 -O2 -Wall -Wextra -DLUA_COMPAT_5_2 -DLUA_USE_LINUX    -c -o lapi.o lapi.c</span><br><span class="line">make[2]: gcc: Command not found</span><br><span class="line">&lt;<span class="built_in">builtin</span>&gt;: recipe <span class="keyword">for</span> target <span class="string">&#x27;lapi.o&#x27;</span> failed</span><br><span class="line">make[2]: *** [lapi.o] Error 127</span><br><span class="line">make[2]: Leaving directory <span class="string">&#x27;/root/lua/lua-5.3.3/src&#x27;</span></span><br><span class="line">Makefile:110: recipe <span class="keyword">for</span> target <span class="string">&#x27;linux&#x27;</span> failed</span><br><span class="line">make[1]: *** [linux] Error 2</span><br><span class="line">make[1]: Leaving directory <span class="string">&#x27;/root/lua/lua-5.3.3/src&#x27;</span></span><br><span class="line">Makefile:55: recipe <span class="keyword">for</span> target <span class="string">&#x27;linux&#x27;</span> failed</span><br><span class="line">make: *** [linux] Error 2</span><br></pre></td></tr></table></figure>
+
+<p>安装gcc：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># apt-get install gcc</span></span><br></pre></td></tr></table></figure>
+
+<p>安装gcc过程提示以下信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">E: Failed to fetch http://cn.archive.ubuntu.com/ubuntu/pool/main/b/binutils/binutils_2.26.1-1ubuntu1~16.04_amd64.deb  404  Not Found [IP: 115.28.122.210 80]</span><br><span class="line">E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?</span><br></pre></td></tr></table></figure>
+
+<p>先更新安装源：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># apt-get update</span></span><br></pre></td></tr></table></figure>
+
+<p>再次安装gcc成功。</p>
+<h1 id="安装libreadline-dev"><a href="#安装libreadline-dev" class="headerlink" title="安装libreadline-dev"></a>安装libreadline-dev</h1><p>编译过程提示以下信息则需要安装libreadline-dev：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">lua.c:80:31: fatal error: readline/readline.h: No such file or directory</span><br><span class="line">compilation terminated.</span><br></pre></td></tr></table></figure>
+
+<p>安装libreadline-dev：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># apt-get install libreadline-dev</span></span><br></pre></td></tr></table></figure>
+
+<p>再次编译成功。</p>
+<h1 id="检查安装"><a href="#检查安装" class="headerlink" title="检查安装"></a>检查安装</h1><p>用以下方法检查安装，如果安装成功会有版本信息提示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># src/lua -v</span></span><br><span class="line">Lua 5.3.3  Copyright (C) 1994-2016 Lua.org, PUC-Rio</span><br></pre></td></tr></table></figure>
+
+<h1 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># make linux install</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Lua</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Lua</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
