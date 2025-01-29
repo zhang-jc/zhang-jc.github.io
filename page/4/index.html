@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,125 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/06/04/Ubuntu-18-04-%E5%AE%89%E8%A3%85-Emacs-26-2-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/06/04/Ubuntu-18-04-%E5%AE%89%E8%A3%85-Emacs-26-2-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Ubuntu 18.04安装Emacs 26.2问题解决</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-06-04 15:16:43" itemprop="dateCreated datePublished" datetime="2019-06-04T15:16:43+08:00">2019-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-28 16:36:44" itemprop="dateModified" datetime="2025-01-28T16:36:44+08:00">2025-01-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/06/04/Ubuntu-18-04-%E5%AE%89%E8%A3%85-Emacs-26-2-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu 18.04安装Emacs 26.2问题解决" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Ubuntu 18.04安装Emacs 26.2问题解决" href="/2019/06/04/Ubuntu-18-04-%E5%AE%89%E8%A3%85-Emacs-26-2-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b448e996fee5763bb026f3ef35406040" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="no-X-development-libraries-were-found"><a href="#no-X-development-libraries-were-found" class="headerlink" title="no X development libraries were found"></a>no X development libraries were found</h1><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">checking for X... no</span><br><span class="line">checking for X... true</span><br><span class="line">configure: error: You seem to be running X, but no X development libraries</span><br><span class="line">were found.  You should install the relevant development files for X</span><br><span class="line">and for the toolkit you want, such as Gtk+ or Motif.  Also make</span><br><span class="line">sure you have development files for image handling, i.e.</span><br><span class="line">tiff, gif, jpeg, png and xpm.</span><br><span class="line">If you are sure you want Emacs compiled without X window support, pass</span><br><span class="line">  --without-x</span><br><span class="line">to configure.</span><br></pre></td></tr></table></figure>
+
+<p>安装libgtk开发包：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/06/04/Ubuntu-18-04-%E5%AE%89%E8%A3%85-Emacs-26-2-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1242,131 +1361,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/02/11/Windows7-%E4%B8%8A%E6%9E%84%E5%BB%BA%E5%B9%B6%E5%AE%89%E8%A3%85-Hadoop-2-7-3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/" class="post-title-link" itemprop="url">Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-02-11 18:47:51" itemprop="dateCreated datePublished" datetime="2017-02-11T18:47:51+08:00">2017-02-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-19 21:48:53" itemprop="dateModified" datetime="2025-01-19T21:48:53+08:00">2025-01-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表" href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::0269942975c241108eb3a4a67c4808ef" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><ul>
-<li>Windows 7</li>
-<li>java version “1.7.0_80”</li>
-<li>Apache Maven 3.2.3</li>
-<li>ProtocolBuffer 2.5.0</li>
-<li>cmake version 3.7.2 win64 x64</li>
-<li>Windows SDK 7.1</li>
-</ul>
-<p>构建过程参照源代码目录下<code>BUILDING.txt</code>说明文件中的“Building on Windows”中的内容；以及我的另外一篇文章：<a href="https://www.zhangjc.com/2016/08/29/%E6%90%AD%E5%BB%BA-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83/">搭建Hadoop源代码阅读环境</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

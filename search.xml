@@ -2082,4 +2082,38 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ThinkPad E480安装Ubuntu 18.04无线网卡驱动</title>
+    <url>/2019/10/23/ThinkPad-E480-%E5%AE%89%E8%A3%85-Ubuntu-18-04-%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8/</url>
+    <content><![CDATA[<p>遗憾的是虽然下面的方法可以解决，但是内核升级后需要重新安装。</p>
+<h1 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h1><ul>
+<li>Ubuntu 18.04</li>
+<li>ThinkPad E480</li>
+<li>使用下面的命令查看 Linux 内核：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">uname</span> -r</span><br><span class="line">5.0.0-32-generic</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用以下命令查看网卡型号信息：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> lshw -C network</span><br><span class="line">  *-network UNCLAIMED</span><br><span class="line">       description: Network controller</span><br><span class="line">       product: RTL8821CE 802.11ac PCIe Wireless Network Adapter</span><br><span class="line">       vendor: Realtek Semiconductor Co., Ltd.</span><br><span class="line">       physical <span class="built_in">id</span>: 0</span><br><span class="line">       bus info: pci@0000:05:00.0</span><br><span class="line">       version: 00</span><br><span class="line">       width: 64 bits</span><br><span class="line">       clock: 33MHz</span><br><span class="line">       capabilities: pm msi pciexpress cap_list</span><br><span class="line">       configuration: latency=0</span><br><span class="line">       resources: ioport:b000(size=256) memory:f2100000-f210ffff</span><br></pre></td></tr></table></figure>
+
+<p>让人头疼的就是这款网卡RTL8821CE！！这款网卡在Linux的内核中还未支持，只能自行编译安装。</p>
+<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><ul>
+<li><a href="https://blog.csdn.net/fljhm/article/details/79281655">https://blog.csdn.net/fljhm/article/details/79281655</a></li>
+<li><a href="https://unix.stackexchange.com/questions/379049/realtek-rtl8821ce-wifi-driver-problem-in-linux-mint-18-2">https://unix.stackexchange.com/questions/379049/realtek-rtl8821ce-wifi-driver-problem-in-linux-mint-18-2</a></li>
+</ul>
+<h1 id="驱动源码下载"><a href="#驱动源码下载" class="headerlink" title="驱动源码下载"></a>驱动源码下载</h1><p>以下源代码是我修改过之后，可以成功编译。原始的代码编译过程中会有不少异常，可以参考上面的网址解决一部分，对于头文件找不到的按照提示将缺少的头文件拷贝到对应的位置即可。</p>
+<p>源码下载：<a href="/images/202501/rtl8821ce.zip">rtl8821ce.zip</a></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
