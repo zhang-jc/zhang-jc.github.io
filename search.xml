@@ -2231,4 +2231,132 @@
         <tag>ORC</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Sqoop源码修改：增加落地HDFS文件数与MapTask数量一致性检查</title>
+    <url>/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/</url>
+    <content><![CDATA[<p>本篇是对<a href="http://zhang-jc.github.io/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/">记录一次Sqoop从MySQL导入数据到Hive问题的排查经过</a>的补充。</p>
+<p>Sqoop 命令通过 bin 下面的脚本调用，调用如下：</p>
+<pre><code>exec $&#123;HADOOP_COMMON_HOME&#125;/bin/hadoop org.apache.sqoop.Sqoop &quot;$@&quot;
+</code></pre>
+<span id="more"></span>
+
+<p>org.apache.sqoop.Sqoop 是 Sqoop 的入口类，在此主要是解析参数及初始化工具类，然后通过 org.apache.hadoop.util.ToolRunner 类调用对应的工具完成操作。Sqoop 的 Import 操作对应的是 org.apache.sqoop.tool.ImportTool 类。</p>
+<p>在 ImportTool 类的 return 代码前增加以下代码：</p>
+<pre><code>int numMappers = options.getNumMappers();
+
+String hDbName = options.getHCatDatabaseName();
+String hTableName = options.getHCatTableName();
+String hPartKeys = options.getHCatalogPartitionKeys();
+String hPartVals = options.getHCatalogPartitionValues();
+
+if(isStringNotEmpty(hDbName) &amp;&amp; isStringNotEmpty(hTableName) &amp;&amp; isStringNotEmpty(hPartKeys) &amp;&amp;     isStringNotEmpty(hPartVals)) &#123;
+  String[] partKeys = hPartKeys.split(&quot;,&quot;);
+  String[] partVals = hPartVals.split(&quot;,&quot;);
+
+  String partPathStr = &quot;&quot;;
+  if(partKeys.length &gt; 0 &amp;&amp; partVals.length == partKeys.length) &#123;
+    for(int i = 0; i &lt; partKeys.length; i++) &#123;
+      partPathStr += partKeys[i] + &quot;=&quot; + partVals[i] + &quot;/&quot;;
+    &#125;
+  &#125;
+
+  String targetDir = &quot;/user/hive/warehouse/&quot; + hDbName + &quot;.db/&quot; + hTableName + &quot;/&quot; + partPathStr;
+  targetDir = targetDir.toLowerCase();
+  LOG.info(&quot;---------targetDir=&quot; + targetDir);
+
+  try &#123;
+    FileSystem fs = FileSystem.get(options.getConf());
+    RemoteIterator&lt;LocatedFileStatus&gt; rIter = fs.listFiles(new Path(targetDir), false);
+
+    int fileCount = 0;
+    while(rIter.hasNext()) &#123;
+      fileCount++;
+      rIter.next();
+    &#125;
+
+    LOG.info(&quot;---------------fileCount=&quot; + fileCount);
+
+    if(numMappers != fileCount) &#123;
+      LOG.error(&quot;files number in hdfs not equals mapper task number !&quot;);
+      return 2;
+    &#125;
+  &#125; catch (IOException e) &#123;
+    LOG.error(&quot;count files number from hdfs error !&quot;);
+    e.printStackTrace();
+    return 3;
+  &#125;
+&#125;
+</code></pre>
+<p>改动只针对 Sqoop 集成 HCatalog 方式导入 ORC 格式的情况。因为我们的数据仓库中都采用的是这种方式。</p>
+<blockquote>
+<p>优化：当 MySQL 中记录数特别少时，如少于 4 条记录，则默认 Sqoop 的 MapTask 数量为 4 但其实际执行时因为原始记录数不够则实际执行的 MapTask 数量会跟实际的记录数一致，此时 split 数量跟落地 HDFS 的文件数量一致。所以，可以根据 Sqoop 对应 MR 的实际 split 数量进行判断文件数量。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>Sqoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录一次Sqoop从MySQL导入数据到Hive问题的排查经过</title>
+    <url>/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/</url>
+    <content><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>MySQL中原始数据有790W+的记录数，在Sqoop抽取作业成功的情况下在Hive中只有500W左右的记录数。</p>
+<h1 id="排查过程"><a href="#排查过程" class="headerlink" title="排查过程"></a>排查过程</h1><h2 id="数据导入脚本Log"><a href="#数据导入脚本Log" class="headerlink" title="数据导入脚本Log"></a>数据导入脚本Log</h2><p>通过Log可以发现以下信息：</p>
+<ol>
+<li>该Sqoop任务被分解为4个MapTask。</li>
+<li>MapTask执行期间有异常，是网络异常导致MySQL连接不成功。</li>
+<li>Sqoop任务对应的MR执行过程中总的被调起9个MapTask，其中3个失败、2个被kill，理论上剩余的4个MapTask是成功执行的。</li>
+<li>Sqoop导入对应的MR只有MapTask，且MapTask的数据记录数为790W+。所以，单纯看MR的输出是正常的。</li>
+<li>Sqoop导入完成后，紧跟着有一个读取Sqoop目标表数据的<code>insert overwrite</code>的操作。该操作只被分解为2个MapTask，说明原数据文件只有两个块。</li>
+<li>根据以上信息说明Sqoop之后确实只生成了2个数据文件，有两个文件丢失了。</li>
+</ol>
+<p>详细原始Log信息见附件：<a href="/images/202501/sqoop.txt">Sqoop执行日志</a></p>
+<h2 id="查看Sqoop任务对应MR的执行日志"><a href="#查看Sqoop任务对应MR的执行日志" class="headerlink" title="查看Sqoop任务对应MR的执行日志"></a>查看Sqoop任务对应MR的执行日志</h2><p>根据上面的Log中的信息，从HDFS上查找对应的日志。Yarn所有的应用执行日志在HDFS的<code>/data/hadoop/yarn-logs/hadoop/logs/</code>目录下。从该目录下查找应用程序application_1533196506314_4460157 的日志。日志会包含MR在各个节点上执行的信息。</p>
+<p>从Log中发现以下异常信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">2018-12-10 00:42:30,595 FATAL [IPC Server handler 17 on 8046] org.apache.hadoop.mapred.TaskAttemptListenerImpl: Task: attempt_1533196506314_4460157_m_000001_0 - exited : org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /user/hive/warehouse/ods.db/bss_customer_fj/_SCRATCH0.3130352759450352/dt=20181209/_temporary/1/_temporary/attempt_1533196506314_4460157_m_000001_0/part-m-00001 (inode 761544109): File does not exist. Holder DFSClient_attempt_1533196506314_4460157_m_000001_0_-1729942809_1 does not have any open files.</span><br></pre></td></tr></table></figure>
+
+<p>所以，怀疑是MR在执行结束时，将临时文件移动到正式目录时发生错误。</p>
+<p>原始Log文件见目录：</p>
+<ul>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-12_27463.txt">192-168-72-12_27463</a>  </li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-24_16310.txt">192-168-72-24_16310</a>  </li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-84_13498.txt">192-168-72-84_13498</a>  </li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-93_53778.txt">192-168-72-93_53778</a></li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-23_18284.txt">192-168-72-23_18284</a>  </li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-73_2363.txt">192-168-72-73_2363</a>  </li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-88_24481.txt">192-168-72-88_24481</a>  </li>
+<li><a href="/images/202501/application_1533196506314_4460157/192-168-72-94_54353.txt">192-168-72-94_54353</a></li>
+</ul>
+<h2 id="查看DN-Log信息"><a href="#查看DN-Log信息" class="headerlink" title="查看DN Log信息"></a>查看DN Log信息</h2><p>根据上面的Log信息，发现DN节点192-168-72-24上的MapTask有以下异常信息。</p>
+<p>192-168-72-24异常信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">2018-12-10 00:42:34,410 WARN [main] org.apache.hadoop.mapred.YarnChild: Exception running child : org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.hdfs.server.namenode.LeaseExpiredException): No lease on /user/hive/warehouse/ods.db/bss_customer_fj/_SCRATCH0.3130352759450352/dt=20181209/_temporary/1/_temporary/attempt_1533196506314_4460157_m_000000_0/part-m-00000 (inode 761544157): File does not exist. Holder DFSClient_attempt_1533196506314_4460157_m_000000_0_798513081_1 does not have any open files.</span><br></pre></td></tr></table></figure>
+
+<p>所以怀疑是MapTask的最后阶段写文件的时候未成功。检查该DN节点的Log发现以下异常信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">2018-12-10 00:42:32,643 ERROR org.apache.hadoop.hdfs.server.datanode.DataNode: BlockSender.sendChunks() exception:</span><br><span class="line">java.io.IOException: 断开的管道</span><br><span class="line">        at sun.nio.ch.FileChannelImpl.transferTo0(Native Method)</span><br><span class="line">        at sun.nio.ch.FileChannelImpl.transferToDirectlyInternal(FileChannelImpl.java:428)</span><br><span class="line">        at sun.nio.ch.FileChannelImpl.transferToDirectly(FileChannelImpl.java:493)</span><br><span class="line">        at sun.nio.ch.FileChannelImpl.transferTo(FileChannelImpl.java:608)</span><br><span class="line">        at org.apache.hadoop.net.SocketOutputStream.transferToFully(SocketOutputStream.java:223)</span><br><span class="line">        at org.apache.hadoop.hdfs.server.datanode.BlockSender.sendPacket(BlockSender.java:583)</span><br><span class="line">        at org.apache.hadoop.hdfs.server.datanode.BlockSender.doSendBlock(BlockSender.java:763)</span><br><span class="line">        at org.apache.hadoop.hdfs.server.datanode.BlockSender.sendBlock(BlockSender.java:710)</span><br><span class="line">        at org.apache.hadoop.hdfs.server.datanode.DataXceiver.readBlock(DataXceiver.java:552)</span><br><span class="line">        at org.apache.hadoop.hdfs.protocol.datatransfer.Receiver.opReadBlock(Receiver.java:116)</span><br><span class="line">        at org.apache.hadoop.hdfs.protocol.datatransfer.Receiver.processOp(Receiver.java:71)</span><br><span class="line">        at org.apache.hadoop.hdfs.server.datanode.DataXceiver.run(DataXceiver.java:253)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
+
+<p>百度之后发现该异常信息跟DN的一个配置有关系，具体配置项是DN可以同时处理的文件上限。对于老版本配置项名称为“dfs.datanode.max.xcievers”，对于新版本配置项名称改为“dfs.datanode.max.transfer.threads”。该参数的默认值为4096，所以需要修改为8192。</p>
+<h2 id="查看NN-Log信息"><a href="#查看NN-Log信息" class="headerlink" title="查看NN Log信息"></a>查看NN Log信息</h2><p>默认的，Log4j输出的NameNode日志文件只保留最近的20个文件。因为NN的Log信息比较多，20个文件保存的日志不足1天，异常时间的日志已经被冲掉了。</p>
+<p><img src="/images/202501/namenodeLogs.png" alt="NameNode Log"></p>
+<h2 id="查看NN信息"><a href="#查看NN信息" class="headerlink" title="查看NN信息"></a>查看NN信息</h2><p>通过NN WebUI查看发现NN内存的使用已经70%左右，负载已经比较高。</p>
+<p><img src="/images/202501/namenodeInfo.png" alt="NameNode Info"></p>
+<h2 id="处理措施"><a href="#处理措施" class="headerlink" title="处理措施"></a>处理措施</h2><p>综合以上信息，其实问题发生的根本原因未能查明。基于对Hadoop了解的深度、精力及对故障恢复的容忍程度的考虑，待定位根本原因再解决问题的方案不可控。所以，采取以下改进措施：</p>
+<p>（1）修改DN最大处理文件数量上限至8192。<br>（2）将NN内存扩展到100G。<br>（3）修改Sqoop源代码，当落地到目标HDFS目录下的文件数量与MapTask数量不一致时返回错误状态，并由调度系统进行重新抽取。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>MySQL</tag>
+        <tag>Hadoop</tag>
+        <tag>Hive</tag>
+        <tag>Sqoop</tag>
+      </tags>
+  </entry>
 </search>
