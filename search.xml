@@ -2333,4 +2333,74 @@
         <tag>Sqoop</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spark SQL读写Hive Table部署</title>
+    <url>/2021/10/26/Spark-SQL%E8%AF%BB%E5%86%99-Hive-Table-%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>官网参考文档：<a href="http://spark.apache.org/docs/3.1.2/sql-data-sources-hive-tables.html">Hive Tables</a>。</p>
+<p>本文使用的组件版本如下：</p>
+<ul>
+<li>Spark 3.1.2</li>
+<li>Hive 3.1.2</li>
+</ul>
+<h1 id="第一步：Hive部署"><a href="#第一步：Hive部署" class="headerlink" title="第一步：Hive部署"></a>第一步：Hive部署</h1><p>在所有Worker节点上部署Hive。主要是使用Hive下面的libs。</p>
+<h1 id="第二步：Spark-CLASSPATH"><a href="#第二步：Spark-CLASSPATH" class="headerlink" title="第二步：Spark CLASSPATH"></a>第二步：Spark CLASSPATH</h1><p>在${SPARK_HOME}&#x2F;conf&#x2F;spark-env.sh中添加以下内容：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export SPARK_DIST_CLASSPATH=$(hadoop classpath)</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三步：编译Spark"><a href="#第三步：编译Spark" class="headerlink" title="第三步：编译Spark"></a>第三步：编译Spark</h1><p>编译的目的是支持Hive。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./dev/make-distribution.sh --tgz -Phive -Phive-thriftserver -Pyarn -Dhadoop.version=3.2.2 -Phadoop-provided</span><br></pre></td></tr></table></figure>
+
+<h1 id="第四步：部署Spark-On-Yarn"><a href="#第四步：部署Spark-On-Yarn" class="headerlink" title="第四步：部署Spark On Yarn"></a>第四步：部署Spark On Yarn</h1><p>部署过程比较简单。部署过程遇到的问题参见另外一篇博文：<a href="https://www.zhangjc.com/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/">Spark on YARN部署</a></p>
+<h1 id="第五步：兼容Hive-3-1-2"><a href="#第五步：兼容Hive-3-1-2" class="headerlink" title="第五步：兼容Hive 3.1.2"></a>第五步：兼容Hive 3.1.2</h1><ul>
+<li>将hive-site.xml复制到spark配置目录下。</li>
+<li>在配置文件spark-defaults.conf中添加以下内容。假设Hive安装目录为：&#x2F;opt&#x2F;hive。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spark.sql.hive.metastore.version 3.1.2</span><br><span class="line">spark.sql.hive.metastore.jars path</span><br><span class="line">spark.sql.hive.metastore.jars.path file:///opt/hive/lib/*.jar</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：这些Jar包需要使用Hive 3.1.2版本的。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>分布式计算</tag>
+        <tag>Hive</tag>
+        <tag>Spark</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spark on YARN部署</title>
+    <url>/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<p>目前各大数据组件部署其实都比较简单，几乎接近开箱即用。此处只记录部署时遇到的问题。</p>
+<h1 id="问题一：java-lang-ClassNotFoundException-org-apache-log4j-spi-Filter"><a href="#问题一：java-lang-ClassNotFoundException-org-apache-log4j-spi-Filter" class="headerlink" title="问题一：java.lang.ClassNotFoundException: org.apache.log4j.spi.Filter"></a>问题一：java.lang.ClassNotFoundException: org.apache.log4j.spi.Filter</h1><p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: A JNI error has occurred, please check your installation and try again</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/apache/log4j/spi/Filter</span><br><span class="line">	at java.lang.Class.getDeclaredMethods0(Native Method)</span><br><span class="line">	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)</span><br><span class="line">	at java.lang.Class.privateGetMethodRecursive(Class.java:3048)</span><br><span class="line">	at java.lang.Class.getMethod0(Class.java:3018)</span><br><span class="line">	at java.lang.Class.getMethod(Class.java:1784)</span><br><span class="line">	at sun.launcher.LauncherHelper.validateMainClass(LauncherHelper.java:544)</span><br><span class="line">	at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:526)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.log4j.spi.Filter</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</span><br><span class="line">	... 7 more</span><br></pre></td></tr></table></figure>
+
+<p>从Spark3.1.2源码pom.xml中可以看到log4j的版本为：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">log4j.version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">log4j.version</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下载对应版本的Jar包，并分发到各Worker节点的${SPARK_HOME}&#x2F;jars下。</p>
+<h1 id="问题二：java-lang-ClassNotFoundException-org-apache-hadoop-fs-FSDataInputStream"><a href="#问题二：java-lang-ClassNotFoundException-org-apache-hadoop-fs-FSDataInputStream" class="headerlink" title="问题二：java.lang.ClassNotFoundException: org.apache.hadoop.fs.FSDataInputStream"></a>问题二：java.lang.ClassNotFoundException: org.apache.hadoop.fs.FSDataInputStream</h1><p>异常信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Error: A JNI error has occurred, please check your installation and try again</span><br><span class="line">Exception in thread &quot;main&quot; java.lang.NoClassDefFoundError: org/apache/hadoop/fs/FSDataInputStream</span><br><span class="line">	at java.lang.Class.getDeclaredMethods0(Native Method)</span><br><span class="line">	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)</span><br><span class="line">	at java.lang.Class.privateGetMethodRecursive(Class.java:3048)</span><br><span class="line">	at java.lang.Class.getMethod0(Class.java:3018)</span><br><span class="line">	at java.lang.Class.getMethod(Class.java:1784)</span><br><span class="line">	at sun.launcher.LauncherHelper.validateMainClass(LauncherHelper.java:544)</span><br><span class="line">	at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:526)</span><br><span class="line">Caused by: java.lang.ClassNotFoundException: org.apache.hadoop.fs.FSDataInputStream</span><br><span class="line">	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)</span><br><span class="line">	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)</span><br><span class="line">	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)</span><br><span class="line">	... 7 more</span><br></pre></td></tr></table></figure>
+
+<p>使用hadoop free版本部署遇到该问题。需要在spark-env.sh中设置包含hadoop的classpath。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export SPARK_DIST_CLASSPATH=$(hadoop classpath)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>官方文档有明确说明，只不过初次阅读容易忽略。位置如下：<br><img src="/images/202502/hadoop-free-spark-env.png" alt="Spark Env"></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>分布式计算</tag>
+        <tag>Spark</tag>
+      </tags>
+  </entry>
 </search>
