@@ -21,25 +21,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="天行健，君子以自强不息。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一张假钞的真实世界">
-<meta property="og:url" content="https://www.zhangjc.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/index.html">
+    <meta name="description" content="编程接口 RDD：弹性分布式数据集（Resilient Distributed Dataset ）。Spark2.0之前的编程接口。Spark2.0之后以不再推荐使用，而是被Dataset替代。 Dataset：Spark2.0之后的编程接口，用来替代RDD。与RDD不同Dataset是强数据类型的，但是这一点不适用与pyspark，因为Python是弱类型的。Spark引擎针对Dataset做了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark的基本概念">
+<meta property="og:url" content="https://www.zhangjc.com/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/index.html">
 <meta property="og:site_name" content="一张假钞的真实世界">
-<meta property="og:description" content="天行健，君子以自强不息。">
+<meta property="og:description" content="编程接口 RDD：弹性分布式数据集（Resilient Distributed Dataset ）。Spark2.0之前的编程接口。Spark2.0之后以不再推荐使用，而是被Dataset替代。 Dataset：Spark2.0之后的编程接口，用来替代RDD。与RDD不同Dataset是强数据类型的，但是这一点不适用与pyspark，因为Python是弱类型的。Spark引擎针对Dataset做了">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhangjc.com/images/202502/spark-cluster-overview.png">
+<meta property="article:published_time" content="2021-10-22T07:39:38.000Z">
+<meta property="article:modified_time" content="2025-02-02T10:33:06.454Z">
 <meta property="article:author" content="徂徕山人">
-<meta property="article:tag" content="一张假钞, 徂徕山人, 大数据, 机器学习, 理财">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="分布式计算">
+<meta property="article:tag" content="Spark">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhangjc.com/images/202502/spark-cluster-overview.png">
 
 
-<link rel="canonical" href="https://www.zhangjc.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+<link rel="canonical" href="https://www.zhangjc.com/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"categories/数据库/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/","path":"2021/10/22/Spark的基本概念/","title":"Spark的基本概念"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>分类: 数据库 | 一张假钞的真实世界</title>
+<title>Spark的基本概念 | 一张假钞的真实世界</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -128,7 +134,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -141,6 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.</span> <span class="nav-text">编程接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">架构</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -190,117 +197,169 @@
 
     </div>
 
-    <div class="main-inner category posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">数据库
-          <small>分类</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spark的基本概念 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spark的基本概念
         </h1>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
-    </div>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-12-26T00:16:03+08:00"
-              content="2024-12-26">
-          12-26
-        </time>
-      </div>
+      <time title="创建时间：2021-10-22 15:39:38" itemprop="dateCreated datePublished" datetime="2021-10-22T15:39:38+08:00">2021-10-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-02 18:33:06" itemprop="dateModified" datetime="2025-02-02T18:33:06+08:00">2025-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
+        </span>
+    </span>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/12/26/%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL/" itemprop="url">
-            <span itemprop="name">无法连接本地MySQL</span>
-          </a>
-      </div>
+  
+    <span id="/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-meta-item leancloud_visitors" data-flag-title="Spark的基本概念" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Spark的基本概念" href="/2021/10/22/Spark%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::95a443cf2106d93deff2d554cfb2f015" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
 
-      
-    </header>
-  </article>
+        </div>
+      </header>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-12-25T23:21:47+08:00"
-              content="2024-12-25">
-          12-25
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/12/25/Superset%E8%BF%9E%E6%8E%A5%E6%9C%AC%E5%9C%B0MySQL%E5%BC%82%E5%B8%B8/" itemprop="url">
-            <span itemprop="name">Superset连接本地MySQL异常</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-01-18T18:02:18+08:00"
-              content="2022-01-18">
-          01-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/01/18/Windows10%E5%AE%89%E8%A3%85MySQL%E6%89%BE%E4%B8%8D%E5%88%B0MSVCR120-dll%E5%92%8CMSVCP120-dll%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" itemprop="url">
-            <span itemprop="name">Windows10安装MySQL找不到MSVCR120.dll和MSVCP120.dll问题解决</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-    <div class="collection-year">
-      <span class="collection-header">2017</span>
-    </div>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2017-06-11T18:39:03+08:00"
-              content="2017-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2017/06/11/Ubuntu-16-04-%E7%94%A8-APT-%E5%AE%89%E8%A3%85-MySQL/" itemprop="url">
-            <span itemprop="name">Ubuntu 16.04用APT安装MySQL</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="编程接口"><a href="#编程接口" class="headerlink" title="编程接口"></a>编程接口</h1><ul>
+<li>RDD：弹性分布式数据集（Resilient Distributed Dataset ）。Spark2.0之前的编程接口。Spark2.0之后以不再推荐使用，而是被Dataset替代。</li>
+<li>Dataset：Spark2.0之后的编程接口，用来替代RDD。与RDD不同Dataset是强数据类型的，但是这一点不适用与pyspark，因为Python是弱类型的。Spark引擎针对Dataset做了更丰富的优化，所以比RDD有更高的性能。</li>
+<li>Dataframe：在Python（Pandas）和R中Dataset的组织形式；在Scala中没有这个概念。</li>
+</ul>
+<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p><img src="/images/202502/spark-cluster-overview.png" alt="Spark Cluster Overview"></p>
+<ul>
+<li>Application：基于Spark构建的用户程序。包含驱动程序和执行器。</li>
+<li>Application jar：用户程序Jar包。</li>
+<li>Driver program：驱动程序。用户程序中运行main()方法及创建SparkContext的进程。</li>
+<li>Cluster manager：集群管理者。管理集群资源的外部服务。如：standalone manager, Mesos, YARN, Kubernetes。</li>
+<li>Deploy mode：用来指明驱动程序运行位置。集群模式下框架在集群中调起驱动程序；客户端模式下在集群之外的程序提交者调起驱动程序。</li>
+<li>Worker node：集群中运行应用程序的节点。</li>
+<li>Executor：Worker节点上调起的为用户应用程序的进程，运行任务并在内存中或磁盘是行保持数据。每个应用程序都有自己的Executor。</li>
+<li>Task：发送到Executor的工作单元。</li>
+<li>Job：由多个任务组成的并行计算，这些任务响应Spark操作（例如保存、收集）而生成；您将在驱动程序日志中看到这个术语。</li>
+<li>Stage：每个作业被划分为更小的任务集，称为相互依赖的阶段（类似于MapReduce中的map和reduce阶段）；您将在驱动程序日志中看到这个术语。</li>
+</ul>
 
     </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
   </div>
-  
-  
-  
+</div>
 
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" rel="tag"><i class="fa fa-tag"></i> 分布式计算</a>
+              <a href="/tags/Spark/" rel="tag"><i class="fa fa-tag"></i> Spark</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/27/vi%E5%BF%BD%E7%95%A5%E5%A4%A7%E5%B0%8F%E5%86%99%E6%90%9C%E7%B4%A2/" rel="prev" title="vi忽略大小写搜索">
+                  <i class="fa fa-angle-left"></i> vi忽略大小写搜索
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/25/Spark-on-YARN%E9%83%A8%E7%BD%B2/" rel="next" title="Spark on YARN部署">
+                  Spark on YARN部署 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="95a443cf2106d93deff2d554cfb2f015"></div>
 </div>
   </main>
 
