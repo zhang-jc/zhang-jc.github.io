@@ -2403,4 +2403,33 @@
         <tag>Spark</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spark On Yarn External Shuffle Service</title>
+    <url>/2021/10/25/Spark-On-Yarn-External-Shuffle-Service/</url>
+    <content><![CDATA[<p>本文基于spark-3.1.2-bin-without-hadoop.tgz版本，所以spark-3.1.2-yarn-shuffle.jar已经在节点的<code>$&#123;SPARK_HOME&#125;/yarn</code>目录下。</p>
+<h1 id="HADOOP-CLASSPATH"><a href="#HADOOP-CLASSPATH" class="headerlink" title="HADOOP_CLASSPATH"></a>HADOOP_CLASSPATH</h1><p>在所有NodeManager节点上设置环境变量：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export HADOOP_CLASSPATH=$&#123;SPARK_HOME&#125;/yarn/spark-3.1.2-yarn-shuffle.jar:$HADOOP_CLASSPATH</span><br></pre></td></tr></table></figure>
+
+<h1 id="yarn-site-xml"><a href="#yarn-site-xml" class="headerlink" title="yarn-site.xml"></a>yarn-site.xml</h1><p>在yarn-site.xml中添加以下配置，并分发至所有NodeManager节点。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Spark Configuration --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>spark_shuffle<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.nodemanager.aux-services.spark_shuffle.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.spark.network.yarn.YarnShuffleService<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>spark.yarn.shuffle.stopOnFailure<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="重启NodeManager"><a href="#重启NodeManager" class="headerlink" title="重启NodeManager"></a>重启NodeManager</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yarn --daemon stop nodemanager</span><br><span class="line">yarn --daemon start nodemanager</span><br></pre></td></tr></table></figure>
+
+<h1 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h1><p>在NodeManager节点上使用以下命令查看7337端口是否已被监听：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">netstat -ntlp|grep 7337</span><br></pre></td></tr></table></figure>
+
+<p>该端口通过spark.shuffle.service.port指定，默认是7337。</p>
+<h1 id="启用"><a href="#启用" class="headerlink" title="启用"></a>启用</h1><p>在<code>$&#123;SPARK_HOME&#125;/conf/spark-defaults.conf</code>中添加以下配置，并分发至所有节点。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spark.shuffle.service.enabled true</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>分布式计算</tag>
+        <tag>Spark</tag>
+      </tags>
+  </entry>
 </search>
