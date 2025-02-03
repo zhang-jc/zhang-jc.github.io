@@ -2532,4 +2532,42 @@
         <tag>Socket.IO</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Shell $0</title>
+    <url>/2016/09/11/Shell-dollar0/</url>
+    <content><![CDATA[<p>我们已经知道在Shell中<code>$0</code>表示Shell脚本的文件名，但在有脚本调用的情形中，子脚本中的<code>$0</code>会是什么值呢？我们通过下面的实例来看。</p>
+<p>已测试系统列表：</p>
+<ul>
+<li>Mac OS X EI Capitan 10.11.6</li>
+<li>Ubuntu 16.04 LTS (GNU&#x2F;Linux 4.4.0-28-generic x86_64)</li>
+</ul>
+<p>父脚本<code>a.sh</code>，位置<code>test1/a.sh</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">!/usr/bin/env bash</span><br><span class="line"></span><br><span class="line">echo &quot;$0&quot;</span><br><span class="line">. ../test2/b.sh</span><br></pre></td></tr></table></figure>
+
+<p>子脚本<code>b.sh</code>，位置<code>test2/b.sh</code>，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">echo &quot;the sub script is: $0&quot;</span><br></pre></td></tr></table></figure>
+
+<p>此时执行父脚本输出结果是：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sh a.sh</span></span><br><span class="line">the main script is a.sh</span><br><span class="line">the sub script is: a.sh</span><br></pre></td></tr></table></figure>
+
+<p>如果父脚本内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">echo &quot;the main script is $0&quot;</span><br><span class="line">../test2/b.sh</span><br></pre></td></tr></table></figure>
+
+<p>则输出结果为：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sh a.sh</span> </span><br><span class="line">the main script is a.sh</span><br><span class="line">the sub script is: ../test2/b.sh</span><br></pre></td></tr></table></figure>
+
+<p>可见，在父脚本中调用子脚本的不同，在子脚本中<code>$0</code>的值也不同。至于为什么会这样本人需要继续学习以找到答案。</p>
+<blockquote>
+<p>测试过程中注意给脚本赋可执行权限。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
