@@ -2570,4 +2570,21 @@
         <tag>Shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>shell -c</title>
+    <url>/2020/12/03/shell-c/</url>
+    <content><![CDATA[<p><code>shell -c &#123;string&#125;</code>：表示命令从<code>-c</code>后的字符串读取。在需要使用管道或者重定向需要sudo时很有用，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> find ../*/exportFiles -mtime +15 -name <span class="string">&quot;*&quot;</span> | xargs -I &#123;&#125; <span class="built_in">rm</span> -rf &#123;&#125;</span></span><br><span class="line">rm: cannot remove `i_20201108_CONTENTINFO_xy_001.dat&#x27;: Permission denied</span><br></pre></td></tr></table></figure>
+
+<p>按照以下方式处理即可：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> sh -c <span class="string">&#x27;find ../*/exportFiles -mtime +15 -name &quot;*&quot; | xargs -I &#123;&#125; rm -rf &#123;&#125;&#x27;</span></span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
