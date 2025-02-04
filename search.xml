@@ -2587,4 +2587,25 @@
         <tag>Shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Shell字符串截取技巧</title>
+    <url>/2020/11/26/Shell-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%88%AA%E5%8F%96%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<ul>
+<li># 号截取：删除左边字符，保留右边字符。</li>
+<li>## 号截取：删除左边字符，保留右边字符。</li>
+<li>%号截取：删除右边字符，保留左边字符</li>
+<li>%% 号截取：删除右边字符，保留左边字符</li>
+</ul>
+<p>示例一：</p>
+<p>···Shell<br>$ var&#x3D;’abcbd’<br>$ echo ${var#<em>b}<br>cbd<br>$ echo ${var##<em>b}<br>d<br>$ echo ${var%b</em>}<br>abc<br>$ echo ${var%%b</em>}<br>a</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">示例二：</span><br><span class="line"></span><br><span class="line">```Shell</span><br><span class="line">$ cat /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin</span><br><span class="line">bin:x:2:2:bin:/bin:/usr/sbin/nologin</span><br><span class="line">sys:x:3:3:sys:/dev:/usr/sbin/nologin</span><br><span class="line">sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">$ for line in `cat /etc/passwd`; do echo $&#123;line%%:*&#125;; done</span><br><span class="line">root</span><br><span class="line">daemon</span><br><span class="line">bin</span><br><span class="line">sys</span><br><span class="line">sync</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
