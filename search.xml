@@ -2687,4 +2687,18 @@
         <tag>Shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>sed变量中特殊字符/处理方式</title>
+    <url>/2021/04/26/sed%E5%8F%98%E9%87%8F%E4%B8%AD%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6-%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>如果变量值中包含斜杠（&#x2F;）特殊字符，在使用sed命令的做行内字符串替换时可以使用井号（#）做为sed语法分隔符，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">GITLAB_PROJECT_CLONE_URL=ssh://git@192.168.1.10:50022/test/Documentation.git</span><br><span class="line">sed -i &quot;11s#GITLAB_PROJECT_CLONE_URL#$GITLAB_PROJECT_CLONE_URL#&quot; config.xml</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
