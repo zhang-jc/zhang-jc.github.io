@@ -2636,4 +2636,55 @@
         <tag>Shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Shell条件变量替换</title>
+    <url>/2016/09/11/Shell-%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2/</url>
+    <content><![CDATA[<p>Bash Shell可以进行变量的条件替换，条件放在<code>&#123;&#125;</code>中，只有条件发生时才进行替换：</p>
+<ul>
+<li>${v1:-$v2}</li>
+</ul>
+<p>当变量v1未定义或者值为空时，返回v2的值，否则返回v1的值。</p>
+<ul>
+<li>${v1:&#x3D;$v2}</li>
+</ul>
+<p>若变量v1未定义或者值为空时，在返回v2的值的同时将v2的值给v1。</p>
+<ul>
+<li>${v1:?message}</li>
+</ul>
+<p>若变量已赋值的话，正常替换。否则将消息message送到标准错误输出(若此替换出现在Shell程序中，那么该程序将终止运行)。</p>
+<ul>
+<li>${v1:+$v2}</li>
+</ul>
+<p>若变量已赋值的话，其值才用v2的值替换，否则不进行任何替换。</p>
+<ul>
+<li>${v1:offset}、${v1:offset:length}</li>
+</ul>
+<p>从变量中提取子串，这里offset和length可以是算术表达式。</p>
+<ul>
+<li>${&#35;v1}</li>
+</ul>
+<p>变量的字符个数(变量的字符个数，并不是变量个数）。</p>
+<ul>
+<li>${v1&#35;pattern}、${v1&#35;&#35;pattern}</li>
+</ul>
+<p>去掉v1中与pattern相匹配的部分，条件是v1的开头与pattern相匹配。&#35;与&#35;&#35;的区别在于一个是最短匹配模式，一个是最长匹配模式。</p>
+<ul>
+<li>${v1％pattern}、${v1％％pattern}</li>
+</ul>
+<p>与上一条规则类似，只是从v1的尾部与pattern相匹配，％与％％的区别与&#35;与&#35;&#35;一样。</p>
+<ul>
+<li>${v1&#x2F;pattern&#x2F;string}、${v1&#x2F;&#x2F;pattern&#x2F;string}</li>
+</ul>
+<p>进行变量内容的替换，把与pattern匹配的部分替换为string的内容，&#x2F;与&#x2F;&#x2F;的区别与上同。</p>
+<p>注意：上述条件变量替换中，除第2条外，其余均不影响变量本身的值。</p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
