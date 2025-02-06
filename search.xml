@@ -1228,7 +1228,7 @@
       </tags>
   </entry>
   <entry>
-    <title>使用RSyslog将Nginx Access Log写入Kafka</title>
+    <title>使用Rsyslog将Nginx Access Log写入Kafka</title>
     <url>/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/</url>
     <content><![CDATA[<h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><ul>
 <li>CentOS Linux release 7.3.1611</li>
@@ -1275,9 +1275,9 @@
       <tags>
         <tag>大数据</tag>
         <tag>Nginx</tag>
-        <tag>RSyslog</tag>
         <tag>Kafka</tag>
         <tag>数据采集</tag>
+        <tag>Rsyslog</tag>
       </tags>
   </entry>
   <entry>
@@ -2699,6 +2699,188 @@
       <tags>
         <tag>Linux</tag>
         <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS 6.5编译Rsyslog 8.1903.0</title>
+    <url>/2019/04/03/CentOS-6-5-%E7%BC%96%E8%AF%91-Rsyslog-8-1903-0/</url>
+    <content><![CDATA[<p>源码下载参考我的另外一片博文：<a href="http://zhang-jc.github.io/2019/04/03/CentOS-7-3-%E7%BC%96%E8%AF%91-Rsyslog-8-1903-0/">CentOS 7.3 编译 Rsyslog 8.1903.0</a>。</p>
+<p>本篇博文从创建构建环境开始填坑&#x2F;(ㄒoㄒ)&#x2F;~~。通过上一篇博文可以解决的问题此处不再赘述。</p>
+<p>执行配置时出现以下错误：</p>
+<pre><code># ./configure --enable-omhttp
+configure: error: cannot find install-sh or install.sh in &quot;.&quot; &quot;./..&quot; &quot;./../..&quot;
+</code></pre>
+<span id="more"></span>
+
+<p>先执行 autogen.sh 出现以下错误：</p>
+<pre><code># sh autogen.sh
+checking for LIBESTR... configure: error: Package requirements (libestr &gt;= 0.1.9) were not met:
+No package &#39;libestr&#39; found
+</code></pre>
+<p>检查没有安装 libestr 库，所以重新安装：</p>
+<pre><code># yum install libestr libestr-devel
+</code></pre>
+<p>再次执行 autogen.sh 问题依旧o(╯□╰)o。需要编译安装 libestr。</p>
+<pre><code># wget https://libestr.adiscon.com/files/download/libestr-0.1.9.tar.gz
+# tar xzvf libestr-0.1.9.tar.gz
+# ./configure CC=&quot;gcc -m64&quot; --prefix=/usr --libdir=/usr/lib64
+# make
+# make install
+</code></pre>
+<p>安装完成后重新执行 autogen.sh 问题解决。</p>
+<p>问题逐一解决后执行自动配置成功：</p>
+<pre><code># autoreconf -fvi
+</code></pre>
+<p>执行配置：</p>
+<pre><code># ./configure --enable-omhttp
+</code></pre>
+<p>配置过程中出现以下错误信息：</p>
+<pre><code>make[3]: Entering directory `/data/kafka/rsyslog-8.1903.0/grammar&#39;
+  LEX    lexer.c
+make[3]: *** [lexer.c] 错误 1
+make[3]: Leaving directory `/data/kafka/rsyslog-8.1903.0/grammar&#39;
+make[2]: *** [all] 错误 2
+make[2]: Leaving directory `/data/kafka/rsyslog-8.1903.0/grammar&#39;
+make[1]: *** [all-recursive] 错误 1
+make[1]: Leaving directory `/data/kafka/rsyslog-8.1903.0&#39;
+make: *** [all] 错误 2
+</code></pre>
+<p>安装 flex：</p>
+<pre><code>yum install flex
+</code></pre>
+<p>安装后执行 autogen.sh，再次执行 configure，然后执行 make 成功。进入 omhttp 目录执行 make 出现以下错误：</p>
+<pre><code># cd contrib/omhttp
+# make
+  CC     omhttp_la-omhttp.lo
+omhttp.c: 在函数‘curlPostSetup’中:
+omhttp.c:1554: 错误：‘CURLOPT_TCP_KEEPALIVE’未声明(在此函数内第一次使用)
+omhttp.c:1554: 错误：(即使在一个函数内多次出现，每个未声明的标识符在其
+omhttp.c:1554: 错误：所在的函数内也只报告一次。)
+omhttp.c:1554: 警告：在‘_curl_opt’的声明中，类型默认为‘int’
+omhttp.c:1558: 错误：‘CURLOPT_TCP_KEEPIDLE’未声明(在此函数内第一次使用)
+omhttp.c:1558: 警告：在‘_curl_opt’的声明中，类型默认为‘int’
+omhttp.c:1562: 错误：‘CURLOPT_TCP_KEEPINTVL’未声明(在此函数内第一次使用)
+omhttp.c:1562: 警告：在‘_curl_opt’的声明中，类型默认为‘int’
+make: *** [omhttp_la-omhttp.lo] 错误 1
+</code></pre>
+<p>经过 Google 后发现 CURLOPT_TCP_KEEPALIVE 是在 libcurl 7.25.0 之后才定义的。使用以下命令检查系统当前 libcurl 版本：</p>
+<pre><code># rpm -q libcurl
+</code></pre>
+<p>  libcurl-7.19.7-52.el6.x86_64</p>
+<p>所以需要升级 curl 版本，参考：<a href="https://www.jianshu.com/p/14f5f145453e%E3%80%82%E5%8D%87%E7%BA%A7%E5%AE%8C%E6%88%90%E5%90%8E%E5%88%9B%E5%BB%BA%E4%BB%A5%E4%B8%8B%E8%BD%AF%E8%BF%9E%E6%8E%A5%EF%BC%9A">https://www.jianshu.com/p/14f5f145453e。升级完成后创建以下软连接：</a></p>
+<pre><code># ln -s /usr/local/curl/include/curl/ /usr/include/curl
+</code></pre>
+<p>再次执行编译 omhttp，出现以下错误：</p>
+<pre><code>make[2]: Entering directory `/data/kafka/rsyslog-8.1903.0/contrib/omhttp&#39;
+  CC     omhttp_la-omhttp.lo
+omhttp.c: 在函数‘checkConn’中:
+omhttp.c:470: 警告：此函数中的‘healthUrl’在使用前可能未初始化
+  CCLD   omhttp.la
+/usr/bin/ld: cannot find -lcurl
+collect2: ld returned 1 exit status
+make[2]: *** [omhttp.la] 错误 1
+make[2]: Leaving directory `/data/kafka/rsyslog-8.1903.0/contrib/omhttp&#39;
+make[1]: *** [all-recursive] 错误 1
+make[1]: Leaving directory `/data/kafka/rsyslog-8.1903.0&#39;
+make: *** [all] 错误 2
+</code></pre>
+<p>创建以下软连接：</p>
+<pre><code>cd /lib64
+# ln -s /usr/local/curl/lib/libcurl.so.4.5.0 libcurl.so
+# ln -s /usr/local/curl/lib/libcurl.so.4.5.0 libcurl.so.4
+</code></pre>
+<p>再次编译 omhttp 成功！！终于大功告成O(∩_∩)O哈哈~</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+        <tag>数据采集</tag>
+        <tag>Rsyslog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS 7.3编译Rsyslog 8.1903.0</title>
+    <url>/2019/04/03/CentOS-7-3-%E7%BC%96%E8%AF%91-Rsyslog-8-1903-0/</url>
+    <content><![CDATA[<p>源码下载：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># wget https://github.com/rsyslog/rsyslog/archive/v8.1903.0.tar.gz</span></span><br><span class="line"><span class="comment"># tar xzvf v8.1903.0.tar.gz</span></span><br></pre></td></tr></table></figure>
+
+<p>创建构建环境：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># autoreconf -fvi</span></span><br></pre></td></tr></table></figure>
+
+<p>创建过程中出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">configure.ac:46: error: possibly undefined macro: AC_DISABLE_STATIC</span><br><span class="line">      If this token and others are legitimate, please use m4_pattern_allow.</span><br><span class="line">      See the Autoconf documentation.</span><br><span class="line">configure.ac:49: error: possibly undefined macro: AC_LIBTOOL_DLOPEN</span><br><span class="line">configure.ac:52: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br><span class="line">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br></pre></td></tr></table></figure>
+
+<p>原因是缺少libtool，执行以下命令安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum install libtool</span></span><br></pre></td></tr></table></figure>
+
+<p>执行配置，可以自定义选项，我是因为要编译omhttp模块，所以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ./configure --enable-omhttp</span></span><br></pre></td></tr></table></figure>
+
+<p>执行过程汇总出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">checking for LIBESTR... no</span><br><span class="line">configure: error: Package requirements (libestr &gt;= 0.1.9) were not met:</span><br><span class="line"></span><br><span class="line">No package &#x27;libestr&#x27; found</span><br></pre></td></tr></table></figure>
+
+<p>使用以下命令检查：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># rpm -q libestr</span></span><br><span class="line">libestr-0.1.9-2.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>安装开发包后解决：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum install libestr-devel</span></span><br></pre></td></tr></table></figure>
+
+<p>再次执行配置出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">checking for LIBFASTJSON... no</span><br><span class="line">configure: error: Package requirements (libfastjson &gt;= 0.99.8) were not met:</span><br><span class="line"></span><br><span class="line">No package &#x27;libfastjson&#x27; found</span><br></pre></td></tr></table></figure>
+
+<p>检查系统安装的包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># rpm -q libfastjson</span></span><br><span class="line">libfastjson-0.99.4-3.el7.x86_64</span><br></pre></td></tr></table></figure>
+
+<p>安装新版本。源码下载：<a href="http://download.rsyslog.com/libfastjson/">http://download.rsyslog.com/libfastjson/</a>。下载<code>libfastjson-0.99.8.tar.gz</code>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># wget http://download.rsyslog.com/libfastjson/libfastjson-0.99.8.tar.gz</span></span><br><span class="line"><span class="comment"># tar xzvf libfastjson-0.99.8.tar.gz</span></span><br><span class="line"><span class="comment"># cd libfastjson-0.99.8/</span></span><br><span class="line"><span class="comment"># ./configure --prefix=/usr CC=&quot;gcc -m64&quot; PKG_CONFIG_PATH=&quot;/usr/lib64/pkgconfig&quot; --libdir=/usr/lib64</span></span><br><span class="line"><span class="comment"># make</span></span><br><span class="line"><span class="comment"># make install</span></span><br></pre></td></tr></table></figure>
+
+<p>再次执行配置出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">checking for LIBUUID... no</span><br><span class="line">configure: error: Package requirements (uuid) were not met:</span><br><span class="line"></span><br><span class="line">No package &#x27;uuid&#x27; found</span><br></pre></td></tr></table></figure>
+
+<p>安装libuuid：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum install libuuid libuuid-devel</span></span><br></pre></td></tr></table></figure>
+
+<p>再次执行配置出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">configure: error: in `/data/rsyslog/rsyslog-8.1903.0&#x27;:</span><br><span class="line">configure: error: libgcrypt-config not found in PATH</span><br></pre></td></tr></table></figure>
+
+<p>安装libgcrypt模块：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum install libgcrypt libgcrypt-devel</span></span><br></pre></td></tr></table></figure>
+
+<p>再次执行配置成功。^_^</p>
+<p>执行编译：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># make</span></span><br></pre></td></tr></table></figure>
+
+<p>编译过程出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">make[2]: 进入目录“/data/rsyslog/rsyslog-8.1903.0/grammar”</span><br><span class="line">  YACC     grammar.c</span><br><span class="line">../ylwrap:行178: yacc: 未找到命令</span><br><span class="line">make[2]: *** [grammar.c] 错误 127</span><br><span class="line">make[2]: 离开目录“/data/rsyslog/rsyslog-8.1903.0/grammar”</span><br><span class="line">make[1]: *** [all-recursive] 错误 1</span><br><span class="line">make[1]: 离开目录“/data/rsyslog/rsyslog-8.1903.0”</span><br><span class="line">make: *** [all] 错误 2</span><br></pre></td></tr></table></figure>
+
+<p>安装byacc：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># yum install byacc</span></span><br></pre></td></tr></table></figure>
+
+<p>再次编译出现以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make  all-am</span><br><span class="line">make[3]: 进入目录“/data/rsyslog/rsyslog-8.1903.0/grammar”</span><br><span class="line">  CC       libgrammar_la-grammar.lo</span><br><span class="line">  LEX      lexer.c</span><br><span class="line">  CC       libgrammar_la-lexer.lo</span><br><span class="line">gcc: error: ./lexer.c: No such file or directory</span><br><span class="line">gcc: fatal error: no input files</span><br></pre></td></tr></table></figure>
+
+<p>这是因为在make前需要执行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># sh autogen.sh</span></span><br></pre></td></tr></table></figure>
+
+<p>编译omhttp模块：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># contrib/omhttp</span></span><br><span class="line"><span class="comment"># make</span></span><br><span class="line">    CC       omhttp_la-omhttp.lo</span><br><span class="line">    CCLD     omhttp.la</span><br></pre></td></tr></table></figure>
+
+<p>执行完成后再次make，生成的<code>omhttp.so</code>文件在<code>contrib/omhttp/.libs</code>目录下。</p>
+<p>至此，大功告成！！O(∩_∩)O哈哈~</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+        <tag>数据采集</tag>
+        <tag>Rsyslog</tag>
       </tags>
   </entry>
 </search>
