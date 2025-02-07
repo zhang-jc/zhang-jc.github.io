@@ -2840,4 +2840,25 @@
         <tag>Rsyslog</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Rsyslog omhttp（HTTP输出模块）</title>
+    <url>/2019/04/01/Rsyslog-omhttp%EF%BC%88HTTP-%E8%BE%93%E5%87%BA%E6%A8%A1%E5%9D%97%EF%BC%89/</url>
+    <content><![CDATA[<p>使用Rsyslog的omhttp模块可以将收集的日志数据以HTTP请求的方式输出。该模块支持单条&#x2F;批量发送数据，支持GZIP压缩，支持HTTPS。</p>
+<p>Rsyslog默认未包含omhttp模块，需要重新编译。编译过程参考我的另外两篇博文：</p>
+<ul>
+<li><a href="https://www.zhangjc.com/2019/04/03/CentOS-7-3-%E7%BC%96%E8%AF%91-Rsyslog-8-1903-0/">CentOS 7.3 编译 Rsyslog 8.1903.0</a></li>
+<li><a href="https://www.zhangjc.com/2019/04/03/CentOS-6-5-%E7%BC%96%E8%AF%91-Rsyslog-8-1903-0/">CentOS 6.5 编译 Rsyslog 8.1903.0</a></li>
+</ul>
+<p>CentOS 6.5系统下编译比较麻烦，可以下载我编译后的so文件：<a href="">CentOS 6.5编译omhttp.so下载</a></p>
+<p>一个简单的配置示例如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">module(load=&quot;omhttp&quot;)</span><br><span class="line">template(name=&quot;tpl1&quot; type=&quot;string&quot; string=&quot;&#123;\&quot;type\&quot;:\&quot;syslog\&quot;, \&quot;host\&quot;:\&quot;%HOSTNAME%\&quot;&#125;&quot;)</span><br><span class="line">action(</span><br><span class="line">    type=&quot;omhttp&quot;</span><br><span class="line">    server=&quot;127.0.0.1&quot;</span><br><span class="line">    serverport=&quot;8080&quot;</span><br><span class="line">    restpath=&quot;events&quot;</span><br><span class="line">    template=&quot;tpl1&quot;</span><br><span class="line">    action.resumeRetryCount=&quot;3&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>数据采集</tag>
+        <tag>Rsyslog</tag>
+      </tags>
+  </entry>
 </search>
