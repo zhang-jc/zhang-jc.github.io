@@ -2885,4 +2885,26 @@
         <tag>调度系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ranger Hive Service连接测试失败问题解决</title>
+    <url>/2020/12/02/Ranger-Hive-Service%E8%BF%9E%E6%8E%A5%E6%B5%8B%E8%AF%95%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>异常信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">org.apache.ranger.plugin.client.HadoopException: Unable to connect to Hive Thrift Server instance..</span><br><span class="line">Unable to connect to Hive Thrift Server instance..</span><br><span class="line">Could not open client transport with JDBC Uri: jdbc:hive2://192.168.72.212:10000: Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &#x27;client_protocol&#x27; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;).</span><br><span class="line">Could not establish connection to jdbc:hive2://192.168.72.212:10000: Required field &#x27;client_protocol&#x27; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;).</span><br><span class="line">Required field &#x27;client_protocol&#x27; is unset! Struct:TOpenSessionReq(client_protocol:null, configuration:&#123;set:hiveconf:hive.server2.thrift.resultset.default.fetch.size=1000, use:database=default&#125;). </span><br></pre></td></tr></table></figure>
+
+<p>百度后是因为Hive版本不匹配导致的。我的测试环境Hive版本是2.1.1，通过下面的命令发现确实版本不一致：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># find . -name &quot;*hive*&quot;</span></span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive</span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive/ranger-hive-plugin-1.2.0.jar</span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-common-2.3.2.jar</span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-service-2.3.2.jar</span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-exec-2.3.2.jar</span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-metastore-2.3.2.jar</span><br><span class="line">./ews/webapp/WEB-INF/classes/ranger-plugins/hive/hive-jdbc-2.3.2.jar</span><br></pre></td></tr></table></figure>
+
+<p>问题解决方法就显而易见了。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据安全</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hive</tag>
+        <tag>Ranger</tag>
+        <tag>数据安全</tag>
+      </tags>
+  </entry>
 </search>
