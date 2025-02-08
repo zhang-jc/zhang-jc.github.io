@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-count">69</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,125 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/" class="post-title-link" itemprop="url">Sqoop源码修改：增加落地HDFS文件数与MapTask数量一致性检查</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-30 17:04:29" itemprop="dateCreated datePublished" datetime="2018-12-30T17:04:29+08:00">2018-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-01-30 19:08:42" itemprop="dateModified" datetime="2025-01-30T19:08:42+08:00">2025-01-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">数据采集</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/" class="post-meta-item leancloud_visitors" data-flag-title="Sqoop源码修改：增加落地HDFS文件数与MapTask数量一致性检查" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Sqoop源码修改：增加落地HDFS文件数与MapTask数量一致性检查" href="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::889195087671f22b586589765ab66590" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本篇是对<a href="https://www.zhangjc.com/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/">记录一次Sqoop从MySQL导入数据到Hive问题的排查经过</a>的补充。</p>
+<p>Sqoop命令通过bin下面的脚本调用，调用如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exec</span> <span class="variable">$&#123;HADOOP_COMMON_HOME&#125;</span>/bin/hadoop org.apache.sqoop.Sqoop <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/30/Sqoop-%E6%BA%90%E7%A0%81%E4%BF%AE%E6%94%B9%EF%BC%9A%E5%A2%9E%E5%8A%A0%E8%90%BD%E5%9C%B0-HDFS-%E6%96%87%E4%BB%B6%E6%95%B0%E4%B8%8E-MapTask-%E6%95%B0%E9%87%8F%E4%B8%80%E8%87%B4%E6%80%A7%E6%A3%80%E6%9F%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1238,131 +1357,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/02/11/Windows7-%E4%B8%8A%E6%9E%84%E5%BB%BA%E5%B9%B6%E5%AE%89%E8%A3%85-Hadoop-2-7-3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/" class="post-title-link" itemprop="url">Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-02-11 18:47:51" itemprop="dateCreated datePublished" datetime="2017-02-11T18:47:51+08:00">2017-02-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-19 21:48:53" itemprop="dateModified" datetime="2025-01-19T21:48:53+08:00">2025-01-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表" href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::0269942975c241108eb3a4a67c4808ef" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><ul>
-<li>Windows 7</li>
-<li>java version “1.7.0_80”</li>
-<li>Apache Maven 3.2.3</li>
-<li>ProtocolBuffer 2.5.0</li>
-<li>cmake version 3.7.2 win64 x64</li>
-<li>Windows SDK 7.1</li>
-</ul>
-<p>构建过程参照源代码目录下<code>BUILDING.txt</code>说明文件中的“Building on Windows”中的内容；以及我的另外一篇文章：<a href="https://www.zhangjc.com/2016/08/29/%E6%90%AD%E5%BB%BA-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83/">搭建Hadoop源代码阅读环境</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
