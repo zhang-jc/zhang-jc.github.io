@@ -2926,4 +2926,38 @@
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ranger Admin安装MySQL初始化问题解决</title>
+    <url>/2020/12/01/Ranger-Admin%E5%AE%89%E8%A3%85MySQL%E5%88%9D%E5%A7%8B%E5%8C%96%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>告警信息及如何解决见我的另外一篇博客：<a href="https://www.zhangjc.com/2020/11/27/MySQL-JDBC-%E8%BF%9E%E6%8E%A5%E5%BC%82%E5%B8%B8%EF%BC%9Ajavax-net-ssl-SSLException-closing-inbound-before-receiving-peer-s-close-notify/">MySQL JDBC连接异常：javax.net.ssl.SSLException: closing inbound before receiving peer’s close_notify</a></p>
+<p>但是Ranger的安装配置<code>install.properties</code>中未启用ssl，配置信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">#SSL config</span><br><span class="line">db_ssl_enabled=false</span><br><span class="line">db_ssl_required=false</span><br><span class="line">db_ssl_verifyServerCertificate=false</span><br><span class="line">#db_ssl_auth_type=1-way|2-way, where 1-way represents standard one way ssl authentication and 2-way represents mutual ssl authentication</span><br><span class="line">db_ssl_auth_type=2-way</span><br><span class="line">javax_net_ssl_keyStore=</span><br><span class="line">javax_net_ssl_keyStorePassword=</span><br><span class="line">javax_net_ssl_trustStore=</span><br><span class="line">javax_net_ssl_trustStorePassword=</span><br></pre></td></tr></table></figure>
+
+<p>跟踪源代码发现安装过程只处理了启用ssl的情况，但是新版本的mysql默认是需要启用ssl的。修改Ranger安装源代码（apache-ranger-1.2.0&#x2F;security-admin&#x2F;scripts&#x2F;db_setup.py）增加下面代码中的221、222行，如下：</p>
+<pre><code class="Python">210    def get_jisql_cmd(self, user, password ,db_name):
+211        path = RANGER_ADMIN_HOME
+212        db_ssl_param=&#39;&#39;
+213        db_ssl_cert_param=&#39;&#39;
+214        if self.db_ssl_enabled == &#39;true&#39;:
+215            db_ssl_param=&quot;?useSSL=%s&amp;requireSSL=%s&amp;verifyServerCertificate=%s&quot; %(self.db_ssl_enabled,self.db_ssl_required,self.db_ssl_verifyServerCertificate)
+216            if self.db_ssl_verifyServerCertificate == &#39;true&#39;:
+217                if self.db_ssl_auth_type == &#39;1-way&#39;:
+218                    db_ssl_cert_param=&quot; -Djavax.net.ssl.trustStore=%s -Djavax.net.ssl.trustStorePassword=%s &quot; %(self.javax_net_ssl_trustStore,self.javax_net_ssl_trustStorePassword)
+219                else:
+220                    db_ssl_cert_param=&quot; -Djavax.net.ssl.keyStore=%s -Djavax.net.ssl.keyStorePassword=%s -Djavax.net.ssl.trustStore=%s -Djavax.net.ssl.trustStorePassword=%s &quot; %(self.javax_net_ssl_keyStore,self.javax_net_ssl_keyStorePassword,self.javax_net_ssl_trustStore,self.javax_net_ssl_trustStorePassword)
+221        else:
+222            db_ssl_param=&#39;?useSSL=false&#39;
+</code></pre>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据安全</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hive</tag>
+        <tag>Ranger</tag>
+        <tag>数据安全</tag>
+      </tags>
+  </entry>
 </search>
