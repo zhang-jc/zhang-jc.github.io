@@ -1962,7 +1962,7 @@
 <p><strong>purpose</strong></p>
 <p>使用<code>purpose</code>选项，不止一种方法配置<strong>运行</strong>按钮。设置选项值为<code>debug-test</code>，定义当在VS Code中调试单元测试时使用该配置。然而，设置该选项为<code>debug-in-terminal</code>，定义只有在访问编辑器右上方的<strong>运行Python文件</strong>按钮时才使用该配置（无论是该按钮的<strong>运行Python文件</strong>还是<strong>调试Python文件</strong>选项被使用）。<strong>注意</strong>，<code>purpose</code>选项不能用来通过<code>F5</code>或<strong>运行→启动调试</strong>启动调试器<strong>。</strong></p>
 <p><strong>autoReload</strong></p>
-<p>允许在调试器碰到断电后，代码做了修改时自动重新加载调试器。如下面代码设置<code>&#123;&quot;enable&quot;: true&#125;</code>启用这个特性：</p>
+<p>允许在调试器碰到断点后，代码做了修改时自动重新加载调试器。如下面代码设置<code>&#123;&quot;enable&quot;: true&#125;</code>启用这个特性：</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;Python Debugger: Current File&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">  &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">  &quot;program&quot;: &quot;$&#123;file&#125;&quot;,</span><br><span class="line">  &quot;console&quot;: &quot;integratedTerminal&quot;,</span><br><span class="line">  &quot;autoReload&quot;: &#123;</span><br><span class="line">    &quot;enable&quot;: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -3009,6 +3009,32 @@
         <tag>大数据</tag>
         <tag>分布式计算</tag>
         <tag>Eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python3连接MySQL并且读取Blob字段信息</title>
+    <url>/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/</url>
+    <content><![CDATA[<h1 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">$ pip3 install mysql-connector-python</span><br><span class="line">Command <span class="string">&#x27;pip3&#x27;</span> <span class="keyword">not</span> found, but can be installed <span class="keyword">with</span>:</span><br><span class="line">sudo apt install python3-pip</span><br></pre></td></tr></table></figure>
+
+<p>根据提示信息安装pip3。</p>
+<p>根据MySQL官网建议应该安装8.0的驱动。我的安装：mysql-connector-python-8.0.13、protobuf-3.6.1、setuptools-40.6.2、six-1.11.0。</p>
+<h1 id="读取MySQL数据"><a href="#读取MySQL数据" class="headerlink" title="读取MySQL数据"></a>读取MySQL数据</h1><p>以读取Azkaban中的triggers表数据为例。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;roHive&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;hive@bigdata!23&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span>: <span class="string">&#x27;172.16.72.22&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;database&#x27;</span>: <span class="string">&#x27;azkaban3&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;raise_on_warnings&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">    <span class="string">&#x27;charset&#x27;</span>: <span class="string">&#x27;latin1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line">query = (<span class="string">&quot;SELECT trigger_id, data FROM azkaban3.triggers&quot;</span>)</span><br><span class="line">cursor.execute(query)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (triggerId, triggerData) <span class="keyword">in</span> cursor:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;triggerId=<span class="subst">&#123;triggerId&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">cnx.close()</span><br></pre></td></tr></table></figure>
+
+<p>Azkaban的triggers表中的data字段是BLOB类型。因为我的Azkaban MySQL库采用的是latin1编码，如果连接时不设置字符集在读取data字段数据时在读取BLOB类型字段时会报如下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">UnicodeDecodeError: &#x27;utf-8&#x27; codec can&#x27;t decode byte 0x8b in position 1: invalid start byte</span><br></pre></td></tr></table></figure>
+
+<p>因为data字段是采用gzip压缩的，所以需要解压，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (triggerId, triggerData) <span class="keyword">in</span> cursor:</span><br><span class="line">    <span class="built_in">print</span>(gzip.decompress(<span class="built_in">bytes</span>(triggerData, encoding=<span class="string">&#x27;latin1&#x27;</span>)))</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>Python</tag>
+        <tag>调度系统</tag>
+        <tag>Azkaban</tag>
       </tags>
   </entry>
 </search>
