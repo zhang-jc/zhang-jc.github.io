@@ -3032,9 +3032,26 @@
       </categories>
       <tags>
         <tag>MySQL</tag>
+        <tag>数据库</tag>
         <tag>Python</tag>
         <tag>调度系统</tag>
         <tag>Azkaban</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python3连接MongoDB并写入数据</title>
+    <url>/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/</url>
+    <content><![CDATA[<h1 id="安装PyMongo"><a href="#安装PyMongo" class="headerlink" title="安装PyMongo"></a>安装PyMongo</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ pip3 install pymongo</span><br><span class="line">Successfully installed pymongo-3.7.2</span><br></pre></td></tr></table></figure>
+
+<h1 id="连接MongoDB并且批量插入操作"><a href="#连接MongoDB并且批量插入操作" class="headerlink" title="连接MongoDB并且批量插入操作"></a>连接MongoDB并且批量插入操作</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">opsDateTime = datetime.now().isoformat(timespec=<span class="string">&#x27;seconds&#x27;</span>)</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;roHive&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;hive@bigdata!23&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span>: <span class="string">&#x27;172.16.72.22&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;database&#x27;</span>: <span class="string">&#x27;azkaban3&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;raise_on_warnings&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">    <span class="string">&#x27;charset&#x27;</span>: <span class="string">&#x27;latin1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line">query = (<span class="string">&quot;SELECT trigger_id, data FROM azkaban3.triggers&quot;</span>)</span><br><span class="line">cursor.execute(query)</span><br><span class="line"></span><br><span class="line">scheduledList = []</span><br><span class="line"><span class="keyword">for</span> (triggerId, triggerData) <span class="keyword">in</span> cursor:</span><br><span class="line">    triggerJson = json.loads(gzip.decompress(<span class="built_in">bytes</span>(triggerData, encoding=<span class="string">&#x27;latin1&#x27;</span>)))</span><br><span class="line">    actionJson = triggerJson[<span class="string">&#x27;actions&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;actionJson&#x27;</span>]</span><br><span class="line">    projectName = actionJson[<span class="string">&#x27;projectName&#x27;</span>]</span><br><span class="line">    flowName = actionJson[<span class="string">&#x27;flowName&#x27;</span>]</span><br><span class="line">    scheduledFlow = &#123;<span class="string">&#x27;opsDateTime&#x27;</span>: opsDateTime, <span class="string">&#x27;projectName&#x27;</span>: projectName, <span class="string">&#x27;flowName&#x27;</span>: flowName&#125;</span><br><span class="line">    scheduledList.append(scheduledFlow)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">cnx.close()</span><br><span class="line"></span><br><span class="line">mongoClient = MongoClient(<span class="string">&#x27;mongodb://172.16.72.213:27017/&#x27;</span>)</span><br><span class="line">opsDb = mongoClient.ops</span><br><span class="line">azScheduled = opsDb.azScheduledFlow</span><br><span class="line">azScheduled.insert_many(scheduledList)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Python</tag>
+        <tag>MongoDB</tag>
       </tags>
   </entry>
 </search>

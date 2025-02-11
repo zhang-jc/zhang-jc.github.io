@@ -21,31 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="在安装完Deepin 23后，无线网络用不了。自己安装无线网卡驱动后，重启电脑，登陆系统时电脑一直黑屏状态。重新安装Deepin 20.9也是相同的情况。 后来发现是因为Deepin系统安装时，需要选择高版本内核，对于Deepin 20.9和Deepin 23版本都一样： Deepin 20.9">
+    <meta name="description" content="安装PyMongo12$ pip3 install pymongoSuccessfully installed pymongo-3.7.2  连接MongoDB并且批量插入操作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Deepin安装完成后无线网无法使用问题">
-<meta property="og:url" content="https://www.zhangjc.com/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="Python3连接MongoDB并写入数据">
+<meta property="og:url" content="https://www.zhangjc.com/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/index.html">
 <meta property="og:site_name" content="一张假钞的真实世界">
-<meta property="og:description" content="在安装完Deepin 23后，无线网络用不了。自己安装无线网卡驱动后，重启电脑，登陆系统时电脑一直黑屏状态。重新安装Deepin 20.9也是相同的情况。 后来发现是因为Deepin系统安装时，需要选择高版本内核，对于Deepin 20.9和Deepin 23版本都一样： Deepin 20.9">
+<meta property="og:description" content="安装PyMongo12$ pip3 install pymongoSuccessfully installed pymongo-3.7.2  连接MongoDB并且批量插入操作">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://www.zhangjc.com/images/202412/07.png">
-<meta property="og:image" content="https://www.zhangjc.com/images/202412/08.png">
-<meta property="article:published_time" content="2024-12-22T09:18:30.000Z">
-<meta property="article:modified_time" content="2025-01-27T08:57:58.719Z">
+<meta property="article:published_time" content="2018-11-15T09:09:30.000Z">
+<meta property="article:modified_time" content="2025-02-11T14:41:56.450Z">
 <meta property="article:author" content="徂徕山人">
-<meta property="article:tag" content="Linux">
-<meta property="article:tag" content="Deepin">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="MongoDB">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.zhangjc.com/images/202412/07.png">
 
 
-<link rel="canonical" href="https://www.zhangjc.com/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="https://www.zhangjc.com/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/","path":"2024/12/22/Deepin安装完成后无线网无法使用问题/","title":"Deepin安装完成后无线网无法使用问题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/","path":"2018/11/15/Python3连接MongoDB并写入数据/","title":"Python3连接MongoDB并写入数据"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Deepin安装完成后无线网无法使用问题 | 一张假钞的真实世界</title>
+<title>Python3连接MongoDB并写入数据 | 一张假钞的真实世界</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -134,7 +132,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -147,6 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85PyMongo"><span class="nav-number">1.</span> <span class="nav-text">安装PyMongo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E4%B8%94%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">连接MongoDB并且批量插入操作</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -207,7 +206,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -220,12 +219,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Deepin安装完成后无线网无法使用问题 | 一张假钞的真实世界">
+      <meta itemprop="name" content="Python3连接MongoDB并写入数据 | 一张假钞的真实世界">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Deepin安装完成后无线网无法使用问题
+          Python3连接MongoDB并写入数据
         </h1>
 
         <div class="post-meta-container">
@@ -236,14 +235,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-12-22 17:18:30" itemprop="dateCreated datePublished" datetime="2024-12-22T17:18:30+08:00">2024-12-22</time>
+      <time title="创建时间：2018-11-15 17:09:30" itemprop="dateCreated datePublished" datetime="2018-11-15T17:09:30+08:00">2018-11-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-27 16:57:58" itemprop="dateModified" datetime="2025-01-27T16:57:58+08:00">2025-01-27</time>
+      <time title="修改时间：2025-02-11 22:41:56" itemprop="dateModified" datetime="2025-02-11T22:41:56+08:00">2025-02-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,16 +250,16 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
         </span>
           ，
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Deepin/" itemprop="url" rel="index"><span itemprop="name">Deepin</span></a>
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
         </span>
     </span>
 
   
-    <span id="/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="Deepin安装完成后无线网无法使用问题" title="阅读次数">
+    <span id="/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/" class="post-meta-item leancloud_visitors" data-flag-title="Python3连接MongoDB并写入数据" title="阅读次数">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -275,8 +274,8 @@
       </span>
       <span class="post-meta-item-text">Changyan：</span>
     
-    <a title="Deepin安装完成后无线网无法使用问题" href="/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::fc06a6cf5db8b850ef74e022b9503f46" class="cy_cmt_count" itemprop="commentCount"></span>
+    <a title="Python3连接MongoDB并写入数据" href="/2018/11/15/Python3%E8%BF%9E%E6%8E%A5MongoDB%E5%B9%B6%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::0e4759f247d629c9b81b89d8d6c2a878" class="cy_cmt_count" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -289,13 +288,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>在安装完Deepin 23后，无线网络用不了。自己安装无线网卡驱动后，重启电脑，登陆系统时电脑一直黑屏状态。重新安装Deepin 20.9也是相同的情况。</p>
-<p>后来发现是因为Deepin系统安装时，需要选择高版本内核，对于Deepin 20.9和Deepin 23版本都一样：</p>
-<p><strong>Deepin 20.9</strong></p>
-<p><img src="/images/202412/07.png"></p>
-<p><strong>Deepin 23</strong></p>
-<p><img src="/images/202412/08.png"></p>
+    <div class="post-body" itemprop="articleBody"><h1 id="安装PyMongo"><a href="#安装PyMongo" class="headerlink" title="安装PyMongo"></a>安装PyMongo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install pymongo</span><br><span class="line">Successfully installed pymongo-3.7.2</span><br></pre></td></tr></table></figure>
 
+<h1 id="连接MongoDB并且批量插入操作"><a href="#连接MongoDB并且批量插入操作" class="headerlink" title="连接MongoDB并且批量插入操作"></a>连接MongoDB并且批量插入操作</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> mysql.connector</span><br><span class="line"><span class="keyword">import</span> gzip</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">opsDateTime = datetime.now().isoformat(timespec=<span class="string">&#x27;seconds&#x27;</span>)</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">    <span class="string">&#x27;user&#x27;</span>: <span class="string">&#x27;roHive&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;password&#x27;</span>: <span class="string">&#x27;hive@bigdata!23&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span>: <span class="string">&#x27;172.16.72.22&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;database&#x27;</span>: <span class="string">&#x27;azkaban3&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;raise_on_warnings&#x27;</span>: <span class="literal">True</span>,</span><br><span class="line">    <span class="string">&#x27;charset&#x27;</span>: <span class="string">&#x27;latin1&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cnx = mysql.connector.connect(**config)</span><br><span class="line">cursor = cnx.cursor()</span><br><span class="line">query = (<span class="string">&quot;SELECT trigger_id, data FROM azkaban3.triggers&quot;</span>)</span><br><span class="line">cursor.execute(query)</span><br><span class="line"></span><br><span class="line">scheduledList = []</span><br><span class="line"><span class="keyword">for</span> (triggerId, triggerData) <span class="keyword">in</span> cursor:</span><br><span class="line">    triggerJson = json.loads(gzip.decompress(<span class="built_in">bytes</span>(triggerData, encoding=<span class="string">&#x27;latin1&#x27;</span>)))</span><br><span class="line">    actionJson = triggerJson[<span class="string">&#x27;actions&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;actionJson&#x27;</span>]</span><br><span class="line">    projectName = actionJson[<span class="string">&#x27;projectName&#x27;</span>]</span><br><span class="line">    flowName = actionJson[<span class="string">&#x27;flowName&#x27;</span>]</span><br><span class="line">    scheduledFlow = &#123;<span class="string">&#x27;opsDateTime&#x27;</span>: opsDateTime, <span class="string">&#x27;projectName&#x27;</span>: projectName, <span class="string">&#x27;flowName&#x27;</span>: flowName&#125;</span><br><span class="line">    scheduledList.append(scheduledFlow)</span><br><span class="line"></span><br><span class="line">cursor.close()</span><br><span class="line">cnx.close()</span><br><span class="line"></span><br><span class="line">mongoClient = MongoClient(<span class="string">&#x27;mongodb://172.16.72.213:27017/&#x27;</span>)</span><br><span class="line">opsDb = mongoClient.ops</span><br><span class="line">azScheduled = opsDb.azScheduledFlow</span><br><span class="line">azScheduled.insert_many(scheduledList)</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -318,21 +313,22 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
-              <a href="/tags/Deepin/" rel="tag"><i class="fa fa-tag"></i> Deepin</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/12/21/Hexo%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%91%98%E8%A6%81/" rel="prev" title="Hexo自动生成摘要">
-                  <i class="fa fa-angle-left"></i> Hexo自动生成摘要
+                <a href="/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/" rel="prev" title="Python3连接MySQL并且读取Blob字段信息">
+                  <i class="fa fa-angle-left"></i> Python3连接MySQL并且读取Blob字段信息
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" rel="next" title="Python虚拟环境管理">
-                  Python虚拟环境管理 <i class="fa fa-angle-right"></i>
+                <a href="/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/" rel="next" title="记录一次Sqoop从MySQL导入数据到Hive问题的排查经过">
+                  记录一次Sqoop从MySQL导入数据到Hive问题的排查经过 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -345,7 +341,7 @@
 
 
 
-    <div class="comments" id="SOHUCS" sid="fc06a6cf5db8b850ef74e022b9503f46"></div>
+    <div class="comments" id="SOHUCS" sid="0e4759f247d629c9b81b89d8d6c2a878"></div>
 </div>
   </main>
 
