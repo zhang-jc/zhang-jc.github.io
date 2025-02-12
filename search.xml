@@ -3070,4 +3070,19 @@
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python3操作MongoDB批量upsert</title>
+    <url>/2018/11/19/Python3-%E6%93%8D%E4%BD%9C-MongoDB-%E6%89%B9%E9%87%8F-upsert/</url>
+    <content><![CDATA[<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mongoClient = MongoClient(<span class="string">&#x27;mongodb://172.16.72.213:27017/&#x27;</span>)</span><br><span class="line">opsDb = mongoClient.ops</span><br><span class="line">azScheduled = opsDb.azScheduledFlow</span><br><span class="line"></span><br><span class="line">bulkOpers = []</span><br><span class="line"><span class="keyword">for</span> flow <span class="keyword">in</span> scheduledFlows.values():</span><br><span class="line">    bulkOpers.append(UpdateOne(&#123;<span class="string">&#x27;opsDt&#x27;</span>: opsDt, <span class="string">&#x27;projectId&#x27;</span>: flow[<span class="string">&#x27;projectId&#x27;</span>], <span class="string">&#x27;projectName&#x27;</span>: flow[<span class="string">&#x27;projectName&#x27;</span>], <span class="string">&#x27;flowName&#x27;</span>: flow[<span class="string">&#x27;flowName&#x27;</span>]&#125;, &#123;<span class="string">&#x27;$set&#x27;</span>: &#123;<span class="string">&#x27;opsDateTime&#x27;</span>: opsDtStr, <span class="string">&#x27;status&#x27;</span>: flow[<span class="string">&#x27;status&#x27;</span>], <span class="string">&#x27;startTime&#x27;</span>: flow[<span class="string">&#x27;startTime&#x27;</span>], <span class="string">&#x27;endTime&#x27;</span>: flow[<span class="string">&#x27;endTime&#x27;</span>], <span class="string">&#x27;elapsed&#x27;</span>: flow[<span class="string">&#x27;elapsed&#x27;</span>]&#125;&#125;, upsert=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">azScheduled.bulk_write(bulkOpers)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Python</tag>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
 </search>
