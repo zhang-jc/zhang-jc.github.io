@@ -3054,4 +3054,20 @@
         <tag>MongoDB</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python3创建虚拟环境</title>
+    <url>/2019/01/13/Python3-%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>Python虚拟环境主要是为了解决Python多版本及模块间版本兼容的问题。创建虚拟环境的方法很简单，使用下面的命令即可：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python3 -m venv PySparkEnv</span><br></pre></td></tr></table></figure>
+
+<p>PySparkEnv即虚拟环境的主目录。如果要启用这个虚拟环境的话，使用以下命令：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">source PySparkEnv/<span class="built_in">bin</span>/activate</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
