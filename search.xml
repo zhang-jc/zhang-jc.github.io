@@ -3098,4 +3098,18 @@
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar</title>
+    <url>/2021/08/17/pentaho-aggdesigner-algorithm-5-1-5-jhyde-jar/</url>
+    <content><![CDATA[<p>Maven编译时无法自动下载<a href="/images/202502/pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar">pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar</a>，需要手动下载并安装到本地仓库。安装命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn install:install-file -Dfile=./pentaho-aggdesigner-algorithm-5.1.5-jhyde.jar -DgroupId=org.pentaho -DartifactId=pentaho-aggdesigner-algorithm -Dversion=5.1.5-jhyde -Dpackaging=jar</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
 </search>
