@@ -3085,4 +3085,17 @@
         <tag>MongoDB</tag>
       </tags>
   </entry>
+  <entry>
+    <title>pip安装指定版本的包</title>
+    <url>/2019/03/19/pip-%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84%E5%8C%85/</url>
+    <content><![CDATA[<p>使用以下命令安装指定版本的包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pip install pyspark==2.3.3</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
