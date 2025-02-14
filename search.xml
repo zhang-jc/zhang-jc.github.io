@@ -3112,4 +3112,22 @@
         <tag>Maven</tag>
       </tags>
   </entry>
+  <entry>
+    <title>pdsh@frin: localhost: rcmd: socket: Permission denied</title>
+    <url>/2021/12/06/pdsh-frin-localhost-rcmd-socket-Permission-denied/</url>
+    <content><![CDATA[<p>在部署单节点Hadoop集群时，执行<code>sbin/start-dfs.sh</code>出现以下错误：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sbin/start-dfs.sh</span></span><br><span class="line">Starting namenodes on [localhost]</span><br><span class="line">pdsh@frin: localhost: rcmd: socket: Permission denied</span><br><span class="line">Starting datanodes</span><br><span class="line">pdsh@frin: localhost: rcmd: socket: Permission denied</span><br><span class="line">Starting secondary namenodes [frin]</span><br><span class="line">pdsh@frin: frin: rcmd: socket: Permission denied</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：在<code>/etc/pdsh/</code>下创建<code>rcmd_default</code>文件，输入内容：ssh。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式存储</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Hadoop</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
