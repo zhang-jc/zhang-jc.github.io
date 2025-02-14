@@ -3134,7 +3134,7 @@
     <title>org.apache.kafka.common.errors.TimeoutException</title>
     <url>/2017/08/24/org-apache-kafka-common-errors-TimeoutException/</url>
     <content><![CDATA[<p>使用<code>kafka-console-producer.sh</code>向远端Kafka写入数据时遇到以下错误：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bin/kafka-console-producer.sh --broker-list 172.16.72.202:9092 --topic <span class="built_in">test</span></span><br><span class="line">This is a message</span><br><span class="line">[2017-08-24 11:47:48,286] ERROR Error when sending message to topic <span class="built_in">test</span> with key: null, value: 17 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.TimeoutException: Expiring 1 record(s) <span class="keyword">for</span> test-0: 1523 ms has passed since batch creation plus linger time</span><br><span class="line">八月 24, 2017 11:50:55 上午 sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span> executeAcceptLoop</span><br><span class="line">警告: RMI TCP Accept-0: accept loop <span class="keyword">for</span> ServerSocket[addr=0.0.0.0/0.0.0.0,localport=38175] throws</span><br><span class="line">java.io.IOException: The server sockets created using the LocalRMIServerSocketFactory only accept connections from clients running on the host <span class="built_in">where</span> the RMI remote objects have been exported.</span><br><span class="line">	at sun.management.jmxremote.LocalRMIServerSocketFactory<span class="variable">$1</span>.accept(LocalRMIServerSocketFactory.java:114)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.executeAcceptLoop(TCPTransport.java:400)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.run(TCPTransport.java:372)</span><br><span class="line"> 	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bin/kafka-console-producer.sh --broker-list 172.16.72.202:9092 --topic <span class="built_in">test</span></span><br><span class="line">This is a message</span><br><span class="line">[2017-08-24 11:47:48,286] ERROR Error when sending message to topic <span class="built_in">test</span> with key: null, value: 17 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.TimeoutException: Expiring 1 record(s) <span class="keyword">for</span> test-0: 1523 ms has passed since batch creation plus linger time</span><br><span class="line">八月 24, 2017 11:50:55 上午 sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span> executeAcceptLoop</span><br><span class="line">警告: RMI TCP Accept-0: accept loop <span class="keyword">for</span> ServerSocket[addr=0.0.0.0/0.0.0.0,localport=38175] throws</span><br><span class="line">java.io.IOException: The server sockets created using the LocalRMIServerSocketFactory only accept connections from clients running on the host <span class="built_in">where</span> the RMI remote objects have been exported.</span><br><span class="line">	at sun.management.jmxremote.LocalRMIServerSocketFactory<span class="variable">$1</span>.accept(LocalRMIServerSocketFactory.java:114)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.executeAcceptLoop(TCPTransport.java:400)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.run(TCPTransport.java:372)</span><br><span class="line"> 	at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
 
 <p>在没有配置<code>advertised.host.name</code>的情况下，Kafka并没有广播我们配置的<code>host.name</code>，而是广播了主机配置的hostname。远端的客户端并没有配置hosts，所以自然是连接不上这个hostname的，所以在远端客户端配置hosts。在客户端<code>/etc/hosts</code>中添加以下内容后问题解决：</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">172.16.72.202 172-16-72-202</span><br></pre></td></tr></table></figure>]]></content>
@@ -3146,6 +3146,31 @@
         <tag>Kafka</tag>
         <tag>实时计算</tag>
         <tag>消息队列</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm安装时无法访问github域名的解决方法</title>
+    <url>/2021/11/10/npm%E5%AE%89%E8%A3%85%E6%97%B6%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AEgithub%E5%9F%9F%E5%90%8D%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>今天在用<code>npm install</code>的时候出现了github项目访问不了的异常：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">npm ERR! Error while executing:</span><br><span class="line">npm ERR! /bin/git ls-remote -h -t https://github.com/nhn/raphael.git</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! fatal: unable to access &#x27;https://github.com/nhn/raphael.git/&#x27;: Encountered end of file</span><br><span class="line">npm ERR! </span><br><span class="line">npm ERR! exited with error code: 128</span><br><span class="line"></span><br><span class="line">npm ERR! A complete log of this run can be found in:</span><br><span class="line">npm ERR!     /home/ycs/.npm/_logs/2021-11-10T09_14_23_017Z-debug.log</span><br></pre></td></tr></table></figure>
+
+<p>ping及curl测试都无法访问。但服务器是可以访问互联网的，怀疑是被墙了。</p>
+<p>从网址<a href="https://websites.ipaddress.com/github.com">https://websites.ipaddress.com/github.com</a>查询GitHub的IP地址。</p>
+<p><img src="/images/202502/github-ip.png" alt="GitHub IP"></p>
+<p>添加hosts配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">140.82.114.3 github.com</span><br></pre></td></tr></table></figure>
+
+<p>问题解决。</p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+        <tag>NPM</tag>
+        <tag>Node.js</tag>
       </tags>
   </entry>
 </search>
