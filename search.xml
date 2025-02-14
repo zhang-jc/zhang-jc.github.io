@@ -3130,4 +3130,22 @@
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>org.apache.kafka.common.errors.TimeoutException</title>
+    <url>/2017/08/24/org-apache-kafka-common-errors-TimeoutException/</url>
+    <content><![CDATA[<p>使用<code>kafka-console-producer.sh</code>向远端Kafka写入数据时遇到以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bin/kafka-console-producer.sh --broker-list 172.16.72.202:9092 --topic <span class="built_in">test</span></span><br><span class="line">This is a message</span><br><span class="line">[2017-08-24 11:47:48,286] ERROR Error when sending message to topic <span class="built_in">test</span> with key: null, value: 17 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.TimeoutException: Expiring 1 record(s) <span class="keyword">for</span> test-0: 1523 ms has passed since batch creation plus linger time</span><br><span class="line">八月 24, 2017 11:50:55 上午 sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span> executeAcceptLoop</span><br><span class="line">警告: RMI TCP Accept-0: accept loop <span class="keyword">for</span> ServerSocket[addr=0.0.0.0/0.0.0.0,localport=38175] throws</span><br><span class="line">java.io.IOException: The server sockets created using the LocalRMIServerSocketFactory only accept connections from clients running on the host <span class="built_in">where</span> the RMI remote objects have been exported.</span><br><span class="line">	at sun.management.jmxremote.LocalRMIServerSocketFactory<span class="variable">$1</span>.accept(LocalRMIServerSocketFactory.java:114)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.executeAcceptLoop(TCPTransport.java:400)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.run(TCPTransport.java:372)</span><br><span class="line"> 	at java.lang.Thread.run(Thread.java:748)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在没有配置<code>advertised.host.name</code>的情况下，Kafka并没有广播我们配置的<code>host.name</code>，而是广播了主机配置的hostname。远端的客户端并没有配置hosts，所以自然是连接不上这个hostname的，所以在远端客户端配置hosts。在客户端<code>/etc/hosts</code>中添加以下内容后问题解决：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">172.16.72.202 172-16-72-202</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>实时计算</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+        <tag>实时计算</tag>
+        <tag>消息队列</tag>
+      </tags>
+  </entry>
 </search>
