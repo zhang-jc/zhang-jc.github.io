@@ -3194,4 +3194,26 @@
         <tag>CentOS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL Workbench 8.0不支持非SSL连接</title>
+    <url>/2022/01/27/MySQL-Workbench-8-0%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9ESSL%E8%BF%9E%E6%8E%A5/</url>
+    <content><![CDATA[<p>连接错误信息：SSL connection error: SSL is required but the server doesn’t support it。如下图：</p>
+<p><img src="/images/202502/mysql-ssl-error1.jpg" alt="错误信息"></p>
+<p>解决方法是在配置连接时“Advanced”选项卡中的Others中添加如下参数：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">useSSL=0</span><br></pre></td></tr></table></figure>
+
+<p>如图：<img src="/images/202502/mysql-ssl-error2.jpg" alt="禁用SSL"></p>
+<p>测试连接出现警告信息，选择“Continue Anyway”：</p>
+<p><img src="/images/202502/mysql-ssl-error3.jpg" alt="警告信息"></p>
+<p><img src="/images/202502/mysql-ssl-error4.jpg" alt="警告信息"></p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
