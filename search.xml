@@ -3173,4 +3173,25 @@
         <tag>Node.js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>no matching cipher found问题一次解决经历</title>
+    <url>/2019/12/10/no-matching-cipher-found-%E9%97%AE%E9%A2%98%E4%B8%80%E6%AC%A1%E8%A7%A3%E5%86%B3%E7%BB%8F%E5%8E%86/</url>
+    <content><![CDATA[<p>本次问题解决纯属蒙对了，原理不清楚。</p>
+<p>当我从一台CentOS 7.3的服务器通过ssh登录另外一台CentOS 6.8的服务器时出现以下错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@192-168-72-75 .ssh]# ssh -p65522 bddev@192.168.72.208</span><br><span class="line">no matching cipher found: client arcfour server chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com</span><br></pre></td></tr></table></figure>
+
+<p>解决方法是在“192-168-72-75”服务器上修改<code>/etc/ssh/ssh_config</code>配置文件，添加以下内容：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Host *</span><br><span class="line">	 GSSAPIAuthentication yes</span><br><span class="line">     Ciphers aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc</span><br><span class="line">     MACs hmac-md5,hmac-sha1,umac-64@openssh.com,hmac-ripemd160</span><br></pre></td></tr></table></figure>
+
+<p>以上内容在原配置文件中本来就有，可能只是注释掉了，修改的时候仔细核对下。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+      </tags>
+  </entry>
 </search>
