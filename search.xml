@@ -3216,4 +3216,24 @@
         <tag>数据库</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL修改max_allowed_packet</title>
+    <url>/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/</url>
+    <content><![CDATA[<p>通过global参数设置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> global max_allowed_packet = 32*1024*1024;</span><br></pre></td></tr></table></figure>
+
+<p>注意，下面的写法是不正确的：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> global max_allowed_packet = 32m;</span><br></pre></td></tr></table></figure>
+
+<p>如果要重启也生效的话，在<code>my.cnf</code>中添加如下配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">max_allowed_packet=32m</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
