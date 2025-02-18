@@ -3290,4 +3290,88 @@
         <tag>MongoDB</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MapReduce远程调试</title>
+    <url>/2021/08/05/MapReduce%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/</url>
+    <content><![CDATA[<p>MR的远程调试分为两个方面：</p>
+<ul>
+<li>MapReduce Task远程调试</li>
+<li>AM（Application Master）远程调试</li>
+</ul>
+<h1 id="MapReduce-Task远程调试"><a href="#MapReduce-Task远程调试" class="headerlink" title="MapReduce Task远程调试"></a>MapReduce Task远程调试</h1><h2 id="Map-Task远程调试"><a href="#Map-Task远程调试" class="headerlink" title="Map Task远程调试"></a>Map Task远程调试</h2><p>修改<code>mapred-site.xml</code>中的配置项：</p>
+<ul>
+<li>mapreduce.map.java.opts：Map Task JVM参数设置。此处设置为：-Xdebug -Xrunjdwp:transport&#x3D;dt_socket,address&#x3D;9091,server&#x3D;y,suspend&#x3D;y。</li>
+<li>mapreduce.map.maxattempts：Map Task失败重试的最大次数。此处设置为1。</li>
+<li>mapreduce.task.timeout：一个Task既没有读写数据也没有状态变化可持续的毫秒数。默认为600000毫秒，设置为0禁用超时。远程调试时通常需要持续的时间比较久，所以此处设置为0。</li>
+</ul>
+<h2 id="Reduce-Task远程调试"><a href="#Reduce-Task远程调试" class="headerlink" title="Reduce Task远程调试"></a>Reduce Task远程调试</h2><p>修改mapred-site.xml中的配置项：</p>
+<ul>
+<li>mapreduce.reduce.java.opts：Map Task JVM参数设置。此处设置为：-Xdebug -Xrunjdwp:transport&#x3D;dt_socket,address&#x3D;9091,server&#x3D;y,suspend&#x3D;y。</li>
+<li>mapreduce.reduce.maxattempts：Map Task失败重试的最大次数。此处设置为1。</li>
+<li>mapreduce.task.timeout：一个Task既没有读写数据也没有状态变化可持续的毫秒数。默认为600000毫秒，设置为0禁用超时。远程调试时通常需要持续的时间比较久，所以此处设置为0。</li>
+</ul>
+<h2 id="virtual-memory错误"><a href="#virtual-memory错误" class="headerlink" title="virtual memory错误"></a>virtual memory错误</h2><p>分为两种：</p>
+<ul>
+<li>AM管理进程virtual memory beyond错误</li>
+<li>Task Container virtual memory beyond错误</li>
+</ul>
+<h3 id="AM"><a href="#AM" class="headerlink" title="AM"></a>AM</h3><p>错误信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">21/08/09 16:38:37 INFO mapreduce.Job: Job job_1593052953461_29983110 failed with state FAILED due to: Application application_1593052953461_29983110 failed 2 times due to AM Container for appattempt_1593052953461_29983110_000002 exited with  exitCode: -103</span><br><span class="line">For more detailed output, check application tracking page:http://ycluster-resourcemanager1:50030/cluster/app/application_1593052953461_29983110Then, click on links to logs of each attempt.</span><br><span class="line">Diagnostics: Container [pid=4359,containerID=container_e32_1593052953461_29983110_02_000001] is running beyond virtual memory limits. Current usage: 121.7 MB of 2 GB physical memory used; 16.4 GB of 6.2 GB virtual memory used. Killing container.</span><br><span class="line">Dump of the process-tree for container_e32_1593052953461_29983110_02_000001 :</span><br><span class="line">	|- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE</span><br><span class="line">	|- 4598 4359 4359 4359 (java) 232 18 17444765696 30784 /opt/java/bin/java -Djava.io.tmpdir=/data5/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog -Xmx14336m org.apache.hadoop.mapreduce.v2.app.MRAppMaster </span><br><span class="line">	|- 4359 4355 4359 4359 (bash) 3 3 115908608 359 /bin/bash -c /opt/java/bin/java -Djava.io.tmpdir=/data5/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog  -Xmx14336m org.apache.hadoop.mapreduce.v2.app.MRAppMaster 1&gt;/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/stdout 2&gt;/data1/hadoop/yarn/log/application_1593052953461_29983110/container_e32_1593052953461_29983110_02_000001/stderr  </span><br><span class="line"></span><br><span class="line">Container killed on request. Exit code is 143</span><br><span class="line">Container exited with a non-zero exit code 143</span><br><span class="line">Failing this attempt. Failing the application.</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>yarn-site.xml</code>以下配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.app.mapreduce.am.resource.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>14336<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Task-Container"><a href="#Task-Container" class="headerlink" title="Task Container"></a>Task Container</h3><p>错误信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">2021-08-09 16:45:28,899 INFO [AsyncDispatcher event handler] org.apache.hadoop.mapreduce.v2.app.job.impl.TaskAttemptImpl: Diagnostics report from attempt_1593052953461_29983142_m_000000_0: Container [pid=188730,containerID=container_e32_1593052953461_29983142_01_000002] is running beyond virtual memory limits. Current usage: 25.3 MB of 4 GB physical memory used; 32.9 GB of 12.4 GB virtual memory used. Killing container.</span><br><span class="line">Dump of the process-tree for container_e32_1593052953461_29983142_01_000002 :</span><br><span class="line">	|- PID PPID PGRPID SESSID CMD_NAME USER_MODE_TIME(MILLIS) SYSTEM_TIME(MILLIS) VMEM_USAGE(BYTES) RSSMEM_USAGE(PAGES) FULL_CMD_LINE</span><br><span class="line">	|- 188965 188730 188730 188730 (java) 8 2 35216101376 6116 /opt/java/bin/java -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN -Xdebug -Xrunjdwp:transport=dt_socket,address=9091,server=y,suspend=y -Djava.io.tmpdir=/data0/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog org.apache.hadoop.mapred.YarnChild 192.168.72.33 32492 attempt_1593052953461_29983142_m_000000_0 35184372088834 </span><br><span class="line">	|- 188730 188728 188730 188730 (bash) 2 4 115855360 358 /bin/bash -c /opt/java/bin/java -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN  -Xdebug -Xrunjdwp:transport=dt_socket,address=9091,server=y,suspend=y -Djava.io.tmpdir=/data0/hadoop/yarn/data/usercache/data-platform/appcache/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/tmp -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002 -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA -Dhadoop.root.logfile=syslog org.apache.hadoop.mapred.YarnChild 192.168.72.33 32492 attempt_1593052953461_29983142_m_000000_0 35184372088834 1&gt;/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/stdout 2&gt;/data3/hadoop/yarn/log/application_1593052953461_29983142/container_e32_1593052953461_29983142_01_000002/stderr  </span><br><span class="line"></span><br><span class="line">Container killed on request. Exit code is 143</span><br><span class="line">Container exited with a non-zero exit code 143</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>yarn-site.xml</code>以下配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.map.memory.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>14336<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>mapreduce.reduce.memory.mb<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>14336<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此处有一个很大的疑问：为什么物理内存占用很小，但虚拟内存占用会这么大？这个问题目前还未搞懂(&gt;﹏&lt;)<br>问题解决的关键是Container分配物理内存的值乘以“yarn.nodemanager.vmem-pmem-ratio”的值大于异常信息中的数据；另外一种思路是禁用虚拟内存的检查，这种方法我没有实际验证。</p>
+</blockquote>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><p>打开track url地址，查找到Task所在的服务器。如下：</p>
+<p><img src="/images/202502/track-url.png" alt="track url"></p>
+<p><img src="/images/202502/job-info.png" alt="job info"></p>
+<p><img src="/images/202502/task-position.png" alt="task position"></p>
+<h1 id="AM（Application-Master）远程调试"><a href="#AM（Application-Master）远程调试" class="headerlink" title="AM（Application Master）远程调试"></a>AM（Application Master）远程调试</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>修改<code>mapred-site.xml</code>中的配置项：</p>
+<ul>
+<li>yarn.app.mapreduce.am.command-opts：AM JVM参数设置。可能出现的virtual memory异常解决方法同上。此处设置为：-Xdebug -Xrunjdwp:transport&#x3D;dt_socket,address&#x3D;9091,server&#x3D;y,suspend&#x3D;y。</li>
+<li>mapreduce.am.max-attempts：Application重试次数。此处设置为1。</li>
+</ul>
+<h2 id="定位-1"><a href="#定位-1" class="headerlink" title="定位"></a>定位</h2><p>在ResourceManager上根据提交的Application ID查找AM所在的服务器。如下：</p>
+<p><img src="/images/202502/yarn-apps.png" alt="ResourceManager"></p>
+<p><img src="/images/202502/am.png" alt="AM"></p>
+<h1 id="Eclipse配置"><a href="#Eclipse配置" class="headerlink" title="Eclipse配置"></a>Eclipse配置</h1><p>远程调试配置都一样，如下图：</p>
+<p><img src="/images/202502/eclipse.png" alt="Eclipse远程调试"></p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Hadoop</tag>
+        <tag>大数据</tag>
+        <tag>分布式计算</tag>
+        <tag>Eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven: Too many files with unapproved license</title>
+    <url>/2020/11/25/Maven-Too-many-files-with-unapproved-license/</url>
+    <content><![CDATA[<p>异常信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.apache.rat:apache-rat-plugin:0.11:check (default) on project ranger: Too many files with unapproved license: 1 See RAT report in: /home/zhangjc/ysten/git/apache-ranger-1.2.0/target/rat.txt -&gt; [Help 1]</span><br><span class="line">org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.rat:apache-rat-plugin:0.11:check (default) on project ranger: Too many files with unapproved license: 1 See RAT report in: /home/zhangjc/ysten/git/apache-ranger-1.2.0/target/rat.txt</span><br><span class="line">    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:215)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)</span><br><span class="line">    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)</span><br><span class="line">    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)</span><br><span class="line">    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)</span><br><span class="line">    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)</span><br><span class="line">    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:957)</span><br><span class="line">    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:289)</span><br><span class="line">    at org.apache.maven.cli.MavenCli.main (MavenCli.java:193)</span><br><span class="line">    at sun.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)</span><br><span class="line">    at sun.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)</span><br><span class="line">    at sun.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">    at java.lang.reflect.Method.invoke (Method.java:498)</span><br><span class="line">    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)</span><br><span class="line">    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)</span><br><span class="line">    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)</span><br><span class="line">    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：增加<code>-Drat.skip=true</code>参数 ，跳过licensing检查。</p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Maven</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
 </search>
