@@ -3424,4 +3424,27 @@
         <tag>MacOS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MacOS安装Emacs</title>
+    <url>/2016/07/17/Mac-OS-%E5%AE%89%E8%A3%85-Emacs/</url>
+    <content><![CDATA[<p>在MacOS X上可以使用<a href="http://brew.sh/">Homebrew</a> 安装Emacs：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ brew install emacs --with-cocoa</span><br></pre></td></tr></table></figure>
+
+<p>或者用<a href="https://www.macports.org/">MacPorts</a>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> port install emacs-app</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://emacsformacosx.com/">OSX Emacs</a> 网站提供了通用的二进制包。</p>
+<blockquote>
+<p>前两种方法安装后只能通过命令行启动Emacs，界面是终端界面。<br>二进制安装可以将Emacs安装到Applications中，通过Spotlight搜索快速启动，并有图形界面。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Emacs</category>
+      </categories>
+      <tags>
+        <tag>Emacs</tag>
+        <tag>MacOS</tag>
+      </tags>
+  </entry>
 </search>
