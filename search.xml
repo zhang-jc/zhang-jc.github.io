@@ -3496,4 +3496,23 @@
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux下基于root指定用户执行命令的方法</title>
+    <url>/2021/08/16/Linux%E4%B8%8B%E5%9F%BA%E4%BA%8Eroot%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>Docker在构建镜像阶段无法配置免密码sudo。但是在实际需求场景中会遇到需要使用sudo的场景。所以，我的解决思路是镜像构建及CMD使用root，在CMD的脚本中执行需要sudo的部分，然后使用普通用户启动服务进程。</p>
+<p>当然，基于root使用普通用户启动进程可以选择su或者runuser。我使用的是su：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">cd `dirname $0`</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">&#123;RANGER_HOME&#125;/enable-hive-plugin.sh</span></span><br><span class="line">if [ $? -ne 0 ];then</span><br><span class="line">    echo &quot;启用ranger plugin错误！&quot;</span><br><span class="line">    exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">su -mp -c &#x27;/opt/hive/bin/hiveserver2&#x27; hive</span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>-mp</code>是保留root设置的环境变量。如果不需要保留这些变量则可以使用<code>-l</code>选项。使用man命令查看su完整的手册。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
