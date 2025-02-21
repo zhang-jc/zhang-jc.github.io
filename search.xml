@@ -3472,4 +3472,28 @@
         <tag>网络安全</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux远程kill进程及$处理</title>
+    <url>/2017/03/14/Linux-%E8%BF%9C%E7%A8%8B-kill-%E8%BF%9B%E7%A8%8B%E5%8F%8A-%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>在远程执行的命令中如果包含特殊字符（$）时需要转义，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@remote_host <span class="string">&quot;ps -ef|grep process_name | grep -v &#x27;grep &#x27; | awk &#x27;&#123;print <span class="variable">$2</span>&#125;&#x27;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上语句的本意是得到进程的ID，但实际输出会是进程的信息。应该使用如下形式：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@remote_host <span class="string">&quot;ps -ef|grep process_name | grep -v &#x27;grep &#x27; | awk &#x27;&#123;print \$2&#125;&#x27;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果远程执行命令是在脚本文件中，则需要多重转义。如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh exec.sh <span class="string">&quot;ps -ef|grep process_name | grep -v &#x27;grep &#x27; | awk &#x27;&#123;print \\\\\$2&#125;&#x27;&quot;</span>  </span><br><span class="line">exec.sh 内容如下：  </span><br><span class="line">ssh root@remote_host &lt;&lt; <span class="string">EOF  </span></span><br><span class="line"><span class="string">  eval &quot;$&#123;command&#125;&quot;  </span></span><br><span class="line"><span class="string">  exit  </span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>使用以下命令可以远程kill进程：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh root@remote_host <span class="string">&quot;ps -ef|grep process_name | grep -v &#x27;grep &#x27; | awk &#x27;&#123;print \$2&#125;&#x27; | xargs kill -9&quot;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
