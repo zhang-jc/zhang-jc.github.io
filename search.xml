@@ -3530,4 +3530,22 @@
         <tag>Shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux命令行导出Emacs ORG文档为HTML</title>
+    <url>/2018/12/28/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AF%BC%E5%87%BA-Emacs-ORG-%E6%96%87%E6%A1%A3%E4%B8%BA-HTML/</url>
+    <content><![CDATA[<p>Emacs版本25.2。使用以下命令将org文档导出html：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">emacs &#123;orgFile&#125; --batch --<span class="built_in">eval</span> <span class="string">&quot;(require &#x27;ox)&quot;</span> --<span class="built_in">eval</span> <span class="string">&quot;(org-html-export-to-html)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>批量导出目录下的org文档：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for orgFile in `ls *.org`</span><br><span class="line">do</span><br><span class="line">    emacs $&#123;orgFile&#125; --batch --eval &quot;(require &#x27;ox)&quot; --eval &quot;(org-html-export-to-html)&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Emacs</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Emacs</tag>
+      </tags>
+  </entry>
 </search>
