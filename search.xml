@@ -3515,4 +3515,19 @@
         <tag>Shell</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux命令后双减号符（--）的含义</title>
+    <url>/2017/02/05/Linux-%E5%91%BD%E4%BB%A4%E5%90%8E-%E7%9A%84%E5%90%AB%E4%B9%89/</url>
+    <content><![CDATA[<p>Unix&#x2F;Linux下各种命令的参数，都是以减号符（<code>-</code>）后面跟单字符参数，比如<code>-r</code>）或者双减号符（<code>--</code>）（后面紧跟多字符参数，比如<code>--recursive</code>）来表示。 在所有参数后面是文件名或者目录。大多情况下（文件名第一个字符不是减号符（<code>-</code>））这样是没有任何问题的，但是如果文件名第一个字符是-时（比如<code>-myfile</code>)，命令就无法区分此时<code>-myfile</code>到底是文件名还是参数名。此时解决方法就是用双减号符（<code>--</code>）来表示命令参数结束了，后面哪怕是以减号符（<code>-</code>）开头的字符串，也被当成文件名处理。</p>
+<p>比如<code>rm -r -- -mydir</code>就会递归的（<code>-r</code>）删除<code>-mydir</code>这个目录。</p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
