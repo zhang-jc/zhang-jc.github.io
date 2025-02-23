@@ -3548,4 +3548,16 @@
         <tag>Emacs</tag>
       </tags>
   </entry>
+  <entry>
+    <title>LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</title>
+    <url>/2021/12/23/LibreSSL-SSL-connect-SSL-ERROR-SYSCALL-in-connection-to-github-com-443/</url>
+    <content><![CDATA[<p>向GitHub Push代码的时候出现以下错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ git push origin master</span><br><span class="line">fatal: unable to access &#x27;https://github.com/zhang-jc/zhangjc.git/&#x27;: LibreSSL SSL_connect: SSL_ERROR_SYSCALL in connection to github.com:443</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：将项目clone协议改为SSH。可以直接修改项目目录下.git&#x2F;config配置文件中的项目地址。</p>
+]]></content>
+      <tags>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
 </search>
