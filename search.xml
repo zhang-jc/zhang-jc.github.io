@@ -3576,4 +3576,22 @@
         <tag>数据采集</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Kafka RecordTooLargeException问题解决</title>
+    <url>/2017/08/17/Kafka-RecordTooLargeException-%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>Producer向Kafka写入数据时遇到异常：org.apache.kafka.common.errors.RecordTooLargeException。该异常是因为单条消息大小超过限制导致的。解决方法是将限制参数调大：</p>
+<p>（1）server端：server.properties<br>    <code>message.max.bytes</code>参数默认值为1000012，调整为适合的值，如10485760。</p>
+<p>（2）producer端：<br>    设置Producer的参数<code>max.request.size</code>的值与server端的<code>message.max.bytes</code>值一致。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>实时计算</category>
+      </categories>
+      <tags>
+        <tag>数据采集</tag>
+        <tag>大数据</tag>
+        <tag>Kafka</tag>
+        <tag>消息队列</tag>
+      </tags>
+  </entry>
 </search>
