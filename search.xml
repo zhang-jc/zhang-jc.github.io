@@ -3650,4 +3650,41 @@
         <tag>CI/CD</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Jenkins重启后Maven的Project加载失败</title>
+    <url>/2019/03/19/Jenkins-%E9%87%8D%E5%90%AF%E5%90%8E-Maven-%E7%9A%84-Project-%E5%8A%A0%E8%BD%BD%E5%A4%B1%E8%B4%A5/</url>
+    <content><![CDATA[<p>Jenkins重启后发现Maven的项目都没有正常加载。检查Jenkins的启动日志发现以下错误信息：</p>
+<pre><code class="Text">java.io.IOException: Unable to read /home/jenkins/.jenkins/jobs/test-maven/config.xml
+    at hudson.XmlFile.read(XmlFile.java:149)
+    at hudson.model.Items.load(Items.java:371)
+    at jenkins.model.Jenkins$14.run(Jenkins.java:3128)
+    at org.jvnet.hudson.reactor.TaskGraphBuilder$TaskImpl.run(TaskGraphBuilder.java:169)
+    at org.jvnet.hudson.reactor.Reactor.runTask(Reactor.java:296)
+    at jenkins.model.Jenkins$5.runTask(Jenkins.java:1069)
+    at org.jvnet.hudson.reactor.Reactor$2.run(Reactor.java:214)
+    at org.jvnet.hudson.reactor.Reactor$Node.run(Reactor.java:117)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+    at java.lang.Thread.run(Thread.java:748)
+Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-moduleset
+    at com.thoughtworks.xstream.mapper.DefaultMapper.realClass(DefaultMapper.java:79)
+    at com.thoughtworks.xstream.mapper.MapperWrapper.realClass(MapperWrapper.java:30)
+    at com.thoughtworks.xstream.mapper.DynamicProxyMapper.realClass(DynamicProxyMapper.java:55)
+    at com.thoughtworks.xstream.mapper.MapperWrapper.realClass(MapperWrapper.java:30)
+    at com.thoughtworks.xstream.mapper.PackageAliasingMapper.realClass(PackageAliasingMapper.java:88)
+    at com.thoughtworks.xstream.mapper.MapperWrapper.realClass(MapperWrapper.java:30)
+</code></pre>
+<p>将Maven Integration plugin重装并重启Jenkins后恢复正常。</p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>Java</tag>
+        <tag>Maven</tag>
+        <tag>CI/CD</tag>
+      </tags>
+  </entry>
 </search>
