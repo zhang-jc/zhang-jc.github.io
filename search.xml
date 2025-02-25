@@ -3627,4 +3627,27 @@
         <tag>垃圾回收</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Jenkins protoc: command not found</title>
+    <url>/2019/03/20/Jenkins-protoc-command-not-found/</url>
+    <content><![CDATA[<p>在使用Jenkins编译Hadoop3.1.2时报错信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[INFO] --- hadoop-maven-plugins:3.1.2:protoc (compile-protoc) @ hadoop-common ---</span><br><span class="line">[WARNING] [protoc, --version] failed: java.io.IOException: Cannot run program &quot;protoc&quot;: error=13, 权限不够</span><br><span class="line">[ERROR] stdout: []</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p>原因是Jenkins中找不到protoc命令。解决方法是在Jenkins中配置环境变量PATH指定protoc路径。</p>
+<p><img src="/images/202502/jenkins-path.png" alt="jenkins path"></p>
+<p>再次执行发现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">protoc: error while loading shared libraries: libprotobuf.so.8: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>解决方法跟PATH配置一样道理，配置一个新的环境变量LD_LIBRARY_PATH：</p>
+<p><img src="/images/202502/jenkins-LD_LIBRARY_PATH.png" alt="jenkins LD_LIBRARY_PATH"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>CI/CD</tag>
+      </tags>
+  </entry>
 </search>
