@@ -3687,4 +3687,19 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>CI/CD</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Jenkins安装插件网络错误问题解决</title>
+    <url>/2019/03/01/Jenkins-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E7%BD%91%E7%BB%9C%E9%94%99%E8%AF%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>Jenkins安装插件时报网络不通的错误，根据错误信息看是连接<a href="https://www.google.com/">https://www.google.com</a>网络不通。解决这个问题的方法是修改“Update Site”的URL地址，将默认地址由https改为http。<br>“Update Site”配置项位置在“插件管理-&gt;Advanced”中，修改后如下图：</p>
+<p><img src="/images/202502/jenkinsUpdateSite.png" alt="Jenkins Update Site"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>CI/CD</tag>
+      </tags>
+  </entry>
 </search>
