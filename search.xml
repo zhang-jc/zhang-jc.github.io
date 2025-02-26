@@ -3702,4 +3702,30 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>CI/CD</tag>
       </tags>
   </entry>
+  <entry>
+    <title>JConsole远程连接错误解决</title>
+    <url>/2021/09/07/JConsole%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>程序启动命令及参数如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ java -Dcom.sent.jmxremote.ssl=false -jar math-game.jar</span><br></pre></td></tr></table></figure>
+
+<p>防火墙已经放开30000端口访问，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">telnet 192.168.72.156 30000</span></span><br><span class="line">Trying 192.168.72.156...</span><br><span class="line">Connected to 192.168.72.156.</span><br><span class="line">Escape character is &#x27;^]&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p>异常界面如下：</p>
+<p><img src="/images/202502/jconsole_security_failed.png" alt="安全连接失败"></p>
+<p>点击“不安全的连接”异常界面如下：</p>
+<p><img src="/images/202502/jconsole_not_security_failed.png" alt="非安全连接失败"></p>
+<p>最终还是防火墙的问题。网上大都是直接关闭了防火墙，所以问题可以解决。但对于服务器来说，直接关闭防火墙是存在比较大安全隐患的，尤其是暴露在公网上的服务器。用netstat查看进程监听的所有端口，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">netstat -ntlp | grep 30000</span></span><br><span class="line">tcp6       0      0 :::30000                :::*                    LISTEN      24488/java</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">netstat -ntlp | grep 24488</span></span><br><span class="line">tcp6       0      0 :::24605                :::*                    LISTEN      24488/java          </span><br><span class="line">tcp6       0      0 :::19170                :::*                    LISTEN      24488/java          </span><br><span class="line">tcp6       0      0 :::30000                :::*                    LISTEN      24488/java</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的信息可以看出，我们启动的应用程序共监听了3个端口。放开3个端口的访问，再次连接成功。</p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
