@@ -3792,4 +3792,41 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>数据仓库</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ImportError: libffi.so.5: cannot open shared object file: No such file or directory</title>
+    <url>/2019/10/10/ImportError-libffi-so-5-cannot-open-shared-object-file-No-such-file-or-directory/</url>
+    <content><![CDATA[<p>在CentOS7.4中通过源码的方式安装Requests时，报错信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># pip3 install .</span></span><br><span class="line">Processing /data/setup/psf-requests-fab1fd1</span><br><span class="line">    ERROR: Command errored out with <span class="built_in">exit</span> status 1:</span><br><span class="line">     <span class="built_in">command</span>: /opt/Python-3.7.2/bin/python3.7 -c <span class="string">&#x27;import sys, setuptools, tokenize; sys.argv[0] = &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;/tmp/pip-req-build-nuwyypgj/setup.py&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;; __file__=&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;/tmp/pip-req-build-nuwyypgj/setup.py&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;;f=getattr(tokenize, &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;open&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;, open)(__file__);code=f.read().replace(&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;\r\n&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;, &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;\n&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;);f.close();exec(compile(code, __file__, &#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;exec&#x27;</span><span class="string">&quot;&#x27;&quot;</span><span class="string">&#x27;))&#x27;</span> egg_info --egg-base pip-egg-info</span><br><span class="line">         cwd: /tmp/pip-req-build-nuwyypgj/</span><br><span class="line">    Complete output (11 lines):</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">      File <span class="string">&quot;&lt;string&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">      File <span class="string">&quot;/opt/Python-3.7.2/lib/python3.7/site-packages/setuptools/__init__.py&quot;</span>, line 18, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">        from setuptools.dist import Distribution, Feature</span><br><span class="line">      File <span class="string">&quot;/opt/Python-3.7.2/lib/python3.7/site-packages/setuptools/dist.py&quot;</span>, line 31, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">        from setuptools import windows_support</span><br><span class="line">      File <span class="string">&quot;/opt/Python-3.7.2/lib/python3.7/site-packages/setuptools/windows_support.py&quot;</span>, line 2, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">        import ctypes</span><br><span class="line">      File <span class="string">&quot;/opt/Python-3.7.2/lib/python3.7/ctypes/__init__.py&quot;</span>, line 7, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">        from _ctypes import Union, Structure, Array</span><br><span class="line">    ImportError: libffi.so.5: cannot open shared object file: No such file or directory</span><br><span class="line">    ----------------------------------------</span><br><span class="line">ERROR: Command errored out with <span class="built_in">exit</span> status 1: python setup.py egg_info Check the logs <span class="keyword">for</span> full <span class="built_in">command</span> output.</span><br></pre></td></tr></table></figure>
+
+<p>其实在CentOS7.4下已经存在libffi.so.6，解决方法是创建软连接，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cd /usr/lib64</span></span><br><span class="line"><span class="comment"># ln -s libffi.so.6 libffi.so.5</span></span><br><span class="line"><span class="comment"># ln -s libffi.so.6.0.1 libffi.so.5.0.1</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Requests</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>CentOS</tag>
+        <tag>Python</tag>
+        <tag>Requests</tag>
+        <tag>网络爬虫</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java读取Properties文件的方法</title>
+    <url>/2017/09/28/Java-%E8%AF%BB%E5%8F%96-Properties-%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>Java读取Properties文件有两种简单方法，就是使用ClassLoader中的资源读取方法。</p>
+<ul>
+<li>public InputStream getResourceAsStream(String name)<br>  该方法是非静态方法，所以不能在静态代码中使用。</li>
+<li>public static InputStream getSystemResourceAsStream(String name)<br>  该方法是静态方法，可以在静态代码中使用。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
