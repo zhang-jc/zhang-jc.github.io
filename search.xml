@@ -3829,4 +3829,47 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Hue UI展示中文</title>
+    <url>/2020/09/17/Hue-UI-%E5%B1%95%E7%A4%BA%E4%B8%AD%E6%96%87/</url>
+    <content><![CDATA[<p>如果使用开发分支代码如master分支）编译安装，需要自己编译语言文件。例如Hue安装目录为“&#x2F;opt&#x2F;hue”，则安装后执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /opt/hue</span><br><span class="line">$ make locales</span><br></pre></td></tr></table></figure>
+
+<p>如果需要则重启Hue即可。是否需要重启我没有验证：）</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据探索</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hue</tag>
+        <tag>数据探索</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hue Load Balance配置</title>
+    <url>/2020/11/18/Hue-Load-Balance%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>直接上配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  server_name 192.168.72.31;</span><br><span class="line">  listen 8001;</span><br><span class="line">  </span><br><span class="line">  charset utf-8;</span><br><span class="line">  </span><br><span class="line">  proxy_connect_timeout 600s;</span><br><span class="line">  proxy_read_timeout 600s;</span><br><span class="line">  proxy_send_timeout 600s;</span><br><span class="line">  </span><br><span class="line">  location / &#123;</span><br><span class="line">    proxy_set_header Host $http_x_forwarded_for;</span><br><span class="line">    proxy_set_header X-Forwarded-For $http_x_forwarded_for;</span><br><span class="line">    </span><br><span class="line">    proxy_pass http://hue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">upstream hue &#123;</span><br><span class="line">  hash $cookie_sessionid;</span><br><span class="line">  </span><br><span class="line">  server 192.168.72.22:8888 max_fails=3;</span><br><span class="line">  server 192.168.72.31:8888 max_fails=3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重点是调整<code>upstream hash</code>的策略。因为Hue是需要保持session的，同一个session的请求需要发送到同一台后端服务器上。简单的可以采用ip_hash策略，这个策略存在两个重要的问题：</p>
+<ul>
+<li>对隐藏在局域网后的用户不起作用。</li>
+<li>ip_hash只取IPV4的前三段值做Hash，在非公网大并发场景下会出现负载非常不均衡的情况。参见：<a href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash">http://nginx.org/en/docs/http/ngx_http_upstream_module.html#ip_hash</a></li>
+</ul>
+<p>基于以上两点修改了Nginx的配置采用<code>$cookie_sessionid</code>做为hash值，达到session级别的负载均衡。</p>
+<p>主要的问题其实是这种方式未做到按照后端服务器实际负载再按照session级别来分配请求。后续打算研究HAProxy是否可以做到。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据探索</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>大数据</tag>
+        <tag>Hue</tag>
+        <tag>数据探索</tag>
+      </tags>
+  </entry>
 </search>
