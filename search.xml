@@ -3872,4 +3872,60 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>数据探索</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Hue Docker镜像构建异常：gnutls_handshake() failed</title>
+    <url>/2021/09/03/Hue-Docker%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA%E5%BC%82%E5%B8%B8%EF%BC%9Agnutls-handshake-failed/</url>
+    <content><![CDATA[<p>错误信息如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  Cloning https://github.com/gethue/PyHive to /tmp/pip-req-build-86w_hwe4</span><br><span class="line">  Running command git clone -q https://github.com/gethue/PyHive /tmp/pip-req-build-86w_hwe4</span><br><span class="line">  fatal: unable to access &#x27;https://github.com/gethue/PyHive/&#x27;: gnutls_handshake() failed: The TLS connection was non-properly terminated.</span><br><span class="line">WARNING: Discarding git+https://github.com/gethue/PyHive. Command errored out with exit status 128: git clone -q https://github.com/gethue/PyHive /tmp/pip-req-build-86w_hwe4 Check the logs for full command output.</span><br><span class="line">ERROR: Command errored out with exit status 128: git clone -q https://github.com/gethue/PyHive /tmp/pip-req-build-86w_hwe4 Check the logs for full command output.</span><br><span class="line">The command &#x27;/bin/sh -c ./build/env/bin/pip install --no-cache-dir   psycopg2-binary   django_redis==4.11.0   flower   git+https://github.com/gethue/PyHive   git+https://github.com/bryanyang0528/ksql-python   pydruid   pybigquery   elasticsearch-dbapi   pyasn1==0.4.1   python-snappy==0.5.4   threadloop   sqlalchemy-clickhouse   infi.clickhouse_orm==1.0.4&#x27; returned a non-zero code: 1</span><br></pre></td></tr></table></figure>
+
+<p>网上大都是说因为代理的问题，对我这个场景没用。通过搜索找到一个很好的代理：<a href="https://mirror.ghproxy.com/">https://mirror.ghproxy.com</a></p>
+<p><code>desktop/core/requirements.txt</code>中以下位置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">git+https://github.com/gethue/django-babel.git</span><br><span class="line">git+https://github.com/gethue/django-mako.git</span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">git+https://mirror.ghproxy.com/https://github.com/gethue/django-babel.git</span><br><span class="line">git+https://mirror.ghproxy.com/https://github.com/gethue/django-mako.git</span><br></pre></td></tr></table></figure>
+
+<p>tools&#x2F;docker&#x2F;hue&#x2F;Dockerfile中以下位置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">git+https://github.com/gethue/PyHive \</span><br><span class="line"># pyhive \</span><br><span class="line">#ksql \</span><br><span class="line">git+https://github.com/bryanyang0528/ksql-python \</span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">git+https://mirror.ghproxy.com/https://github.com/gethue/PyHive \</span><br><span class="line"># pyhive \</span><br><span class="line">#ksql \</span><br><span class="line">git+https://mirror.ghproxy.com/https://github.com/bryanyang0528/ksql-python \</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据探索</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+        <tag>Hue</tag>
+        <tag>数据探索</tag>
+        <tag>Docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hue 编译异常：ImportError: cannot import name &#39;six&#39; from &#39;urllib3.packages&#39;</title>
+    <url>/2020/06/23/Hue-%E7%BC%96%E8%AF%91%E5%BC%82%E5%B8%B8%EF%BC%9AImportError-cannot-import-name-six-from-urllib3-packages/</url>
+    <content><![CDATA[<p>在编译Hue的时候出现错误信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Running &#x27;/home/zhangjc/ysten/git/ysten-hue/build/env/bin/hue makemigrations --noinput&#x27; with None</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/bin/hue&quot;, line 33, in &lt;module&gt;</span><br><span class="line">    sys.exit(load_entry_point(&#x27;desktop&#x27;, &#x27;console_scripts&#x27;, &#x27;hue&#x27;)())</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/manage_entry.py&quot;, line 225, in entry</span><br><span class="line">    execute_from_command_line(sys.argv)</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/core/management/__init__.py&quot;, line 364, in execute_from_command_line</span><br><span class="line">    utility.execute()</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/core/management/__init__.py&quot;, line 338, in execute</span><br><span class="line">    django.setup()</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/__init__.py&quot;, line 27, in setup</span><br><span class="line">    apps.populate(settings.INSTALLED_APPS)</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/apps/registry.py&quot;, line 108, in populate</span><br><span class="line">    app_config.import_models()</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/site-packages/django/apps/config.py&quot;, line 202, in import_models</span><br><span class="line">    self.models_module = import_module(models_module_name)</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/build/env/lib/python3.7/importlib/__init__.py&quot;, line 127, in import_module</span><br><span class="line">    return _bootstrap._gcd_import(name[level:], package, level)</span><br><span class="line">  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 1006, in _gcd_import</span><br><span class="line">  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 983, in _find_and_load</span><br><span class="line">  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 967, in _find_and_load_unlocked</span><br><span class="line">  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 677, in _load_unlocked</span><br><span class="line">  File &quot;&lt;frozen importlib._bootstrap_external&gt;&quot;, line 728, in exec_module</span><br><span class="line">  File &quot;&lt;frozen importlib._bootstrap&gt;&quot;, line 219, in _call_with_frames_removed</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/models.py&quot;, line 47, in &lt;module&gt;</span><br><span class="line">    from useradmin.models import User, Group, get_organization</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/apps/useradmin/src/useradmin/models.py&quot;, line 56, in &lt;module&gt;</span><br><span class="line">    from desktop.lib.connectors.models import _get_installed_connectors, Connector</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/connectors/models.py&quot;, line 29, in &lt;module&gt;</span><br><span class="line">    from desktop.lib.connectors.types import get_connectors_types</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/connectors/types.py&quot;, line 24, in &lt;module&gt;</span><br><span class="line">    from desktop.lib.exceptions_renderable import PopupException</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/exceptions_renderable.py&quot;, line 31, in &lt;module&gt;</span><br><span class="line">    import desktop.lib.django_util</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/django_util.py&quot;, line 42, in &lt;module&gt;</span><br><span class="line">    import desktop.lib.thrift_util</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/thrift_util.py&quot;, line 49, in &lt;module&gt;</span><br><span class="line">    from desktop.lib.thrift_.http_client import THttpClient</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/thrift_/http_client.py&quot;, line 26, in &lt;module&gt;</span><br><span class="line">    from desktop.lib.rest.http_client import HttpClient</span><br><span class="line">  File &quot;/home/zhangjc/ysten/git/ysten-hue/desktop/core/src/desktop/lib/rest/http_client.py&quot;, line 32, in &lt;module&gt;</span><br><span class="line">    from urllib3.contrib import pyopenssl</span><br><span class="line">  File &quot;/usr/lib/python3/dist-packages/urllib3/contrib/pyopenssl.py&quot;, line 62, in &lt;module&gt;</span><br><span class="line">    from ..packages import six</span><br><span class="line">ImportError: cannot import name &#x27;six&#x27; from &#x27;urllib3.packages&#x27; (/usr/lib/python3/dist-packages/urllib3/packages/__init__.py)</span><br></pre></td></tr></table></figure>
+
+<p>错误原因：根据错误信息可以看到是“&#x2F;usr&#x2F;lib&#x2F;python3&#x2F;dist-packages&#x2F;urllib3”这个包的问题。正确的应该是引用“build&#x2F;env&#x2F;lib&#x2F;python3.7&#x2F;site-packages&#x2F;”下的包。查看”&#x2F;usr&#x2F;lib&#x2F;python3&#x2F;dist-packages&#x2F;urllib3”下的包信息，发现包版本比较低。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l /usr/lib/python3/dist-packages/</span><br><span class="line">drwxr-xr-x  6 root root   4096 1月  13 17:07 urllib3</span><br><span class="line">drwxr-xr-x  2 root root   4096 1月  13 17:06 urllib3-1.22.egg-info</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：删除有问题的包后再试成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> <span class="built_in">rm</span> -rf /usr/lib/python3/dist-packages/urllib3*</span><br></pre></td></tr></table></figure>
+
+<p>查看“build&#x2F;env&#x2F;lib&#x2F;python3.7&#x2F;site-packages&#x2F;”下的urllib3包信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l build/env/lib/python3.7/site-packages/|grep urllib3</span><br><span class="line">drwxr-xr-x  6 zhangjc zhangjc   4096 6月  23 17:06 urllib3</span><br><span class="line">drwxr-xr-x  2 zhangjc zhangjc   4096 6月  23 17:06 urllib3-1.25.9.dist-info</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据探索</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>大数据</tag>
+        <tag>Hue</tag>
+        <tag>数据探索</tag>
+      </tags>
+  </entry>
 </search>
