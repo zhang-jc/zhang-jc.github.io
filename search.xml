@@ -3947,4 +3947,29 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin下创建WebStorm快捷方式</title>
+    <url>/2025/03/07/Deepin%E4%B8%8B%E5%88%9B%E5%BB%BAWebStorm%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>下载WebStorm并解压至安装目录，默认的只能通过命令行启动，每次都需要先打开终端，很不方便。解决方法是创建快捷方式，并驻留任务栏。这样点击任务栏上的图标即可启动。</p>
+<p>为了方便快捷方式配置，在安装目录创建软链接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ln -s WebStorm-243.25659.40 webstorm</span></span><br><span class="line"><span class="comment"># ls -l</span></span><br><span class="line">lrwxrwxrwx 1 root    root           21  3月 7日 21:26 webstorm -&gt; WebStorm-243.25659.40</span><br><span class="line">drwxr-xr-x 9 zhangjc zhangjc      4096  3月 7日 20:35 WebStorm-243.25659.40</span><br></pre></td></tr></table></figure>
+
+<p>在<code>/usr/share/applications/</code>目录下，创建<code>webstorm.desktop</code>文件，并输入一下内容：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=WebStorm</span><br><span class="line">Exec=/opt/webstorm/bin/webstorm</span><br><span class="line">Icon=/opt/webstorm/bin/webstorm.png</span><br><span class="line">Type=Application</span><br></pre></td></tr></table></figure>
+
+<p>保存文件后，就可以从启动器搜索到WebStorm了：</p>
+<p><img src="/images/202503/01.png"></p>
+<p>启动后，可以将WebStorm驻留至任务栏：</p>
+<p><img src="/images/202503/02.png"></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Deepin</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Deepin</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
