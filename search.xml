@@ -3972,4 +3972,20 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>NPM镜像源设置</title>
+    <url>/2025/03/10/NPM%E9%95%9C%E5%83%8F%E6%BA%90%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<p>以设置阿里镜像源为例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看当前镜像源</span></span><br><span class="line">npm config get registry</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 设置阿里镜像源</span></span><br><span class="line">npm config <span class="built_in">set</span> registry http://registry.npmmirror.com</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 删除阿里镜像源</span></span><br><span class="line">npm config delete registry http://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<p>阿里镜像源网址：<a href="https://developer.aliyun.com/mirror/NPM?spm=a2c6h.13651102.0.0.30da1b11bsbolw">https://developer.aliyun.com/mirror/NPM?spm=a2c6h.13651102.0.0.30da1b11bsbolw</a></p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>NPM</tag>
+      </tags>
+  </entry>
 </search>
