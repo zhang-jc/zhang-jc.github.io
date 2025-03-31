@@ -4008,4 +4008,21 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>浏览器</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Jenkins中找不到pyenv命令问题解决</title>
+    <url>/2025/03/31/Jenkins%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0pyenv%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>错误信息如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Building in workspace /home/zhangjc/.jenkins/workspace/updateCompanies</span><br><span class="line">[updateCompanies] $ /bin/sh -xe /tmp/jenkins15523675592087959393.sh</span><br><span class="line">+ pyenv activate probe</span><br><span class="line">/tmp/jenkins15523675592087959393.sh: 2: pyenv: not found</span><br><span class="line">Build step &#x27;Execute shell&#x27; marked build as failure</span><br></pre></td></tr></table></figure>
+
+<p>查看用户环境变量加载脚本<code>.bashrc</code>，找到pyenv环境变量加载内容，将内容添加至Jenkins构建步骤脚本中，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export PYENV_ROOT=&quot;$HOME/.pyenv&quot;</span><br><span class="line">command -v pyenv &gt;/dev/null || export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;</span><br><span class="line">eval &quot;$(pyenv init -)&quot;</span><br><span class="line"></span><br><span class="line">pyenv activate probe</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>CI/CD</tag>
+      </tags>
+  </entry>
 </search>
