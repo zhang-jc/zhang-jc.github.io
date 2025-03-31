@@ -3988,4 +3988,24 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>NPM</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Firefox默认在新标签页打开收藏栏链接</title>
+    <url>/2025/03/31/Firefox%E9%BB%98%E8%AE%A4%E5%9C%A8%E6%96%B0%E6%A0%87%E7%AD%BE%E9%A1%B5%E6%89%93%E5%BC%80%E6%94%B6%E8%97%8F%E6%A0%8F%E9%93%BE%E6%8E%A5/</url>
+    <content><![CDATA[<p>选择Firefox浏览器，有两个理由：</p>
+<ul>
+<li>可以使用Firefox多端同步功能。</li>
+<li>可以在浏览器内配置代理，方便抓包时的代理配置。</li>
+</ul>
+<p>虽然可以按下Ctrl键时点击链接，以在新标签页中打开，但每次操作还是太麻烦了。配置默认在新标签页打开链接，可以安装Firefox的扩展插件“Open bookmarks in new tab”。</p>
+<p>在Firefox的“管理扩展”页面搜索“Open bookmarks in new tab”，找到对应的插件安装即可。安装完成后，再点击链接时，默认在新标签页打开。</p>
+]]></content>
+      <categories>
+        <category>浏览器</category>
+        <category>Firefox</category>
+      </categories>
+      <tags>
+        <tag>Firefox</tag>
+        <tag>浏览器</tag>
+      </tags>
+  </entry>
 </search>
