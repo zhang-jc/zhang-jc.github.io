@@ -4031,7 +4031,13 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
     <content><![CDATA[<p>首先，配置SMTP服务器为“smtp.qq.com”。</p>
 <p>然后，展开高级配置项，并选中使用SMTP认证，同时选中使用SSL。</p>
 <p>最后，在用户名输入框输入完整QQ邮箱地址。注意，密码输入框需要输入生成的授权码，而不是输入邮箱的登陆密码。</p>
+<ul>
+<li>Jenkins邮箱用户名：</li>
+</ul>
 <p><img src="/images/202503/03.png" alt="Jenkins邮箱用户名"></p>
+<ul>
+<li>QQ邮箱授权码入口：</li>
+</ul>
 <p><img src="/images/202503/04.png" alt="QQ邮箱授权码入口"></p>
 ]]></content>
       <categories>
