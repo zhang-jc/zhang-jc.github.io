@@ -4129,4 +4129,39 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux命令行命令自动补全</title>
+    <url>/2025/05/28/Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%91%BD%E4%BB%A4%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8/</url>
+    <content><![CDATA[<p>GitHub项目：<a href="https://github.com/scop/bash-completion%E3%80%82">https://github.com/scop/bash-completion。</a></p>
+<p>确认bash版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">bash --version</span><br></pre></td></tr></table></figure>
+
+<p>make check过程出现错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/bin/sh: pytest: <span class="built_in">command</span> not found</span><br><span class="line">make[4]: *** [check-local] Error 127</span><br></pre></td></tr></table></figure>
+
+<p>由于我的环境没有安装pip，所以先安装。安装参考<a href="https://pip.pypa.io/en/stable/installation/%E3%80%82%E9%87%87%E7%94%A8get-pip.py%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85%EF%BC%8C%E8%AF%A5%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E4%BF%A1%E6%81%AF%E5%A6%82%E4%B8%8B%EF%BC%9A">https://pip.pypa.io/en/stable/installation/。采用get-pip.py方式安装，该文件下载信息如下：</a></p>
+<ul>
+<li>Python3.7及以上版本：<a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a></li>
+<li>Python3.7以下版本：<a href="https://bootstrap.pypa.io/pip/2.7/get-pip.py">https://bootstrap.pypa.io/pip/2.7/get-pip.py</a></li>
+</ul>
+<p>安装执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python get-pip.py</span><br></pre></td></tr></table></figure>
+
+<p>然后安装pytest：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install pytest</span><br></pre></td></tr></table></figure>
+
+<p>再次执行make check报错信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ABS_TOP_BUILDDIR=<span class="string">&quot;/root/bash-completion&quot;</span> \</span><br><span class="line">	pytest  .</span><br><span class="line">ImportError <span class="keyword">while</span> loading conftest <span class="string">&#x27;/root/bash-completion/test/t/conftest.py&#x27;</span>.</span><br><span class="line">  File <span class="string">&quot;/root/bash-completion/test/t/conftest.py&quot;</span>, line 32</span><br><span class="line">    items: Iterable[str],</span><br><span class="line">         ^</span><br><span class="line">SyntaxError: invalid syntax</span><br><span class="line">make[4]: *** [check-local] Error 4</span><br></pre></td></tr></table></figure>
+
+<p>怀疑是Python版本导致的问题，由于时间关系没继续研究。反正该错误不影响安装和正常使用。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
