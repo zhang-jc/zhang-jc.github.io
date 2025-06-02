@@ -4368,4 +4368,32 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Chrome</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Please make sure the TESSDATA_PREFIX environment variable is set to your tessdata directory</title>
+    <url>/2025/05/31/Please-make-sure-the-TESSDATA-PREFIX-environment-variable-is-set-to-your-tessdata-directory/</url>
+    <content><![CDATA[<p>安装 Tesseract 及 PyTesseract 后，在验证时，出现以下异常信息：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/Downloads/pyocr.py&quot;</span>, line 7, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(pytesseract.image_to_string(Image.open(<span class="string">&quot;example.png&quot;</span>)))</span><br><span class="line">          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 486, <span class="keyword">in</span> image_to_string</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">           ~</span><br><span class="line">    ...&lt;2 lines&gt;...</span><br><span class="line">        Output.STRING: lambda: run_and_get_output(*args),</span><br><span class="line">        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">    &#125;[output_type]()</span><br><span class="line">    ~~~~~~~~~~~~~~^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 489, <span class="keyword">in</span> &lt;lambda&gt;</span><br><span class="line">    Output.STRING: lambda: run_and_get_output(*args),</span><br><span class="line">                           ~~~~~~~~~~~~~~~~~~^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 352, <span class="keyword">in</span> run_and_get_output</span><br><span class="line">    run_tesseract(**kwargs)</span><br><span class="line">    ~~~~~~~~~~~~~^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 284, <span class="keyword">in</span> run_tesseract</span><br><span class="line">    raise TesseractError(proc.returncode, get_errors(error_string))</span><br><span class="line">pytesseract.pytesseract.TesseractError: (1, <span class="string">&#x27;Error opening data file /usr/share/tesseract-ocr/5/tessdata/eng.traineddata Please make sure the TESSDATA_PREFIX environment variable is set to your &quot;tessdata&quot; directory. Failed loading language \&#x27;</span>eng\&#x27; Tesseract couldn\&#x27;t load any languages! Could not initialize tesseract.<span class="string">&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<p>根据提示信息，需要设置 TESSDATA_PREFIX 环境变量指向包含 Tesseract 语言数据文件（如 eng.traineddata、fra.traineddata 等）的 tessdata 目录。通常该目录位置如下：</p>
+<ul>
+<li>Linux：&#x2F;usr&#x2F;share&#x2F;tesseract-ocr&#x2F;4.00&#x2F;tessdata&#x2F;</li>
+<li>MacOS：&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;tesseract&#x2F;<version>&#x2F;share&#x2F;tessdata&#x2F;</li>
+<li>Windows：C:\Program Files\Tesseract-OCR\tessdata\</li>
+</ul>
+<p>Linux 下设置环境变量命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> TESSDATA_PREFIX=<span class="string">&quot;/usr/share/tesseract-ocr/4.00/tessdata&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>再次执行验证，成功！</p>
+<p>Linux 下，可以在 &#x2F;etc&#x2F;profile 或 ~&#x2F;.bashrc 中设置环境变量，避免每次临时设置。</p>
+<p>其他系统下，可自行设置环境变量。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>爬虫</tag>
+        <tag>OCR</tag>
+      </tags>
+  </entry>
 </search>
