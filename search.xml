@@ -4396,4 +4396,72 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>OCR</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin 安装 Nginx</title>
+    <url>/2025/06/03/Deepin-%E5%AE%89%E8%A3%85-Nginx/</url>
+    <content><![CDATA[<p>系统版本：Deepin 23.10。</p>
+<p>执行以下命令安装 Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install nginx</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，Nginx 默认会启动。也可以使用以下命令启动 Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx.service</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器并访问 <a href="http://localhost/">http://localhost</a> 看到下图所示的 Nginx 欢迎页面则说明安装并启动成功。<img src="/images/202506/01.png"></p>
+<p>使用如下命令将 Nginx 设置为开机启动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx.service</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Nginx</tag>
+        <tag>Deepin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装 Nginx</title>
+    <url>/2025/06/03/%E5%AE%89%E8%A3%85-Nginx/</url>
+    <content><![CDATA[<p>对于 Linux 平台，Nginx 安装包 可以从 nginx.org 下载。</p>
+<p>Ubuntu:</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>Codename</th>
+<th>支持平台</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>12.04</td>
+<td>precise</td>
+<td>x86_64, i386</td>
+</tr>
+<tr>
+<td>14.04</td>
+<td>trusty</td>
+<td>x86_64, i386, aarch64&#x2F;arm64</td>
+</tr>
+<tr>
+<td>15.10</td>
+<td>wily</td>
+<td>x86_64, i386</td>
+</tr>
+</tbody></table>
+<p>在 Debian&#x2F;Ubuntu 系统上，为了生效 nginx 仓库的签名，并且消除 nginx 安装过程中丢失 PGP 密钥的告警，必须向 apt 程序密钥环添加用来签名 nginx 安装包和仓库的密钥。请从 nginx 网站下载密钥，并且用下面的命令添加到 apt 程序密钥环中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-key add nginx_signing.key</span><br></pre></td></tr></table></figure>
+
+<p>用上表中 Ubuntu 发行版本的 codename 替换 codename ，然后添加下面内容到 &#x2F;etc&#x2F;apt&#x2F;sources.list 文件的末尾：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">deb http://nginx.org/packages/ubuntu/ codename nginx</span><br><span class="line">deb-src http://nginx.org/packages/ubuntu/ codename nginx</span><br></pre></td></tr></table></figure>
+
+<p>然后执行一下命令完成安装：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install nginx</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
 </search>
