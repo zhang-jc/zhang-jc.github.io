@@ -4441,4 +4441,69 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Node.js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windows 11主机Ubuntu 24.04虚机共享目录权限问题</title>
+    <url>/2025/09/05/Windows-11%E4%B8%BB%E6%9C%BAUbuntu-24-04%E8%99%9A%E6%9C%BA%E5%85%B1%E4%BA%AB%E7%9B%AE%E5%BD%95%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>问题如下图：</p>
+<p><img src="/images/202509/virtualbox%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6%E5%A4%B9.jpg"></p>
+<p>问题原因是在虚机中挂在目录的属主非系统登陆用户引起的，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -l /media/</span><br><span class="line">总计 8</span><br><span class="line">drwxrwx---  1 root vboxsf 4096  9月  5 09:58 sf_Downloads</span><br></pre></td></tr></table></figure>
+
+<p>可通过以下方法解决：</p>
+<p><strong>1. 修改用户组权限</strong></p>
+<p>在虚机终端执行以下命令，将当前用户添加到 boxsf 组：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> usermod -aG vboxsf $(<span class="built_in">whoami</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 重启虚机</strong></p>
+<p>执行上述命令后，需重启虚拟机使权限生效。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>虚拟化</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+        <tag>VirtualBox</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>双系统通过Grub修改启动顺序</title>
+    <url>/2025/09/05/%E5%8F%8C%E7%B3%BB%E7%BB%9F%E9%80%9A%E8%BF%87Grub%E4%BF%AE%E6%94%B9%E5%90%AF%E5%8A%A8%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[<p>我的双系统是 Deepin + Windows 11。安装完后，默认启动 Deepin。如下图：</p>
+<p><img src="/images/202509/deepin.jpg"></p>
+<p>按照以下步骤修改默认启动的系统为 Windows 11。</p>
+<p><strong>1. 打开终端</strong></p>
+<p>首先，打开 Deepin 系统的终端。</p>
+<p><strong>2. 编辑GRUB配置文件</strong></p>
+<p>GRUB配置文件通常位于 &#x2F;etc&#x2F;default&#x2F;grub。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vi /etc/default/grub</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 修改GRUB_DEFAULT设置</strong></p>
+<p>在&#x2F;etc&#x2F;default&#x2F;grub文件中，GRUB_DEFAULT配置项决定了默认启动哪个系统。系统顺序号从0开始。例如，如果想设置第一个系统为默认启动项，可以这样设置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">GRUB_DEFAULT=0</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 保存并关闭文件</strong></p>
+<p>保存并关闭修改后的&#x2F;etc&#x2F;default&#x2F;grub文件。</p>
+<p><strong>5. 更新GRUB配置</strong></p>
+<p>更新GRUB配置文件以使配置生效。运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> update-grub</span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 重启系统</strong></p>
+<p>完成以上步骤后，重启系统使更改生效。如下图：</p>
+<p><img src="/images/202509/windows.jpg"></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Deepin</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Deepin</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>
