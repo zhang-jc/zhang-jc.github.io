@@ -4506,4 +4506,27 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu启动终端时默认窗口最大化</title>
+    <url>/2025/09/05/Ubuntu%E5%90%AF%E5%8A%A8%E7%BB%88%E7%AB%AF%E6%97%B6%E9%BB%98%E8%AE%A4%E7%AA%97%E5%8F%A3%E6%9C%80%E5%A4%A7%E5%8C%96/</url>
+    <content><![CDATA[<p>通过以下两种方式，可以优雅的实现从快捷栏和使用快捷键启动终端时，默认窗口最大化。</p>
+<h1 id="快捷栏"><a href="#快捷栏" class="headerlink" title="快捷栏"></a>快捷栏</h1><p>打开快捷栏图标配置文件 <code>/usr/share/applications/org.gnome.Terminal.desktop</code>，在启动命令后添加 <code>--maximize</code> 参数，如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Exec=gnome-terminal --maximize</span><br></pre></td></tr></table></figure>
+
+<p>保存文件并退出，此时再从快捷栏启动终端时，窗口默认最大化。</p>
+<h1 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h1><p>首先，取消系统默认的终端启动快捷键。如下图：</p>
+<p><img src="/images/202509/01.png"></p>
+<p>然后，新建终端启动快捷键。如下图：</p>
+<p><img src="/images/202509/02.png"></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
