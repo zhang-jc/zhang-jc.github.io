@@ -4546,4 +4546,53 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux下Spark Standalone测试环境部署</title>
+    <url>/2025/09/26/Linux%E4%B8%8BSpark-Standalone%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</url>
+    <content><![CDATA[<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>为了可以使用 start-all.sh 脚本启动整个本地集群，需要先配置 ssh 免密。</p>
+<p>检查本机是否启动了 ssh 服务，如果出现以下信息则说明服务未启动，需先配置本机的 ssh 服务。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh localhost</span><br><span class="line">ssh: connect to host localhost port 22: Connection refused</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置-SSH-服务"><a href="#配置-SSH-服务" class="headerlink" title="配置 SSH 服务"></a>配置 SSH 服务</h1><ol>
+<li>安装 SSH 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>启动 SSH 服务</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start ssh</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>启用 SSH 服务开机启动</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> ssh</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置免密-SSH-登录"><a href="#配置免密-SSH-登录" class="headerlink" title="配置免密 SSH 登录"></a>配置免密 SSH 登录</h1><p>首先，需要生成 SSH 密钥对。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+
+<p>然后，将公钥复制到目标服务器（localhost）。执行以下命令，并按照提示输入密码即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-copy-id zhangjc@localhost</span><br><span class="line">/usr/bin/ssh-copy-id: INFO: attempting to <span class="built_in">log</span> <span class="keyword">in</span> with the new key(s), to filter out any that are already installed</span><br><span class="line">/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- <span class="keyword">if</span> you are prompted now it is to install the new keys</span><br><span class="line">zhangjc@localhost<span class="string">&#x27;s password: </span></span><br><span class="line"><span class="string">ERROR: Python with virtualenvwrapper module not found!</span></span><br><span class="line"><span class="string">Either, install virtualenvwrapper module for the default python3 interpreter</span></span><br><span class="line"><span class="string">or set VIRTUALENVWRAPPER_PYTHON to the interpreter to use.</span></span><br><span class="line"><span class="string">Number of key(s) added: 1</span></span><br><span class="line"><span class="string">Now try logging into the machine, with:   &quot;ssh &#x27;</span>zhangjc@localhost<span class="string">&#x27;&quot;</span></span><br><span class="line"><span class="string">and check to make sure that only the key(s) you wanted were added.</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Spark-Standalone启动"><a href="#Spark-Standalone启动" class="headerlink" title="Spark Standalone启动"></a>Spark Standalone启动</h1><p>首先，从Spark官网（<a href="https://spark.apache.org/downloads.html">Downloads | Apache Spark</a>）下载安装包。我下载的是“<a href="https://www.apache.org/dyn/closer.lua/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz">spark-3.5.1-bin-hadoop3.tgz</a>”。</p>
+<p>然后，将下载安装包解压至自己喜欢的位置。</p>
+<p>执行以下命令时，可能会出现未配置JAVA_HOME的错误，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ./sbin/start-all.sh </span><br><span class="line">localhost:   JAVA_HOME is not <span class="built_in">set</span></span><br></pre></td></tr></table></figure>
+
+<p>这是因为Spark通过SSH登录Worker节点启动服务，但shell登录服务器时不会加载环境变量。解决该问题需要在spark-config.sh中添加以下配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/opt/java</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，再次执行以下命令集群启动成功。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ./sbin/start-all.sh</span><br><span class="line">$ jps</span><br><span class="line">99510 Master</span><br><span class="line">99654 Worker</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>大数据</tag>
+        <tag>分布式计算</tag>
+        <tag>Spark</tag>
+      </tags>
+  </entry>
 </search>
