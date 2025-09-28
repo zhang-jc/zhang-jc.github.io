@@ -467,7 +467,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-28 14:54:54" itemprop="dateModified" datetime="2025-09-28T14:54:54+08:00">2025-09-28</time>
+      <time title="修改时间：2025-09-28 15:35:39" itemprop="dateModified" datetime="2025-09-28T15:35:39+08:00">2025-09-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -514,8 +514,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>按照官网手册安装完单机 Hadoop 集群（见我的另外一篇文章：），电脑重启后，在启动HDFS时NameNode启动失败，出现以下错误信息：</p>
+          <p>按照官网手册安装完单机 Hadoop 集群（见我的另外一篇文章：<a href="https://www.zhangjc.com/2025/09/27/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/">搭建单节点Hadoop集群</a>），电脑重启后，在启动 HDFS 时 NameNode 启动失败，出现以下错误信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sbin/start-dfs.sh </span><br><span class="line">Starting namenodes on [localhost]</span><br><span class="line">pdsh@frin: localhost: ssh exited with <span class="built_in">exit</span> code 1</span><br><span class="line">Starting datanodes</span><br><span class="line">Starting secondary namenodes [frin]</span><br></pre></td></tr></table></figure>
 
+<p>查看 NameNode 启动日志可以看到以下错误信息：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/09/27/Directory-tmp-hadoop-zhangjc-dfs-name-is-in-an-inconsistent-state/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
