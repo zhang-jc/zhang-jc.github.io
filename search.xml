@@ -5145,4 +5145,27 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Gitee</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin 安装 Nginx</title>
+    <url>/2025/09/28/Deepin-%E5%AE%89%E8%A3%85-Nginx/</url>
+    <content><![CDATA[<p>系统版本：Deepin 23.10。</p>
+<p>执行以下命令安装 Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install nginx</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，Nginx 默认会启动。也可以使用以下命令启动 Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx.service</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器并访问 <a href="http://localhost/">http://localhost</a> 看到下图所示的 Nginx 欢迎页面则说明安装并启动成功。<br><img src="/images/202509/45.png"></p>
+<p>使用如下命令将 Nginx 设置为开机启动：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx.service</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Nginx</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Deepin</tag>
+        <tag>Nginx</tag>
+      </tags>
+  </entry>
 </search>
