@@ -4761,4 +4761,83 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Spark</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Superset 数据探查</title>
+    <url>/2025/09/28/Superset-%E6%95%B0%E6%8D%AE%E6%8E%A2%E6%9F%A5/</url>
+    <content><![CDATA[<p>本文基于个人电脑部署的环境和 Superset 官网样例数据讲解数据探查。</p>
+<h1 id="启用数据上传功能"><a href="#启用数据上传功能" class="headerlink" title="启用数据上传功能"></a>启用数据上传功能</h1><p>默认上传功能是不可用的。<br><img src="/images/202509/03.png"></p>
+<p>要启用文件上传功能，在右上角“Settings”下拉菜单中选择“Database Connections”。<br><img src="/images/202509/04.png"></p>
+<p>鼠标停留在要上传数据的数据库上，Actions 列中会显示可选操作，点击 Edit 图标。<br><img src="/images/202509/05.png"></p>
+<p>在弹出编辑页“ADVANCED”选项卡“Security”下选中“Allow file uploads to database”，并点击 FINISH 按钮。<br><img src="/images/202509/06.png"><br><img src="/images/202509/07.png"></p>
+<p>之后在右上角 “+” 下拉菜单 “Data” 中可以看到文件上传功能变为可用了。<br><img src="/images/202509/08.png"></p>
+<h1 id="加载-CSV-数据"><a href="#加载-CSV-数据" class="headerlink" title="加载 CSV 数据"></a>加载 CSV 数据</h1><p>下载下面的样例数 。样例数据中包含一些旅途信息。</p>
+<p><a href="https://raw.githubusercontent.com/apache-superset/examples-data/master/tutorial_flights.csv">https://raw.githubusercontent.com/apache-superset/examples-data/master/tutorial_flights.csv</a></p>
+<p>选择上文启用的“Upload CSV to database”导入功能，选择文件及设置相应参数，点击“Save”按钮完成上传。<br><img src="/images/202509/09.png"></p>
+<h1 id="表格可视化"><a href="#表格可视化" class="headerlink" title="表格可视化"></a>表格可视化</h1><p>上传完成后，在 Datasets 中可以看到 tutorial_flights 数据集。<br><img src="/images/202509/10.png"></p>
+<p>点击编辑按钮进入数据集编辑界面，设置 Travel Date 为时间序列字段。这一步骤对下文的样例会有比较大的影响，如果不设置很多样例做不了。<br><img src="/images/202509/11.png"></p>
+<p>点击数据集名称进入该数据集的探查工作流。<br><img src="/images/202509/12.png"></p>
+<p>在本例中会创建一个展示每种旅行类别的航班数量和成本。在 DATA 选项卡 Query 的维度中选择 Travel Class 作为分析维度。<br><img src="/images/202509/13.png"></p>
+<p>在统计指标中设置以下两项：</p>
+<ul>
+<li>COUNT(*)：用于在表格每行中显示每种旅行航班数量。</li>
+<li>SUM(Cost)：显示每种旅行航班的成本。</li>
+</ul>
+<p><img src="/images/202509/14.png"></p>
+<p>然后点击“CREATE CHART”按钮完成表格可视化的创建。<br><img src="/images/202509/15.png"></p>
+<p>点击 SAVE 按钮保存。可以在保存时选择可视化表在哪个仪表盘中显示，也可以创建新的仪表盘时选择要展示的图表。</p>
+<h1 id="仪表盘基础"><a href="#仪表盘基础" class="headerlink" title="仪表盘基础"></a>仪表盘基础</h1><p>点击左上角“Dashboard”菜单，进入仪表盘列表页面。点击列表的右上方的“+DASHBOARD”按钮进入仪表盘新建页面。给新建的仪表盘命名，并将刚才新建的差旅分析表拖入仪表盘，保存即可。这样一个简单的仪表盘就创建完成了。<br><img src="/images/202509/16.png"></p>
+<p>创建完的仪表盘在仪表盘列表中选中并点击，进入仪表盘展示页面，点击右上角的编辑按钮可再次编辑。在仪表盘编辑页面可以用鼠标调整每个图表的大小，如下图（鼠标放在红圈图表右下角的位置）：<br><img src="/images/202509/17.png"></p>
+<h1 id="数据透视表"><a href="#数据透视表" class="headerlink" title="数据透视表"></a>数据透视表</h1><p>数据透视表是一种更复杂的可视化分析工具。在这个例子中，将按照部门、旅行种类展示前6个月每个月的飞行花费。在仪表盘编辑页面点击“+ CREATE NEW CHART”按钮。<br><img src="/images/202509/18.png"></p>
+<p>选择 tutorial_flights 作为数据集，选择 Pivot Table 作为图表类型（可通过搜索查找），如下图：<br><img src="/images/202509/19.png"></p>
+<p>点击右下角“CREATE NEW CHAT”完成创建，并进入图表编辑页面。</p>
+<p>进入透视表编辑页面，并做如下设置：</p>
+<ul>
+<li>查询列中选择 Department 和 Travel Classs</li>
+<li>在行中选择在数据集中新建的计算列 Travel Date，时间粒度选择 Month。</li>
+<li>在指标栏新增 Sum（Cost）</li>
+<li>设置数据过滤条件 Travel Date ≥ ‘2011-01-01’ 和 Travel Date ≤ ‘2011-06-30’</li>
+</ul>
+<p>点击保存在右侧就可以看到透视表的效果：<br><img src="/images/202509/20.png"></p>
+<p>完成以上工作后，点击保存按钮，并将该透视表发布至上文创建的仪表盘。</p>
+<h1 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h1><p>这一小节，用折线图显示每个月平均票价。如上面的例子，依然是在仪表盘编辑页面添加新的图表。本例中图表类型选择折线图。进入图表编辑页面后，做如下设置：</p>
+<ul>
+<li>设置图表名称为：票价趋势分析</li>
+<li>X轴选择 Travel Date，时间粒度选择 Month</li>
+<li>指标设置为 AVG（Cost）</li>
+</ul>
+<p>保存后效果如下图：<br><img src="/images/202509/21.png"></p>
+<p>从上图可以看出在 2011-12 月份票价大幅增高。现在图表数据未考虑单程和往返票的区别，更合理的应该是将两种票价做成两条折线。在图表编辑页面维度选择 Ticket Single or Return，更新后效果如下：<br><img src="/images/202509/22.png"></p>
+<p>折线图的保存与发布至仪表盘与上面的例子一样。</p>
+<h1 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h1><p>本节将在前文创建的仪表盘上增加一些文本信息。首先进入上文创建的“差旅分析”仪表盘的编辑页面。从右侧布局组件中拖动“Text”组件至仪表盘，此时在仪表盘中会有一个Markdown的编辑框，可以输入文本信息。点击文本框中的链接学习Markdown知识。<br><img src="/images/202509/23.png"></p>
+<p>在文本框的左上角可以选择预览文本效果：<br><img src="/images/202509/24.png"></p>
+<h1 id="发布仪表盘"><a href="#发布仪表盘" class="headerlink" title="发布仪表盘"></a>发布仪表盘</h1><p>根据上面的步骤已经创建了一个样例仪表盘，这个仪表盘随时可以再次编辑。如果要将该仪表盘发布给其他用户，则点击仪表盘左上角“Draft”按钮，这时仪表盘状态就变为“Published”状态了。点击状态按钮左侧的星号可收藏该仪表盘。<br><img src="/images/202509/25.png"></p>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>使用注释可以在图表中添加说明，本例将在上文中折线图中增加说明。</p>
+<p>点击“Settings”→“Manage”→“Annotation Layers”进入注释管理页面。<br><img src="/images/202509/26.png"></p>
+<p>点击新建 Annotation Layer 按钮，输入信息后进入 Annotation 管理页面。点击新建 Annotation 按钮，输入信息创建新的 Annotation：<br><img src="/images/202509/27.png"></p>
+<p>进入差旅折线图编辑页面，在Annotations and Layers部分选择添加，在弹出对话框中做如下设置：</p>
+<ul>
+<li>布局命名：特殊天气</li>
+<li>Annotation Layer Type设置为：Event</li>
+<li>Annotation Source设置为：Superset annotation</li>
+<li>Annotation Layer选择上面新建的“特殊天气”</li>
+<li>线宽设置为5。如果选择 Annotation Layer Type 为 Event 时，如果线宽不够，注释显示不明显。</li>
+</ul>
+<p>保存后在折线图中就可以看到补充信息。如下图：<br><img src="/images/202509/28.png"></p>
+<h1 id="高级分析"><a href="#高级分析" class="headerlink" title="高级分析"></a>高级分析</h1><p>Superset 的高级分析特性允许对数据应用三种类型额外的转换。本节将建立一个基础图表，然后应用不同的高级分析特性。</p>
+<p>首先，使用本文导入的 tutorial_flights 数据源和折线图，如下图：<br><img src="/images/202509/29.png"></p>
+<h1 id="滚动平均值"><a href="#滚动平均值" class="headerlink" title="滚动平均值"></a>滚动平均值</h1><p>当数据中有相当多的变化时，会使得很难确定任何趋势。可以采用的一种方法是显示时间序列的滚动平均值。为此，在刚才创建的图表中的“高级分析” Rolling window 设置中选择 mean，并在“周期”和“最小周期”中输入7。周期是以时间粒度的倍数表示的滚动周期的长度。在我们的示例中，时间粒度是一天，所以滚动周期是7天，这样在2011年10月7日显示的值将对应于2011年10月的前7天。最后，通过指定最小周期为7，我们确保我们的平均值总是计算在7天。<br><img src="/images/202509/30.png"></p>
+<h1 id="时间比较"><a href="#时间比较" class="headerlink" title="时间比较"></a>时间比较</h1><p>本节将比较时间序列中的值与一周前的值。首先创建基础的折线图，然后在高级分析时间比较中选择“1 week ago”，更新图表，效果如下：<br><img src="/images/202509/31.png"></p>
+<p>然后，将“计算”类型更改为“绝对差异”并更新图表。现在只能看到一个系列，显示了之前两个系列之间的差异。<br><img src="/images/202509/32.png"></p>
+<h1 id="重新取样数据"><a href="#重新取样数据" class="headerlink" title="重新取样数据"></a>重新取样数据</h1><p>本节将对数据进行重新取样，这样就不需要每天的数据，而是每周的数据。跟上面的章节一样，新创建一个折线图。然后，在 Advanced Analytics 的重新取样的 Rule 中输入“7 calendar day frequency” ，并将中位数作为过滤方法，然后保存，效果如下：<br><img src="/images/202509/33.png"></p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据探索</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>数据探索</tag>
+        <tag>Superset</tag>
+      </tags>
+  </entry>
 </search>
