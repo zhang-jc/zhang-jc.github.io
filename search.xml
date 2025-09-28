@@ -4953,4 +4953,28 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Node.js</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windows下Jenkins控制台中文乱码</title>
+    <url>/2025/09/28/Windows%E4%B8%8BJenkins%E6%8E%A7%E5%88%B6%E5%8F%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</url>
+    <content><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>问题情况如下图：<br><img src="/images/202509/38.png"></p>
+<h1 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h1><ul>
+<li>Windows 11 家庭中文版</li>
+<li>java 21.0.4 2024-07-16 LTS</li>
+<li>Jenkins 2.452.3</li>
+</ul>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>增加系统 JAVA_TOOL_OPTIONS，并设置值为 <code>-Dfile.encoding=GBK</code>。</p>
+<p>打开设置方法：桌面上右键点击“此电脑”图标，选择“属性”。</p>
+<p>环境变量添加如下图：<br><img src="/images/202509/39.png"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+        <tag>Jenkins</tag>
+        <tag>CI/CD</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>
