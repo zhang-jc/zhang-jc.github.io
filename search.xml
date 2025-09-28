@@ -4595,4 +4595,98 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Spark</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Directory /tmp/hadoop-zhangjc/dfs/name is in an inconsistent state</title>
+    <url>/2025/09/27/Directory-tmp-hadoop-zhangjc-dfs-name-is-in-an-inconsistent-state/</url>
+    <content><![CDATA[<p>按照官网手册安装完单机 Hadoop 集群（见我的另外一篇文章：），电脑重启后，在启动HDFS时NameNode启动失败，出现以下错误信息：</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式存储</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>分布式存储</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Emacs列编辑</title>
+    <url>/2025/09/28/Emacs%E5%88%97%E7%BC%96%E8%BE%91/</url>
+    <content><![CDATA[<p>推荐使用 rect-mark.el 插件，参考地址：<a href="https://www.emacswiki.org/emacs/RectangleMark">https://www.emacswiki.org/emacs/RectangleMark</a>。</p>
+<p>在 Emacs 配置文件中（一般是 ~&#x2F;.emacs）添加以下配置：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">;; 列编辑</span><br><span class="line">(require &#x27;rect-mark)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-w&quot;) &#x27;rm-kill-region)</span><br><span class="line">(global-set-key (kbd &quot;C-x r M-w&quot;) &#x27;rm-kill-ring-save)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-y&quot;) &#x27;yank-rectangle)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-M-d&quot;) &#x27;delete-rectangle)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-i&quot;) &#x27;string-insert-rectangle)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-M-i&quot;) &#x27;string-rectangle)</span><br></pre></td></tr></table></figure>
+
+<p>在使用列编辑命令前，先使用快捷键 <code>Ctrl+@</code>（注意 @ 符需要使用 Shift 键）设置 Mark，并移动光标选中需要操作的区域。</p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Emacs</category>
+      </categories>
+      <tags>
+        <tag>Emacs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建单节点Hadoop集群</title>
+    <url>/2025/09/27/%E6%90%AD%E5%BB%BA%E5%8D%95%E8%8A%82%E7%82%B9Hadoop%E9%9B%86%E7%BE%A4/</url>
+    <content><![CDATA[<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>可以快速使用 Hadoop 的 MapReduce 和 HDFS 执行某些操作，主要用于学习的目的。</p>
+<h1 id="先决条件"><a href="#先决条件" class="headerlink" title="先决条件"></a>先决条件</h1><h2 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h2><ul>
+<li>操作系统：deepin 20.9 社区版</li>
+<li>内核：5.18.17-amd64-desktop-hwe</li>
+<li>Hadoop版本：Apache Hadoop 3.3.6</li>
+<li>Java版本：java version “11.0.21” 2023-10-17 LTS</li>
+</ul>
+<h2 id="安装必要的软件"><a href="#安装必要的软件" class="headerlink" title="安装必要的软件"></a>安装必要的软件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get install ssh</span><br><span class="line">$ <span class="built_in">sudo</span> apt-get install pdsh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>pdsh 是一个多线程并发在远程服务器上执行命令的 shell 客户端。项目地址：<a href="https://github.com/chaos/pdsh">https://github.com/chaos/pdsh</a>。</p>
+</blockquote>
+<h1 id="Hadoop-安装"><a href="#Hadoop-安装" class="headerlink" title="Hadoop 安装"></a>Hadoop 安装</h1><p>下载 Hadoop：<a href="https://www.apache.org/dyn/closer.cgi/hadoop/common/">Apache Download Mirrors</a>。下载完成后解压至本地的目录。在解压后的目录中，编辑 <code>etc/hadoop/hadoop-env.sh</code> 文件，增加 JAVA_HOME 环境变量定义。如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># set to the root of your Java installation</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/opt/java</span><br></pre></td></tr></table></figure>
+
+<p>执行以下命令会显示 hadoop 命令的使用文档，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bin/hadoop</span><br><span class="line">Usage: hadoop [OPTIONS] SUBCOMMAND [SUBCOMMAND OPTIONS]</span><br><span class="line"> or    hadoop [OPTIONS] CLASSNAME [CLASSNAME OPTIONS]</span><br><span class="line">  <span class="built_in">where</span> CLASSNAME is a user-provided Java class</span><br></pre></td></tr></table></figure>
+
+<h1 id="伪分布式"><a href="#伪分布式" class="headerlink" title="伪分布式"></a>伪分布式</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>使用以下配置。</p>
+<p>etc&#x2F;hadoop&#x2F;core-site.xml：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>etc&#x2F;hadoop&#x2F;hdfs-site.xml：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-ssh-免密登录"><a href="#配置-ssh-免密登录" class="headerlink" title="配置 ssh 免密登录"></a>配置 ssh 免密登录</h2><p>见我的另外一篇文章中的章节：<a href="https://www.zhangjc.com/2025/09/26/Linux%E4%B8%8BSpark-Standalone%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">Linux下Spark Standalone测试环境部署</a>。</p>
+<h2 id="启动-HDFS"><a href="#启动-HDFS" class="headerlink" title="启动 HDFS"></a>启动 HDFS</h2><ol>
+<li>格式换 HDFS</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ bin/hdfs namenode -format</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>启动 NameNode 和 DataNode</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sbin/start-dfs.sh</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>NameNode WebUI</li>
+</ol>
+<p><a href="http://localhost:9870/">http://localhost:9870/</a></p>
+<ol start="4">
+<li>停止 NameNode 和 DataNode</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ sbin/stop-dfs.sh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>默认的 HDFS 元数据信息会存储在临时目录 tmp 下，机器重启后再次启动 HDFS 时会出现错误，见我的另外一篇文章：<a href="">Directory &#x2F;tmp&#x2F;hadoop-zhangjc&#x2F;dfs&#x2F;name is in an inconsistent state</a>。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+        <tag>分布式计算</tag>
+      </tags>
+  </entry>
 </search>
