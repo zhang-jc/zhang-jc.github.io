@@ -1458,7 +1458,7 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <category>数据采集</category>
       </categories>
       <tags>
-        <tag>爬虫</tag>
+        <tag>网络爬虫</tag>
         <tag>OCR</tag>
       </tags>
   </entry>
@@ -4975,6 +4975,63 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Jenkins</tag>
         <tag>CI/CD</tag>
         <tag>Windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>抓包工具：Mitmproxy</title>
+    <url>/2025/09/28/%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7%EF%BC%9AMitmproxy/</url>
+    <content><![CDATA[<p>Mitmproxy 是一组工具，它们为 HTTP&#x2F;1、 HTTP&#x2F;2 和 WebSocket 提供交互式、支持 SSL&#x2F;TLS 的拦截代理。</p>
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul>
+<li>拦截 HTTP 和 HTTPS 请求和响应并动态修改它们。</li>
+<li>保存完整的 HTTP 对话，以便以后重放和分析。</li>
+<li>重放 HTTP 会话的客户端。</li>
+<li>重放以前记录的服务器的 HTTP 响应。</li>
+<li>反向代理模式将流量转发到指定的服务器。</li>
+<li>MacOS 和 Linux 上的透明代理模式。</li>
+<li>使用 Python 脚本对 HTTP 流量进行更改。</li>
+<li>用于拦截动态生成的 SSL&#x2F;TLS 证书。</li>
+<li>更多特性，请参考：<a href="https://docs.mitmproxy.org/stable/overview-features/">Mitmproxy 官方文档</a>。</li>
+</ul>
+<h1 id="三个强大的核心工具"><a href="#三个强大的核心工具" class="headerlink" title="三个强大的核心工具"></a>三个强大的核心工具</h1><p>Mitmproxy 项目是一组展示通用的底层功能的前端工具。当谈论“mitmproxy”时，通常指的是这三个工具中的任何一个——它们只是同一个核心代理的不同前端。</p>
+<ul>
+<li>mitmproxy 是一个交互式的、支持 SSL&#x2F;TLS 的拦截代理，用于 HTTP&#x2F;1、 HTTP&#x2F;2 和 WebSocket 的控制台接口。</li>
+<li>mitmweb 是 mitmproxy 的一个基于Web的接口。</li>
+<li>mitmdump 是 mitmproxy 的命令行版本。用户 HTTP 的 tcpdump。</li>
+</ul>
+<p>在 Mitmproxy 官网 可以找到发行的软件包。开发信息和源代码可以在 GitHub 存储库中找到。</p>
+<h2 id="mitmproxy"><a href="#mitmproxy" class="headerlink" title="mitmproxy"></a>mitmproxy</h2><p><img src="/images/202509/40.png"></p>
+<p>mitmproxy 是一个控制台工具，允许交互式检查和修改 HTTP 流量。它与 mitmdump 的不同之处在于，所有流都保存在内存中，这意味着它用于获取和操作小型样本。在 mitmproxy 窗口中使用 ？ 快捷键查看上下文文档。</p>
+<h2 id="mitmweb"><a href="#mitmweb" class="headerlink" title="mitmweb"></a>mitmweb</h2><p><img src="/images/202509/41.png"></p>
+<p>mitmweb 是 mitmproxy 的基于 web 的用户界面，允许交互式检查和修改 HTTP 流量。与 mitmproxy 一样，它与 mitmdump 的不同之处在于所有流都保存在内存中，这意味着它用于获取和操作小型样本。</p>
+<p>Mitmweb 目前处于测试阶段。它对于当前暴露在 UI 中的所有特性都是稳定的，但是它仍然遗漏了很多 mitmproxy 的特性。</p>
+<h2 id="mitmdump"><a href="#mitmdump" class="headerlink" title="mitmdump"></a>mitmdump</h2><p>mitmdump 是 mitmproxy 的命令行伙伴。它提供了类似 tcpdump 的功能，允许查看、记录和以编程方式转换 HTTP 流量。命令添加 –help 标识查看输出的完整文档。</p>
+<h3 id="示例：保存流量"><a href="#示例：保存流量" class="headerlink" title="示例：保存流量"></a>示例：保存流量</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mitmdump -w outfile</span><br></pre></td></tr></table></figure>
+
+<p>在代理模式下启动 mitmdump，并将所有流量写入 outfile。</p>
+<h3 id="过滤保存的流量"><a href="#过滤保存的流量" class="headerlink" title="过滤保存的流量"></a>过滤保存的流量</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mitmdump -nr infile -w outfile <span class="string">&quot;~m post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>启动 mitmdump 而不绑定到代理端口（-n），从 infile 中读取所有流，应用指定的筛选器表达式（只匹配 POST），并写入 outfile。</p>
+<h3 id="客户端重放"><a href="#客户端重放" class="headerlink" title="客户端重放"></a>客户端重放</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mitmdump -nC outfile</span><br></pre></td></tr></table></figure>
+
+<p>启动 mitmdump 而不绑定到代理端口（-n），然后重放来自 outfile （-C filename）的所有请求。标识以显而易见的方式组合在一起，因此可以重放来自一个文件的请求，并将结果流写入另一个文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mitmdump -nC srcfile -w dstfile</span><br></pre></td></tr></table></figure>
+
+<p>更多信息请参见 <a href="https://docs.mitmproxy.org/stable/overview-features/#client-side-replay">client-side replay</a>。</p>
+<h3 id="运行脚本"><a href="#运行脚本" class="headerlink" title="运行脚本"></a>运行脚本</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mitmdump -s examples/simple/add_header.py</span><br></pre></td></tr></table></figure>
+
+<p>这将运行 add_header.py 示例脚本，该脚本只是向所有响应添加一个新的头。</p>
+<h3 id="脚本数据转换"><a href="#脚本数据转换" class="headerlink" title="脚本数据转换"></a>脚本数据转换</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mitmdump -ns examples/simple/add_header.py -r srcfile -w dstfile</span><br></pre></td></tr></table></figure>
+
+<p>此命令从 srcfile 加载流，根据指定的脚本对其进行转换，然后将其写回 dstfile。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>数据采集</tag>
+        <tag>网络爬虫</tag>
+        <tag>Mitmproxy</tag>
       </tags>
   </entry>
 </search>
