@@ -4720,4 +4720,45 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>分布式计算</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SparkSQL 内置函数</title>
+    <url>/2025/09/28/SparkSQL-%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<p>SparkSQL 有很多方便且功能强大的内置函数。本篇文章用来记录我在实际工作中用到的一些函数，并结合自己的使用场景进行分享。我会不断更新本文的内容。</p>
+<h1 id="last-day"><a href="#last-day" class="headerlink" title="last_day"></a>last_day</h1><p>last_day(date)：返回日期参数所属月最后一天的日期。</p>
+<p>用例：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="operator">&gt;</span> <span class="keyword">SELECT</span> last_day(<span class="string">&#x27;2009-01-12&#x27;</span>);</span><br><span class="line"> <span class="number">2009</span><span class="number">-01</span><span class="number">-31</span></span><br></pre></td></tr></table></figure>
+
+<p>可以用来快速选择月底数据。如数据表（T），包含从 2023-01-01 至 2024-09-18 连续日期的数据。</p>
+<table>
+<thead>
+<tr>
+<th>col1</th>
+<th>col2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023-01-01</td>
+<td>1</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>2024-09-18</td>
+<td>18</td>
+</tr>
+</tbody></table>
+<p>如果只查询期间每月底的数据，可以用以下 SQL 语句：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> T <span class="keyword">WHERE</span> col1 <span class="operator">=</span> last_day(col1);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>分布式计算</tag>
+        <tag>Spark</tag>
+      </tags>
+  </entry>
 </search>
