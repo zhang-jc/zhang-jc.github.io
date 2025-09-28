@@ -4840,4 +4840,21 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Superset</tag>
       </tags>
   </entry>
+  <entry>
+    <title>华为Nova9开启开发人员选项</title>
+    <url>/2025/09/28/%E5%8D%8E%E4%B8%BANova9%E5%BC%80%E5%90%AF%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E9%80%89%E9%A1%B9/</url>
+    <content><![CDATA[<p>默认状态下，华为 Nova9 的开发人员选项是隐藏的，如下图：<br><img src="/images/202509/34.png"></p>
+<p>要开启开发人员选项，在“设置→关于手机”中找到“HarmonyOS版本”或者“软件版本”，在版本号上连续点击，每次点击“HarmonyOS版本”和“软件版本”会交替出现，大概点7次会出现输入密码界面。输入手机解锁密码，然后就可以开启开发人员选项了。<br><img src="/images/202509/35.png"></p>
+<p>此时再进入“设置→系统和更新”中，就可以看到开发人员选项了。<br><img src="/images/202509/36.png"></p>
+]]></content>
+      <categories>
+        <category>移动端</category>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>ADB</tag>
+        <tag>Android</tag>
+        <tag>移动端</tag>
+      </tags>
+  </entry>
 </search>
