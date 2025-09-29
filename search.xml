@@ -5240,4 +5240,23 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>MacOS</tag>
       </tags>
   </entry>
+  <entry>
+    <title>[: ==: unary operator expected</title>
+    <url>/2025/09/29/unary-operator-expected/</url>
+    <content><![CDATA[<p>Shell 脚本报错：“line 10: [: &#x3D;: unary operator expected”。根据提示信息找到报错的程序是：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="variable">$OPERATION</span> == <span class="string">&quot;scp&quot;</span> ]; <span class="keyword">then</span></span><br></pre></td></tr></table></figure>
+
+<p>报错原因是变量 OPERATION 的值为空，那么程序就变成了：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> [ == <span class="string">&quot;scp&quot;</span> ]; <span class="keyword">then</span></span><br></pre></td></tr></table></figure>
+
+<p>显然 [ 和 “scp” 不相等并且缺少了 [ 符号，所以报了这样的错误。检查程序发现是 OPERATION 在声明的时候写错导致的。这样的错误还是很隐蔽的，所以为了增强程序的健壮性可以用下面的写法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$&#123;OPERATION&#125;</span>x&quot;</span> == <span class="string">&quot;scpx&quot;</span> ]; <span class="keyword">then</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Shell</category>
+      </categories>
+      <tags>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
 </search>
