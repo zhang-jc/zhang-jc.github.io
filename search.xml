@@ -5391,4 +5391,49 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>CI/CD</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Ubuntu SSH 免密码登陆</title>
+    <url>/2025/10/14/Ubuntu-SSH-%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86/</url>
+    <content><![CDATA[<p>使用 Ubuntu 系统远程登陆时，一般使用用户名加密码登陆，但这种方式每次需要输入用户名和密码，比较繁琐。我们可以用更具安全性的 RSA 密钥认证方式避免频繁输入用户名和密码。</p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>如果我们需要从一台机器上同时操作多台 Ubuntu 服务器，免密码登陆操作起来就方便多了。</p>
+<h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><h2 id="安装-SSH-服务"><a href="#安装-SSH-服务" class="headerlink" title="安装 SSH 服务"></a>安装 SSH 服务</h2><p>在 Ubuntu 服务器上安装 SSH 服务，方法参见另外一篇博客：Ubuntu 安装 SSH，并开启 root 远程登录。<br>Client 端生成公钥和密钥</p>
+<p>使用以下命令生成客户端公钥和密钥：</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu 安装 SSH，并开启 root 远程登录</title>
+    <url>/2025/10/14/Ubuntu-%E5%AE%89%E8%A3%85-SSH%EF%BC%8C%E5%B9%B6%E5%BC%80%E5%90%AF-root-%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="安装-SSH"><a href="#安装-SSH" class="headerlink" title="安装 SSH"></a>安装 SSH</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">apt-get install ssh</span><br></pre></td></tr></table></figure>
+
+<p>其中包含了 openssh-client 和 openssh-server。</p>
+<h1 id="开启-root-远程登录"><a href="#开启-root-远程登录" class="headerlink" title="开启 root 远程登录"></a>开启 root 远程登录</h1><p>修改配置文件 &#x2F;etc&#x2F;ssh&#x2F;sshd_config 中的 PermitRootLogin 参数值为 yes：<br><img src="/images/202510/01.jpg"></p>
+<p>重启 SSH 服务：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service ssh restart</span><br></pre></td></tr></table></figure>
+
+<p><strong>PermitRootLogin 参数</strong></p>
+<p>指定 root 是否可以用 ssh 登录。参数值必须是“yes”、“prohibit-password”、“without-password”、“orced-commands-only”或者“no”。默认值是“prohibit-password”。</p>
+<p>如果这个选项设置为“prohibit-password”、“without-password”，通过密码和键盘交互的授权方式对 root 用户禁用。</p>
+<p>如果这个选项设置为“orced-commands-only”，root 用户只允许通过公钥授权登录，但只是指定了 conmmand 选项的时候（这可能对远程备份是有好处的，即使 root 不允许登录）。其他授权方式对 root 无效。</p>
+<p>如果这个选项设置为“no”，root 不允许登录。</p>
+<p>其他参数说明，请查阅<a href="https://man.openbsd.org/sshd_config">官方文档</a>。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
