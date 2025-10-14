@@ -5396,8 +5396,22 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
     <url>/2025/10/14/Ubuntu-SSH-%E5%85%8D%E5%AF%86%E7%A0%81%E7%99%BB%E9%99%86/</url>
     <content><![CDATA[<p>使用 Ubuntu 系统远程登陆时，一般使用用户名加密码登陆，但这种方式每次需要输入用户名和密码，比较繁琐。我们可以用更具安全性的 RSA 密钥认证方式避免频繁输入用户名和密码。</p>
 <h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>如果我们需要从一台机器上同时操作多台 Ubuntu 服务器，免密码登陆操作起来就方便多了。</p>
-<h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><h2 id="安装-SSH-服务"><a href="#安装-SSH-服务" class="headerlink" title="安装 SSH 服务"></a>安装 SSH 服务</h2><p>在 Ubuntu 服务器上安装 SSH 服务，方法参见另外一篇博客：Ubuntu 安装 SSH，并开启 root 远程登录。<br>Client 端生成公钥和密钥</p>
-<p>使用以下命令生成客户端公钥和密钥：</p>
+<h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><h2 id="安装-SSH-服务"><a href="#安装-SSH-服务" class="headerlink" title="安装 SSH 服务"></a>安装 SSH 服务</h2><p>在 Ubuntu 服务器上安装 SSH 服务，方法参见我的另外一篇博客：<a href="https://www.zhangjc.com/2025/10/14/Ubuntu-%E5%AE%89%E8%A3%85-SSH%EF%BC%8C%E5%B9%B6%E5%BC%80%E5%90%AF-root-%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95/">Ubuntu 安装 SSH，并开启 root 远程登录</a>。</p>
+<h2 id="Client-端生成公钥和密钥"><a href="#Client-端生成公钥和密钥" class="headerlink" title="Client 端生成公钥和密钥"></a>Client 端生成公钥和密钥</h2><p>使用以下命令生成客户端公钥和密钥：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -P <span class="string">&#x27;&#x27;</span> -f ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+
+<p>生成的密钥对在目录 ~&#x2F;.ssh&#x2F; 下，id_rsa.pub 是公钥，id_rsa 是密钥。</p>
+<h2 id="将-Client-端的公钥添加到-Server-端的公钥文件中"><a href="#将-Client-端的公钥添加到-Server-端的公钥文件中" class="headerlink" title="将 Client 端的公钥添加到 Server 端的公钥文件中"></a>将 Client 端的公钥添加到 Server 端的公钥文件中</h2><p>首先检查 Server 端需要认证的用户（如 root）的 Home 目录下，隐藏目录 .ssh 中是否存在一个名为 authorized_keys 的文件，若不存在，使用命令：touch authorized_keys 创建一个空文件创建完成后，则可以执行如下步骤：</p>
+<ol>
+<li>复制 Clinet 端公钥的内容。</li>
+<li>将复制的 Client 端公钥内容粘贴至 Server 端的 authorized_keys 文件中，保存文件。</li>
+<li>更改 authorized_keys 文件的权限为 600，执行命令 <code>chmod 600 authorized_keys</code>。</li>
+<li>重启服务端 sshd 服务：<code>service sshd restart</code>。</li>
+</ol>
+<h2 id="验证无密码登陆"><a href="#验证无密码登陆" class="headerlink" title="验证无密码登陆"></a>验证无密码登陆</h2><p>在客户端输入命令：<code>ssh root@192.168.1.133</code>（用户名和 IP 自行替换），看到如下结果则无密码登陆配置成功。<br><img src="/images/202510/02.jpg"></p>
+<blockquote>
+<p>在将客户端公钥添加到服务端时，如果是从一台客户端登陆多台服务器，则可以先将公钥添加至客户端的 authorized_keys 文件，直接将客户端 authorized_keys 文件 scp 到服务器对应的目录下，然后重启服务器 sshd 服务。但这个过程中还是需要先输入用户名和密码登陆服务器重启 sshd 服务。是否有更便捷的方式有待学习。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>操作系统</category>
