@@ -5502,4 +5502,23 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Windows下Jenkins服务未自动重启问题解决</title>
+    <url>/2025/10/15/Windows%E4%B8%8BJenkins%E6%9C%8D%E5%8A%A1%E6%9C%AA%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>成功安装 Jenkins 服务后，有时开机后 Jenkins 服务未自动启动。查看 Jenkins 服务安装目录下的日志发现没有服务启动的日志，所以猜测是系统启动后 Jenkins 服务未调起。</p>
+<p>通过按 Win + R，然后输入 services.msc 并按回车来打开服务管理工具。找到 Jenkins 服务，点击右键，查看“属性”，Jenkins 默认设置如下：<br><img src="/images/202510/03.jpg"></p>
+<p>为了每次开机能自动启动 Jenkins 服务，更改配置如下：</p>
+<p>首先，将启动类型修改为“自动（延迟启动）”：<br><img src="/images/202510/04.jpg"></p>
+<p>其次，设置失败重试机制：<br><img src="/images/202510/05.jpg"></p>
+]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Jenkins</category>
+      </categories>
+      <tags>
+        <tag>Jenkins</tag>
+        <tag>CI/CD</tag>
+        <tag>Windows</tag>
+      </tags>
+  </entry>
 </search>
