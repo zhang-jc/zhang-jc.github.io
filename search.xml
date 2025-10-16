@@ -5521,4 +5521,53 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>在 Linux 平台上安装 64 位 JDK</title>
+    <url>/2025/10/16/%E5%9C%A8-Linux-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E5%AE%89%E8%A3%85-64-%E4%BD%8D-JDK/</url>
+    <content><![CDATA[<p>这个过程使用二进制打包文件（.tar.gz）为 64 位 Linux 安装 Java 开发包（JDK）。</p>
+<p>本教程使用文件：jdk-8uversion-linux-x64.tar.gz</p>
+<ol>
+<li>下载文件</li>
+</ol>
+<p>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></p>
+<p>下载前必须先同意许可协议。这个二进制文件可以被所有用户安装（不只是 root 用户）在任何有写入权限的位置。但是，只有 root 用户可以安装 JDK 到系统位置。</p>
+<ol start="2">
+<li><p>切换目录到要安装 JDK 的位置，然后移动二进制 .tar.gz 文件到当前目录。</p>
+</li>
+<li><p>打开 tar 包并安装 JDK</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar zxvf jdk-8uversion-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>如果想节省磁盘空间则删除 .tar.gz 文件。</p>
+</li>
+<li><p>配置 Path</p>
+</li>
+</ol>
+<p>使用 vi 编辑 profile 文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># vi /etc/profile</span></span><br></pre></td></tr></table></figure>
+
+<p>添加以下内容：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">JAVA_HOME=/usr/local/lib/jdk1.8.0_91</span><br><span class="line">export JAVA_HOME</span><br><span class="line"></span><br><span class="line">PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+
+<p>重新登陆或者使用 source 命令生效最新配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>检查安装结果</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ java -version</span><br><span class="line">java version “1.8.0_91”</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_91-b14)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)</span><br></pre></td></tr></table></figure>
+
+<p>如果看到类似上面的信息则说明安装成功。</p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
