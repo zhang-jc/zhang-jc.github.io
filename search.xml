@@ -5710,7 +5710,9 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
 <p>在 index.js 中我们打印出 chat message 事件：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">io.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="keyword">function</span>(<span class="params">socket</span>)&#123;</span><br><span class="line">  socket.<span class="title function_">on</span>(<span class="string">&#x27;chat message&#x27;</span>, <span class="keyword">function</span>(<span class="params">msg</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;message: &#x27;</span> + msg);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>结果像下面的视频展示的：<br><img src="/images/202510/12.mp4"></p>
+<p>结果像下面的视频展示的：</p>
+<video src="/images/202510/12.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>
+
 <h1 id="广播"><a href="#广播" class="headerlink" title="广播"></a>广播</h1><p>下一个目标是我们从服务器发送事件给其他用户。</p>
 <p>为了发送事件给所有人，<a href="http://socket.io/">Socket.IO</a> 给我们提供了 io.emit：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">io.<span class="title function_">emit</span>(<span class="string">&#x27;some event&#x27;</span>, &#123; <span class="attr">for</span>: <span class="string">&#x27;everyone&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
@@ -5723,8 +5725,8 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
 
 <p>在客户端，当我们捕获到一个 chat message 事件，我们把它包含到页面中。客户端完整的代码如下：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> socket = <span class="title function_">io</span>();</span><br><span class="line">  $(<span class="string">&#x27;form&#x27;</span>).<span class="title function_">submit</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    socket.<span class="title function_">emit</span>(<span class="string">&#x27;chat message&#x27;</span>, $(<span class="string">&#x27;#m&#x27;</span>).<span class="title function_">val</span>());</span><br><span class="line">    $(<span class="string">&#x27;#m&#x27;</span>).<span class="title function_">val</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  socket.<span class="title function_">on</span>(<span class="string">&#x27;chat message&#x27;</span>, <span class="keyword">function</span>(<span class="params">msg</span>)&#123;</span><br><span class="line">    $(<span class="string">&#x27;#messages&#x27;</span>).<span class="title function_">append</span>($(<span class="string">&#x27;&lt;li&gt;&#x27;</span>).<span class="title function_">text</span>(msg));</span><br><span class="line">  &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>我们的聊天应用就完成了，用了大概 20 行代码！看起来像这样：<br><img src="/images/202510/13.mp4"></p>
-]]></content>
+<p>我们的聊天应用就完成了，用了大概 20 行代码！看起来像这样：</p>
+<video src="/images/202510/13.mp4" preload="metadata" controlslist="nodownload" controls playsinline poster=""></video>]]></content>
       <categories>
         <category>开发框架</category>
         <category>Socket.IO</category>
