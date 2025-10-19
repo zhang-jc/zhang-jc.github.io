@@ -5755,8 +5755,7 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
   <entry>
     <title>LRU 算法</title>
     <url>/2025/10/19/LRU-%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<p>转载：<a href="http://flychao88.iteye.com/blog/1977653">http://flychao88.iteye.com/blog/1977653</a></p>
-<h1 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>LRU 是 Least Recently Used 的缩写，即最近最少使用算法。其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
+    <content><![CDATA[<h1 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>LRU 是 Least Recently Used 的缩写，即最近最少使用算法。其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>最常见的实现是使用一个链表保存缓存数据，详细算法实现如下：<br><img src="/images/202510/14.jpg"></p>
 <ul>
 <li>新数据插入到链表头部；</li>
