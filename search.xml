@@ -5829,4 +5829,81 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
         <tag>算法</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Redis 初探</title>
+    <url>/2025/10/19/Redis-%E5%88%9D%E6%8E%A2/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>Redis 下载地址及安装说明官方地址：<a href="http://redis.io/download">http://redis.io/download</a>。Redis 目前没有官方支持的 Windows 平台版本。</p>
+<p>用以下命令下载、解压、编译 Redis：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ wget http://download.redis.io/releases/redis-3.2.0.tar.gz</span><br><span class="line">$ tar xzf redis-3.2.0.tar.gz</span><br><span class="line">$ <span class="built_in">cd</span> redis-3.2.0</span><br><span class="line">$ make</span><br></pre></td></tr></table></figure>
+
+<p>编译之后的二进制文件在 src 目录下。用以下命令启动 Redis：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ src/redis-server</span><br></pre></td></tr></table></figure>
+
+<p>可以用 Redis 内置的客户端与 Redis 交互：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ src/redis-cli</span><br><span class="line">redis&gt; <span class="built_in">set</span> foo bar</span><br><span class="line">OK</span><br><span class="line">redis&gt; get foo</span><br><span class="line"><span class="string">&quot;bar&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Java-客户端"><a href="#Java-客户端" class="headerlink" title="Java 客户端"></a>Java 客户端</h1><p>Redis 分语言的客户端列表可以从官网链接查看：<a href="http://redis.io/clients">http://redis.io/clients</a>。Jedis 是推荐的 Java 客户端，并且近 6 个月有更新，所以选用该客户端。Jedis 的 github 项目链接：<a href="https://github.com/xetorthio/jedis">https://github.com/xetorthio/jedis</a></p>
+<p>Mave 依赖配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">type</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jedis</span>(<span class="string">&quot;localhost&quot;</span>);</span><br><span class="line">jedis.set(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;bar&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> jedis.get(<span class="string">&quot;foo&quot;</span>);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过 MongoDB 日志信息定位操作来源</title>
+    <url>/2025/10/20/%E9%80%9A%E8%BF%87-MongoDB-%E6%97%A5%E5%BF%97%E4%BF%A1%E6%81%AF%E5%AE%9A%E4%BD%8D%E6%93%8D%E4%BD%9C%E6%9D%A5%E6%BA%90/</url>
+    <content><![CDATA[<h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>一天中午突然发现生产系统使用的 MongoDB 库被删掉了。幸亏有备份，很快恢复，生产系统并未受很大影响。问了团队成员，都未进行过删除操作，说明可能是两种情况：一、误删，连操作者自己也没意识到做了一个删除操作；二、bug，在某个程序中存在一个 bug。</p>
+<h1 id="local-oplog-rs"><a href="#local-oplog-rs" class="headerlink" title="local.oplog.rs"></a>local.oplog.rs</h1><p>MongoDB 的复制集是通过 oplog 来实现的，主库的更改操作会被记录到主库的 oplog 日志中，然后从库通过异步方式复制主库的 oplog 文件并且将 oplog 日志应用到从库，从而实现了与主库的同步。</p>
+<p>先查看 oplog 看是否有删除操作。查过之后，并未发现有 remove 的操作。</p>
+<p>oplog 说明：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&gt; db.<span class="property">oplog</span>.<span class="property">rs</span>.<span class="title function_">findOne</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;ts&quot;</span> : <span class="title class_">Timestamp</span>(<span class="number">1419392438</span>, <span class="number">1</span>),</span><br><span class="line">  <span class="string">&quot;h&quot;</span> : <span class="title class_">NumberLong</span>(<span class="string">&quot;3445526183368758260&quot;</span>),</span><br><span class="line">  <span class="string">&quot;v&quot;</span> : <span class="number">2</span>,</span><br><span class="line">  <span class="string">&quot;op&quot;</span> : <span class="string">&quot;n&quot;</span>,</span><br><span class="line">  <span class="string">&quot;ns&quot;</span> : <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="string">&quot;o&quot;</span> : &#123;</span><br><span class="line">    <span class="string">&quot;msg&quot;</span> : <span class="string">&quot;Reconfig set&quot;</span>,</span><br><span class="line">    <span class="string">&quot;version&quot;</span> : <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>ts：8字节的时间戳，由4字节unix timestamp + 4字节自增计数表示。这个值很重要，在选举(如master宕机时)新primary时，会选择ts最大的那个secondary作为新primary。</li>
+<li>op：1字节的操作类型，例如：<ul>
+<li>“i”： insert</li>
+<li>“u”： update</li>
+<li>“d”： delete</li>
+<li>“c”： db cmd</li>
+<li>“db”：声明当前数据库 (其中ns 被设置成为&#x3D;&gt;数据库名称+ ‘.’)</li>
+<li>“n”: no op,即空操作，其会定期执行以确保时效性</li>
+</ul>
+</li>
+<li>ns：操作所在的namespace。</li>
+<li>o：操作所对应的document，即当前操作的内容（比如更新操作时要更新的的字段和值）</li>
+<li>o2: 在执行更新操作时的where条件，仅限于update时才有该属性。</li>
+</ul>
+<h1 id="MongoDB-系统日志"><a href="#MongoDB-系统日志" class="headerlink" title="MongoDB 系统日志"></a>MongoDB 系统日志</h1><p>MongoDB 系统日志路径从配置文件中可以查看。MongoDB 进程信息中可以看到配置文件的位置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@10-180-86-57 ~]# ps -ef|grep mongo</span><br><span class="line">root      1564     1  1  2015 ?        2-21:32:34 /usr/local/mongodb/bin/mongod -f /usr/local/mongodb/mongodb.conf</span><br></pre></td></tr></table></figure>
+
+<p>日志文件路径配置如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@10-180-86-57 ~]# more /usr/local/mongodb/mongodb.conf</span><br><span class="line">systemLog</span><br><span class="line"></span><br><span class="line">:</span><br><span class="line">  destination: file</span><br><span class="line">  path: <span class="string">&quot;/data/mongodb/log/mongodb.log&quot;</span></span><br><span class="line">  logAppend: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>查看日志信息发现有 dropDatabase 的操作：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@10-180-86-57 <span class="built_in">log</span>]# <span class="built_in">cat</span> mongodb.log |grep dropDatabase</span><br><span class="line">2016-05-24T11:24:37.994+0800 [repl writer worker 1] dropDatabase md starting</span><br><span class="line">2016-05-24T11:24:38.357+0800 [repl writer worker 1] dropDatabase md finished</span><br></pre></td></tr></table></figure>
+
+<p>md 正是被删除的库。时间范围已经明确，剩下的就是找到删除操作的来源，通过时间查看该时间前有哪些 IP 连接了数据库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@10-180-86-57 <span class="built_in">log</span>]# <span class="built_in">cat</span> mongodb.log |grep <span class="string">&quot;2016-05-24T11:24&quot;</span></span><br><span class="line">2016-05-24T11:24:34.960+0800 [initandlisten] connection accepted from 10.57.172.146:58082 <span class="comment">#5171827 (55 connections now open)</span></span><br><span class="line">2016-05-24T11:24:35.011+0800 [conn5171827]  authenticate db: admin &#123; authenticate: 1, user: <span class="string">&quot;bigdata&quot;</span>, nonce: <span class="string">&quot;xxx&quot;</span>, key: <span class="string">&quot;xxx&quot;</span> &#125;</span><br><span class="line">2016-05-24T11:24:36.483+0800 [conn5171600] end connection 10.149.13.17:4202 (54 connections now open)</span><br><span class="line">2016-05-24T11:24:37.994+0800 [repl writer worker 1] dropDatabase md starting</span><br><span class="line">2016-05-24T11:24:38.137+0800 [conn5171338] end connection 10.149.13.6:32360 (53 connections now open)</span><br><span class="line">2016-05-24T11:24:38.252+0800 [repl writer worker 1] removeJournalFiles</span><br><span class="line">2016-05-24T11:24:38.357+0800 [repl writer worker 1] dropDatabase md finished</span><br></pre></td></tr></table></figure>
+
+<p>发现在这个时间有一个内容 IP（10.57.172.146） 有连接数据库的操作。虽然问题没有重新，但基本可能定位为误删操作。review 同事代码确定没有问题后，问题没有再现。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="读写权限分离"><a href="#读写权限分离" class="headerlink" title="读写权限分离"></a>读写权限分离</h2><p>这个库下存放的都是配置信息，变动很少，但读取很频繁，而且多个地方都会读取。为了控制权限，创建这个库的只读账号，对外只开放只读账号，只有管理功能使用可写账号。</p>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><p>这次事故就是因为有备份才可以快速恢复的。</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MongoDB</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>MongoDB</tag>
+      </tags>
+  </entry>
 </search>
