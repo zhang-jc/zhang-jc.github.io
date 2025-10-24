@@ -6111,7 +6111,7 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
 <h1 id="转义"><a href="#转义" class="headerlink" title="转义 &gt;"></a>转义 &gt;</h1><p>遇到以下情况时如何转义：</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">String</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<p>是 &lt;String&gt; 吗？试一下就知道这样是不行的。在这种情况下通过下面的方式处理：</p>
+<p>是 <code>&lt;String\&gt;</code> 吗？试一下就知道这样是不行的。在这种情况下通过下面的方式处理：</p>
 <figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="language-xml">&lt;String<span class="symbol">&amp;gt;</span></span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
