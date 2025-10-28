@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">209</span>
+          <span class="site-state-item-count">210</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,126 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/27/wget%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/27/wget%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D/" class="post-title-link" itemprop="url">wget下载文件重命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-27 16:55:46" itemprop="dateCreated datePublished" datetime="2025-10-27T16:55:46+08:00">2025-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-28 17:42:42" itemprop="dateModified" datetime="2025-10-28T17:42:42+08:00">2025-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/27/wget%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D/" class="post-meta-item leancloud_visitors" data-flag-title="wget下载文件重命名" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="wget下载文件重命名" href="/2025/10/27/wget%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::1590775f6f6f4a0e3ab58481525749a2" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ wget -c <span class="string">&#x27;https://camel-builds.s3.amazonaws.com/ActiveTcl/x86_64-linux-glibc-2.17/20210816T193804Z/ActiveTcl-8.6.11.1.0000-x86_64-linux-glibc-2.17-e4e2f327.tar.gz?****************=***************************=******************************************-east-1%2Fs3%2F***********&amp;X-Amz-Date=20220224T060023Z&amp;*******************************=host&amp;***********=****************************************************************&#x27;</span></span><br><span class="line">--2022-02-24 06:01:04--  https://camel-builds.s3.amazonaws.com/ActiveTcl/x86_64-linux-glibc-2.17/20210816T193804Z/ActiveTcl-8.6.11.1.0000-x86_64-linux-glibc-2.17-e4e2f327.tar.gz?****************=***************************=************************************-east-1%2Fs3%2F***********&amp;X-Amz-Date=20220224T060023Z&amp;*******************************=host&amp;***********=*****************************************************</span><br><span class="line">Resolving camel-builds.s3.amazonaws.com (camel-builds.s3.amazonaws.com)... 52.216.240.84</span><br><span class="line">Connecting to camel-builds.s3.amazonaws.com (camel-builds.s3.amazonaws.com)|52.216.240.84|:443... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 27637315 (26M) [application/gzip]</span><br><span class="line">ActiveTcl-8.6.11.1.0000-x86_64-linux-glibc-2.17-e4e2f327.tar.gz?****************=*********************************************************************-east-1%2Fs3%2F***********&amp;X-Amz-Date=20220224T060023Z&amp;*******************************=host&amp;***********=****************************************************************: File name too long</span><br><span class="line"></span><br><span class="line">Cannot write to <span class="string">&#x27;ActiveTcl-8.6.11.1.0000-x86_64-linux-glibc-2.17-e4e2f327.tar.gz?****************=********************************************************************-east-1%2Fs3%2F***********&amp;X-Amz-Date=20220224T060023Z&amp;*******************************=host&amp;***********=***************************************************************&#x27;</span> (Success).</span><br></pre></td></tr></table></figure>
+
+<p>因为写入文件名太长了，导致写入失败，方法是对下载文件重命名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ wget -c <span class="string">&#x27;https://camel-builds.s3.amazonaws.com/ActiveTcl/x86_64-linux-glibc-2.17/20210816T193804Z/ActiveTcl-8.6.11.1.0000-x86_64-linux-glibc-2.17-e4e2f327.tar.gz?****************=**********************************************************************-east-1%2Fs3%2F***********&amp;X-Amz-Date=20220224T060023Z&amp;*******************************=host&amp;***********=***************************************************************&#x27;</span> -O tcl-8.6.tar.gz</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/27/wget%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E9%87%8D%E5%91%BD%E5%90%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1199,128 +1319,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/10/27/timed-out-waiting-for-input-auto-logout/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/27/Jenkins-REST-API/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/27/Jenkins-REST-API/" class="post-title-link" itemprop="url">Jenkins REST API</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-27 15:17:26 / 修改时间：15:24:04" itemprop="dateCreated datePublished" datetime="2025-10-27T15:17:26+08:00">2025-10-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/27/Jenkins-REST-API/" class="post-meta-item leancloud_visitors" data-flag-title="Jenkins REST API" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Jenkins REST API" href="/2025/10/27/Jenkins-REST-API/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::e6231e9551ba345922fcb4a8b61aadac" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="buildWithParameters（参数化构建项目）"><a href="#buildWithParameters（参数化构建项目）" class="headerlink" title="buildWithParameters（参数化构建项目）"></a>buildWithParameters（参数化构建项目）</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">url=http://<span class="variable">$&#123;ip&#125;</span>:<span class="variable">$&#123;port&#125;</span>/job/<span class="variable">$&#123;projectName&#125;</span>/buildWithParameters?args=<span class="variable">$&#123;argsValue&#125;</span></span><br><span class="line">curl -X POST <span class="variable">$&#123;url&#125;</span> --user <span class="variable">$&#123;userName&#125;</span>:<span class="variable">$&#123;password&#125;</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>url – 完整的 REST API 请求地址，包含请求参数</li>
-<li>ip – Jenkins Master 主机的ip地址（如果有域名可以使用域名）</li>
-<li>port – Jenkins 服务监听端口</li>
-<li>projectName – Jenkins 通过参数构建的项目的名称</li>
-<li>args – 要构建项目配置的构建时需要输入参数的名称，在构建任务内部可以通过 ${args} 获取输入的值（以 shell 为例）</li>
-<li>argsValue – 构建时需要输入的参数值</li>
-<li>curl -X POST – 以 POST 方法请求</li>
-<li>userName – 具有构建项目权限的用户名</li>
-<li>password – 具有构建项目权限的用户的口令</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/27/Jenkins-REST-API/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
