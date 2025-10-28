@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="反编译一个或多个class文件。 摘要javap [options] classfile…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javap">
+<meta property="og:url" content="https://www.zhangjc.com/2016/10/16/javap/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="反编译一个或多个class文件。 摘要javap [options] classfile…">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-10-15T16:28:10.000Z">
+<meta property="article:modified_time" content="2025-09-04T07:26:17.570Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2016/10/16/javap/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2016/10/16/javap/","path":"2016/10/16/javap/","title":"javap"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>javap | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#options"><span class="nav-number">1.1.</span> <span class="nav-text">options</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#classfile"><span class="nav-number">1.2.</span> <span class="nav-text">classfile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%89%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">选项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#help-help"><span class="nav-number">3.1.</span> <span class="nav-text">-help --help -?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#version"><span class="nav-number">3.2.</span> <span class="nav-text">-version</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#l"><span class="nav-number">3.3.</span> <span class="nav-text">-l</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#public"><span class="nav-number">3.4.</span> <span class="nav-text">-public</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protected"><span class="nav-number">3.5.</span> <span class="nav-text">-protected</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#private-p"><span class="nav-number">3.6.</span> <span class="nav-text">-private -p</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Joption"><span class="nav-number">3.7.</span> <span class="nav-text">-Joption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s"><span class="nav-number">3.8.</span> <span class="nav-text">-s</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sysinfo"><span class="nav-number">3.9.</span> <span class="nav-text">-sysinfo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constants"><span class="nav-number">3.10.</span> <span class="nav-text">-constants</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#c"><span class="nav-number">3.11.</span> <span class="nav-text">-c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#verbose"><span class="nav-number">3.12.</span> <span class="nav-text">-verbose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#classpath-path"><span class="nav-number">3.13.</span> <span class="nav-text">-classpath path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bootclasspath-path"><span class="nav-number">3.14.</span> <span class="nav-text">-bootclasspath path</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extdir-dirs"><span class="nav-number">3.15.</span> <span class="nav-text">-extdir dirs</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">实例</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2016/10/16/javap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="javap | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javap
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-10-16 00:28:10" itemprop="dateCreated datePublished" datetime="2016-10-16T00:28:10+08:00">2016-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2016/10/16/javap/" class="post-meta-item leancloud_visitors" data-flag-title="javap" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="javap" href="/2016/10/16/javap/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::84c39e5494bfbf822a18ff40b7e2e236" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>反编译一个或多个class文件。</p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p><strong>javap</strong> [<em>options</em>] <em>classfile…</em></p>
+<h2 id="options"><a href="#options" class="headerlink" title="options"></a><em>options</em></h2><p>命令行选项。具体选项参见“选项”一节。</p>
+<h2 id="classfile"><a href="#classfile" class="headerlink" title="classfile"></a><em>classfile</em></h2><p>一个或多个用空格分隔的被注释的类，例如：<code>DocFooter.class</code>。可以通过文件名或者URL（如：file:&#x2F;&#x2F;&#x2F;home&#x2F;user&#x2F;myproject&#x2F;src&#x2F;DocFooter.class）指定一个在类路径中的类。</p>
+<h1 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h1><p><em>javap</em> 命令反汇编一个或多个类文件。输出依赖于使用的选项。当不使用选项时，<em>javap</em> 命令打印传递给它的类的包、protected和public属性、方法。<em>javap</em> 命令打印输出到标准输入。</p>
+<h1 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h1><h2 id="help-help"><a href="#help-help" class="headerlink" title="-help --help -?"></a>-help --help -?</h2><p>打印 <em>javap</em> 命令的帮助信息。</p>
+<h2 id="version"><a href="#version" class="headerlink" title="-version"></a>-version</h2><p>打印发布信息。</p>
+<h2 id="l"><a href="#l" class="headerlink" title="-l"></a>-l</h2><p>输出行号和本地变量表。</p>
+<h2 id="public"><a href="#public" class="headerlink" title="-public"></a>-public</h2><p>仅显示公共类和成员。</p>
+<h2 id="protected"><a href="#protected" class="headerlink" title="-protected"></a>-protected</h2><p>显示受保护的&#x2F;公共类和成员。</p>
+<h2 id="private-p"><a href="#private-p" class="headerlink" title="-private -p"></a>-private -p</h2><p>显示所有类和成员。</p>
+<h2 id="Joption"><a href="#Joption" class="headerlink" title="-Joption"></a>-Joption</h2><p>传递指定的选项给JVM。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">javap -J-version</span><br><span class="line">javap -J-Djava.security.manager -J-Djava.security.policy=MyPolicy MyClassName</span><br></pre></td></tr></table></figure>
+
+<p>关于JVM选项的更多信息，参见 <a target="_blank" rel="noopener" href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html#CBBFHAJA">java</a> 命令文档。</p>
+<h2 id="s"><a href="#s" class="headerlink" title="-s"></a>-s</h2><p>输出内部类型签名。</p>
+<h2 id="sysinfo"><a href="#sysinfo" class="headerlink" title="-sysinfo"></a>-sysinfo</h2><p>显示正在处理的类的系统信息 (路径、大小、日期、MD5 散列)。</p>
+<h2 id="constants"><a href="#constants" class="headerlink" title="-constants"></a>-constants</h2><p>显示静态最终常量。</p>
+<h2 id="c"><a href="#c" class="headerlink" title="-c"></a>-c</h2><p>对代码进行反汇编。</p>
+<h2 id="verbose"><a href="#verbose" class="headerlink" title="-verbose"></a>-verbose</h2><p>打印方法参数和本地变量的数量以及栈区大小。</p>
+<h2 id="classpath-path"><a href="#classpath-path" class="headerlink" title="-classpath path"></a>-classpath <em>path</em></h2><p>指定查找用户类文件的位。当设置了这个变量将覆盖默认的或 CLASSPATH 环境变量。</p>
+<h2 id="bootclasspath-path"><a href="#bootclasspath-path" class="headerlink" title="-bootclasspath path"></a>-bootclasspath <em>path</em></h2><p>覆盖引导类文件的位置。默认的，引导类是那些实现了位于 jre&#x2F;lib&#x2F;rt.jar 和其他几个 JAR 文件的核心 Java 平台的类。</p>
+<h2 id="extdir-dirs"><a href="#extdir-dirs" class="headerlink" title="-extdir dirs"></a>-extdir <em>dirs</em></h2><p>指定javap搜索已安装的java扩展的位置，默认的java扩展的位置为 java.ext.dirs 的值。</p>
+<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><p>编译下面的<code>HelloWorld.java</code>类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>javap HelloWorld.class</code>命令的输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Compiled from <span class="string">&quot;HelloWorld.java&quot;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">HelloWorld</span><span class="params">()</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(java.lang.String[])</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>javap -c HelloWorld.class</code>命令的输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Compiled from <span class="string">&quot;HelloWorld.java&quot;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorld</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">HelloWorld</span><span class="params">()</span>;</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0       </span><br><span class="line">       <span class="number">1</span>: invokespecial #<span class="number">1</span>                  <span class="comment">// Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span></span><br><span class="line">       <span class="number">4</span>: <span class="keyword">return</span>        </span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(java.lang.String[])</span>;</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: getstatic     #<span class="number">2</span>                  <span class="comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       <span class="number">3</span>: ldc           #<span class="number">3</span>                  <span class="comment">// String Hello World!</span></span><br><span class="line">       <span class="number">5</span>: invokevirtual #<span class="number">4</span>                  <span class="comment">// Method java/io/PrintStream.println:(Ljava/lang/String;)V</span></span><br><span class="line">       <span class="number">8</span>: <span class="keyword">return</span>        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/09/11/Shell-%E6%96%87%E4%BB%B6%E5%88%A4%E6%96%AD%E6%9D%A1%E4%BB%B6/" rel="prev" title="Shell文件判断条件">
+                  <i class="fa fa-angle-left"></i> Shell文件判断条件
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/10/16/Socket-IO-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" rel="next" title="Socket.IO负载均衡">
+                  Socket.IO负载均衡 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="84c39e5494bfbf822a18ff40b7e2e236"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

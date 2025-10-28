@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Socket.IO 是一个非常棒的项目；Java 是目前应用非常广的开发语言。两者的结合也是必然的。本篇翻译自 Socket.IO-client Java 项目的 github 主页。 Socket.IO-client Java 是 Socket.IO v1.x 的 Java 客户端类库，这个类库是从 JavaScript client 移植过来的。 参见：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket.IO Java 客户端">
+<meta property="og:url" content="https://www.zhangjc.com/2025/10/16/Socket-IO-Java-%E5%AE%A2%E6%88%B7%E7%AB%AF/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="Socket.IO 是一个非常棒的项目；Java 是目前应用非常广的开发语言。两者的结合也是必然的。本篇翻译自 Socket.IO-client Java 项目的 github 主页。 Socket.IO-client Java 是 Socket.IO v1.x 的 Java 客户端类库，这个类库是从 JavaScript client 移植过来的。 参见：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-16T02:22:25.000Z">
+<meta property="article:modified_time" content="2025-10-16T02:36:21.287Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Socket.IO">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2025/10/16/Socket-IO-Java-%E5%AE%A2%E6%88%B7%E7%AB%AF/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2025/10/16/Socket-IO-Java-%E5%AE%A2%E6%88%B7%E7%AB%AF/","path":"2025/10/16/Socket-IO-Java-客户端/","title":"Socket.IO Java 客户端"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Socket.IO Java 客户端 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven"><span class="nav-number">1.1.</span> <span class="nav-text">Maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle"><span class="nav-number">1.2.</span> <span class="nav-text">Gradle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transports-%E5%92%8C-HTTP-%E5%A4%B4"><span class="nav-number">3.</span> <span class="nav-text">Transports 和 HTTP 头</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#License"><span class="nav-number">5.</span> <span class="nav-text">License</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/16/Socket-IO-Java-%E5%AE%A2%E6%88%B7%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Socket.IO Java 客户端 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Socket.IO Java 客户端
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-16 10:22:25 / 修改时间：10:36:21" itemprop="dateCreated datePublished" datetime="2025-10-16T10:22:25+08:00">2025-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">开发框架</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/Socket-IO/" itemprop="url" rel="index"><span itemprop="name">Socket.IO</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/16/Socket-IO-Java-%E5%AE%A2%E6%88%B7%E7%AB%AF/" class="post-meta-item leancloud_visitors" data-flag-title="Socket.IO Java 客户端" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Socket.IO Java 客户端" href="/2025/10/16/Socket-IO-Java-%E5%AE%A2%E6%88%B7%E7%AB%AF/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::bc256301d5b6c4ef838fb8c032027ad2" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><a href="https://link.zhihu.com/?target=http://Socket.IO">Socket.IO</a> 是一个非常棒的项目；Java 是目前应用非常广的开发语言。两者的结合也是必然的。本篇翻译自 Socket.IO-client Java 项目的 github 主页。</p>
+<p><a href="https://link.zhihu.com/?target=https://github.com/socketio/socket.io-client-java">Socket.IO-client Java</a> 是 Socket.IO v1.x 的 Java 客户端类库，这个类库是从 <a href="https://link.zhihu.com/?target=https://github.com/socketio/socket.io-client">JavaScript client</a> 移植过来的。</p>
+<p>参见：</p>
+<ul>
+<li><a href="https://link.zhihu.com/?target=https://github.com/nkzawa/socket.io-android-chat">Android chat demo</a></li>
+<li><a href="https://link.zhihu.com/?target=https://github.com/socketio/engine.io-client-java">engine.io-client-java</a></li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>最新的包可以从 Maven 的中心仓库获取。你将需要安装依赖。</p>
+<blockquote>
+<p>注意：v0.6.1 之后，包名改为了 io.socket 。请确认更新了依赖配置。</p>
+</blockquote>
+<h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><p>在 pom.xml 中添加依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.socket<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>socket.io-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><p>在 build.gradle 中，给 Android Studio 添加 gradle 依赖：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">compile (<span class="string">&#x27;io.socket:socket.io-client:0.7.0&#x27;</span>) &#123;</span><br><span class="line">  <span class="comment">// excluding org.json which is provided by Android</span></span><br><span class="line">  exclude group: <span class="string">&#x27;org.json&#x27;</span>, <span class="keyword">module</span>: <span class="string">&#x27;json&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>Socket.IO-client Java 几乎拥有跟原生 JS 客户端相同的 api 和特性。使用 IO.socket 初始化 Socket ：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">socket = IO.socket(<span class="string">&quot;http://localhost&quot;</span>);</span><br><span class="line">socket.on(Socket.EVENT_CONNECT, <span class="keyword">new</span> <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;</span><br><span class="line">    socket.emit(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;hi&quot;</span>);</span><br><span class="line">    socket.disconnect();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;).on(<span class="string">&quot;event&quot;</span>, <span class="keyword">new</span> <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;).on(Socket.EVENT_DISCONNECT, <span class="keyword">new</span>  <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line">socket.connect();</span><br></pre></td></tr></table></figure>
+
+<p>这个类库使用 <a href="https://link.zhihu.com/?target=http://www.json.org/">org.json</a> 解析和构造 JSON 字符串：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sending an object</span></span><br><span class="line"><span class="type">JSONObject</span> <span class="variable">obj</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JSONObject</span>();</span><br><span class="line">obj.put(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;server&quot;</span>);</span><br><span class="line">obj.put(<span class="string">&quot;binary&quot;</span>, <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">42</span>]);</span><br><span class="line">socket.emit(<span class="string">&quot;foo&quot;</span>, obj);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Receiving an object</span></span><br><span class="line">socket.on(<span class="string">&quot;foo&quot;</span>, <span class="keyword">new</span> <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;</span><br><span class="line">    <span class="type">JSONObject</span> <span class="variable">obj</span> <span class="operator">=</span> (JSONObject)args[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>像下面这样设置选项：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">IO.<span class="type">Options</span> <span class="variable">opts</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IO</span>.Options();</span><br><span class="line">opts.forceNew = <span class="literal">true</span>;</span><br><span class="line">opts.reconnection = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">socket = IO.socket(<span class="string">&quot;http://localhost&quot;</span>, opts);</span><br></pre></td></tr></table></figure>
+
+<p>可以用 query 选项设置查询参数。请注意：如果当查询参数改变时不想复用一个缓存的 socket 实例，应该使用 forceNew 选项，可能的使用场景是如果你的应用允许用户退出，并且一个新的用户再次登录：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IO.<span class="type">Options</span> <span class="variable">opts</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IO</span>.Options();</span><br><span class="line">opts.forceNew = <span class="literal">true</span>;</span><br><span class="line">opts.query = <span class="string">&quot;auth_token=&quot;</span> + authToken;</span><br><span class="line"><span class="type">Socket</span> <span class="variable">socket</span> <span class="operator">=</span> IO.socket(<span class="string">&quot;http://localhost&quot;</span>, opts);</span><br></pre></td></tr></table></figure>
+
+<p>当服务器接收到一个消息时，可以用 Ack 获取一个回调：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">socket.emit(<span class="string">&quot;foo&quot;</span>, <span class="string">&quot;woot&quot;</span>, <span class="keyword">new</span> <span class="title class_">Ack</span>() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>反之亦然：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ack from client to server</span></span><br><span class="line">socket.on(<span class="string">&quot;foo&quot;</span>, <span class="keyword">new</span> <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;</span><br><span class="line">    <span class="type">Ack</span> <span class="variable">ack</span> <span class="operator">=</span> (Ack) args[args.length - <span class="number">1</span>];</span><br><span class="line">    ack.call();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>SSL (HTTPS, WSS) 设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// default settings for all sockets</span></span><br><span class="line">IO.setDefaultSSLContext(mySSLContext);</span><br><span class="line">IO.setDefaultHostnameVerifier(myHostnameVerifier);</span><br><span class="line"></span><br><span class="line"><span class="comment">// set as an option</span></span><br><span class="line">opts = <span class="keyword">new</span> <span class="title class_">IO</span>.Options();</span><br><span class="line">opts.sslContext = mySSLContext;</span><br><span class="line">opts.hostnameVerifier = myHostnameVerifier;</span><br><span class="line">socket = IO.socket(<span class="string">&quot;https://localhost&quot;</span>, opts);</span><br></pre></td></tr></table></figure>
+
+<p>查阅 Javadoc 获取更多详情：<a target="_blank" rel="noopener" href="http://socketio.github.io/socket.io-client-java/apidocs/">http://socketio.github.io/socket.io-client-java/apidocs/</a></p>
+<h1 id="Transports-和-HTTP-头"><a href="#Transports-和-HTTP-头" class="headerlink" title="Transports 和 HTTP 头"></a>Transports 和 HTTP 头</h1><p>可以像下面这样访问 transports 和它们的 HTTP 头：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Called upon transport creation.</span></span><br><span class="line">socket.io().on(Manager.EVENT_TRANSPORT, <span class="keyword">new</span> <span class="title class_">Emitter</span>.listener() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;</span><br><span class="line">    <span class="type">Transport</span> <span class="variable">transport</span> <span class="operator">=</span> (Transport)args[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    transport.on(Transport.EVENT_REQUEST_HEADERS, <span class="keyword">new</span> <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;</span><br><span class="line">        <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">        Map&lt;String, List&lt;String&gt;&gt; headers = (Map&lt;String, List&lt;String&gt;&gt;)args[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// modify request headers</span></span><br><span class="line">        headers.put(<span class="string">&quot;Cookie&quot;</span>, Arrays.asList(<span class="string">&quot;foo=1;&quot;</span>));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    transport.on(Transport.EVENT_RESPONSE_HEADERS, <span class="keyword">new</span> <span class="title class_">Emitter</span>.Listener() &#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">call</span><span class="params">(Object... args)</span> &#123;</span><br><span class="line">        <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">        Map&lt;String, List&lt;String&gt;&gt; headers = (Map&lt;String, List&lt;String&gt;&gt;)args[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">// access response headers</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">cookie</span> <span class="operator">=</span> headers.get(<span class="string">&quot;Set-Cookie&quot;</span>).get(<span class="number">0</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><p>这个类库支持 JS 客户端支持的所有特性，包括 events、options、upgrading transport。完全支持 Android。</p>
+<h1 id="License"><a href="#License" class="headerlink" title="License"></a>License</h1><p>MIT</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+              <a href="/tags/Socket-IO/" rel="tag"><i class="fa fa-tag"></i> Socket.IO</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/16/%E5%9C%A8-Linux-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E5%AE%89%E8%A3%85-64-%E4%BD%8D-JDK/" rel="prev" title="在 Linux 平台上安装 64 位 JDK">
+                  <i class="fa fa-angle-left"></i> 在 Linux 平台上安装 64 位 JDK
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/17/Mac-OS-%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="next" title="Mac OS 常用快捷键">
+                  Mac OS 常用快捷键 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="bc256301d5b6c4ef838fb8c032027ad2"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

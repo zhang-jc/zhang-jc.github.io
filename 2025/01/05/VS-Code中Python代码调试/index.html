@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Python扩展通过Python调试器扩展支持多种类型的Python应用调试。简短了解基本调试，见Tutorial - Configure and run the debugger。此外也查看Flask tutorial。两个手册展示了像设置断点和步入代码核心技能。 学习通用的调试特性，像检查变量、设置断点和其他不依赖语言的活动，回顾VS Code debugging。 本文主要讲述Python特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS Code中Python代码调试">
+<meta property="og:url" content="https://www.zhangjc.com/2025/01/05/VS-Code%E4%B8%ADPython%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="Python扩展通过Python调试器扩展支持多种类型的Python应用调试。简短了解基本调试，见Tutorial - Configure and run the debugger。此外也查看Flask tutorial。两个手册展示了像设置断点和步入代码核心技能。 学习通用的调试特性，像检查变量、设置断点和其他不依赖语言的活动，回顾VS Code debugging。 本文主要讲述Python特">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/05.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/06.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/07.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/08.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/09.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/10.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/11.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/12.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/13.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/14.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/15.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/16.png">
+<meta property="og:image" content="https://www.zhangjc.com/images/202501/17.png">
+<meta property="article:published_time" content="2025-01-05T09:47:12.000Z">
+<meta property="article:modified_time" content="2025-09-04T07:26:17.569Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="VS Code">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhangjc.com/images/202501/05.png">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2025/01/05/VS-Code%E4%B8%ADPython%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2025/01/05/VS-Code%E4%B8%ADPython%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/","path":"2025/01/05/VS-Code中Python代码调试/","title":"VS Code中Python代码调试"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VS Code中Python代码调试 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python%E8%B0%83%E8%AF%95%E5%99%A8%E6%89%A9%E5%B1%95"><span class="nav-number">1.</span> <span class="nav-text">Python调试器扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">初始配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%8A%A0%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">附加配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%B0%83%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">基础调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%B0%83%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">命令行调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85debugpy"><span class="nav-number">5.1.</span> <span class="nav-text">安装debugpy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%AF%AD%E6%B3%95"><span class="nav-number">5.2.</span> <span class="nav-text">命令行语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.3.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9"><span class="nav-number">5.4.</span> <span class="nav-text">命令行选项</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E7%BD%91%E7%BB%9C%E8%BF%9E%E7%BB%93%E8%B0%83%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">通过网络连结调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E8%84%9A%E6%9C%AC%E8%B0%83%E8%AF%95"><span class="nav-number">6.1.</span> <span class="nav-text">本地脚本调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8SSH%E8%B0%83%E8%AF%95%E8%BF%9C%E7%A8%8B%E8%84%9A%E6%9C%AC"><span class="nav-number">6.2.</span> <span class="nav-text">用SSH调试远程脚本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">7.</span> <span class="nav-text">设置配置项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E5%92%8C%E6%97%A5%E5%BF%97%E7%82%B9"><span class="nav-number">8.</span> <span class="nav-text">断点和日志点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%96%AD%E7%82%B9"><span class="nav-number">8.1.</span> <span class="nav-text">条件断点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E4%BB%A3%E7%A0%81%E4%B8%AD%E8%B0%83%E7%94%A8%E6%96%AD%E7%82%B9"><span class="nav-number">8.2.</span> <span class="nav-text">在代码中调用断点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E9%AA%8C%E8%AF%81"><span class="nav-number">8.3.</span> <span class="nav-text">断点验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E7%89%B9%E5%AE%9A%E7%9A%84%E5%BA%94%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">9.</span> <span class="nav-text">调试特定的应用类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Flask%E8%B0%83%E8%AF%95"><span class="nav-number">9.1.</span> <span class="nav-text">Flask调试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">10.</span> <span class="nav-text">常见问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/01/05/VS-Code%E4%B8%ADPython%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VS Code中Python代码调试 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VS Code中Python代码调试
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-05 17:47:12" itemprop="dateCreated datePublished" datetime="2025-01-05T17:47:12+08:00">2025-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VS-Code/" itemprop="url" rel="index"><span itemprop="name">VS Code</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/01/05/VS-Code%E4%B8%ADPython%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/" class="post-meta-item leancloud_visitors" data-flag-title="VS Code中Python代码调试" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="VS Code中Python代码调试" href="/2025/01/05/VS-Code%E4%B8%ADPython%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::39b015bf4271a607dca166c83e15e306" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Python扩展通过<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy">Python调试器扩展</a>支持多种类型的Python应用调试。简短了解基本调试，见<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/python/python-tutorial#_configure-and-run-the-debugger">Tutorial - Configure and run the debugger</a>。此外也查看<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/python/tutorial-flask">Flask tutorial</a>。两个手册展示了像设置断点和步入代码核心技能。</p>
+<p>学习通用的调试特性，像检查变量、设置断点和其他不依赖语言的活动，回顾<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging">VS Code debugging</a>。</p>
+<p>本文主要讲述Python特定的调试配置，包含特定应用类型和远程调试必要的步骤。</p>
+<h1 id="Python调试器扩展"><a href="#Python调试器扩展" class="headerlink" title="Python调试器扩展"></a>Python调试器扩展</h1><p>在VS Code中，<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy">Python调试器扩展</a>会随着<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python扩展</a>一起安装。Python调试器基于实现了Python调试适配器协议的<a target="_blank" rel="noopener" href="https://pypi.org/project/debugpy/">debugpy</a>模块，可以调试多种类型的Python应用，包括脚本、Web应用、远程进程等。</p>
+<p>验证上面插件安装的方法是，打开<strong>扩展面板</strong>（<code>Ctrl+Shift+X</code>），在搜索框中输入<code>@installed python debugger</code>，在结果列表中可以看到Python和Python调试器插件。</p>
+<p><img src="/images/202501/05.png"></p>
+<h1 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h1><p>VS Code通过配置控制调试行为。这些配置在<code>launch.json</code>文件中进行定义。<code>launch.json</code>文件存储在工作空间的<code>.vscode</code>目录中。</p>
+<p>初始化调试配置，首先打开<strong>运行和调试面板</strong>（<code>Ctrl+Shift+D</code>）。如果还未做配置，会看到<strong>运行和调试</strong>按钮和创建launch.json文件的超链接。</p>
+<p>按照以下步骤创建<code>launch.json</code>文件：</p>
+<ol>
+<li><p>点击创建launch.json文件链接。</p>
+</li>
+<li><p>从调试选项列表中选择<strong>Python Debugger</strong>。</p>
+</li>
+</ol>
+<p><img src="/images/202501/06.png"></p>
+<ol start="3">
+<li>从弹出的配置类型选择列表中，根据需要选择：如果调试单个Python脚本，选择<strong>Python文件</strong>。其他类型及选项在列表中有说明，如下：</li>
+</ol>
+<p><img src="/images/202501/07.png"></p>
+<ol start="4">
+<li>这时候Python调试器扩展会创建并打开<code>launch.json</code>文件。根据上一步骤选择的类型，文件中已经预先定义了一些配置，如本例中选择的<strong>Python文件</strong>。可以根据需要修改文件内容添加配置（如添加参数）。</li>
+</ol>
+<p><img src="/images/202501/08.png"></p>
+<blockquote>
+<p>下文会讲解配置细节和不同类型应用的配置。</p>
+</blockquote>
+<h1 id="附加配置"><a href="#附加配置" class="headerlink" title="附加配置"></a>附加配置</h1><p>默认的，VS Code只展示Python调试器扩展最通用的配置。可点击其他配置下拉框中选择<strong>添加配置</strong>命令或点击<code>launch.json</code>文件编辑器中的<strong>添加配置</strong>按钮，VS Code会展示所有可选配置的列表（注意选择<strong>Python调试程序</strong>选项）：</p>
+<p><img src="/images/202501/09.png"></p>
+<p>选择带有参数的Python文件后，效果如下：</p>
+<p><img src="/images/202501/10.png"></p>
+<p>调试的时候，状态栏会显示当前的配置和当前的解释器。点击状态栏上的配置，可以选择其他配置。</p>
+<p><img src="/images/202501/11.png"></p>
+<p>在工作空间下，默认调试器跟其他扩展一样使用相同的解释器。如果调试器要使用不同的解释器，设置<code>launch.json</code>中的<code>python</code>值，或者使用状态栏的Python解释器指示器。</p>
+<h1 id="基础调试"><a href="#基础调试" class="headerlink" title="基础调试"></a>基础调试</h1><p>如果只是调试Python脚本，最简单的方式是脚本编辑器运行下拉列表中选择<strong>Python调试程序：调试Python文件</strong>。</p>
+<p><img src="/images/202501/12.png"></p>
+<p>如果调试使用Flask、Django或FastAPI开发的web应用，Python调试器扩展在<strong>运行和调试面板</strong>中，提供了根据项目结构提供动态调试配置的选项。</p>
+<p><img src="/images/202501/13.png"></p>
+<p>如果调试其他类型应用，可以通过点击<strong>运行和调试面板</strong>中的<strong>运行和调试</strong>按钮。</p>
+<p><img src="/images/202501/14.png"></p>
+<p>当没有设置配置时，VS Code会给出调试选项，选择适合的选项快速进入调试。有两个常用的选项，<strong>Python文件</strong>配置运行当前打开的Python文件，或者<strong>使用进程ID进行附加</strong>配置连结调试器到一个运行中的进程。添加配置后，就可以在列表中选择，并使用<strong>开始调试（F5）</strong>进行调试。</p>
+<p><img src="/images/202501/15.png"></p>
+<h1 id="命令行调试"><a href="#命令行调试" class="headerlink" title="命令行调试"></a>命令行调试</h1><p>如果安装了<code>debugpy</code>也可以在命令行运行调试器。</p>
+<h2 id="安装debugpy"><a href="#安装debugpy" class="headerlink" title="安装debugpy"></a>安装debugpy</h2><p>使用以下命令安装<a target="_blank" rel="noopener" href="https://pypi.org/project/debugpy/">debugpy</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ pip install --upgrade debugpy</span><br><span class="line">Looking <span class="keyword">in</span> indexes: https://mirrors.aliyun.com/pypi/simple/</span><br><span class="line">Collecting debugpy</span><br><span class="line">  Downloading https://mirrors.aliyun.com/pypi/packages/fd/b6/ee71d5e73712daf8307a9e85f5e39301abc8b66d13acd04dfff1702e672e/debugpy-1.8.5-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.4 MB)</span><br><span class="line">     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 11.6 MB/s eta 0:00:00</span><br><span class="line">Installing collected packages: debugpy</span><br><span class="line">Successfully installed debugpy-1.8.5</span><br><span class="line"></span><br><span class="line">[notice] A new release of pip is available: 24.0 -&gt; 24.2</span><br><span class="line">[notice] To update, run: pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>虽然不是必须的，但使用虚拟环境仍然是推荐的最佳实践。在VS Code中，可以打开命令面板（<code>Ctrl+Shift+P</code>），运行**Python: 创建环境…**命令创建虚拟环境。</p>
+</blockquote>
+<h2 id="命令行语法"><a href="#命令行语法" class="headerlink" title="命令行语法"></a>命令行语法</h2><p>调试器命令行语法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python -m debugpy</span><br><span class="line">    --listen | --connect</span><br><span class="line">    [&lt;host&gt;:]&lt;port&gt;</span><br><span class="line">    [--wait-for-client]</span><br><span class="line">    [--configure-&lt;name&gt; &lt;value&gt;]...</span><br><span class="line">    [--log-to &lt;path&gt;] [--log-to-stderr]</span><br><span class="line">    &lt;filename&gt; | -m &lt;module&gt; | -c &lt;code&gt; | --pid &lt;pid&gt;</span><br><span class="line">    [&lt;arg&gt;]...</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>在命令行，可以使用一个特定的端口（5678）启动要调试脚本的调试器。如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m debugpy --listen 5678 ./myscript.py</span><br></pre></td></tr></table></figure>
+
+<p>这个示例假设这个脚本是长期运行且忽略<code>--wait-for-client</code>标识，意味着脚本不会等待客户端连结。</p>
+<p>然后，VS Code调试器插件使用下面的配置连结。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;Python Debugger: Attach&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">  &quot;request&quot;: &quot;attach&quot;,</span><br><span class="line">  &quot;connect&quot;: &#123;</span><br><span class="line">    &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">    &quot;port&quot;: 5678</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong>：可以指定<strong>监听</strong>的主机，默认使用127.0.0.1。</p>
+</blockquote>
+<p>如果调试远程机器上的远程代码或运行在docker容器中的代码，需要修改前文的 CLI 命令指定一台机器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m debugpy --listen 0.0.0.0:5678 ./myscript.py</span><br></pre></td></tr></table></figure>
+
+
+<p>关联的配置文件看起来如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;Attach&quot;</span>,</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;debugpy&quot;</span>,</span><br><span class="line">  <span class="string">&quot;request&quot;</span>: <span class="string">&quot;attach&quot;</span>,</span><br><span class="line">  <span class="string">&quot;connect&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;host&quot;</span>: <span class="string">&quot;remote-machine-name&quot;</span>, // replace this with remote machine name</span><br><span class="line">    <span class="string">&quot;port&quot;</span>: 5678</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong>：注意，如果指定了<code>127.0.0.1</code>或<code>localhost</code>以外的机器，就打开了一个从任何机器允许访问的一个端口，这将带来安全风险。在远程调试时，需确保已采取了适合的预防措施，例如SSH隧道。</p>
+</blockquote>
+<h2 id="命令行选项"><a href="#命令行选项" class="headerlink" title="命令行选项"></a>命令行选项</h2><table>
+<thead>
+<tr>
+<th><strong>标识</strong></th>
+<th><strong>选项</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>–listen</strong> or <strong>–connect</strong></td>
+<td><code>[&lt;host&gt;:]&lt;port&gt;</code></td>
+<td><strong>必须</strong>。为调试适配器服务器指定主机地址和端口号，来等待连接（–listen）或连接一个等待连接的客户端（–connect) 。这跟VS Code调试配置使用的地址相同。默认，主机地址是<code>localhost (127.0.0.1)</code>。</td>
+</tr>
+<tr>
+<td><strong>–wait-for-client</strong></td>
+<td>none</td>
+<td><strong>可选</strong>。 指定从调试服务器有一个连接连入时才运行代码。这个设置允许从第一行代码开始调试。</td>
+</tr>
+<tr>
+<td><strong>–log-to</strong></td>
+<td><code>&lt;path&gt;</code></td>
+<td><strong>可选</strong>。指定保存日志的一个已存在目录。</td>
+</tr>
+<tr>
+<td><strong>–log-to-stderr</strong></td>
+<td>none</td>
+<td><strong>可选</strong>。启用 debugpy 写日志到标准错误输出。</td>
+</tr>
+<tr>
+<td><strong>–pid</strong></td>
+<td><code>&lt;pid&gt;</code></td>
+<td><strong>可选</strong>。指定一个已经运行中待调试服务器进入的进程。</td>
+</tr>
+<tr>
+<td><strong>–configure-<name></strong></td>
+<td><code>&lt;value&gt;</code></td>
+<td><strong>可选</strong>。设置在客户端连接前调试服务器必须知道的调试属性。这些属性可以直接在<em>调用</em>配置中直接使用，但是必须以这种方式设置的<em>连结</em>配置。例如，不想调试服务器自动引入连结的进程创建的子进程，使用<code>--configure-subProcess false</code>。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>提示</strong>：可以使用<code>[&lt;arg&gt;]</code>将命令行参数传递给已启动的应用程序。</p>
+</blockquote>
+<h1 id="通过网络连结调试"><a href="#通过网络连结调试" class="headerlink" title="通过网络连结调试"></a>通过网络连结调试</h1><h2 id="本地脚本调试"><a href="#本地脚本调试" class="headerlink" title="本地脚本调试"></a>本地脚本调试</h2><p>在某些实例中，需要调试由另外一个进程在本地调用的Python脚本。例如，调试一个web服务器运行的一些处理特定任务的脚本。在这个例子中，一旦这个脚本被调用则需要VS Code调试器就连结它：</p>
+<ol>
+<li>运行VS Code，打开这个脚本所在的文件夹或工作空间，如果<code>launch.json</code>不存在则创建它。</li>
+<li>在脚本代码中，添加下面的代码并保存：</li>
+</ol>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import debugpy</span><br><span class="line"></span><br><span class="line"># 5678 is the default attach port in the VS Code debug configurations. Unless a host and port are specified, host defaults to 127.0.0.1</span><br><span class="line">debugpy.listen(5678)</span><br><span class="line">print(&quot;Waiting for debugger attach&quot;)</span><br><span class="line">debugpy.wait_for_client()</span><br><span class="line">debugpy.breakpoint()</span><br><span class="line">print(&#x27;break on this line&#x27;)</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用<strong>终端：创建新的终端</strong>命令创建一个终端，终端会自动激活脚本选择的环境。</li>
+<li>在终端中安装debugpy（见<strong>安装debugpy</strong>一节）。</li>
+<li>在终端中，用该脚本开启Python，如<code>python3 myscript.py</code>。会看到包含在代码中的“Waiting for debugger attach”信息，脚本会在<code>debugpy.wait_for_client()</code>处等待调用。</li>
+<li>切换至<strong>运行和调试（<code>Ctrl+Shift+D</code>）</strong>面板，从调试器下拉列表中选择合适的配置进入调试器。</li>
+<li>调试器在<code>debugpy.breakpoint()</code>处等待调用，在该处可以正常的使用调试器。也可以使用UI界面设置其他断点，而不是用<code>debugpy.breakpoint()</code>。</li>
+</ol>
+<h2 id="用SSH调试远程脚本"><a href="#用SSH调试远程脚本" class="headerlink" title="用SSH调试远程脚本"></a>用SSH调试远程脚本</h2><p>远程调试能力允许在本地VS Code内单步调试远程服务器上运行的程序，而不需要在远程服务器安装VS Code。为了安全，在连接远程服务器调试时需要使用安全连接，如SSH。</p>
+<blockquote>
+<p><strong>提示</strong>：在Windows系统上，需要安装<a target="_blank" rel="noopener" href="https://learn.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse">Windows 10 OpenSSH</a>才可以使用<code>ssh</code>命令。</p>
+</blockquote>
+<p>下面的步骤简要列出了设置SSH隧道的步骤。与开放一个可公共访问的端口比，SSH隧道允许安全的在本地连接远程机器进行工作。</p>
+<p><strong>在远程主机上：</strong></p>
+<ol>
+<li>要启用端口，打开<code>sshd_config</code>配置文件（Linux服务器在<code>/etc/ssh/</code>下，Windows在<code>%programfiles(x86)%/openssh/etc</code>下），添加或修改以下内容：</li>
+</ol>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllowTcpForwarding yes</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong>：AllowTcpForwarding默认值为yes，可能不需要修改。</p>
+</blockquote>
+<ol start="2">
+<li>如果必须添加<code>AllowTcpForwarding</code>，则需要重启SSH服务。在Linux&#x2F;macOS上，运行<code>sudo service ssh restart</code>；在Windows上，运行<code>services.msc</code>，在服务列表中选择OpenSSH或sshd。</li>
+</ol>
+<p><strong>在本地主机上：</strong></p>
+<ol>
+<li>执行<code>ssh -2 -L sourceport:localhost:destinationport -i identityfile user@remoteaddress</code>创建一个SSH隧道，为<code>destinationport</code>选择一个端口，并在<code>user@remoteaddress</code>中指定合适的用户名和远程主机的IP。例如，在IP地址1.2.3.4上使用端口5678，命令为<code>ssh -2 -L 5678:localhost:5678 -i identityfile user@1.2.3.4</code>。可以使用<code>-i</code>标识指定认证文件的路径。</li>
+<li>确定在SSH会话中可以看到提示信息。</li>
+<li>在VS Code工作空间中，在<code>launch.json</code>文件中为远程调试创建配置项，设置匹配<code>ssh</code>命令使用的端口号，并设置主机为<code>localhost</code>。使用<code>localhost</code>是因为已经设置了SSH隧道。</li>
+</ol>
+  <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;Python Debugger: Attach&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">  &quot;request&quot;: &quot;attach&quot;,</span><br><span class="line">  &quot;port&quot;: 5678,</span><br><span class="line">  &quot;host&quot;: &quot;localhost&quot;,</span><br><span class="line">  &quot;pathMappings&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;localRoot&quot;: &quot;$&#123;workspaceFolder&#125;&quot;, // Maps C:\Users\user1\project1</span><br><span class="line">      &quot;remoteRoot&quot;: &quot;.&quot; // To current working directory ~/project1</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>开始调试</strong></p>
+<p>现在已经设置了连接远程主机的SSH隧道，可以开始调试了。</p>
+<ol>
+<li>远程和本地主机：保证可以获取相同的代码。</li>
+<li>远程和本地主机：安装debugpy（见<strong>安装debugpy</strong>一节）。</li>
+<li>远程主机：有两种指定连结远程主机的方式。</li>
+</ol>
+<p>  a. 在源代码中，添加下面的代码，<code>address</code>替换为远程主机的IP和端口（这里用1.2.3.4作为示例）。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> debugpy</span><br><span class="line"></span><br><span class="line"><span class="comment"># Allow other computers to attach to debugpy at this IP address and port.</span></span><br><span class="line">debugpy.listen((<span class="string">&#x27;1.2.3.4&#x27;</span>, <span class="number">5678</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pause the program until a remote debugger is attached</span></span><br><span class="line">debugpy.wait_for_client()</span><br></pre></td></tr></table></figure>
+
+<p>  在<code>listen</code>中应该使用远程主机的私有IP。然后可以正常启动程序，直到调试器连结使其暂停。</p>
+<p>  b. 通过debugpy启动远程进程，例如：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m debugpy --listen 1.2.3.4:5678 --wait-for-client -m myproject</span><br></pre></td></tr></table></figure>
+
+<p>  以上命令使用<code>python3</code>启动<code>myproject</code>，使用远程主机的私有IP<code>1.2.3.4</code>，并监听端口<code>5678</code>（也可以不使用<code>-m</code>，而是指定文件路径启动远程Python进程，例如<code>./hello.py</code>）。</p>
+<ol start="4">
+<li>本地主机：<strong>只有在上面列出的远程主机上的代码被修改</strong>，然后在远程主机的源代码中，拷贝添加注释的相同代码。添加这些代码确保远程和本地主机上的代码每行都是匹配的。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#import debugpy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Allow other computers to attach to debugpy at this IP address and port.</span></span><br><span class="line"><span class="comment">#debugpy.listen((&#x27;1.2.3.4&#x27;, 5678))</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pause the program until a remote debugger is attached</span></span><br><span class="line"><span class="comment">#debugpy.wait_for_client()</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>本地机器：切换至<strong>运行和调试（Ctrl+Shift+D）</strong>面板，选择<strong>Python Debugger: 远程附加</strong>配置。</li>
+<li>本地机器：在打算调试的代码位置设置一个断点。</li>
+<li>本地机器：使用修改过的<strong>Python Debugger:附加</strong>配置文件和启动调试按钮启动VS Code调试器。VS Code会停在本地设置的断点位置，允许单步调试代码、检查变量并执行其他调试动作。在<strong>Debug Console</strong>中输入的表达式也会在远程主机上运行。</li>
+</ol>
+<blockquote>
+<p>像来自<code>print</code>表达式的内容，输出到标准输出的文本，会出现在两边的主机上。但是其他输出，像来自matplotlib包的图像，只会出现在远程主机上。</p>
+</blockquote>
+<ol start="8">
+<li>在远程调试时，调试工具栏如下面：</li>
+</ol>
+<p><img src="/images/202501/16.png"></p>
+<p>  在工具栏上，断开连接按钮（<code>Shift+F5</code>）可以停止调试器，并允许远程程序运行完成。重启按钮（<code>Ctrl+Shift+F5</code>）重启调试器本地主机上的调试器，但不会重启远程程序。只有在已经重启远程程序并需要重新连结调试器时使用重启按钮。</p>
+<h1 id="设置配置项"><a href="#设置配置项" class="headerlink" title="设置配置项"></a>设置配置项</h1><p>当第一次创建<code>launch.json</code>时，有两种标准配置可以在集成终端（VS Code内）或外部终端（VS Code外部）运行编辑器中活动的文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;configurations&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Python Debugger: Current File (Integrated Terminal)&quot;,</span><br><span class="line">      &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">      &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">      &quot;program&quot;: &quot;$&#123;file&#125;&quot;,</span><br><span class="line">      &quot;console&quot;: &quot;integratedTerminal&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;Python Debugger: Current File (External Terminal)&quot;,</span><br><span class="line">      &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">      &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">      &quot;program&quot;: &quot;$&#123;file&#125;&quot;,</span><br><span class="line">      &quot;console&quot;: &quot;externalTerminal&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体设置将在下面的章节中描述。也可以添加其他不在标准配置中的设置，如<code>args</code>。</p>
+<blockquote>
+<p><strong>提示</strong>：在项目中，创建一个运行特定启动文件的配置会很有帮助。例如，启动调试器时总是使用参数<code>--port 1593</code>调用<code>startup.py</code>，如下创建一个配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;Python Debugger: startup.py&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">    &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">    &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/startup.py&quot;,</span><br><span class="line">    &quot;args&quot; : [&quot;--port&quot;, &quot;1593&quot;]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>name</strong></p>
+<p>给展示在VS Code调试配置下拉列表中的配置命名。</p>
+<p><strong>type</strong></p>
+<p>标识调试器的类型；保持该设置为<code>debugpy</code>来调试Python代码。</p>
+<p><strong>request</strong></p>
+<p>指定开始调试的模式：</p>
+<ul>
+<li>launch：在指定为<code>program</code>的文件上启动调试器。</li>
+<li>attach：附加调试器至已运行的一个进程。参见“通过网络连结调试”一节。</li>
+</ul>
+<p><strong>program</strong></p>
+<p>提供Python程序入口模块（启动文件）的全路径。在默认配置中经常使用<code>$&#123;file&#125;</code>，用作编辑器当前活动的文件。指定一个特定的启动文件时，需要确保不管打开的是哪个文件，都用同一个入口调用程序。例如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;program&quot;: &quot;/Users/Me/Projects/MyProject/src/event_handlers/__init__.py&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>也可基于工作空间根目录设置相对路径。例如，工作空间根目录是<code>/Users/Me/Projects/MyProject</code>，则可以使用下面的配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/src/event_handlers/__init__.py&quot;,</span><br></pre></td></tr></table></figure>
+
+<p><strong>module</strong></p>
+<p>提供给被调试模块指定名称的能力，跟命令行运行时的<code>-m</code>参数类似。更多信息见<a target="_blank" rel="noopener" href="https://docs.python.org/3/using/cmdline.html#cmdoption-m">Python.org</a>。</p>
+<p><strong>python</strong></p>
+<p>指向调试使用的Python解释器的全路径。</p>
+<p>如果不指定，这个设置默认指向工作空间选择的解释器，跟<code>$&#123;command:python.interpreterPath&#125;</code>等同。使用其他解释器，则指定<code>python</code>值为解释器的路径。</p>
+<p>可选的，可以在不同平台上使用包含使用的Python解释器路径的环境变量，因此就不再需要目录路径了。</p>
+<p>如果需要传递参数给Python解释器，可以使用<code>pythonArgs</code>属性。</p>
+<p><strong>pythonArgs</strong></p>
+<p>用语法<code>&quot;pythonArgs&quot;: [&quot;&lt;arg 1&gt;&quot;, &quot;&lt;arg 2&gt;&quot;,...]</code>指定传递给Python解释器的参数。</p>
+<p><strong>args</strong></p>
+<p>指定传递给Python程序的参数。每个用空格分开的参数字符串需在引号内，如：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;args&quot;: [&quot;--quiet&quot;, &quot;--norepeat&quot;, &quot;--port&quot;, &quot;1593&quot;],</span><br></pre></td></tr></table></figure>
+
+<p>如果想每次调试运行提供不同的参数，可以设置<code>args</code>为<code>$&#123;command:pickArgs&#125;</code>。每次启动调试时，将提示输入变量。</p>
+<p><strong>stopOnEntry</strong></p>
+<p>设置为true时，在程序第一行代码被调试时中断调试器。如果忽略（默认）或设置为false，调试器运行程序至第一个断点。</p>
+<p><strong>console</strong></p>
+<p>在<code>redirectOutput</code>默认值没被修改时，指定程序输出如何展示。</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>显示输出信息的地方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;internalConsole&quot;</code></td>
+<td><strong>VS Code调试控制台</strong>。如果 <code>redirectOutput</code> 设置为False，不展示输出信息。</td>
+</tr>
+<tr>
+<td><code>&quot;integratedTerminal&quot;</code> （默认）</td>
+<td><a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/terminal/basics">VS Code集成终端</a>。如果<code>redirectOutput</code> 设置为True，在调试控制台也会展示输出信息。</td>
+</tr>
+<tr>
+<td><code>&quot;externalTerminal&quot;</code></td>
+<td><strong>独立的控制台窗口</strong>。如果<code>redirectOutput</code> 设置为True，在调试控制台也会展示输出信息。</td>
+</tr>
+</tbody></table>
+<p><strong>purpose</strong></p>
+<p>使用<code>purpose</code>选项，不止一种方法配置<strong>运行</strong>按钮。设置选项值为<code>debug-test</code>，定义当在VS Code中调试单元测试时使用该配置。然而，设置该选项为<code>debug-in-terminal</code>，定义只有在访问编辑器右上方的<strong>运行Python文件</strong>按钮时才使用该配置（无论是该按钮的<strong>运行Python文件</strong>还是<strong>调试Python文件</strong>选项被使用）。<strong>注意</strong>，<code>purpose</code>选项不能用来通过<code>F5</code>或<strong>运行→启动调试</strong>启动调试器<strong>。</strong></p>
+<p><strong>autoReload</strong></p>
+<p>允许在调试器碰到断点后，代码做了修改时自动重新加载调试器。如下面代码设置<code>&#123;&quot;enable&quot;: true&#125;</code>启用这个特性：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;Python Debugger: Current File&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">  &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">  &quot;program&quot;: &quot;$&#123;file&#125;&quot;,</span><br><span class="line">  &quot;console&quot;: &quot;integratedTerminal&quot;,</span><br><span class="line">  &quot;autoReload&quot;: &#123;</span><br><span class="line">    &quot;enable&quot;: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong>：当调试器重新加载时，导入代码可能会再次执行。要避免这种情况，尝试只在模块中使用导、常量和定义，将所有代码放到函数中。可选的，用<code>if __name__==&quot;__main__&quot;</code>做检查。</p>
+</blockquote>
+<p><strong>subprocess</strong></p>
+<p>指定是否启用子进程调试。默认是false，设置为true启用。获取更多信息见<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging#_multitarget-debugging">multi-target debugging</a>。</p>
+<p><strong>cwd</strong></p>
+<p>为调试器指定当前工作目录，作为其他任何相对路径的基础目录。如果忽略，默认为<code>$&#123;workspaceFolder&#125;</code>（VS Code打开的文件夹）。</p>
+<p>例如，<code>$&#123;workspaceFolder&#125;</code>包含的一个有<code>app.py</code>的<code>py_code</code>文件夹，和有<code>salaries.csv</code>的<code>data</code>文件夹。如果在<code>py_code/app.py</code>上启动调试器，则指向data文件的相对路径就非常依赖<code>cwd</code>的值：</p>
+<table>
+<thead>
+<tr>
+<th>cwd</th>
+<th>data的相对路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>忽略 or <code>$&#123;workspaceFolder&#125;</code></td>
+<td><code>data/salaries.csv</code></td>
+</tr>
+<tr>
+<td><code>$&#123;workspaceFolder&#125;/py_code</code></td>
+<td><code>../data/salaries.csv</code></td>
+</tr>
+<tr>
+<td><code>$&#123;workspaceFolder&#125;/data</code></td>
+<td><code>salaries.csv</code></td>
+</tr>
+</tbody></table>
+<p><strong>redirectOutput</strong></p>
+<p>设置为true时（默认internalConsole），调试器打印程序所有输出至VS Code调试输出窗口。如果设置为false（默认integratedTerminal和externalTerminal），程序输出不会展示在调试输出窗口。</p>
+<p>使用<code>&quot;console&quot;: &quot;integratedTerminal&quot;</code>或<code>&quot;console&quot;: &quot;externalTerminal&quot;</code>时，该选项通常被禁用，因为不需要重复输出到调试控制台。</p>
+<p><strong>justMyCode</strong></p>
+<p>当忽略或设置为true时（默认），限制只调试用户代码。设置为false时也允许调试标准库函数。</p>
+<p><strong>django</strong></p>
+<p>设置为true时，激活调试Django web框架的特性。</p>
+<p><strong>sudo</strong></p>
+<p>设置为true且使用<code>&quot;console&quot;: &quot;externalTerminal&quot;</code>时，允许调试需要提升权限的应用。使用一个外部控制台捕获密码是必要的。</p>
+<p><strong>pyramid</strong></p>
+<p>当设置为true时，确保使用必要的<code>pserve</code>命令调用<a target="_blank" rel="noopener" href="https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/startup.html">Pyramid</a>应用。</p>
+<p><strong>env</strong></p>
+<p>在系统环境变量之上，为调试器进程设置总是继承的可选环境变量。这些参数的值必须作为字符串输入。</p>
+<p><strong>envFile</strong></p>
+<p>指向包含环境变量定义的一个可选文件路径。见：<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/python/environments#_environment-variable-definitions-file">Configuring Python environments - environment variable definitions file</a>。</p>
+<p><strong>gevent</strong></p>
+<p>如果设置为true，启用调试<a target="_blank" rel="noopener" href="https://www.gevent.org/intro.html">gevent monkey-patched code</a>。</p>
+<p><strong>jinja</strong></p>
+<p>当设置为true，激活<a target="_blank" rel="noopener" href="https://jinja.palletsprojects.com/">Jinja</a>模板框架调试特性。</p>
+<h1 id="断点和日志点"><a href="#断点和日志点" class="headerlink" title="断点和日志点"></a>断点和日志点</h1><p>Python调试器扩展支持为调试代码设置<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging#_breakpoints">断点</a>和<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging#_logpoints">日志点</a>。简短了解基础的调试和断点使用，<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/python/python-tutorial#_configure-and-run-the-debugger">Tutorial - Configure and run the debugger</a>。</p>
+<h2 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h2><p>断点也可以被设置在表达式、命中计数或两者组合满足时被触发。Python调试器扩展支持命中计数是整数，进而支持&#x3D;&#x3D;、&gt;、&gt;&#x3D;、&lt;、&lt;&#x3D;和%操作。例如，设置命中次数&gt;5，会在发生5次后设置的断点被触发。获取更多信息，见<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/editor/debugging#_conditional-breakpoints">conditional breakpoints</a>。</p>
+<h2 id="在代码中调用断点"><a href="#在代码中调用断点" class="headerlink" title="在代码中调用断点"></a>在代码中调用断点</h2><p>调试会话中，可以在想要暂停调试器的位置调用<code>debugpy.breakpoint()</code>。</p>
+<h2 id="断点验证"><a href="#断点验证" class="headerlink" title="断点验证"></a>断点验证</h2><p>Python调试器扩展会自动探测在非可执行行设置的断点，类似<code>pass</code>表达式或多行表达式的中间。在这些场景中，调试器会移动断点至最近的代码行，确保代码执行停在这个断点。</p>
+<h1 id="调试特定的应用类型"><a href="#调试特定的应用类型" class="headerlink" title="调试特定的应用类型"></a>调试特定的应用类型</h1><p>配置下拉表中为一般应用提供了多种不同的选项：</p>
+<table>
+<thead>
+<tr>
+<th>配置</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Attach</td>
+<td>见前文“通过网络连结调试”一节。</td>
+</tr>
+<tr>
+<td>Django</td>
+<td>指定<code>&quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/manage.py&quot;</code>、<code>&quot;args&quot;: [&quot;runserver&quot;]</code>，并且添加<code>&quot;django&quot;: true</code>启用Django HTML模板的调试。</td>
+</tr>
+<tr>
+<td>Flask</td>
+<td>见下文“Flask调试”一节。</td>
+</tr>
+<tr>
+<td>Gevent</td>
+<td>添加 <code>&quot;gevent&quot;: true</code> 到集成的标准终端配置。</td>
+</tr>
+<tr>
+<td>Pyramid</td>
+<td>移除<code>program</code>，添加<code>&quot;args&quot;: [&quot;$&#123;workspaceFolder&#125;/development.ini&quot;]</code>，添加<code>&quot;jinja&quot;: true</code>，启用模板调试，并且添加<code>&quot;pyramid&quot;: true</code>，确保使用必要的<code>pserve</code>命令调用<a target="_blank" rel="noopener" href="https://docs.pylonsproject.org/projects/pyramid/en/latest/narr/startup.html">Pyramid</a>应用。</td>
+</tr>
+</tbody></table>
+<p>远程调试和Google App Engine需要特定的步骤。了解调试单元测试的详情，见<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/python/testing">Testing</a>。</p>
+<p>调试需要管理员权限的应用，使用<code>&quot;console&quot;: &quot;externalTerminal&quot;</code>和<code>&quot;sudo&quot;: &quot;True&quot;</code>。</p>
+<h2 id="Flask调试"><a href="#Flask调试" class="headerlink" title="Flask调试"></a>Flask调试</h2><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;Python Debugger: Flask&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">    &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">    &quot;module&quot;: &quot;flask&quot;,</span><br><span class="line">    &quot;env&quot;: &#123;</span><br><span class="line">        &quot;FLASK_APP&quot;: &quot;app.py&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;args&quot;: [</span><br><span class="line">        &quot;run&quot;,</span><br><span class="line">        &quot;--no-debugger&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;jinja&quot;: true</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+
+<p>如上配置，指定<code>&quot;env&quot;: &#123;&quot;FLASK_APP&quot;: &quot;app.py&quot;&#125;</code>和<code>&quot;args&quot;: [&quot;run&quot;, &quot;--no-debugger&quot;]</code>。<code>&quot;module&quot;: &quot;flask&quot;</code>属性替代<code>program</code>。（可能在<code>env</code>属性中看到<code>&quot;FLASK_APP&quot;: &quot;$&#123;workspaceFolder&#125;/app.py&quot;</code>，在这个场景中修改配置只有文件名。然而，可能会看到“Cannot import module C”错误，C是一个驱动器字符。）</p>
+<p><code>&quot;jinja&quot;: true</code>也是启用Flask默认的Jinja模板引擎调试的设置。</p>
+<p>如果以开发模式运行Flask开发服务器，使用下面的配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;Python Debugger: Flask (development mode)&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;debugpy&quot;,</span><br><span class="line">    &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">    &quot;module&quot;: &quot;flask&quot;,</span><br><span class="line">    &quot;env&quot;: &#123;</span><br><span class="line">        &quot;FLASK_APP&quot;: &quot;app.py&quot;,</span><br><span class="line">        &quot;FLASK_ENV&quot;: &quot;development&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;args&quot;: [</span><br><span class="line">        &quot;run&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;jinja&quot;: true</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><p>为什么调试器不工作有很多原因。有时调试控制台会显示出原因，但主要的原因如下：</p>
+<ul>
+<li>打开扩展面板（<code>Ctrl+Shift+X</code>）并搜索<code>@installed python debugger</code>，确保<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy">Python调试器扩展</a>已安装并已启用。</li>
+<li>指向可执行程序python的路径是否正确：通过运行<strong>Python：选择解释器</strong>命令并查看当前值，检查选择的解释器路径。</li>
+</ul>
+<p><img src="/images/202501/17.png"></p>
+<ul>
+<li>在<code>launch.json</code>文件中<code>&quot;type&quot;</code>设置为过时的值<code>&quot;python&quot;</code>：用Python调试器正常工作的<code>&quot;debugpy&quot;</code>替代<code>&quot;python&quot;</code>。</li>
+<li>在监视窗口中有无效的表达式：清理监视窗口中的所有表达式并重启调试器。</li>
+<li>如果在使用本地现成API的多线程应用上工作（例如Win32的<code>CreateThread</code>函数，而不是Python的线程API），非常有必要在每个要调试文件的头部加入以下代码：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> debugpy</span><br><span class="line">debugpy.debug_this_thread()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果在<strong>Linux</strong>系统中工作，当尝试应用调试器至任何运行中的进程时，可能会收到“timed out”错误信息。要防止该错误，可以临时运行下面的命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 0 | <span class="built_in">sudo</span> <span class="built_in">tee</span> /proc/sys/kernel/yama/ptrace_scope</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+              <a href="/tags/VS-Code/" rel="tag"><i class="fa fa-tag"></i> VS Code</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/01/Windows-PySide6-MySQL%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98/" rel="prev" title="Windows PySide6 MySQL驱动问题">
+                  <i class="fa fa-angle-left"></i> Windows PySide6 MySQL驱动问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/" rel="next" title="VirtualBox can't enable the AMD-V extension">
+                  VirtualBox can't enable the AMD-V extension <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="39b015bf4271a607dca166c83e15e306"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="LRU原理LRU 是 Least Recently Used 的缩写，即最近最少使用算法。其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LRU 算法">
+<meta property="og:url" content="https://www.zhangjc.com/2025/10/19/LRU-%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="LRU原理LRU 是 Least Recently Used 的缩写，即最近最少使用算法。其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhangjc.com/images/202510/14.jpg">
+<meta property="og:image" content="https://www.zhangjc.com/images/202510/15.jpg">
+<meta property="og:image" content="https://www.zhangjc.com/images/202510/16.jpg">
+<meta property="og:image" content="https://www.zhangjc.com/images/202510/17.jpg">
+<meta property="article:published_time" content="2025-10-19T15:16:59.000Z">
+<meta property="article:modified_time" content="2025-10-19T15:55:05.176Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhangjc.com/images/202510/14.jpg">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2025/10/19/LRU-%E7%AE%97%E6%B3%95/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2025/10/19/LRU-%E7%AE%97%E6%B3%95/","path":"2025/10/19/LRU-算法/","title":"LRU 算法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>LRU 算法 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LRU"><span class="nav-number">1.</span> <span class="nav-text">LRU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.3.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LRU-K"><span class="nav-number">2.</span> <span class="nav-text">LRU-K</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-1"><span class="nav-number">2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90-1"><span class="nav-number">2.3.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Two-queues%EF%BC%882Q%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">Two queues（2Q）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-2"><span class="nav-number">3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90-2"><span class="nav-number">3.3.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multi-Queue%EF%BC%88MQ%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">Multi Queue（MQ）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E7%90%86-3"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-3"><span class="nav-number">4.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90-3"><span class="nav-number">4.3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LRU%E7%B1%BB%E7%AE%97%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">4.4.</span> <span class="nav-text">LRU类算法对比</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-LinkedHashMap-%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">Java LinkedHashMap 实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%8F%8C%E9%93%BE%E8%A1%A8%E7%9A%84-LRU-%E5%AE%9E%E7%8E%B0"><span class="nav-number">6.</span> <span class="nav-text">基于双链表的 LRU 实现</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/19/LRU-%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="LRU 算法 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LRU 算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-19 23:16:59 / 修改时间：23:55:05" itemprop="dateCreated datePublished" datetime="2025-10-19T23:16:59+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">软件开发</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/19/LRU-%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="LRU 算法" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="LRU 算法" href="/2025/10/19/LRU-%E7%AE%97%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::f4f5efedac73fa083ca8186359d449f8" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>LRU 是 Least Recently Used 的缩写，即最近最少使用算法。其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>最常见的实现是使用一个链表保存缓存数据，详细算法实现如下：<br><img src="/images/202510/14.jpg"></p>
+<ul>
+<li>新数据插入到链表头部；</li>
+<li>每当缓存命中（即缓存数据被访问），则将数据移到链表头部；</li>
+<li>当链表满的时候，将链表尾部的数据丢弃。</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>当存在热点数据时，LRU的效率很好，但偶发性的、周期性的批量操作会导致 LRU 命中率急剧下降，缓存污染情况比较严重。该算法实现简单。命中时需要遍历链表，找到命中的数据块索引，然后需要将数据移到头部。</p>
+<h1 id="LRU-K"><a href="#LRU-K" class="headerlink" title="LRU-K"></a>LRU-K</h1><h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>LRU-K 中的 K 代表最近使用的次数，因此 LRU 可以认为是 LRU-1。LRU-K 的主要目的是为了解决 LRU 算法“缓存污染”的问题，其核心思想是将“最近使用过 1 次”的判断标准扩展为“最近使用过 K 次”。</p>
+<h2 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h2><p>相比 LRU，LRU-K 需要多维护一个队列，用于记录所有缓存数据被访问的历史。只有当数据的访问次数达到 K 次的时候，才将数据放入缓存。当需要淘汰数据时，LRU-K 会淘汰第 K 次访问时间距当前时间最大的数据。详细实现如下：<br><img src="/images/202510/15.jpg"></p>
+<ul>
+<li>数据第一次被访问，加入到访问历史列表；</li>
+<li>如果数据在访问历史列表里后没有达到 K 次访问，则按照一定规则（FIFO，LRU）淘汰；</li>
+<li>当访问历史队列中的数据访问次数达到 K 次后，将数据索引从历史队列删除，将数据移到缓存队列中，并缓存此数据，缓存队列重新按照时间排序；</li>
+<li>缓存数据队列中被再次访问后，重新排序；</li>
+<li>需要淘汰数据时，淘汰缓存队列中排在末尾的数据，即：淘汰“倒数第 K 次访问离现在最久”的数据。</li>
+</ul>
+<p>LRU-K 具有 LRU 的优点，同时能够避免 LRU 的缺点，实际应用中 LRU-2 是综合各种因素后最优的选择，LRU-3 或者更大的 K 值命中率会高，但适应性差，需要大量的数据访问才能将历史访问记录清除掉。</p>
+<h2 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h2><p>LRU-K 降低了“缓存污染”带来的问题，命中率比 LRU 要高。LRU-K 算法复杂度和代价比较高。由于 LRU-K 还需要记录那些被访问过、但还没有放入缓存的对象，因此内存消耗会比LRU要多；当数据量很大的时候，内存消耗会比较可观。LRU-K 需要基于时间进行排序（可以需要淘汰时再排序，也可以即时排序），CPU消耗比 LRU 要高。</p>
+<h1 id="Two-queues（2Q）"><a href="#Two-queues（2Q）" class="headerlink" title="Two queues（2Q）"></a>Two queues（2Q）</h1><h2 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h2><p>Two queues（以下使用 2Q 代替）算法类似于 LRU-2，不同点在于 2Q 将 LRU-2 算法中的访问历史队列（注意这不是缓存数据的）改为一个 FIFO 缓存队列，即：2Q 算法有两个缓存队列，一个是 FIFO 队列，一个是 LRU 队列。</p>
+<h2 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h2><p>当数据第一次访问时，2Q 算法将数据缓存在 FIFO 队列里面，当数据第二次被访问时，则将数据从 FIFO 队列移到 LRU 队列里面，两个队列各自按照自己的方法淘汰数据。详细实现如下：<br><img src="/images/202510/16.jpg"></p>
+<ul>
+<li>新访问的数据插入到 FIFO 队列；</li>
+<li>如果数据在FIFO队列中一直没有被再次访问，则最终按照 FIFO 规则淘汰；</li>
+<li>如果数据在 FIFO 队列中被再次访问，则将数据移到 LRU 队列头部；</li>
+<li>如果数据在 LRU 队列再次被访问，则将数据移到 LRU 队列头部；</li>
+<li>LRU 队列淘汰末尾的数据。</li>
+</ul>
+<blockquote>
+<p>注：上图中 FIFO 队列比 LRU 队列短，但并不代表这是算法要求，实际应用中两者比例没有硬性规定。</p>
+</blockquote>
+<h2 id="分析-2"><a href="#分析-2" class="headerlink" title="分析"></a>分析</h2><p>2Q 算法的命中率要高于 LRU。2Q 算法需要两个队列，但两个队列本身都比较简单。2Q 算法的代价是 FIFO 和 LRU 的代价之和。2Q 算法和 LRU-2 算法命中率类似，内存消耗也比较接近，但对于最后缓存的数据来说，2Q 会减少一次从原始存储读取数据或者计算数据的操作。</p>
+<h1 id="Multi-Queue（MQ）"><a href="#Multi-Queue（MQ）" class="headerlink" title="Multi Queue（MQ）"></a>Multi Queue（MQ）</h1><h2 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h2><p>MQ 算法根据访问频率将数据划分为多个队列，不同的队列具有不同的访问优先级，其核心思想是：优先缓存访问次数多的数据。</p>
+<h2 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h2><p>MQ 算法将缓存划分为多个 LRU 队列，每个队列对应不同的访问优先级。访问优先级是根据访问次数计算出来的，例如：详细的算法结构图如下，Q0，Q1….Qk 代表不同的优先级队列，Q-history 代表从缓存中淘汰数据，但记录了数据的索引和引用次数的队列：<br><img src="/images/202510/17.jpg"></p>
+<p>如上图，算法详细描述如下：</p>
+<ul>
+<li>新插入的数据放入 Q0；</li>
+<li>每个队列按照 LRU 管理数据；</li>
+<li>当数据的访问次数达到一定次数，需要提升优先级时，将数据从当前队列删除，加入到高一级队列的头部；</li>
+<li>为了防止高优先级数据永远不被淘汰，当数据在指定的时间里访问没有被访问时，需要降低优先级，将数据从当前队列删除，加入到低一级的队列头部；</li>
+<li>需要淘汰数据时，从最低一级队列开始按照 LRU 淘汰；每个队列淘汰数据时，将数据从缓存中删除，将数据索引加入 Q-history 头部；</li>
+<li>如果数据在 Q-history 中被重新访问，则重新计算其优先级，移到目标队列的头部；</li>
+<li>Q-history 按照 LRU 淘汰数据的索引。</li>
+</ul>
+<h2 id="分析-3"><a href="#分析-3" class="headerlink" title="分析"></a>分析</h2><p>MQ 降低了“缓存污染”带来的问题，命中率比 LRU 要高。MQ 需要维护多个队列，且需要维护每个数据的访问时间，复杂度比 LRU 高。MQ 需要记录每个数据的访问时间，需要定时扫描所有队列，代价比 LRU 要高。</p>
+<p>注：虽然 MQ 的队列看起来数量比较多，但由于所有队列之和受限于缓存容量的大小，因此这里多个队列长度之和跟一个 LRU 队列是一样的，因此队列扫描性能也相近。</p>
+<h2 id="LRU类算法对比"><a href="#LRU类算法对比" class="headerlink" title="LRU类算法对比"></a>LRU类算法对比</h2><p>由于不同的访问模型导致命中率变化较大，此处对比仅基于理论定性分析，不做定量分析。</p>
+<ul>
+<li>命中率：LRU-2 &gt; MQ(2) &gt; 2Q &gt; LRU</li>
+<li>复杂度：LRU-2 &gt; MQ(2) &gt; 2Q &gt; LRU</li>
+<li>代价：LRU-2 &gt; MQ(2) &gt; 2Q &gt; LRU</li>
+</ul>
+<p>实际应用中需要根据业务的需求和对数据的访问情况进行选择，并不是命中率越高越好。例如：虽然LRU看起来命中率会低一些，且存在”缓存污染“的问题，但由于其简单和代价小，实际应用中反而应用更多。</p>
+<h1 id="Java-LinkedHashMap-实现"><a href="#Java-LinkedHashMap-实现" class="headerlink" title="Java LinkedHashMap 实现"></a>Java LinkedHashMap 实现</h1><p>Java 中最简单的 LRU 算法实现，就是利用 jdk 的 LinkedHashMap，覆写其中的 removeEldestEntry(Map.Entry) 方法即可。如果你去看 LinkedHashMap 的源码可知，LRU 算法是通过双向链表来实现，当某个位置被命中，通过调整链表的指向将该位置调整到头位置，新加入的内容直接放在链表头，如此一来，最近被命中的内容就向链表头移动，需要替换时，链表最后的位置就是最近最少使用的位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;  </span><br><span class="line"><span class="keyword">import</span> java.util.Collection;  </span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;  </span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.Lock;  </span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;  </span><br><span class="line"><span class="keyword">import</span> java.util.Map;  </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 类说明：利用 LinkedHashMap 实现简单的缓存， 必须实现 removeEldestEntry 方法，具体参见 JDK 文档</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;K&gt;</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;V&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LRULinkedHashMap</span>&lt;K, V&gt; <span class="keyword">extends</span> <span class="title class_">LinkedHashMap</span>&lt;K, V&gt; &#123;  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> maxCapacity;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">float</span> <span class="variable">DEFAULT_LOAD_FACTOR</span> <span class="operator">=</span> <span class="number">0.75f</span>;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">Lock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">LRULinkedHashMap</span><span class="params">(<span class="type">int</span> maxCapacity)</span> &#123;  </span><br><span class="line">    <span class="built_in">super</span>(maxCapacity, DEFAULT_LOAD_FACTOR, <span class="literal">true</span>);  </span><br><span class="line">    <span class="built_in">this</span>.maxCapacity = maxCapacity;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">protected</span> <span class="type">boolean</span> <span class="title function_">removeEldestEntry</span><span class="params">(java.util.Map.Entry&lt;K, V&gt; eldest)</span> &#123;  </span><br><span class="line">    <span class="keyword">return</span> size() &gt; maxCapacity;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">containsKey</span><span class="params">(Object key)</span> &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">      lock.lock();  </span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">super</span>.containsKey(key);  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">      lock.unlock();  </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> V <span class="title function_">get</span><span class="params">(Object key)</span> &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">      lock.lock();  </span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">super</span>.get(key);  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">      lock.unlock();  </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> V <span class="title function_">put</span><span class="params">(K key, V value)</span> &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">      lock.lock();  </span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">super</span>.put(key, value);  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">      lock.unlock();  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">      lock.lock();  </span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">super</span>.size();  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">      lock.unlock();  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span> &#123;  </span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">      lock.lock();  </span><br><span class="line">      <span class="built_in">super</span>.clear();  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">      lock.unlock();  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> Collection&lt;Map.Entry&lt;K, V&gt;&gt; getAll() &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;  </span><br><span class="line">      lock.lock();  </span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Map.Entry&lt;K, V&gt;&gt;(<span class="built_in">super</span>.entrySet());  </span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">      lock.unlock();  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="基于双链表的-LRU-实现"><a href="#基于双链表的-LRU-实现" class="headerlink" title="基于双链表的 LRU 实现"></a>基于双链表的 LRU 实现</h1><p>传统意义的 LRU 算法是为每一个 Cache 对象设置一个计数器，每次 Cache 命中则给计数器 +1，而 Cache 用完，需要淘汰旧内容，放置新内容时，就查看所有的计数器，并将最少使用的内容替换掉。</p>
+<p>它的弊端很明显，如果 Cache 的数量少，问题不会很大，但是如果 Cache 的空间过大，达到 10W 或者 100W 以上，一旦需要淘汰，则需要遍历所有计算器，其性能与资源消耗是巨大的。效率也就非常的慢了。</p>
+<p>它的原理：将 Cache 的所有位置都用双连表连接起来，当一个位置被命中之后，就将通过调整链表的指向，将该位置调整到链表头的位置，新加入的 Cache 直接加到链表头中。</p>
+<p>这样，在多次进行 Cache 操作后，最近被命中的，就会被向链表头方向移动，而没有命中的，而想链表后面移动，链表尾则表示最近最少使用的 Cache。</p>
+<p>当需要替换内容时候，链表的最后位置就是最少被命中的位置，我们只需要淘汰链表最后的部分即可。</p>
+<p>上面说了这么多的理论， 下面用代码来实现一个 LRU 策略的缓存。我们用一个对象来表示 Cache，并实现双链表：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Hashtable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">CacheNode</span> &#123;</span><br><span class="line">    <span class="comment">// add your code here</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> cacheSize;<span class="comment">// 缓存大小</span></span><br><span class="line">    <span class="keyword">private</span> Hashtable nodes;<span class="comment">// 缓存容器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> currentSize;<span class="comment">// 当前缓存对象数量</span></span><br><span class="line">    <span class="keyword">private</span> CacheNode first;<span class="comment">// (实现双链表)链表头</span></span><br><span class="line">    <span class="keyword">private</span> CacheNode last;<span class="comment">// (实现双链表)链表尾</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面给出完整的实现，这个类也被 Tomcat 所使用（ org.apache.tomcat.util.collections.LRUCache），但是在 tomcat6.x 版本中，已经被弃用，使用另外其他的缓存类来替代它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Hashtable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">CacheNode</span> &#123;</span><br><span class="line">        CacheNode prev;<span class="comment">// 前一节点</span></span><br><span class="line">        CacheNode next;<span class="comment">// 后一节点</span></span><br><span class="line">        Object value;<span class="comment">// 值</span></span><br><span class="line">        Object key;<span class="comment">// 键</span></span><br><span class="line"></span><br><span class="line">        CacheNode() &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LRUCache</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        currentSize = <span class="number">0</span>;</span><br><span class="line">        cacheSize = i;</span><br><span class="line">        nodes = <span class="keyword">new</span> <span class="title class_">Hashtable</span>(i);<span class="comment">// 缓存容器</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取缓存中对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">get</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">        <span class="type">CacheNode</span> <span class="variable">node</span> <span class="operator">=</span> (CacheNode) nodes.get(key);</span><br><span class="line">        <span class="keyword">if</span> (node != <span class="literal">null</span>) &#123;</span><br><span class="line">            moveToHead(node);</span><br><span class="line">            <span class="keyword">return</span> node.value;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加缓存</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(Object key, Object value)</span> &#123;</span><br><span class="line">        <span class="type">CacheNode</span> <span class="variable">node</span> <span class="operator">=</span> (CacheNode) nodes.get(key);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (node == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="comment">// 缓存容器是否已经超过大小.</span></span><br><span class="line">            <span class="keyword">if</span> (currentSize &gt;= cacheSize) &#123;</span><br><span class="line">                <span class="keyword">if</span> (last != <span class="literal">null</span>)<span class="comment">// 将最少使用的删除</span></span><br><span class="line">                    nodes.remove(last.key);</span><br><span class="line">                removeLast();</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                currentSize++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            node = <span class="keyword">new</span> <span class="title class_">CacheNode</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        node.value = value;</span><br><span class="line">        node.key = key;</span><br><span class="line">        <span class="comment">// 将最新使用的节点放到链表头，表示最新使用的.</span></span><br><span class="line">        moveToHead(node);</span><br><span class="line">        nodes.put(key, node);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将缓存删除</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">remove</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">        <span class="type">CacheNode</span> <span class="variable">node</span> <span class="operator">=</span> (CacheNode) nodes.get(key);</span><br><span class="line">        <span class="keyword">if</span> (node != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (node.prev != <span class="literal">null</span>) &#123;</span><br><span class="line">                node.prev.next = node.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (node.next != <span class="literal">null</span>) &#123;</span><br><span class="line">                node.next.prev = node.prev;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (last == node)</span><br><span class="line">                last = node.prev;</span><br><span class="line">            <span class="keyword">if</span> (first == node)</span><br><span class="line">                first = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span> &#123;</span><br><span class="line">        first = <span class="literal">null</span>;</span><br><span class="line"> 	    last = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除链表尾部节点 表示 删除最少使用的缓存对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">removeLast</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 链表尾不为空,则将链表尾指向null. 删除连表尾（删除最少使用的缓存对象）</span></span><br><span class="line">        <span class="keyword">if</span> (last != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (last.prev != <span class="literal">null</span>)</span><br><span class="line">                last.prev.next = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                first = <span class="literal">null</span>;</span><br><span class="line">            last = last.prev;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 移动到链表头，表示这个节点是最新使用过的</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> node</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">moveToHead</span><span class="params">(CacheNode node)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (node == first)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span> (node.prev != <span class="literal">null</span>)</span><br><span class="line">            node.prev.next = node.next;</span><br><span class="line">        <span class="keyword">if</span> (node.next != <span class="literal">null</span>)</span><br><span class="line">            node.next.prev = node.prev;</span><br><span class="line">        <span class="keyword">if</span> (last == node)</span><br><span class="line">            last = node.prev;</span><br><span class="line">        <span class="keyword">if</span> (first != <span class="literal">null</span>) &#123;</span><br><span class="line">            node.next = first;</span><br><span class="line">            first.prev = node;</span><br><span class="line">        &#125;</span><br><span class="line">        first = node;</span><br><span class="line">        node.prev = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (last == <span class="literal">null</span>)</span><br><span class="line">            last = first;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> cacheSize;</span><br><span class="line">    <span class="keyword">private</span> Hashtable nodes;<span class="comment">// 缓存容器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> currentSize;</span><br><span class="line">    <span class="keyword">private</span> CacheNode first;<span class="comment">// 链表头</span></span><br><span class="line">    <span class="keyword">private</span> CacheNode last;<span class="comment">// 链表尾</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/17/Socket-IO-%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8%E5%AE%9E%E4%BE%8B/" rel="prev" title="Socket.IO 聊天应用实例">
+                  <i class="fa fa-angle-left"></i> Socket.IO 聊天应用实例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/19/Java-Socket-%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AE%9E%E4%BE%8B/" rel="next" title="Java Socket 多线程实例">
+                  Java Socket 多线程实例 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="f4f5efedac73fa083ca8186359d449f8"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

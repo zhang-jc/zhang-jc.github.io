@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="在另外一篇文章已经讲了Python版本管理。本文主要讲Python虚拟环境管理。有了这两个方面的工具，就可以实现在Python的不同版本不同虚拟环境间方便地切换。 pyenv-virtualenv一般会随pyenv一起安装，也可以通过下文方式独立安装。 什么是虚拟环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python虚拟环境管理">
+<meta property="og:url" content="https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="在另外一篇文章已经讲了Python版本管理。本文主要讲Python虚拟环境管理。有了这两个方面的工具，就可以实现在Python的不同版本不同虚拟环境间方便地切换。 pyenv-virtualenv一般会随pyenv一起安装，也可以通过下文方式独立安装。 什么是虚拟环境">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-12-22T10:00:09.000Z">
+<meta property="article:modified_time" content="2025-09-04T07:26:17.568Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/","path":"2024/12/22/Python虚拟环境管理/","title":"Python虚拟环境管理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python虚拟环境管理 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">什么是虚拟环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">为什么需要虚拟环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pyenv-virtualenv"><span class="nav-number">3.</span> <span class="nav-text">pyenv-virtualenv</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8Epyenv%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8pyenv-virtualenv"><span class="nav-number">5.1.</span> <span class="nav-text">与pyenv一起使用pyenv virtualenv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.2.</span> <span class="nav-text">从当前版本创建虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E5%B7%B2%E6%9C%89%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.3.</span> <span class="nav-text">列出已有的虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.4.</span> <span class="nav-text">激活虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%B7%B2%E6%9C%89%E7%9A%84%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.5.</span> <span class="nav-text">删除已有的虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">5.6.</span> <span class="nav-text">特殊环境变量</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python虚拟环境管理 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python虚拟环境管理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-22 18:00:09" itemprop="dateCreated datePublished" datetime="2024-12-22T18:00:09+08:00">2024-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="Python虚拟环境管理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Python虚拟环境管理" href="/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::baa6411fdfdea4b0f7a7a375d14453c0" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>在另外一篇文章已经讲了<a href="https://www.zhangjc.com/2024/12/17/Python-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">Python版本管理</a>。本文主要讲Python虚拟环境管理。有了这两个方面的工具，就可以实现在Python的不同版本不同虚拟环境间方便地切换。</p>
+<p>pyenv-virtualenv一般会随pyenv一起安装，也可以通过下文方式独立安装。</p>
+<h1 id="什么是虚拟环境"><a href="#什么是虚拟环境" class="headerlink" title="什么是虚拟环境"></a>什么是虚拟环境</h1><p>一种采用协作式隔离的运行时环境，允许Python用户和应用程序在安装和升级Python分发包时不会干扰到同一系统上运行的其他Python应用程序的行为。</p>
+<p>虚拟环境其实是一个目录树，其中安装有特定Python版本，以及许多其他包。</p>
+<h1 id="为什么需要虚拟环境"><a href="#为什么需要虚拟环境" class="headerlink" title="为什么需要虚拟环境"></a>为什么需要虚拟环境</h1><p>Python应用程序通常会使用非标准库内的软件包和模块。因为可能需要修复特定的错误，或者使用库的过时版本的接口，应用程序有时需要特定版本的库。</p>
+<p>这意味着一个Python安装可能无法满足每个应用程序的要求。如果应用程序A需要特定模块的1.0版本，但应用程序B需要2.0版本，则需求存在冲突，安装版本1.0或2.0将导致某一个应用程序无法运行。</p>
+<p>这个问题的解决方案就是创建一个虚拟环境。然后，不同的应用将可以使用不同的虚拟环境。 要解决先前需求相冲突的例子，应用程序A可以拥有自己的安装了1.0版本的虚拟环境，而应用程序B则拥有安装了2.0版本的另一个虚拟环境。如果应用程序B要求将某个库升级到3.0版本，也不会影响应用程序A的环境。</p>
+<h1 id="pyenv-virtualenv"><a href="#pyenv-virtualenv" class="headerlink" title="pyenv-virtualenv"></a>pyenv-virtualenv</h1><p>pyenv-viralenv是一个pyenv插件，它提供了在类UNIX系统上管理虚拟环境和conda环境的特性。</p>
+<blockquote>
+<p>pyenv-virtualenvwrapper是pyenv的另外一个管理虚拟环境的插件。选择pyenv-virtualenv的原因是，pyenv-virtualenvwrapper有助于与virtualenvwrapper进行交互，但是pyenv-virtualenv提供了更方便的命令，其中virtualenvs是第一种pyenv版本，可以（反）激活。也就是说，pyenv和virtualenvwrapper仍然是分开的，而pyenv-virtualenv是一个很好的组合。</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下面将把最新开发版本的pyenv-virtualenv安装到$(pyenv root)&#x2F;plugins&#x2F;pyenv-virtualenv目录中。</p>
+<blockquote>
+<p><strong>重要提示</strong>: 如果将pyenv安装到一个非标准目录中，请确保将该仓库克隆到安装位置的“plugins”目录中。</p>
+</blockquote>
+<p>在这个目录中可以：</p>
+<ul>
+<li>检出特定的发布版标签。</li>
+<li>通过运行git pull来下载最新的更改，从而获得最新的开发版本。<ol>
+<li>检出pyenv-virtualenv至插件目录<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv</span><br></pre></td></tr></table></figure></li>
+<li>（可选）添加pyenv virtualenv-init至shell来自动激活虚拟环境。这完全是可选的，但是非常有用。请参阅下面的“<a href="https://www.zhangjc.com/2024/12/22/Python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E7%AE%A1%E7%90%86/#%E6%BF%80%E6%B4%BB%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">激活虚拟环境</a>”。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;eval &quot;$(pyenv virtualenv-init -)&quot;&#x27; &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure></li>
+<li>重启shell以启用pyenv-virtualenv<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exec &quot;$SHELL&quot;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="与pyenv一起使用pyenv-virtualenv"><a href="#与pyenv一起使用pyenv-virtualenv" class="headerlink" title="与pyenv一起使用pyenv virtualenv"></a>与pyenv一起使用pyenv virtualenv</h2><p>要与pyenv一起使用创建Python版本的虚拟环境，运行pyenv virtualenv，指定所需的Python版本和虚拟环境目录的名称。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv 3.13.1 scrat</span><br></pre></td></tr></table></figure>
+
+<p>将在$(pyenv root)&#x2F;versions目录下一个名为scrat的文件夹中，创建一个基于Python 3.13.1的虚拟环境。</p>
+<p>pyenv virtualenv将任何选项转发给实际创建虚拟环境的底层命令（conda、 virtualenv或python -m venv)。有关详细信息，请参阅pyenv virtualenv –help的输出。</p>
+<h2 id="从当前版本创建虚拟环境"><a href="#从当前版本创建虚拟环境" class="headerlink" title="从当前版本创建虚拟环境"></a>从当前版本创建虚拟环境</h2><p>如果只有一个参数提供给pyenv virtualenv，那么将根据当前pyenv的Python版本并使用给定的名称创建虚拟环境。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv version</span><br><span class="line">3.13.1 (set by /home/zhangjc/.pyenv/version)</span><br><span class="line">$ pyenv virtualenv venv3.13.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="列出已有的虚拟环境"><a href="#列出已有的虚拟环境" class="headerlink" title="列出已有的虚拟环境"></a>列出已有的虚拟环境</h2><p>pyenv virtualenvs显示已有的虚拟环境和conda环境列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenvs</span><br><span class="line">  3.13.1/envs/scrat (created from /home/zhangjc/.pyenv/versions/3.13.1)</span><br><span class="line">  scrat (created from /home/zhangjc/.pyenv/versions/3.13.1)</span><br></pre></td></tr></table></figure>
+
+<p>每个虚拟环境有两个条目，较短的条目只是一个符号链接。</p>
+<h2 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h2><p>一些外部工具（例如<a target="_blank" rel="noopener" href="https://github.com/davidhalter/jedi">jedi</a>）可能需要您激活虚拟环境和conda环境。</p>
+<p>如果eval “$(pyenv virtualenv-init -)”在shell中配置，当进入&#x2F;离开包含.python-version文件时会自动激活对应的虚拟环境，前提是.python-version中的虚拟环境的名称是有效的。使用pyenv virtualenvs命令查看有效虚拟环境清单，如上例中的scrat。pyenv使用.python-version文件来表示本地Python版本，可以使用pyenv local命令创建和删除这些文件。</p>
+<p>可以手动激活和停用一个pyenv虚拟环境：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pyenv activate &lt;name&gt;</span><br><span class="line">pyenv deactivate</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除已有的虚拟环境"><a href="#删除已有的虚拟环境" class="headerlink" title="删除已有的虚拟环境"></a>删除已有的虚拟环境</h2><p>删除$(pyenv root)&#x2F;versions和$(pyenv root)&#x2F;versions&#x2F;{version}&#x2F;envs中的目录将删除虚拟环境，或者您可以运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用virtualenv-delete命令删除已有的虚拟环境，例如，可以运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv virtualenv-delete my-virtual-env</span><br></pre></td></tr></table></figure>
+
+<p>这将删除名为my-virtual-env的虚拟环境。</p>
+<h2 id="特殊环境变量"><a href="#特殊环境变量" class="headerlink" title="特殊环境变量"></a>特殊环境变量</h2><p>可以设置某些环境变量来控制pyenv-virtualenv。</p>
+<ul>
+<li>PYENV_VIRTUALENV_CACHE_PATH：如果设置了，则指定一个目录用于缓存下载的包文件。</li>
+<li>VIRTUALENV_VERSION：如果设置了，则强制pyenv-virtualenv安装所需的virtualenv版本。如果没有安装virtualenv，pyenv-virtualenv将尝试安装给定版本的virtualenv。</li>
+<li>GET_PIP：如果设置了并且venv优于virtualenv，则从指定位置使用get_pip.py。</li>
+<li>GET_PIP_URL：如果设置了并且venv优于virtualenv，则从指定的URL下载get_pip.py。</li>
+<li>PIP_VERSION：如果设置了并且venv优于virtualenv，则安装指定版本的pip。</li>
+<li>PYENV_VIRTUALENV_VERBOSE_ACTIVATE：如果设置了，则显示一些关于激活和停用的详细输出。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/22/Deepin%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90%E5%90%8E%E6%97%A0%E7%BA%BF%E7%BD%91%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/" rel="prev" title="Deepin安装完成后无线网无法使用问题">
+                  <i class="fa fa-angle-left"></i> Deepin安装完成后无线网无法使用问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/23/Python%E6%97%A5%E5%BF%97%E5%BA%93%EF%BC%9ALoguru/" rel="next" title="Python日志库：Loguru">
+                  Python日志库：Loguru <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="baa6411fdfdea4b0f7a7a375d14453c0"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

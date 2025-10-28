@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="ORC介绍ORC文件格式是Hive 0.11.0版本引入的一种文件格式。ORC的引入是为了解决其他Hive文件格式的局限性。使用ORC文件格式提升Hive读取、写入及处理数据的性能。 与RCFile对比，ORC文件格式有很多优点：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sqoop支持ORC文件格式">
+<meta property="og:url" content="https://www.zhangjc.com/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="ORC介绍ORC文件格式是Hive 0.11.0版本引入的一种文件格式。ORC的引入是为了解决其他Hive文件格式的局限性。使用ORC文件格式提升Hive读取、写入及处理数据的性能。 与RCFile对比，ORC文件格式有很多优点：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-27T17:18:34.000Z">
+<meta property="article:modified_time" content="2025-09-04T07:26:17.568Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="Hive">
+<meta property="article:tag" content="ORC">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/","path":"2018/12/28/Sqoop-支持-ORC-文件格式/","title":"Sqoop支持ORC文件格式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Sqoop支持ORC文件格式 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ORC%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">ORC介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sqoop%E6%94%AF%E6%8C%81ORC"><span class="nav-number">2.</span> <span class="nav-text">Sqoop支持ORC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HCatalog%E8%83%8C%E6%99%AF"><span class="nav-number">2.1.</span> <span class="nav-text">HCatalog背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E6%88%90HCatalog%E5%90%8E%E6%96%B0%E5%A2%9E%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">集成HCatalog后新增的参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6Sqoop%E6%94%B9%E9%80%A0"><span class="nav-number">2.3.</span> <span class="nav-text">定制Sqoop改造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sqoop%E5%AF%BC%E5%85%A5ORC%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.4.</span> <span class="nav-text">Sqoop导入ORC实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BAHive%E8%A1%A8"><span class="nav-number">2.4.1.</span> <span class="nav-text">第一步：创建Hive表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9ASqoop-import"><span class="nav-number">2.4.2.</span> <span class="nav-text">第二步：Sqoop import</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sqoop%E5%AF%BC%E5%87%BAORC%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.5.</span> <span class="nav-text">Sqoop导出ORC实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%88%9B%E5%BB%BAMySQL%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="nav-number">2.5.1.</span> <span class="nav-text">第一步：创建MySQL数据表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9ASqoop-export"><span class="nav-number">2.5.2.</span> <span class="nav-text">第二步：Sqoop export</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Sqoop支持ORC文件格式 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Sqoop支持ORC文件格式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-28 01:18:34" itemprop="dateCreated datePublished" datetime="2018-12-28T01:18:34+08:00">2018-12-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">数据采集</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="Sqoop支持ORC文件格式" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Sqoop支持ORC文件格式" href="/2018/12/28/Sqoop-%E6%94%AF%E6%8C%81-ORC-%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::4f69ca65b669e29d5f4356bddc85e8d6" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="ORC介绍"><a href="#ORC介绍" class="headerlink" title="ORC介绍"></a>ORC介绍</h1><p>ORC文件格式是Hive 0.11.0版本引入的一种文件格式。ORC的引入是为了解决其他Hive文件格式的局限性。使用ORC文件格式提升Hive读取、写入及处理数据的性能。</p>
+<p>与RCFile对比，ORC文件格式有很多优点：</p>
+<ul>
+<li>每个Task只输出一个文件，降低NameNode的负载。</li>
+<li>Hive数据类型支持，包括：datetime、decimal以及复杂数据类型（struct、list、map、union）。</li>
+<li>文件中存储轻量级的索引：<ul>
+<li>跳过不通过谓语过滤的行组</li>
+<li>跳转到指定的行</li>
+</ul>
+</li>
+<li>基于数据类型的块模式压缩：<ul>
+<li>整型数据列采用行程长度编码（run-length encoding）</li>
+<li>字符串数据列采用词典编码（dictionary encoding）</li>
+</ul>
+</li>
+<li>使用独立的RecordReader并发读取相同的文件</li>
+<li>无需扫描markers就可以分割文件的能力</li>
+<li>绑定读写需要的内存量</li>
+<li>使用Protocol Buffer存储元数据，允许添加、移除字段</li>
+</ul>
+<p>Hive官网介绍：<a target="_blank" rel="noopener" href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC">https://cwiki.apache.org/confluence/display/Hive/LanguageManual+ORC</a></p>
+<h1 id="Sqoop支持ORC"><a href="#Sqoop支持ORC" class="headerlink" title="Sqoop支持ORC"></a>Sqoop支持ORC</h1><p>通过Sqoop-HCatalog集成解决Sqoop不支持ORC的问题。</p>
+<h2 id="HCatalog背景"><a href="#HCatalog背景" class="headerlink" title="HCatalog背景"></a>HCatalog背景</h2><p>HCatalog是Hadoop的一个table与存储管理的一个服务，用户可以更容易地使用不同的数据处理工具Pig、MapReduce和Hive读写数据。HCatalog表的抽象呈现给用户一个HDFS分布式文件系统（HDFS）中的关系视图，用户不需要担心数据存储在哪里及数据的存储格式：RCFile格式、text文件、或者SequenceFile。</p>
+<p>HCatalog支持读写任何实现了Hive SerDe（serializer-deserializer）的文件格式。默认的，HCatalog支持RCFile、CSV、JSON和SequenceFile。要使用用户自定义格式，必须提供InputFormat和OutputFormat及SerDe。</p>
+<p>Sqoop使用HCatalog抽象不同存储格式的能力来支持RCFile（以及未来的文件类型）。</p>
+<h2 id="集成HCatalog后新增的参数"><a href="#集成HCatalog后新增的参数" class="headerlink" title="集成HCatalog后新增的参数"></a>集成HCatalog后新增的参数</h2><p>见Sqoop官方文档：<a target="_blank" rel="noopener" href="http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html#_sqoop_hcatalog_integration">http://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html#_sqoop_hcatalog_integration</a></p>
+<h2 id="定制Sqoop改造"><a href="#定制Sqoop改造" class="headerlink" title="定制Sqoop改造"></a>定制Sqoop改造</h2><p>修改<code>bin/sqoop</code>命令脚本：为import操作增加Hive Table分区数据删除逻辑，在执行导入前不需要另行清理数据，从而简化Sqoop import脚本的开发工作。</p>
+<h2 id="Sqoop导入ORC实例"><a href="#Sqoop导入ORC实例" class="headerlink" title="Sqoop导入ORC实例"></a>Sqoop导入ORC实例</h2><h3 id="第一步：创建Hive表"><a href="#第一步：创建Hive表" class="headerlink" title="第一步：创建Hive表"></a>第一步：创建Hive表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `dev.bims_device`(</span><br><span class="line">  `code` string,</span><br><span class="line">  `mac` string,</span><br><span class="line">  `wifi_mac` string,</span><br><span class="line">  `create_date` string,</span><br><span class="line">  `activate_date` string,</span><br><span class="line">  `state` string,</span><br><span class="line">  `area_id` <span class="type">bigint</span>,</span><br><span class="line">  `city_id` <span class="type">bigint</span>,</span><br><span class="line">  `sp_define_id` <span class="type">bigint</span>)</span><br><span class="line">PARTITIONED <span class="keyword">BY</span> (</span><br><span class="line">  `dt` string)</span><br><span class="line">stored <span class="keyword">as</span> orc;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步：Sqoop-import"><a href="#第二步：Sqoop-import" class="headerlink" title="第二步：Sqoop import"></a>第二步：Sqoop import</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sqoop import \</span><br><span class="line">  <span class="comment">--hcatalog-database dev \</span></span><br><span class="line">  <span class="comment">--hcatalog-table bims_device \</span></span><br><span class="line">  <span class="comment">--hcatalog-partition-keys dt \</span></span><br><span class="line">  <span class="comment">--hcatalog-partition-values $&#123;dt&#125; \</span></span><br><span class="line">  <span class="comment">--connect jdbc:mysql://$&#123;host&#125;:$&#123;port&#125;/bims \</span></span><br><span class="line">  <span class="comment">--username &quot;$&#123;userName&#125;&quot; \</span></span><br><span class="line">  <span class="comment">--password &quot;$&#123;password&#125;&quot; \</span></span><br><span class="line">  <span class="comment">--table bims_device \</span></span><br><span class="line">  <span class="comment">--columns &quot;code,mac,wifi_mac,create_date,activate_date,state,area_id,city_id,sp_define_id&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Sqoop导出ORC实例"><a href="#Sqoop导出ORC实例" class="headerlink" title="Sqoop导出ORC实例"></a>Sqoop导出ORC实例</h2><h3 id="第一步：创建MySQL数据表"><a href="#第一步：创建MySQL数据表" class="headerlink" title="第一步：创建MySQL数据表"></a>第一步：创建MySQL数据表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `test`.`bims_device`(</span><br><span class="line">  `code` <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">  `mac` <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">  `wifi_mac` <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">  `create_date` <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">  `activate_date` <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">  `state` <span class="type">varchar</span>(<span class="number">50</span>),</span><br><span class="line">  `area_id` <span class="type">bigint</span>,</span><br><span class="line">  `city_id` <span class="type">bigint</span>,</span><br><span class="line">  `sp_define_id` <span class="type">bigint</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二步：Sqoop-export"><a href="#第二步：Sqoop-export" class="headerlink" title="第二步：Sqoop export"></a>第二步：Sqoop export</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sqoop export \</span><br><span class="line">  <span class="comment">--hcatalog-database dev \</span></span><br><span class="line">  <span class="comment">--hcatalog-table bims_device \</span></span><br><span class="line">  <span class="comment">--hcatalog-partition-keys dt \</span></span><br><span class="line">  <span class="comment">--hcatalog-partition-values $&#123;dt&#125; \</span></span><br><span class="line">  <span class="comment">--connect jdbc:mysql://$&#123;host&#125;:$&#123;port&#125;/test?useCompression=true \</span></span><br><span class="line">  <span class="comment">--username $&#123;userName&#125; \</span></span><br><span class="line">  <span class="comment">--password $&#123;password&#125; \</span></span><br><span class="line">  <span class="comment">--table bims_device</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li>MySQL表字段名称必须与Hive仓库中的表字段名称一致</li>
+<li>Sqoop ORC导出时，数据类型需要转换时如果存在脏数据会导致导出失败。例如，长度为0的String如果导出为int时。</li>
+<li>导出时需要提前清理MySQL中之前导出的数据，避免重复运行时造成数据重复。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
+              <a href="/tags/Hive/" rel="tag"><i class="fa fa-tag"></i> Hive</a>
+              <a href="/tags/ORC/" rel="tag"><i class="fa fa-tag"></i> ORC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/12/11/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1-Sqoop-%E4%BB%8E-MySQL-%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%88%B0-Hive-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8E%92%E6%9F%A5%E7%BB%8F%E8%BF%87/" rel="prev" title="记录一次Sqoop从MySQL导入数据到Hive问题的排查经过">
+                  <i class="fa fa-angle-left"></i> 记录一次Sqoop从MySQL导入数据到Hive问题的排查经过
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/28/Linux-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AF%BC%E5%87%BA-Emacs-ORG-%E6%96%87%E6%A1%A3%E4%B8%BA-HTML/" rel="next" title="Linux命令行导出Emacs ORG文档为HTML">
+                  Linux命令行导出Emacs ORG文档为HTML <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="4f69ca65b669e29d5f4356bddc85e8d6"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

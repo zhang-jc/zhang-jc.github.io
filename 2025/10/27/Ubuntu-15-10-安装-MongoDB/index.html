@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本篇主要参考官方安装文档，在 Ubuntu 15.10 上安装并启动。中间遇到一些问题，已经找到解决方案。 概述从 3.2 版本开始，MongoDB 不再支持 32 位的平台。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 15.10 安装 MongoDB">
+<meta property="og:url" content="https://www.zhangjc.com/2025/10/27/Ubuntu-15-10-%E5%AE%89%E8%A3%85-MongoDB/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="本篇主要参考官方安装文档，在 Ubuntu 15.10 上安装并启动。中间遇到一些问题，已经找到解决方案。 概述从 3.2 版本开始，MongoDB 不再支持 32 位的平台。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.zhangjc.com/images/202510/30.jpg">
+<meta property="article:published_time" content="2025-10-26T17:28:05.000Z">
+<meta property="article:modified_time" content="2025-10-26T17:46:06.371Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.zhangjc.com/images/202510/30.jpg">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2025/10/27/Ubuntu-15-10-%E5%AE%89%E8%A3%85-MongoDB/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2025/10/27/Ubuntu-15-10-%E5%AE%89%E8%A3%85-MongoDB/","path":"2025/10/27/Ubuntu-15-10-安装-MongoDB/","title":"Ubuntu 15.10 安装 MongoDB"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Ubuntu 15.10 安装 MongoDB | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">安装包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%84%9A%E6%9C%AC"><span class="nav-number">3.</span> <span class="nav-text">初始化脚本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-MongoDB-%E7%A4%BE%E5%8C%BA%E7%89%88"><span class="nav-number">4.</span> <span class="nav-text">安装 MongoDB 社区版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%AF%BC%E5%85%A5%E5%AE%89%E8%A3%85%E5%8C%85%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E7%9A%84%E5%85%AC%E9%92%A5"><span class="nav-number">4.1.</span> <span class="nav-text">1、导入安装包管理系统使用的公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E4%B8%BA-MongoDB-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E5%88%97%E8%A1%A8"><span class="nav-number">4.2.</span> <span class="nav-text">2、为 MongoDB 创建一个文件列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85%E5%8C%85%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.3.</span> <span class="nav-text">3、重新加载本地安装包数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85-MongoDB"><span class="nav-number">4.4.</span> <span class="nav-text">4、安装 MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E3%80%81%E5%AE%89%E8%A3%85-MongoDB-%E6%9C%80%E6%96%B0%E7%A8%B3%E5%AE%9A%E7%89%88%E6%9C%AC"><span class="nav-number">4.5.</span> <span class="nav-text">5、安装 MongoDB 最新稳定版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6%E3%80%81%E5%AE%89%E8%A3%85%E7%89%B9%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-MongoDB"><span class="nav-number">4.6.</span> <span class="nav-text">6、安装特定版本的 MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7%E3%80%81%E5%9B%BA%E5%AE%9A%E4%B8%80%E4%B8%AA%E7%89%B9%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-MongoDB"><span class="nav-number">4.7.</span> <span class="nav-text">7、固定一个特定版本的 MongoDB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-MongoDB-%E7%A4%BE%E5%8C%BA%E7%89%88"><span class="nav-number">5.</span> <span class="nav-text">运行 MongoDB 社区版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8-MongoDB"><span class="nav-number">5.1.</span> <span class="nav-text">1、启动 MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%A1%AE%E8%AE%A4-MongoDB-%E5%B7%B2%E7%BB%8F%E6%88%90%E5%8A%9F%E5%90%AF%E5%8A%A8"><span class="nav-number">5.2.</span> <span class="nav-text">2、确认 MongoDB 已经成功启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E5%81%9C%E6%AD%A2-MongoDB"><span class="nav-number">5.3.</span> <span class="nav-text">3、停止 MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81%E9%87%8D%E5%90%AF-MongoDB"><span class="nav-number">5.4.</span> <span class="nav-text">4、重启 MongoDB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B8%E8%BD%BD-MongoDB-%E7%A4%BE%E5%8C%BA%E7%89%88"><span class="nav-number">6.</span> <span class="nav-text">卸载 MongoDB 社区版</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E5%81%9C%E6%AD%A2-MongoDB"><span class="nav-number">6.1.</span> <span class="nav-text">1、停止 MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E7%A7%BB%E9%99%A4%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">6.2.</span> <span class="nav-text">2、移除安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E7%A7%BB%E9%99%A4%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95"><span class="nav-number">6.3.</span> <span class="nav-text">3、移除数据目录</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">201</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">89</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/27/Ubuntu-15-10-%E5%AE%89%E8%A3%85-MongoDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Ubuntu 15.10 安装 MongoDB | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ubuntu 15.10 安装 MongoDB
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-27 01:28:05 / 修改时间：01:46:06" itemprop="dateCreated datePublished" datetime="2025-10-27T01:28:05+08:00">2025-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/27/Ubuntu-15-10-%E5%AE%89%E8%A3%85-MongoDB/" class="post-meta-item leancloud_visitors" data-flag-title="Ubuntu 15.10 安装 MongoDB" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Ubuntu 15.10 安装 MongoDB" href="/2025/10/27/Ubuntu-15-10-%E5%AE%89%E8%A3%85-MongoDB/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::8744873f7192eb0270324fad7184aa19" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本篇主要参考官方安装文档，在 Ubuntu 15.10 上安装并启动。中间遇到一些问题，已经找到解决方案。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>从 3.2 版本开始，MongoDB 不再支持 32 位的平台。</p>
+<p>使用本教程从 .deb 包在 LTS Ubuntu Linux 系统上安装 MongoDB 社区版。虽然 Ubuntu 包含自己的 MongoDB 包，官方 MongoDB 社区版包通常是更新的。</p>
+<h1 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h1><p>MongoDB 在自己的仓库中提供了官方支持的安装包。这个仓库包含一下包：</p>
+<ul>
+<li>mongodb-org：一个元安装包，可以自动安装下面的四个组件安装包。</li>
+<li>mongodb-org-server：包含 mongod 守护进程和相关的配置及初始脚本。</li>
+<li>mongodb-org-mongos：包含 mongos 守护进程。</li>
+<li>mongodb-org-shell：包含 mongo shell。</li>
+<li>mongodb-org-tools：包含以下 MongoDB 工具：mongoimport、bsondump、mongodump、mongoexport、mongofiles、mongooplog、mongoperf、mongorestore、mongostat 和 mongotop。</li>
+</ul>
+<p>这些包与 Ubuntu 提供的 mongodb、mongodb-server 和 mongodb-clients 包冲突。</p>
+<p>安装包提供的默认的 &#x2F;etc&#x2F;mongod.conf 配置文件默认设置 bind_ip 为 127.0.0.1。在初始化一个 replica set 之前根据环境的需要修改这个设置。</p>
+<h1 id="初始化脚本"><a href="#初始化脚本" class="headerlink" title="初始化脚本"></a>初始化脚本</h1><p>mongodb-org 安装包包含许多初始化脚本，包含初始化脚本 &#x2F;etc&#x2F;init.d&#x2F;mongod。你可以用这些脚本停止、启动和重启守护进程。</p>
+<p>安装包使用 &#x2F;etc&#x2F;mongod.conf 文件结合初始化脚本配置 MongoDB。查看<a href="https://link.zhihu.com/?target=https://docs.mongodb.org/manual/reference/configuration-options/">配置文件</a>参考获取配置文件中的设置参数。</p>
+<p>从 3.2.5 版本开始，不再有 mongos 初始脚本。mongos 进程只在 sharding 时用。你可以用 mongod 初始脚本生成自己的 mongos 初始化脚本在这样的环境使用。查看 <a href="https://link.zhihu.com/?target=https://docs.mongodb.org/manual/reference/program/mongos/%23bin.mongos">mongos</a> 参考获取详细配置。</p>
+<h1 id="安装-MongoDB-社区版"><a href="#安装-MongoDB-社区版" class="headerlink" title="安装 MongoDB 社区版"></a>安装 MongoDB 社区版</h1><p>MongoDB 只为 64 位长期支持的 Ubuntu 发行版提供安装包。当前，这意味着 12.04 LTS (Precise Pangolin) 和 14.04 LTS (Trusty Tahr) 两个版本。同时b安装包在其他 Ubuntu 发行版本也可以运行，这不是一个维持的配置。</p>
+<h2 id="1、导入安装包管理系统使用的公钥"><a href="#1、导入安装包管理系统使用的公钥" class="headerlink" title="1、导入安装包管理系统使用的公钥"></a>1、导入安装包管理系统使用的公钥</h2><p>Ubuntu 包管理工具（例如 dpkg 和 apt) 通过要求发布者签名的 GPG 密钥确保安装包的一致和真实。输入下面的命令导入 MongoDB GPG 公钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、为-MongoDB-创建一个文件列表"><a href="#2、为-MongoDB-创建一个文件列表" class="headerlink" title="2、为 MongoDB 创建一个文件列表"></a>2、为 MongoDB 创建一个文件列表</h2><p>使用适用你的 Ubuntu 版本的命令创建 &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;mongodb-org-3.2.list 列表文件：</p>
+<p>Ubuntu 12.04：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb http://repo.mongodb.org/apt/ubuntu precise/mongodb-org/3.2 multiverse&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/mongodb-org-3.2.list</span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu 14.04：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/mongodb-org-3.2.list</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、重新加载本地安装包数据库"><a href="#3、重新加载本地安装包数据库" class="headerlink" title="3、重新加载本地安装包数据库"></a>3、重新加载本地安装包数据库</h2><p>输入以下命令重新加载本地安装包数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br></pre></td></tr></table></figure>
+
+<p>重新加载过程中可能会报以下错误信息，多试两次即可：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">错误 http://repo.mongodb.org trusty/mongodb-org/3.2/multiverse Translation-zh_CN                                                              </span><br><span class="line">  不能连接到 repo.mongodb.org：http：</span><br><span class="line">错误 http://repo.mongodb.org trusty/mongodb-org/3.2/multiverse Translation-zh</span><br><span class="line">  不能连接到 repo.mongodb.org：http：</span><br><span class="line">错误 http://repo.mongodb.org trusty/mongodb-org/3.2/multiverse Translation-en_US</span><br><span class="line">  不能连接到 repo.mongodb.org：http：</span><br><span class="line">错误 http://repo.mongodb.org trusty/mongodb-org/3.2/multiverse Translation-en</span><br><span class="line">  不能连接到 repo.mongodb.org：http：</span><br></pre></td></tr></table></figure>
+
+<p>如果报以下错误信息，可以将添加到文件列表中的信息由 HTTP 改为 HTTPS：</p>
+<p>错误信息：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W: 无法下载 http://repo.mongodb.org/apt/ubuntu/dists/trusty/mongodb-org/3.2/multiverse/binary-amd64/Packages  Hash 校验和不符</span><br></pre></td></tr></table></figure>
+
+<p>第 2 步创建文件列表命令改为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/mongodb-org-3.2.list</span><br></pre></td></tr></table></figure>
+
+<p>再次执行更新命令成功。</p>
+<h2 id="4、安装-MongoDB"><a href="#4、安装-MongoDB" class="headerlink" title="4、安装 MongoDB"></a>4、安装 MongoDB</h2><p>可以安装 MongoDB 最新稳定版本或者指定的版本。</p>
+<h2 id="5、安装-MongoDB-最新稳定版本"><a href="#5、安装-MongoDB-最新稳定版本" class="headerlink" title="5、安装 MongoDB 最新稳定版本"></a>5、安装 MongoDB 最新稳定版本</h2><p>输入下面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install -y mongodb-org</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、安装特定版本的-MongoDB"><a href="#6、安装特定版本的-MongoDB" class="headerlink" title="6、安装特定版本的 MongoDB"></a>6、安装特定版本的 MongoDB</h2><p>安装特定发行版，你必须分别单独用版本号指定每个组件，像下面示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install -y mongodb-org=3.2.5 mongodb-org-server=3.2.5 mongodb-org-shell=3.2.5 mongodb-org-mongos=3.2.5 mongodb-org-tools=3.2.5</span><br></pre></td></tr></table></figure>
+
+<p>如果你只安装 mongodb-org&#x3D;3.2.5，并且没有包含组件安装包，MongoDB 每个最新的版本将被安装，不管你指明了哪个版本。</p>
+<h2 id="7、固定一个特定版本的-MongoDB"><a href="#7、固定一个特定版本的-MongoDB" class="headerlink" title="7、固定一个特定版本的 MongoDB"></a>7、固定一个特定版本的 MongoDB</h2><p>虽然你可以指定任何可以获取的 MongoDB 版本，当新版本可以获取时 apt-get 将更新安装包。为了防止无意的更新，固定安装包。为了固定当前安装的 MongoDB 版本，输入以下命令序列：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mongodb-org hold&quot;</span> | <span class="built_in">sudo</span> dpkg --set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mongodb-org-server hold&quot;</span> | <span class="built_in">sudo</span> dpkg --set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mongodb-org-shell hold&quot;</span> | <span class="built_in">sudo</span> dpkg --set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mongodb-org-mongos hold&quot;</span> | <span class="built_in">sudo</span> dpkg --set-selections</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mongodb-org-tools hold&quot;</span> | <span class="built_in">sudo</span> dpkg --set-selections</span><br></pre></td></tr></table></figure>
+
+<h1 id="运行-MongoDB-社区版"><a href="#运行-MongoDB-社区版" class="headerlink" title="运行 MongoDB 社区版"></a>运行 MongoDB 社区版</h1><p>默认的 MongoDB 实例在 &#x2F;var&#x2F;lib&#x2F;mongodb 存储数据文件，并且在 &#x2F;var&#x2F;log&#x2F;mongodb 存储日志文件，并且用 mongodb 用户用户帐号运行。你可以在 &#x2F;etc&#x2F;mongod.conf 中指定替换的日志和数据文件目录。查看 systemLog.path 和 storage.dbPath 获取额外的信息。</p>
+<p>如果改变运行 MongoDB 进程的用户，你必须修改 &#x2F;var&#x2F;lib&#x2F;mongodb 和 &#x2F;var&#x2F;log&#x2F;mongodb 目录的访问控制权限给这个用户对这些目录的访问权限。</p>
+<h2 id="1、启动-MongoDB"><a href="#1、启动-MongoDB" class="headerlink" title="1、启动 MongoDB"></a>1、启动 MongoDB</h2><p>输入下面的命令启动 mongod：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service mongod start</span><br></pre></td></tr></table></figure>
+
+<p>执行上面的命令会报错，错误信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to start mongod.service: Unit mongod.service failed to load: No such file or directory.</span><br></pre></td></tr></table></figure>
+
+<p>原因是缺少 systemd 的 service 文件。不需要重新开始安装或者换用其他仓库。创建文件 &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;mongod.service，并输入以下内容：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Unit]</span></span><br><span class="line"><span class="attr">Description</span>=High-performance, schema-free document-oriented database</span><br><span class="line"><span class="attr">After</span>=network.target</span><br><span class="line"></span><br><span class="line"><span class="section">[Service]</span></span><br><span class="line"><span class="attr">User</span>=mongodb</span><br><span class="line"><span class="attr">ExecStart</span>=/usr/bin/mongod --quiet --config /etc/mongod.conf</span><br><span class="line"></span><br><span class="line"><span class="section">[Install]</span></span><br><span class="line"><span class="attr">WantedBy</span>=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;mongod.service 和配置内容中的文件名可能需要对应的做修改，可能是 mongodb.service 和 mongodb.conf。参考网上的资料是 mongodb，而我的系统安装后都是 mongod。</p>
+</blockquote>
+<p>重新执行启动命令，提示以下信息，检查 mongo 进程不存在，说明未启动成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning: mongod.service changed on disk. Run <span class="string">&#x27;systemctl daemon-reload&#x27;</span> to reload units.</span><br></pre></td></tr></table></figure>
+
+<p>根据提示执行以下命令，并输入用户密码，再次执行启动命令，这次启动成功 :)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、确认-MongoDB-已经成功启动"><a href="#2、确认-MongoDB-已经成功启动" class="headerlink" title="2、确认 MongoDB 已经成功启动"></a>2、确认 MongoDB 已经成功启动</h2><p>通过读取检查 &#x2F;var&#x2F;log&#x2F;mongodb&#x2F;mongod.log 日志文件中的下面一行记录确认 mongod 进程已经成功启动。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[initandlisten] waiting for connections on port &lt;port&gt;</span><br></pre></td></tr></table></figure>
+
+<p>是在 &#x2F;etc&#x2F;mongod.conf 文件中配置的端口号，默认是 27017。</p>
+<p>以下是我的安装过程的启动日志信息：<br><img src="/images/202510/30.jpg"></p>
+<h2 id="3、停止-MongoDB"><a href="#3、停止-MongoDB" class="headerlink" title="3、停止 MongoDB"></a>3、停止 MongoDB</h2><p>如果需要，你可以输入以下命令停止 mongod 进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service mongod stop</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、重启-MongoDB"><a href="#4、重启-MongoDB" class="headerlink" title="4、重启 MongoDB"></a>4、重启 MongoDB</h2><p>输入以下命令重启 mongod 进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service mongod restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="卸载-MongoDB-社区版"><a href="#卸载-MongoDB-社区版" class="headerlink" title="卸载 MongoDB 社区版"></a>卸载 MongoDB 社区版</h1><p>要从系统中完全移除 MongoDB，你必须移除 MongoDB 应用程序、配置文件和所有包含数据和日志的目录。下面的章节指导你通过必要的步骤完成卸载。</p>
+<blockquote>
+<p>警告：<br>这个过程将完全移除 MongoDB、配置和所有数据库。这个过程是不能恢复的，因此确认执行该过程前确保你的配置和数据应经备份。</p>
+</blockquote>
+<h2 id="1、停止-MongoDB"><a href="#1、停止-MongoDB" class="headerlink" title="1、停止 MongoDB"></a>1、停止 MongoDB</h2><p>输入以下命令停止 mongod 进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> service mongod stop</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、移除安装包"><a href="#2、移除安装包" class="headerlink" title="2、移除安装包"></a>2、移除安装包</h2><p>移除所有以前安装的 MongoDB 安装包。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get purge mongodb-org*</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、移除数据目录"><a href="#3、移除数据目录" class="headerlink" title="3、移除数据目录"></a>3、移除数据目录</h2><p>移除 MongoDB 数据库和日志文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> -r /var/log/mongodb</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">rm</span> -r /var/lib/mongodb</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MongoDB/" rel="tag"><i class="fa fa-tag"></i> MongoDB</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"><i class="fa fa-tag"></i> 数据库</a>
+              <a href="/tags/Ubuntu/" rel="tag"><i class="fa fa-tag"></i> Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/27/MongoDB-%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2/" rel="prev" title="MongoDB 常用查询">
+                  <i class="fa fa-angle-left"></i> MongoDB 常用查询
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/27/Ubuntu-%E5%B8%B8%E8%A7%81%E5%AE%89%E8%A3%85%E6%BA%90%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" rel="next" title="Ubuntu 常见安装源更新问题">
+                  Ubuntu 常见安装源更新问题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="8744873f7192eb0270324fad7184aa19"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>
