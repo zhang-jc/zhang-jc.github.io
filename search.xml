@@ -7361,4 +7361,21 @@ remote:            path: search.xml:6173
         <tag>Hadoop</tag>
       </tags>
   </entry>
+  <entry>
+    <title>在列表每行末尾追加字符串的命令</title>
+    <url>/2025/10/28/%E5%9C%A8%E5%88%97%E8%A1%A8%E6%AF%8F%E8%A1%8C%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>命令样例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">_config.next.yml  _config.yml  db.json  node_modules  package.json  package-lock.json  public  scaffolds  <span class="built_in">source</span>  themes</span><br><span class="line">$ <span class="built_in">ls</span> | grep json</span><br><span class="line">db.json</span><br><span class="line">package.json</span><br><span class="line">package-lock.json</span><br><span class="line">$ <span class="built_in">ls</span> | grep json | sed</span><br><span class="line"></span><br><span class="line"> <span class="string">&quot;s:$: abc:&quot;</span></span><br><span class="line">db.json abc</span><br><span class="line">package.json abc</span><br><span class="line">package-lock.json abc</span><br></pre></td></tr></table></figure>
+
+<p>以上命令是在末尾追加“ abc”。关键就是sed工具的使用，详细的可以查看sed使用手册。</p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
