@@ -7315,4 +7315,20 @@ remote:            path: search.xml:6173
         <tag>云计算</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SourceForge下载加速</title>
+    <url>/2025/10/28/SourceForge%E4%B8%8B%E8%BD%BD%E5%8A%A0%E9%80%9F/</url>
+    <content><![CDATA[<p>记录一个加速镜像网站“liquidtelecom”，以TCL</p>
+<p>下载为例，原下载地址如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">https://jaist.dl.sourceforge.net/project/tcl/Tcl/8.6.11/tcl8.6.11-src.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>替换后的下载地址：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">https://liquidtelecom.dl.sourceforge.net/project/tcl/Tcl/8.6.11/tcl8.6.11-src.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>下载速度非常快。</p>
+]]></content>
+      <tags>
+        <tag>SourceForge</tag>
+      </tags>
+  </entry>
 </search>
