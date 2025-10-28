@@ -7284,4 +7284,35 @@ remote:            path: search.xml:6173
         <tag>Github</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Docker常用命令</title>
+    <url>/2025/10/28/Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<ul>
+<li>指定名称启动容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --name Redis -it centos bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>列出所有容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">CONTAINER ID   IMAGE    COMMAND    CREATED        STATUS                       PORTS     NAMES</span><br><span class="line">8aeb92ae184b   centos   <span class="string">&quot;bash&quot;</span>     4 hours ago    Exited (130) 5 minutes ago             Redis</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动已存在的容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker start Redis</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>连接已运行的容器</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it Redis bash</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>云计算</category>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>云计算</tag>
+      </tags>
+  </entry>
 </search>
