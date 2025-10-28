@@ -155,13 +155,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">206</span>
+          <span class="site-state-item-count">207</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -191,6 +191,124 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/" class="post-title-link" itemprop="url">Nginx 配置支持 HTTPS 代理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-12 15:39:01" itemprop="dateCreated datePublished" datetime="2019-03-12T15:39:01+08:00">2019-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="Nginx 配置支持 HTTPS 代理" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Nginx 配置支持 HTTPS 代理" href="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::564602b4ef4ed6502a9687962b063aca" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文描述的是Nginx HTTPS反向代理的情况（即后端服务是HTTP的）。</p>
+<h1 id="使用openssl配置ssl证书"><a href="#使用openssl配置ssl证书" class="headerlink" title="使用openssl配置ssl证书"></a>使用openssl配置ssl证书</h1><h2 id="生成服务器端的私钥（key-文件）："><a href="#生成服务器端的私钥（key-文件）：" class="headerlink" title="生成服务器端的私钥（key 文件）："></a>生成服务器端的私钥（key 文件）：</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/12/Nginx-%E9%85%8D%E7%BD%AE%E6%94%AF%E6%8C%81-HTTPS-%E4%BB%A3%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1224,126 +1342,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/11/15/Python3-%E8%BF%9E%E6%8E%A5-MySQL-%E5%B9%B6%E4%B8%94%E8%AF%BB%E5%8F%96-Blob-%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/" class="post-title-link" itemprop="url">MySQL修改max_allowed_packet</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-10-12 01:25:22" itemprop="dateCreated datePublished" datetime="2018-10-12T01:25:22+08:00">2018-10-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/" class="post-meta-item leancloud_visitors" data-flag-title="MySQL修改max_allowed_packet" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="MySQL修改max_allowed_packet" href="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::70cc5cd9a69ce471630ff87e703e8c2f" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>通过global参数设置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> global max_allowed_packet = 32*1024*1024;</span><br></pre></td></tr></table></figure>
-
-<p>注意，下面的写法是不正确的：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/10/12/MySQL-%E4%BF%AE%E6%94%B9-max-allowed-packet/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

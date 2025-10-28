@@ -7378,4 +7378,24 @@ remote:            path: search.xml:6173
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL Workbench CSV导入编码问题</title>
+    <url>/2025/10/28/MySQL-Workbench-CSV%E5%AF%BC%E5%85%A5%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>异常信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Unhandled exception: &#x27;gbk&#x27; codec can&#x27;t decode byte 0xa2 in position 43; illegal multibyte sequence</span><br></pre></td></tr></table></figure>
+
+<p>如图：<br><img src="/images/202510/48.jpg"></p>
+<p>因为Windows环境下Mysql Workbench编码器只有gbk，而csv文件是utf-8编码的，所以导致该问题。如图：<br><img src="/images/202510/49.jpg"></p>
+<p>将csv编码改为gbk后再次导入成功。如图：<br><img src="/images/202510/50.jpg"></p>
+<p>另外一种思路：为Mysql Workbench安装UTF-8编码器。这种方法没有实际进行尝试，感兴趣的话可以探索下^_^</p>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL-</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
 </search>
