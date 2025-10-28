@@ -7461,4 +7461,18 @@ remote:            path: search.xml:6173
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Hive 3.1.0编译ldap-client-api-0.1-SNAPSHOT.jar问题解决</title>
+    <url>/2025/10/28/Hive-3-1-0%E7%BC%96%E8%AF%91ldap-client-api-0-1-SNAPSHOT-jar%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</url>
+    <content><![CDATA[<p>解决方法参见：<a href="https://link.zhihu.com/?target=https://issues.apache.org/jira/browse/HIVE-21777">HIVE-21777</a></p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据仓库</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hive</tag>
+      </tags>
+  </entry>
 </search>
