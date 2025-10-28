@@ -7398,4 +7398,22 @@ remote:            path: search.xml:6173
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Docker修改已有容器的端口映射</title>
+    <url>/2025/10/28/Docker%E4%BF%AE%E6%94%B9%E5%B7%B2%E6%9C%89%E5%AE%B9%E5%99%A8%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84/</url>
+    <content><![CDATA[<p>此文是在现在容器实例上修改端口映射，并不希望创建新的容器，这样可以保持原有容器中的数据。</p>
+<p>方法是修改容器目录下 hostconfig.json 配置文件中的 PortBindings 配置项内容。如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;PortBindings&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;8080/tcp&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span><span class="attr">&quot;HostIp&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span><span class="punctuation">,</span><span class="attr">&quot;HostPort&quot;</span><span class="punctuation">:</span><span class="string">&quot;8080&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">]</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>前一个数字是容器端口，后一个是宿主机端口。将宿主机的8080端口映射到容器的8080端口。如修改现有端口映射则把端口号改掉就OK。</p>
+]]></content>
+      <categories>
+        <category>云计算</category>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Docker</tag>
+        <tag>云计算</tag>
+      </tags>
+  </entry>
 </search>
