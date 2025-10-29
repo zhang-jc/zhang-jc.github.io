@@ -8545,4 +8545,23 @@ remote:            path: search.xml:6173
         <tag>理财</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SQLAlchemy访问MySQL：ModuleNotFoundError: No module named &#39;MySQLdb&#39;</title>
+    <url>/2025/10/29/SQLAlchemy%E8%AE%BF%E9%97%AEMySQL%EF%BC%9AModuleNotFoundError-No-module-named-MySQLdb/</url>
+    <content><![CDATA[<p>JupyterLab使用SQLAlchemy访问MySQL时出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line">ModuleNotFoundError                       Traceback (most recent call last)</span><br><span class="line">Cell In[7], line 2</span><br><span class="line">      1 from sqlalchemy import create_engine</span><br><span class="line">----&gt; 2 engine = create_engine(&quot;mysql://scrat:scrat%40123@127.0.0.1/scrat&quot;)</span><br><span class="line"></span><br><span class="line">File &lt;string&gt;:2, in create_engine(url, **kwargs)</span><br><span class="line"></span><br><span class="line">File ~/frin/python/venvs/jupyter/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py:281, in deprecated_params.&lt;locals&gt;.decorate.&lt;locals&gt;.warned(fn, *args, **kwargs)</span><br><span class="line">    274     if m in kwargs:</span><br><span class="line">    275         _warn_with_version(</span><br><span class="line">    276             messages[m],</span><br><span class="line">    277             versions[m],</span><br><span class="line">    278             version_warnings[m],</span><br><span class="line">    279             stacklevel=3,</span><br><span class="line">    280         )</span><br><span class="line">--&gt; 281 return fn(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">File ~/frin/python/venvs/jupyter/lib/python3.12/site-packages/sqlalchemy/engine/create.py:599, in create_engine(url, **kwargs)</span><br><span class="line">    597         if k in kwargs:</span><br><span class="line">    598             dbapi_args[k] = pop_kwarg(k)</span><br><span class="line">--&gt; 599     dbapi = dbapi_meth(**dbapi_args)</span><br><span class="line">    601 dialect_args[&quot;dbapi&quot;] = dbapi</span><br><span class="line">    603 dialect_args.setdefault(&quot;compiler_linting&quot;, compiler.NO_LINTING)</span><br><span class="line"></span><br><span class="line">File ~/frin/python/venvs/jupyter/lib/python3.12/site-packages/sqlalchemy/dialects/mysql/mysqldb.py:147, in MySQLDialect_mysqldb.import_dbapi(cls)</span><br><span class="line">    145 @classmethod</span><br><span class="line">    146 def import_dbapi(cls):</span><br><span class="line">--&gt; 147     return __import__(&quot;MySQLdb&quot;)</span><br><span class="line"></span><br><span class="line">ModuleNotFoundError: No module named &#x27;MySQLdb&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这是因为SQLAlchemy连接MySQL默认驱动是MySQLdb，MySQLdb仅支持Python2，不支持Python3。如果使用Python3，可以安装pymysql库，并将连接串改为mysql+pymysql:&#x2F;&#x2F;scrat:scrat%<a href="mailto:&#x34;&#48;&#x31;&#50;&#51;&#64;&#x31;&#50;&#55;&#46;&#48;&#46;&#48;&#46;&#49;">&#x34;&#48;&#x31;&#50;&#51;&#64;&#x31;&#50;&#55;&#46;&#48;&#46;&#48;&#46;&#49;</a>&#x2F;scrat就好了。</p>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>SQLAlchemy</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>MySQL</tag>
+        <tag>SQLAlchemy</tag>
+        <tag>Jupyter</tag>
+      </tags>
+  </entry>
 </search>

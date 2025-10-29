@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">243</span>
+          <span class="site-state-item-count">244</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">75</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">106</span>
+        <span class="site-state-item-count">108</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/SQLAlchemy%E8%AE%BF%E9%97%AEMySQL%EF%BC%9AModuleNotFoundError-No-module-named-MySQLdb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/29/SQLAlchemy%E8%AE%BF%E9%97%AEMySQL%EF%BC%9AModuleNotFoundError-No-module-named-MySQLdb/" class="post-title-link" itemprop="url">SQLAlchemy访问MySQL：ModuleNotFoundError: No module named 'MySQLdb'</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-29 21:51:54 / 修改时间：21:59:51" itemprop="dateCreated datePublished" datetime="2025-10-29T21:51:54+08:00">2025-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">开发框架</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/SQLAlchemy/" itemprop="url" rel="index"><span itemprop="name">SQLAlchemy</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/29/SQLAlchemy%E8%AE%BF%E9%97%AEMySQL%EF%BC%9AModuleNotFoundError-No-module-named-MySQLdb/" class="post-meta-item leancloud_visitors" data-flag-title="SQLAlchemy访问MySQL：ModuleNotFoundError: No module named 'MySQLdb'" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="SQLAlchemy访问MySQL：ModuleNotFoundError: No module named 'MySQLdb'" href="/2025/10/29/SQLAlchemy%E8%AE%BF%E9%97%AEMySQL%EF%BC%9AModuleNotFoundError-No-module-named-MySQLdb/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b82aeac21a485f1d65c2619a6e57c88a" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>JupyterLab使用SQLAlchemy访问MySQL时出现以下错误：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line">ModuleNotFoundError                       Traceback (most recent call last)</span><br><span class="line">Cell In[7], line 2</span><br><span class="line">      1 from sqlalchemy import create_engine</span><br><span class="line">----&gt; 2 engine = create_engine(&quot;mysql://scrat:scrat%40123@127.0.0.1/scrat&quot;)</span><br><span class="line"></span><br><span class="line">File &lt;string&gt;:2, in create_engine(url, **kwargs)</span><br><span class="line"></span><br><span class="line">File ~/frin/python/venvs/jupyter/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py:281, in deprecated_params.&lt;locals&gt;.decorate.&lt;locals&gt;.warned(fn, *args, **kwargs)</span><br><span class="line">    274     if m in kwargs:</span><br><span class="line">    275         _warn_with_version(</span><br><span class="line">    276             messages[m],</span><br><span class="line">    277             versions[m],</span><br><span class="line">    278             version_warnings[m],</span><br><span class="line">    279             stacklevel=3,</span><br><span class="line">    280         )</span><br><span class="line">--&gt; 281 return fn(*args, **kwargs)</span><br><span class="line"></span><br><span class="line">File ~/frin/python/venvs/jupyter/lib/python3.12/site-packages/sqlalchemy/engine/create.py:599, in create_engine(url, **kwargs)</span><br><span class="line">    597         if k in kwargs:</span><br><span class="line">    598             dbapi_args[k] = pop_kwarg(k)</span><br><span class="line">--&gt; 599     dbapi = dbapi_meth(**dbapi_args)</span><br><span class="line">    601 dialect_args[&quot;dbapi&quot;] = dbapi</span><br><span class="line">    603 dialect_args.setdefault(&quot;compiler_linting&quot;, compiler.NO_LINTING)</span><br><span class="line"></span><br><span class="line">File ~/frin/python/venvs/jupyter/lib/python3.12/site-packages/sqlalchemy/dialects/mysql/mysqldb.py:147, in MySQLDialect_mysqldb.import_dbapi(cls)</span><br><span class="line">    145 @classmethod</span><br><span class="line">    146 def import_dbapi(cls):</span><br><span class="line">--&gt; 147     return __import__(&quot;MySQLdb&quot;)</span><br><span class="line"></span><br><span class="line">ModuleNotFoundError: No module named &#x27;MySQLdb&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>这是因为SQLAlchemy连接MySQL默认驱动是MySQLdb，MySQLdb仅支持Python2，不支持Python3。如果使用Python3，可以安装pymysql库，并将连接串改为mysql+pymysql:&#x2F;&#x2F;scrat:scrat%<a href="mailto:&#x34;&#48;&#x31;&#50;&#51;&#64;&#x31;&#50;&#55;&#46;&#48;&#46;&#48;&#46;&#49;">&#x34;&#48;&#x31;&#50;&#51;&#64;&#x31;&#50;&#55;&#46;&#48;&#46;&#48;&#46;&#49;</a>&#x2F;scrat就好了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/29/SQLAlchemy%E8%AE%BF%E9%97%AEMySQL%EF%BC%9AModuleNotFoundError-No-module-named-MySQLdb/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1185,122 +1299,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/10/29/Deepin-Linux-sudoer%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/%E9%87%8D%E7%BD%AEMySQL8-0-Root%E5%AF%86%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/29/%E9%87%8D%E7%BD%AEMySQL8-0-Root%E5%AF%86%E7%A0%81/" class="post-title-link" itemprop="url">重置MySQL8.0 Root密码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-29 20:02:39 / 修改时间：20:05:30" itemprop="dateCreated datePublished" datetime="2025-10-29T20:02:39+08:00">2025-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/29/%E9%87%8D%E7%BD%AEMySQL8-0-Root%E5%AF%86%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="重置MySQL8.0 Root密码" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="重置MySQL8.0 Root密码" href="/2025/10/29/%E9%87%8D%E7%BD%AEMySQL8-0-Root%E5%AF%86%E7%A0%81/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::37d71d62e6cf550b3a6b3faa41935351" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在本地安装了MySQL8.0，但忘记了root密码，通过以下方式重置root密码。</p>
-<ol>
-<li>停止MySQL服务。</li>
-<li>跳过权限检查启动MySQL服务：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mysqld_safe --skip-grant-tables &amp;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/29/%E9%87%8D%E7%BD%AEMySQL8-0-Root%E5%AF%86%E7%A0%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
