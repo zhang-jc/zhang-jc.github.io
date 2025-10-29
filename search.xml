@@ -8233,4 +8233,43 @@ remote:            path: search.xml:6173
         <tag>云计算</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin20.9安装PySide6后QtDesigner无法输入中文</title>
+    <url>/2025/10/29/Deepin20-9%E5%AE%89%E8%A3%85PySide6%E5%90%8EQtDesigner%E6%97%A0%E6%B3%95%E8%BE%93%E5%85%A5%E4%B8%AD%E6%96%87/</url>
+    <content><![CDATA[<p>安装PySide6后，QtDesigner无法输入中文，需要手动编译fcitx-qt5时启用对QT6的支持。</p>
+<p>安装编译需要的依赖包：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install git</span><br><span class="line"><span class="built_in">sudo</span> apt-get install cmake</span><br><span class="line"><span class="built_in">sudo</span> apt install fcitx-libs-dev</span><br><span class="line"><span class="built_in">sudo</span> apt install extra-cmake-modules</span><br><span class="line"><span class="built_in">sudo</span> apt install libxkbcommon-dev</span><br><span class="line"><span class="built_in">sudo</span> apt install qt6-remoteobjects-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install bison</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libgl1-mesa-dev libglu1-mesa-dev</span><br><span class="line"><span class="built_in">sudo</span> apt-get install qt6-base-private-dev</span><br></pre></td></tr></table></figure>
+
+<p>下载fcitx-qt5源代码：<a href="https://link.zhihu.com/?target=https://github.com/fcitx/fcitx-qt5">GitHub - fcitx&#x2F;fcitx-qt5: Fcitx support for Qt5</a>。</p>
+<p>修改编译配置支持QT6：</p>
+<ul>
+<li>进入源代码目录</li>
+<li>编辑CMakeLists.txt文件内容，将以下内容：</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">option(ENABLE_QT5 &quot;Enable Qt5&quot; On)</span><br><span class="line">option(ENABLE_QT6 &quot;Enable Qt6 im module&quot; Off)</span><br></pre></td></tr></table></figure>
+
+<p>改为：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">option(ENABLE_QT5 &quot;Enable Qt5&quot; Off)</span><br><span class="line">option(ENABLE_QT6 &quot;Enable Qt6 im module&quot; On)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>通过以下步骤编译：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake ../</span><br><span class="line">make -j8</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编译好的文件：build&#x2F;qt6&#x2F;platforminputcontext&#x2F;libfcitxplatforminputcontextplugin-qt6.so</li>
+<li>将编译好的文件拷贝至PySide6对应目录下：{PYTHON_HOME}&#x2F;lib&#x2F;python3.12&#x2F;site-packages&#x2F;PySide6&#x2F;Qt&#x2F;plugins&#x2F;platforminputcontexts&#x2F;</li>
+</ul>
+]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Qt</category>
+      </categories>
+      <tags>
+        <tag>Deepin</tag>
+        <tag>Qt</tag>
+        <tag>PySide</tag>
+        <tag>QtDesigner</tag>
+      </tags>
+  </entry>
 </search>
