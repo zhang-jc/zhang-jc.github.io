@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-count">228</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,126 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/04/04/%E8%A7%A3%E5%86%B3-HTTP-POST-%E8%AF%B7%E6%B1%82-Nginx-%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9-405-%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/04/04/%E8%A7%A3%E5%86%B3-HTTP-POST-%E8%AF%B7%E6%B1%82-Nginx-%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9-405-%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">解决HTTP POST请求Nginx静态内容405错误</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-04 16:09:57" itemprop="dateCreated datePublished" datetime="2019-04-04T16:09:57+08:00">2019-04-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2019/04/04/%E8%A7%A3%E5%86%B3-HTTP-POST-%E8%AF%B7%E6%B1%82-Nginx-%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9-405-%E9%94%99%E8%AF%AF/" class="post-meta-item leancloud_visitors" data-flag-title="解决HTTP POST请求Nginx静态内容405错误" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="解决HTTP POST请求Nginx静态内容405错误" href="/2019/04/04/%E8%A7%A3%E5%86%B3-HTTP-POST-%E8%AF%B7%E6%B1%82-Nginx-%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9-405-%E9%94%99%E8%AF%AF/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::6f990c09fa5132ec9b0d552d4dc9903f" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Nginx是不支持POST请求静态内容的，通过POST请求时出现以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># curl -d &quot;a=b&quot; &quot;http://192.16.36.15:11013/upgrade&quot;</span></span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;&lt;title&gt;405 Not Allowed&lt;/title&gt;&lt;/head&gt;</span><br><span class="line">&lt;body bgcolor=<span class="string">&quot;white&quot;</span>&gt;</span><br><span class="line">&lt;center&gt;&lt;h1&gt;405 Not Allowed&lt;/h1&gt;&lt;/center&gt;</span><br><span class="line">&lt;hr&gt;&lt;center&gt;nginx/1.14.2&lt;/center&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>解决方法是在Nginx配置中添加以下配置：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/04/%E8%A7%A3%E5%86%B3-HTTP-POST-%E8%AF%B7%E6%B1%82-Nginx-%E9%9D%99%E6%80%81%E5%86%85%E5%AE%B9-405-%E9%94%99%E8%AF%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1265,125 +1385,6 @@ Caused by: com.thoughtworks.xstream.mapper.CannotResolveClassException: maven2-m
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/03/15/%E4%BD%BF%E7%94%A8-Rsyslog-%E5%B0%86-Nginx-Access-Log-%E5%86%99%E5%85%A5-Kafka/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/" class="post-title-link" itemprop="url">GitLab + Jenkins + Nginx + Lua 实现代码自动分发</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-03-13 22:48:30" itemprop="dateCreated datePublished" datetime="2019-03-13T22:48:30+08:00">2019-03-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">系统架构</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/CI/" itemprop="url" rel="index"><span itemprop="name">CI</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/" class="post-meta-item leancloud_visitors" data-flag-title="GitLab + Jenkins + Nginx + Lua 实现代码自动分发" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="GitLab + Jenkins + Nginx + Lua 实现代码自动分发" href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::55fc1614c3b6bc5238f7700101893ee8" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在大数据Hive数据仓库的开发中，主要是shell + HQL的脚本开发。脚本的测试需要放到适当的大数据环境中进行。如果大家共用GitLab项目上的同一个Branch进行测试需要代码频繁合并，影响效率。我的思路是每个Developer在自己的Branch开发并经过测试后发起Merge Request。  </p>
-<p>在我的开发场景中GitLab在内网中通过端口映射后允许从外网访问，GitLab中的IP都是内网的，GitLab上的项目链接地址都是内网的，如（ssh:&#x2F;&#x2F;<a href="mailto:&#103;&#105;&#x74;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#x2e;&#49;&#46;&#x31;&#48;">&#103;&#105;&#x74;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#56;&#x2e;&#49;&#46;&#x31;&#48;</a>:50022&#x2F;test&#x2F;test.git）。并且我的Jenkins也是在内网中的，所以需要通过一层代理接收外部的REST API请求。这一点给最终的实现带来一些难点。</p>
-<h1 id="系统架构"><a href="#系统架构" class="headerlink" title="系统架构"></a>系统架构</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/03/13/GitLab-Jenkins-Nginx-Lua-%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81%E8%87%AA%E5%8A%A8%E5%88%86%E5%8F%91/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

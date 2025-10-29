@@ -8179,4 +8179,20 @@ remote:            path: search.xml:6173
         <tag>Deepin</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ERROR Deployer not found: git</title>
+    <url>/2025/10/29/ERROR-Deployer-not-found-git/</url>
+    <content><![CDATA[<p>在执行Hexo一键部署时出现以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo d</span><br><span class="line">INFO  Validating config</span><br><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
+
+<p>原因是未安装hexo-deployer-git，通过以下命令安装后重新部署即可。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发框架</category>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
 </search>
