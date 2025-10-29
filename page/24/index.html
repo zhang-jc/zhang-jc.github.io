@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">246</span>
+          <span class="site-state-item-count">247</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,126 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/03/03/REDUCE-capability-required-is-more-than-the-supported-max-container-capability-in-the-cluster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/03/REDUCE-capability-required-is-more-than-the-supported-max-container-capability-in-the-cluster/" class="post-title-link" itemprop="url">REDUCE capability required is more than the supported max container capability in the cluster</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-03 10:56:11" itemprop="dateCreated datePublished" datetime="2017-03-03T10:56:11+08:00">2017-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">调度系统</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/03/03/REDUCE-capability-required-is-more-than-the-supported-max-container-capability-in-the-cluster/" class="post-meta-item leancloud_visitors" data-flag-title="REDUCE capability required is more than the supported max container capability in the cluster" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="REDUCE capability required is more than the supported max container capability in the cluster" href="/2017/03/03/REDUCE-capability-required-is-more-than-the-supported-max-container-capability-in-the-cluster/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::92f93116eb6bca686c254cc851da4d0b" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天在运行MR程序时遇到以下信息：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">17/03/03 10:09:45 INFO mapreduce.Job: Job job_1488363995041_0002 failed with state KILLED due to: REDUCE capability required is more than the supported max container capability in the cluster. Killing the Job. reduceResourceRequest: &lt;memory:4096, vCores:1&gt; maxContainerCapability:&lt;memory:3096, vCores:8&gt;</span><br></pre></td></tr></table></figure>
+
+<p>原因是Reduce Task在申请资源时超过了设置的最大可申请内容量。检查<code>yarn-site.xml</code>中的配置项<code>yarn.scheduler.maximum-allocation-mb</code>，如下：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/03/REDUCE-capability-required-is-more-than-the-supported-max-container-capability-in-the-cluster/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1246,124 +1366,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2016/09/11/Shell-%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F%E6%9B%BF%E6%8D%A2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2016/09/11/%E8%B0%83%E8%AF%95-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2016/09/11/%E8%B0%83%E8%AF%95-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">调试Hadoop源代码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2016-09-11 12:26:51" itemprop="dateCreated datePublished" datetime="2016-09-11T12:26:51+08:00">2016-09-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2016/09/11/%E8%B0%83%E8%AF%95-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="调试Hadoop源代码" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="调试Hadoop源代码" href="/2016/09/11/%E8%B0%83%E8%AF%95-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::9cd4ca14eab617ccd17420319df8ce93" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="Hadoop版本"><a href="#Hadoop版本" class="headerlink" title="Hadoop版本"></a>Hadoop版本</h1><p>Hadoop 2.7.3</p>
-<h1 id="调试模式下启动Hadoop-NameNode"><a href="#调试模式下启动Hadoop-NameNode" class="headerlink" title="调试模式下启动Hadoop NameNode"></a>调试模式下启动Hadoop NameNode</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/09/11/%E8%B0%83%E8%AF%95-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
