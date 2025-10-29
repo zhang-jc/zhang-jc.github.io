@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">241</span>
+          <span class="site-state-item-count">242</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">70</span>
+        <span class="site-state-item-count">72</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-count">105</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,124 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2024/12/23/Python%E6%97%A5%E5%BF%97%E5%BA%93%EF%BC%9ALoguru/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/23/Python%E6%97%A5%E5%BF%97%E5%BA%93%EF%BC%9ALoguru/" class="post-title-link" itemprop="url">Python日志库：Loguru</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-12-23 22:38:33" itemprop="dateCreated datePublished" datetime="2024-12-23T22:38:33+08:00">2024-12-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">开发框架</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/Loguru/" itemprop="url" rel="index"><span itemprop="name">Loguru</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2024/12/23/Python%E6%97%A5%E5%BF%97%E5%BA%93%EF%BC%9ALoguru/" class="post-meta-item leancloud_visitors" data-flag-title="Python日志库：Loguru" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Python日志库：Loguru" href="/2024/12/23/Python%E6%97%A5%E5%BF%97%E5%BA%93%EF%BC%9ALoguru/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::029451b39646040f424c6102fb529122" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Loguru是一个旨在为Python带来愉快的日志记录的库。使用Loguru，没有理由不从一开始就使用日志记录，这就像从Loguru导入日志一样简单from loguru import logger。此外，这个库通过添加一系列有用的功能来解决使用标准日志记录库的痛苦。在应用程序中使用日志应该是自动的，Loguru试图使其既令人愉快又强大。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install loguru</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/23/Python%E6%97%A5%E5%BF%97%E5%BA%93%EF%BC%9ALoguru/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1239,125 +1357,6 @@
           <p>ll是个很方便的快捷命令，默认Deepin未启用。启用方法很简单，编辑下面的文件，去掉以下内容前面的注释即可。</p>
 <p>文件：~&#x2F;.bashrc</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;ls -l&#x27;</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2022/01/27/MySQL-Workbench-8-0%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9ESSL%E8%BF%9E%E6%8E%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/27/MySQL-Workbench-8-0%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9ESSL%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">MySQL Workbench 8.0不支持非SSL连接</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-01-27 11:19:30" itemprop="dateCreated datePublished" datetime="2022-01-27T11:19:30+08:00">2022-01-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2022/01/27/MySQL-Workbench-8-0%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9ESSL%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="MySQL Workbench 8.0不支持非SSL连接" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="MySQL Workbench 8.0不支持非SSL连接" href="/2022/01/27/MySQL-Workbench-8-0%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9ESSL%E8%BF%9E%E6%8E%A5/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::f5607c39dec6e0649f97f92c9a116cf5" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>连接错误信息：SSL connection error: SSL is required but the server doesn’t support it。如下图：</p>
-<p><img src="/images/202502/mysql-ssl-error1.jpg" alt="错误信息"></p>
-<p>解决方法是在配置连接时“Advanced”选项卡中的Others中添加如下参数：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/27/MySQL-Workbench-8-0%E4%B8%8D%E6%94%AF%E6%8C%81%E9%9D%9ESSL%E8%BF%9E%E6%8E%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
