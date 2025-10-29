@@ -8143,4 +8143,22 @@ remote:            path: search.xml:6173
         <tag>代数</tag>
       </tags>
   </entry>
+  <entry>
+    <title>libmediainfo-dev问题</title>
+    <url>/2025/10/29/libmediainfo-dev%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>Ubuntu 20.04 在使用某软件的时候出现了以下异常信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">OSError: libmediainfo.so.0: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>这是因为缺少了libmediainfo-dev软件包，安装后问题解决：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update -y</span><br><span class="line"><span class="built_in">sudo</span> apt-get install -y libmediainfo-dev</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Ubuntu</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Ubuntu</tag>
+      </tags>
+  </entry>
 </search>
