@@ -8564,4 +8564,28 @@ remote:            path: search.xml:6173
         <tag>Jupyter</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ERROR: Python with virtualenvwrapper module not found!</title>
+    <url>/2025/10/29/ERROR-Python-with-virtualenvwrapper-module-not-found/</url>
+    <content><![CDATA[<p>这个错误是我在本机启动Spark Standalone集群时出现的错误，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ./sbin/start-all.sh </span><br><span class="line">starting org.apache.spark.deploy.master.Master, logging to /home/zhangjc/frin/spark/spark-3.5.1-bin-hadoop3/logs/spark-zhangjc-org.apache.spark.deploy.master.Master-1-frin.out</span><br><span class="line">localhost: ERROR: Python with virtualenvwrapper module not found!</span><br><span class="line">localhost: Either, install virtualenvwrapper module <span class="keyword">for</span> the default python3 interpreter</span><br><span class="line">localhost: or <span class="built_in">set</span> VIRTUALENVWRAPPER_PYTHON to the interpreter to use.</span><br><span class="line">localhost: starting org.apache.spark.deploy.worker.Worker, logging to /home/zhangjc/frin/spark/spark-3.5.1-bin-hadoop3/logs/spark-zhangjc-org.apache.spark.deploy.worker.Worker-1-frin.out</span><br></pre></td></tr></table></figure>
+
+<p>其实，这个错误跟Spark一点关系都没有。通过跟踪Spark启动脚本，发现在 sbin&#x2F;workers.sh 中有以下代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for host in `echo &quot;$HOSTLIST&quot;|sed  &quot;s/#.*$//;/^$/d&quot;`; do</span><br><span class="line">  if [ -n &quot;$&#123;SPARK_SSH_FOREGROUND&#125;&quot; ]; then</span><br><span class="line">    ssh $SPARK_SSH_OPTS &quot;$host&quot; $&quot;$&#123;@// /\\ &#125;&quot; \</span><br><span class="line">      2&gt;&amp;1 | sed &quot;s/^/$host: /&quot;</span><br><span class="line">  else</span><br><span class="line">    ssh $SPARK_SSH_OPTS &quot;$host&quot; $&quot;$&#123;@// /\\ &#125;&quot; \</span><br><span class="line">      2&gt;&amp;1 | sed &quot;s/^/$host: /&quot; &amp;</span><br><span class="line">  fi</span><br><span class="line">  if [ &quot;$SPARK_WORKER_SLEEP&quot; != &quot;&quot; ]; then</span><br><span class="line">    sleep $SPARK_WORKER_SLEEP</span><br><span class="line">  fi</span><br><span class="line">  if [ &quot;$SPARK_SLAVE_SLEEP&quot; != &quot;&quot; ]; then</span><br><span class="line">    &gt;&amp;2 echo &quot;SPARK_SLAVE_SLEEP is deprecated, use SPARK_WORKER_SLEEP&quot;</span><br><span class="line">    sleep $SPARK_SLAVE_SLEEP</span><br><span class="line">  fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>之所以出现这个错误是因为我本机安装了Python的virtualenvwrapper，并在 .bashrc 中做了以下配置：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> /home/zhangjc/.local/bin/virtualenvwrapper.sh</span><br></pre></td></tr></table></figure>
+
+<p>又因为我本地的virtualenvwrapper使用的非系统自带Python版本，并且在profile中配置了针对性的环境变量。在ssh远程登录时profile中的环境变量不会被自动加载，所以出现了上面的错误信息。</p>
+<p>原因找到了，解决就很简单了。只需要在 .bashrc 中增加profile环境变量加载即可，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source /etc/profile</span><br><span class="line">source /home/zhangjc/.local/bin/virtualenvwrapper.sh</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Spark</tag>
+      </tags>
+  </entry>
 </search>
