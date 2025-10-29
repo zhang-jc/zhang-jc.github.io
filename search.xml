@@ -8354,4 +8354,23 @@ remote:            path: search.xml:6173
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin Linux sudoer文件语法错误修复</title>
+    <url>/2025/10/29/Deepin-Linux-sudoer%E6%96%87%E4%BB%B6%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AF%E4%BF%AE%E5%A4%8D/</url>
+    <content><![CDATA[<p>不小心将sudoer文件内容修改错了，导致无法sudo获取root权限进行修正，可以用以下方法修复。</p>
+<p>执行以下命令修改sudoer文件的权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkttyagent -p $(<span class="built_in">echo</span> $$) | pkexec <span class="built_in">chmod</span> 7777 /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<p>修复完语法错误后将sudoer文件的权限复原：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pkttyagent -p $(<span class="built_in">echo</span> $$) | pkexec <span class="built_in">chmod</span> 0400 /etc/sudoers</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Deepin</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Deepin</tag>
+      </tags>
+  </entry>
 </search>
