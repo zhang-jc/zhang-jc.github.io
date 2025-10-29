@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">232</span>
+          <span class="site-state-item-count">233</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">69</span>
+        <span class="site-state-item-count">70</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,123 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/ORA-12543-TNS-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/29/ORA-12543-TNS-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA/" class="post-title-link" itemprop="url">ORA-12543: TNS: 无法连接目标主机</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-29 19:59:49 / 修改时间：20:01:33" itemprop="dateCreated datePublished" datetime="2025-10-29T19:59:49+08:00">2025-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/Oracle/" itemprop="url" rel="index"><span itemprop="name">Oracle</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/29/ORA-12543-TNS-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA/" class="post-meta-item leancloud_visitors" data-flag-title="ORA-12543: TNS: 无法连接目标主机" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="ORA-12543: TNS: 无法连接目标主机" href="/2025/10/29/ORA-12543-TNS-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::94199c8bafdbf8771b848e1ae55893ee" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>安装完成Oracle后，通过sqlplus使用system用户访问提示“ORA-12543: TNS: 无法连接目标主机”错误，经过排查发现是由于密码中包含@符号导致。</p>
+<p>解决方法如下：</p>
+<ul>
+<li>打开 cmd，输入：sqlplus &#x2F;nolog，无用户名登录。</li>
+<li>输入 conn &#x2F;as sysdba，连接到数据库。</li>
+<li>重新设置 system 用户密码：</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/29/ORA-12543-TNS-%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1195,118 +1312,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/10/29/%E6%AD%A3%E5%BC%A6%E3%80%81%E4%BD%99%E5%BC%A6%E5%92%8C%E6%AD%A3%E5%88%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/%E5%8B%BE%E8%82%A1%E5%AE%9A%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/29/%E5%8B%BE%E8%82%A1%E5%AE%9A%E7%90%86/" class="post-title-link" itemprop="url">勾股定理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-29 16:07:52 / 修改时间：16:10:53" itemprop="dateCreated datePublished" datetime="2025-10-29T16:07:52+08:00">2025-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/%E5%87%A0%E4%BD%95%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">几何学</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/29/%E5%8B%BE%E8%82%A1%E5%AE%9A%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="勾股定理" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="勾股定理" href="/2025/10/29/%E5%8B%BE%E8%82%A1%E5%AE%9A%E7%90%86/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::92d969d0e803f899753d03eed36f5caf" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>在一个直角三角形里：斜边的平方等于其他两边的平方的和。</p>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/29/%E5%8B%BE%E8%82%A1%E5%AE%9A%E7%90%86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
