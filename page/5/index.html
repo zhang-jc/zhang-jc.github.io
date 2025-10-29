@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">222</span>
+          <span class="site-state-item-count">223</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">67</span>
+        <span class="site-state-item-count">68</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-count">99</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/27/nginx-ngx-http-core-module-location%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/27/nginx-ngx-http-core-module-location%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">Nginx ngx_http_core_module location指令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-27 01:56:44 / 修改时间：02:01:26" itemprop="dateCreated datePublished" datetime="2025-10-27T01:56:44+08:00">2025-10-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Nginx/" itemprop="url" rel="index"><span itemprop="name">Nginx</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/27/nginx-ngx-http-core-module-location%E6%8C%87%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="Nginx ngx_http_core_module location指令" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Nginx ngx_http_core_module location指令" href="/2025/10/27/nginx-ngx-http-core-module-location%E6%8C%87%E4%BB%A4/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::3559458373829020b10966d3b0145bae" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法：location [ = | ~ | ~* | ^~ ] uri &#123; ... &#125;</span><br><span class="line">     location @name &#123; ... &#125;</span><br><span class="line">默认：—</span><br><span class="line">上下文：server, location</span><br></pre></td></tr></table></figure>
+
+<p>为请求 URI（路径）设置配置。</p>
+<p>路径匹配在 URI 规范化以后进行。规范化，就是先将 URI 中形如 “%XX” 的编码字符进行解码，再解析 URI 中的相对路径 “.” 和 “..” 部分，另外还可能会压缩相邻的两个或多个斜线成为一个斜线。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/27/nginx-ngx-http-core-module-location%E6%8C%87%E4%BB%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1238,118 +1352,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/10/22/MongoDB-%E6%9F%A5%E8%AF%A2%E5%92%8C%E6%8A%95%E5%BD%B1%E6%93%8D%E4%BD%9C%E7%AC%A6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/22/MySQL-%E8%A1%A8%E5%88%86%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E4%B8%8D%E6%94%AF%E6%8C%81-IF-NOT-EXISTS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/22/MySQL-%E8%A1%A8%E5%88%86%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E4%B8%8D%E6%94%AF%E6%8C%81-IF-NOT-EXISTS/" class="post-title-link" itemprop="url">MySQL 表分区修改操作不支持 IF [NOT] EXISTS</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-22 08:23:05 / 修改时间：08:28:26" itemprop="dateCreated datePublished" datetime="2025-10-22T08:23:05+08:00">2025-10-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/22/MySQL-%E8%A1%A8%E5%88%86%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E4%B8%8D%E6%94%AF%E6%8C%81-IF-NOT-EXISTS/" class="post-meta-item leancloud_visitors" data-flag-title="MySQL 表分区修改操作不支持 IF [NOT] EXISTS" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="MySQL 表分区修改操作不支持 IF [NOT] EXISTS" href="/2025/10/22/MySQL-%E8%A1%A8%E5%88%86%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E4%B8%8D%E6%94%AF%E6%8C%81-IF-NOT-EXISTS/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::4398c76000ec3619ea21ee5cbe062052" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近的工作中需要用到 MySQL 的分区表。表根据每天的日期分区，如：20160518、20160519 等。需要支持数据重新写入分区，即如果对应的分区下已经存在数据，则先清理再写入。IF [NOT] EXISTS 是一种判定表是否存在简便方式，非常适合这种场景。但查看了 MySQL 的官方文档，PARTITION 的添加、删除操作不支持该操作。<a href="https://link.zhihu.com/?target=http://dev.mysql.com/doc/refman/5.7/en/alter-table-partition-operations.html">ALTER TABLE Partition Operations</a><br><img src="/images/202510/23.jpg"></p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>通过 MySQL 的 INFORMATION_SCHEMA 库下的 PARTITIONS 表查询表分区信息确定分区是否存在。该表的使用见下面的例子：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/22/MySQL-%E8%A1%A8%E5%88%86%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%93%8D%E4%BD%9C%E4%B8%8D%E6%94%AF%E6%8C%81-IF-NOT-EXISTS/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

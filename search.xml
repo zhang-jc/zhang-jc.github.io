@@ -8079,6 +8079,25 @@ remote:            path: search.xml:6173
       </categories>
       <tags>
         <tag>数学</tag>
+        <tag>数学基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>勾股定理</title>
+    <url>/2025/10/29/%E5%8B%BE%E8%82%A1%E5%AE%9A%E7%90%86/</url>
+    <content><![CDATA[<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>在一个直角三角形里：斜边的平方等于其他两边的平方的和。</p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><ul>
+<li>知道直角三角形任意两边的长计算第三条边的长。</li>
+<li>计算两点之间的距离，可以是二维、三维或更高维。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数学</category>
+        <category>几何学</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>几何学</tag>
       </tags>
   </entry>
 </search>
