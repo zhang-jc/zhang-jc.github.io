@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">238</span>
+          <span class="site-state-item-count">239</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/29/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/" class="post-title-link" itemprop="url">Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-29 15:39:01 / 修改时间：15:41:45" itemprop="dateCreated datePublished" datetime="2025-10-29T15:39:01+08:00">2025-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/29/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/" class="post-meta-item leancloud_visitors" data-flag-title="Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass" href="/2025/10/29/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::7de24a88a2987742b90dd6b956d04b55" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>错误信息如下：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">2022-08-28 00:29:37.447 ERROR 123200 --- [           main] o.s.boot.SpringApplication               : Application startup failed</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: Cannot load configuration class: org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:403) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanFactory(ConfigurationClassPostProcessor.java:249) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:281) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:125) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:687) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:525) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:122) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:693) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:360) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:303) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br><span class="line">Caused by: java.lang.ExceptionInInitializerError: null</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassEnhancer.newEnhancer(ConfigurationClassEnhancer.java:122) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassEnhancer.enhance(ConfigurationClassEnhancer.java:110) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.annotation.ConfigurationClassPostProcessor.enhanceConfigurationClasses(ConfigurationClassPostProcessor.java:393) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 12 common frames omitted</span><br><span class="line">Caused by: org.springframework.cglib.core.CodeGenerationException: java.lang.reflect.InaccessibleObjectException--&gt;Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @7a4ccb53</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils.defineClass(ReflectUtils.java:464) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:336) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:93) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData$3.apply(AbstractClassGenerator.java:91) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache$2.call(LoadingCache.java:54) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache.createEntry(LoadingCache.java:61) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.internal.LoadingCache.get(LoadingCache.java:34) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator$ClassLoaderData.get(AbstractClassGenerator.java:116) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.create(AbstractClassGenerator.java:291) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory$Generator.create(KeyFactory.java:221) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:174) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory.create(KeyFactory.java:153) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.proxy.Enhancer.&lt;clinit&gt;(Enhancer.java:73) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 15 common frames omitted</span><br><span class="line">Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not &quot;opens java.lang&quot; to unnamed module @7a4ccb53</span><br><span class="line">	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.Method.checkCanSetAccessible(Method.java:199) ~[na:na]</span><br><span class="line">	at java.base/java.lang.reflect.Method.setAccessible(Method.java:193) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils$1.run(ReflectUtils.java:61) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at java.base/java.security.AccessController.doPrivileged(AccessController.java:569) ~[na:na]</span><br><span class="line">	at org.springframework.cglib.core.ReflectUtils.&lt;clinit&gt;(ReflectUtils.java:52) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.KeyFactory$Generator.generateClass(KeyFactory.java:243) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.DefaultGeneratorStrategy.generate(DefaultGeneratorStrategy.java:25) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.cglib.core.AbstractClassGenerator.generate(AbstractClassGenerator.java:329) ~[spring-core-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	... 27 common frames omitted</span><br><span class="line"></span><br><span class="line">2022-08-28 00:29:37.448  INFO 123200 --- [           main] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">2022-08-28 00:29:37.449  WARN 123200 --- [           main] ationConfigEmbeddedWebApplicationContext : Exception thrown from LifecycleProcessor on context close</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: LifecycleProcessor not initialized - call &#x27;refresh&#x27; before invoking lifecycle methods via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:427) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:999) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br><span class="line"></span><br><span class="line">2022-08-28 00:29:37.449 ERROR 123200 --- [           main] o.s.b.f.s.DefaultListableBeanFactory     : Destroy method on bean with name &#x27;org.springframework.boot.autoconfigure.internalCachingMetadataReaderFactory&#x27; threw an exception</span><br><span class="line"></span><br><span class="line">java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call &#x27;refresh&#x27; before multicasting events via the context: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@548a24a: startup date [Sun Aug 28 00:29:37 CST 2022]; root of context hierarchy</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:414) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.ApplicationListenerDetector.postProcessBeforeDestruction(ApplicationListenerDetector.java:97) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:253) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:578) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:554) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:961) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:523) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.destroySingletons(FactoryBeanRegistrySupport.java:230) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:968) ~[spring-beans-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1030) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1006) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:958) ~[spring-context-4.3.11.RELEASE.jar:4.3.11.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:750) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:314) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1118) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1107) ~[spring-boot-1.5.7.RELEASE.jar:1.5.7.RELEASE]</span><br><span class="line">	at com.frin.controller.HelloController.main(HelloController.java:17) ~[classes/:na]</span><br></pre></td></tr></table></figure>
+
+<p>这是由于 JDK 8 中有关反射相关的功能自从 JDK 9 开始就被限制了，两种方法解决：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/29/Unable-to-make-protected-final-java-lang-Class-java-lang-ClassLoader-defineClass/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1174,119 +1288,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/10/28/Linux%E4%B8%8B-M%E5%A4%84%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/28/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/28/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Spark SQL查询HBase表异常解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-28 20:44:23 / 修改时间：20:50:39" itemprop="dateCreated datePublished" datetime="2025-10-28T20:44:23+08:00">2025-10-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/28/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/" class="post-meta-item leancloud_visitors" data-flag-title="Spark SQL查询HBase表异常解决" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Spark SQL查询HBase表异常解决" href="/2025/10/28/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::50a1dec40121aad3b6dc61eb6ac07211" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="hbase-default-xml-file-seems-to-be-for-an-older-version"><a href="#hbase-default-xml-file-seems-to-be-for-an-older-version" class="headerlink" title="hbase-default.xml file seems to be for an older version"></a>hbase-default.xml file seems to be for an older version</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">spark-sql&gt;</span><span class="language-bash">SELECT FROM test.test_hbase_table LIMIT 100;</span></span><br><span class="line">java.lang.RuntimeException:java.lang.RuntimeException:hbase-default.xml file seems to be for an older version of HBase</span><br><span class="line"></span><br><span class="line"> (1.2.3),this version is 2.0.0.3.0.1.0.187</span><br><span class="line">        at org,apache.hadoop.hive.ql.metadata.Table.getStorageHandler(Table.java:292)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplsSanon funSgetTableOptions1ssanon funSapplys7.apply(HiveClientImpl.scala:407)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplsSanon funsgetTableOptions1ssanon funsapplys7.apply(HiveClientImpl.scala:374)</span><br><span class="line">        at scala.Option.map(Option.scala:146)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplssanon funSgetTableOptions1.apply(HiveClientImpl.scala:374)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplssanon funSgetTableOptions1.apply(HiveClientImpl.scala:372)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImplsSanonfunSwithHiveStates1.apply(HiveClientImpl.scala:281)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.liftedTreels1(HiveClientImpl.scala:219)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.retryLocked(HiveClientImpl.scala:218)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.withHiveState(HiveClientImpl.scala:264)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.getTableOption(HiveClientImpl.scala:372)</span><br><span class="line">        at org.apache.spark.sql.hive.client.Hiveclientsclass.getTable(Hiveclient.scala:81)</span><br><span class="line">        at org.apache.spark.sql.hive.client.HiveClientImpl.getTable(HiveClientImpl.scala:84)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalog.getRawTable(HiveExternalCatalog.scala:118)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalogssanon funSgetTables1.apply(HiveExternalCatalog.scala:700)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalogssanon funSgetTables1.apply(HiveExternalCatalog.scala:700)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalog.withClient(HiveExternalCatalog.scala:97)</span><br><span class="line">        at org.apache.spark.sql.hive.HiveExternalCatalog.getTable(HiveExternalCatalog.scala:699)</span><br></pre></td></tr></table></figure>
-
-<p>解决方法是在hbase-site.xml文件中添加如下配置：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/28/Spark-SQL%E6%9F%A5%E8%AF%A2HBase%E8%A1%A8%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
