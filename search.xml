@@ -8397,4 +8397,22 @@ remote:            path: search.xml:6173
         <tag>Hive</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Hiveserver2 User: ** is not allowed to impersonate **</title>
+    <url>/2025/10/29/Hiveserver2-User-is-not-allowed-to-impersonate/</url>
+    <content><![CDATA[<p>确认已经配置了Hadoop的超级代理用户（配置方式见：Hadoop代理用户），并且也重启了NameNode服务。后来发现是因为ResourceManager没有重启，任务提交到Yarn时出现权限不够导致的。</p>
+<p>使用以下刷新命令，不必重启：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hdfs dfsadmin -refreshSuperUserGroupsConfiguration</span><br><span class="line">$ yarn rmadmin -refreshSuperUserGroupsConfiguration</span><br></pre></td></tr></table></figure>
+
+<p>执行完成后需要重启HiveServer2。然后问题解决。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据仓库</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hive</tag>
+      </tags>
+  </entry>
 </search>
