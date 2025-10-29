@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">223</span>
+          <span class="site-state-item-count">224</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,110 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/28/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/28/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">Linux查看服务器是否重启过的一种方法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-28 20:10:33 / 修改时间：20:11:51" itemprop="dateCreated datePublished" datetime="2025-10-28T20:10:33+08:00">2025-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/28/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="Linux查看服务器是否重启过的一种方法" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux查看服务器是否重启过的一种方法" href="/2025/10/28/Linux%E6%9F%A5%E7%9C%8B%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E5%90%A6%E9%87%8D%E5%90%AF%E8%BF%87%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::72530b5a899e18d41a75fd5ff4edf9cc" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用 uptime 命令可以方便检查服务器是否发生了重启。uptime 命令手册中说：uptime会在一行中显示下列信息：当前时间、系统运行了多久时间、当前登录的用户有多少，以及前 1、5 和 15 分钟系统的平均负载。当然可以添加参数以不同的方式展示信息，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">uptime</span></span><br><span class="line"> 17:30:22 up 23 min,  1 user,  load average: 0.55, 0.63, 0.46</span><br><span class="line">$ <span class="built_in">uptime</span> -p</span><br><span class="line">up 25 minutes</span><br><span class="line">$ <span class="built_in">uptime</span> -s</span><br><span class="line">2022-03-09 17:06:48</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1190,119 +1294,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/10/27/nginx-ngx-http-core-module-%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/27/react-native-windows-%E7%B3%BB%E7%BB%9F%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/27/react-native-windows-%E7%B3%BB%E7%BB%9F%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">React Native windows 系统本地图片不能显示问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-27 15:55:15 / 修改时间：15:59:59" itemprop="dateCreated datePublished" datetime="2025-10-27T15:55:15+08:00">2025-10-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">开发框架</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/React-Native/" itemprop="url" rel="index"><span itemprop="name">React Native</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/27/react-native-windows-%E7%B3%BB%E7%BB%9F%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="React Native windows 系统本地图片不能显示问题" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="React Native windows 系统本地图片不能显示问题" href="/2025/10/27/react-native-windows-%E7%B3%BB%E7%BB%9F%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::00f32f92d4cf4e6fe81dd5f667e6a95a" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 windows 开发环境下，使用 React Native 的 Image UI 组件通过相对路径加载本地图片显示不出来，可以通过修改 react native 源代码解决。但是，通过这种方式不确定是否会引起其他平台下新的问题。</p>
-<p>将文件 packager&#x2F;react-packager&#x2F;src&#x2F;Bundler&#x2F;index.js 中的下面一行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">httpServerLocation</span>: path.<span class="title function_">join</span>(<span class="string">&#x27;/assets&#x27;</span>, path.<span class="title function_">dirname</span>(relPath)),</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/27/react-native-windows-%E7%B3%BB%E7%BB%9F%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E4%B8%8D%E8%83%BD%E6%98%BE%E7%A4%BA%E9%97%AE%E9%A2%98/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
