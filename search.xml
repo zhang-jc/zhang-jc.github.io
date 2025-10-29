@@ -8195,4 +8195,22 @@ remote:            path: search.xml:6173
         <tag>Hexo</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin删除APT软件源</title>
+    <url>/2025/10/29/Deepin%E5%88%A0%E9%99%A4APT%E8%BD%AF%E4%BB%B6%E6%BA%90/</url>
+    <content><![CDATA[<p>在更新软件源时有些源会出现错误，如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> apt-get update</span><br><span class="line">命中:2 https://pro-driver-packages.uniontech.com eagle InRelease                                                                                                </span><br><span class="line">命中:1 https://app-store-files.uniontech.com/231017174131534/appstore deepin InRelease                                                                          </span><br><span class="line">忽略:3 https://download.docker.com/linux/ubuntu apricot InRelease                                                                                            </span><br><span class="line">错误:4 https://download.docker.com/linux/ubuntu apricot Release     </span><br><span class="line">  404  Not Found [IP: 54.230.21.56 443]</span><br><span class="line">命中:5 https://community-packages.deepin.com/deepin apricot InRelease</span><br><span class="line">命中:6 https://community-packages.deepin.com/driver driver InRelease</span><br><span class="line">命中:7 https://community-packages.deepin.com/printer eagle InRelease</span><br><span class="line">正在读取软件包列表... 完成</span><br><span class="line">E: 仓库 “https://download.docker.com/linux/ubuntu apricot Release” 没有 Release 文件。</span><br><span class="line">N: 无法安全地用该源进行更新，所以默认禁用该源。</span><br><span class="line">N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细节。</span><br></pre></td></tr></table></figure>
+
+<p>从上面的错误信息可以看出是docker的源出现错误。用以下命令删除docker源：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/apt/sources.list.d</span><br><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">appstore.list  devicemanager.list  docker.list  driver.list  printer.list</span><br><span class="line">$ <span class="built_in">sudo</span> <span class="built_in">rm</span> -rf docker.list</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Deepin</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Deepin</tag>
+      </tags>
+  </entry>
 </search>

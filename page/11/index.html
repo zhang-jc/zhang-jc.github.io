@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">228</span>
+          <span class="site-state-item-count">229</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,125 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/05/31/Linux-%E4%B8%8B-ChromeDriver-%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/31/Linux-%E4%B8%8B-ChromeDriver-%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Linux 下 ChromeDriver 安装</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-05-31 18:49:50" itemprop="dateCreated datePublished" datetime="2025-05-31T18:49:50+08:00">2025-05-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">数据采集</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/05/31/Linux-%E4%B8%8B-ChromeDriver-%E5%AE%89%E8%A3%85/" class="post-meta-item leancloud_visitors" data-flag-title="Linux 下 ChromeDriver 安装" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Linux 下 ChromeDriver 安装" href="/2025/05/31/Linux-%E4%B8%8B-ChromeDriver-%E5%AE%89%E8%A3%85/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::b12b720fb996f66e85c4ca6ef2c4e3cb" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Selenium 是一个用于 Web 应用程序测试的工具。可以通过它驱动浏览器执行特定的操作，如点击、下滑、资源加载与渲染等。该工具在爬虫开发中也非常有帮助。Selenium 需要通过浏览器驱动操控浏览器，不同的浏览器对应的驱动不同，Chrome 浏览器的驱动是ChromeDriver，Firefox 浏览器的驱动是 GeckoDriver。要注意的是，浏览器驱动版本必须与计算机上的浏览器版本对应，否则无法正常使用。</p>
+<p>打开 Chrome 浏览器后点击右上角三个点菜单中的“帮助”选项，并选择“关于 Google Chrome”​，即可看到版本信息：<img src="/images/202505/02.png"></p>
+<p>114.0.5735.90 及以下版本，从 <a target="_blank" rel="noopener" href="http://chromedriver.storage.googleapis.com/index.html">http://chromedriver.storage.googleapis.com/index.html</a> 下载对应的版本。114.0.5735.90 以上版本，需要从 GitHub 项目 <a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/chrome-for-testing?tab=readme-ov-file#json-api-endpoints">chrome-for-testing</a> 中的 <a target="_blank" rel="noopener" href="https://googlechromelabs.github.io/chrome-for-testing/known-good-versions-with-downloads.json">JSON API 端点文件</a> 内容查找对应版本的下载地址。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/31/Linux-%E4%B8%8B-ChromeDriver-%E5%AE%89%E8%A3%85/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1222,126 +1341,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/03/31/Jenkins%E9%85%8D%E7%BD%AEQQ%E9%82%AE%E7%AE%B1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/03/31/Jenkins%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0pyenv%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/31/Jenkins%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0pyenv%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-title-link" itemprop="url">Jenkins中找不到pyenv命令问题解决</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-03-31 10:35:20" itemprop="dateCreated datePublished" datetime="2025-03-31T10:35:20+08:00">2025-03-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Jenkins/" itemprop="url" rel="index"><span itemprop="name">Jenkins</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/03/31/Jenkins%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0pyenv%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="post-meta-item leancloud_visitors" data-flag-title="Jenkins中找不到pyenv命令问题解决" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Jenkins中找不到pyenv命令问题解决" href="/2025/03/31/Jenkins%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0pyenv%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::6af889e5058f1b039429b4864593e9da" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>错误信息如下：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Building in workspace /home/zhangjc/.jenkins/workspace/updateCompanies</span><br><span class="line">[updateCompanies] $ /bin/sh -xe /tmp/jenkins15523675592087959393.sh</span><br><span class="line">+ pyenv activate probe</span><br><span class="line">/tmp/jenkins15523675592087959393.sh: 2: pyenv: not found</span><br><span class="line">Build step &#x27;Execute shell&#x27; marked build as failure</span><br></pre></td></tr></table></figure>
-
-<p>查看用户环境变量加载脚本<code>.bashrc</code>，找到pyenv环境变量加载内容，将内容添加至Jenkins构建步骤脚本中，如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/31/Jenkins%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0pyenv%E5%91%BD%E4%BB%A4%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
