@@ -8415,4 +8415,23 @@ remote:            path: search.xml:6173
         <tag>Hive</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Hadoop代理用户</title>
+    <url>/2025/10/29/Hadoop%E4%BB%A3%E7%90%86%E7%94%A8%E6%88%B7/</url>
+    <content><![CDATA[<p>Hadoop的代理用户是代表其他用户执行操作的超级用户。</p>
+<p>在 etc&#x2F;hadoop&#x2F;core-site.xml 中添加以下配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.zhangjc.hosts<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.proxyuser.zhangjc.groups<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">value</span>&gt;</span>*<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的配置表示超级用户zhangjc可以扮演来自任意服务器的任意用户。</p>
+<p>保存配置并重启HDFS和Yarn。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>分布式计算</category>
+      </categories>
+      <tags>
+        <tag>大数据</tag>
+        <tag>Hadoop</tag>
+      </tags>
+  </entry>
 </search>
