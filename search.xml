@@ -8313,4 +8313,45 @@ remote:            path: search.xml:6173
         <tag>Oracle</tag>
       </tags>
   </entry>
+  <entry>
+    <title>重置MySQL8.0 Root密码</title>
+    <url>/2025/10/29/%E9%87%8D%E7%BD%AEMySQL8-0-Root%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<p>在本地安装了MySQL8.0，但忘记了root密码，通过以下方式重置root密码。</p>
+<ol>
+<li>停止MySQL服务。</li>
+<li>跳过权限检查启动MySQL服务：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> mysqld_safe --skip-grant-tables &amp;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用root账号登录MySQL：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -u root</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>更新Root密码：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">flush privileges;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;root&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如不先执行“flush privileges;”，则可能会提示以下错误信息：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ERROR 1290 (HY000): The MySQL server is running with the --skip-grant-tables option so it cannot execute this statement</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>刷新权限：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>重启MySQL服务。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
 </search>
