@@ -8683,4 +8683,21 @@ remote:            path: search.xml:6173
         <tag>MySQL</tag>
       </tags>
   </entry>
+  <entry>
+    <title>mitmprox启动异常：version &#39;GLIBC_2.29&#39; not found</title>
+    <url>/2025/10/29/mitmprox%E5%90%AF%E5%8A%A8%E5%BC%82%E5%B8%B8%EF%BC%9Aversion-GLIBC-2-29-not-found/</url>
+    <content><![CDATA[<p>异常信息如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">mitmproxy</span> </span><br><span class="line">[PYI-33188:ERROR] Failed to load Python shared library &#x27;/tmp/_MEI3XMYKN/libpython3.12.so.1.0&#x27;: dlopen: /lib/x86_64-linux-gnu/libm.so.6: version `GLIBC_2.29&#x27; not found (required by /tmp/_MEI3XMYKN/libpython3.12.so.1.0)</span><br></pre></td></tr></table></figure>
+
+<p>简单解决方法是安装<strong>GLIBC 2.29</strong>。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>数据采集</category>
+      </categories>
+      <tags>
+        <tag>网络爬虫</tag>
+        <tag>Mitmproxy</tag>
+      </tags>
+  </entry>
 </search>
