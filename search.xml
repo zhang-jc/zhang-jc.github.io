@@ -7991,4 +7991,16 @@ remote:            path: search.xml:6173
         <tag>操作系统</tag>
       </tags>
   </entry>
+  <entry>
+    <title>运行yarn config异常：No such file or directory: &#39;config&#39;</title>
+    <url>/2025/10/29/%E8%BF%90%E8%A1%8Cyarn-config%E5%BC%82%E5%B8%B8%EF%BC%9ANo-such-file-or-directory-config/</url>
+    <content><![CDATA[<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt remove cmdtest</span><br><span class="line"><span class="built_in">sudo</span> apt remove yarn</span><br><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | <span class="built_in">sudo</span> apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/yarn.list</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install yarn -y</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>开发工具</category>
+        <category>Yarn</category>
+      </categories>
+      <tags>
+        <tag>Yarn</tag>
+      </tags>
+  </entry>
 </search>
