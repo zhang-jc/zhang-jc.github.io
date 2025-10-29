@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">219</span>
+          <span class="site-state-item-count">220</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,119 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/09/28/Emacs%E5%88%97%E7%BC%96%E8%BE%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/09/28/Emacs%E5%88%97%E7%BC%96%E8%BE%91/" class="post-title-link" itemprop="url">Emacs列编辑</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-09-28 14:34:01 / 修改时间：14:54:08" itemprop="dateCreated datePublished" datetime="2025-09-28T14:34:01+08:00">2025-09-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">开发工具</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/Emacs/" itemprop="url" rel="index"><span itemprop="name">Emacs</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/09/28/Emacs%E5%88%97%E7%BC%96%E8%BE%91/" class="post-meta-item leancloud_visitors" data-flag-title="Emacs列编辑" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Emacs列编辑" href="/2025/09/28/Emacs%E5%88%97%E7%BC%96%E8%BE%91/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::df5b6d4e949186c03281fd257749d854" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>推荐使用 rect-mark.el 插件，参考地址：<a target="_blank" rel="noopener" href="https://www.emacswiki.org/emacs/RectangleMark">https://www.emacswiki.org/emacs/RectangleMark</a>。</p>
+<p>在 Emacs 配置文件中（一般是 ~&#x2F;.emacs）添加以下配置：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">;; 列编辑</span><br><span class="line">(require &#x27;rect-mark)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-w&quot;) &#x27;rm-kill-region)</span><br><span class="line">(global-set-key (kbd &quot;C-x r M-w&quot;) &#x27;rm-kill-ring-save)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-y&quot;) &#x27;yank-rectangle)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-M-d&quot;) &#x27;delete-rectangle)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-i&quot;) &#x27;string-insert-rectangle)</span><br><span class="line">(global-set-key (kbd &quot;C-x r C-M-i&quot;) &#x27;string-rectangle)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/09/28/Emacs%E5%88%97%E7%BC%96%E8%BE%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1211,126 +1324,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/09/04/Linux%E5%85%8D%E5%AF%86sudo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/05/31/Please-make-sure-the-TESSDATA-PREFIX-environment-variable-is-set-to-your-tessdata-directory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/05/31/Please-make-sure-the-TESSDATA-PREFIX-environment-variable-is-set-to-your-tessdata-directory/" class="post-title-link" itemprop="url">Please make sure the TESSDATA_PREFIX environment variable is set to your tessdata directory</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2025-05-31 23:36:47" itemprop="dateCreated datePublished" datetime="2025-05-31T23:36:47+08:00">2025-05-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-28 18:40:32" itemprop="dateModified" datetime="2025-09-28T18:40:32+08:00">2025-09-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E9%87%87%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">数据采集</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/05/31/Please-make-sure-the-TESSDATA-PREFIX-environment-variable-is-set-to-your-tessdata-directory/" class="post-meta-item leancloud_visitors" data-flag-title="Please make sure the TESSDATA_PREFIX environment variable is set to your tessdata directory" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Please make sure the TESSDATA_PREFIX environment variable is set to your tessdata directory" href="/2025/05/31/Please-make-sure-the-TESSDATA-PREFIX-environment-variable-is-set-to-your-tessdata-directory/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::200914eb7ab2ab2f0be09e84ca8e30c0" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>安装 Tesseract 及 PyTesseract 后，在验证时，出现以下异常信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/Downloads/pyocr.py&quot;</span>, line 7, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="built_in">print</span>(pytesseract.image_to_string(Image.open(<span class="string">&quot;example.png&quot;</span>)))</span><br><span class="line">          ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 486, <span class="keyword">in</span> image_to_string</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">           ~</span><br><span class="line">    ...&lt;2 lines&gt;...</span><br><span class="line">        Output.STRING: lambda: run_and_get_output(*args),</span><br><span class="line">        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">    &#125;[output_type]()</span><br><span class="line">    ~~~~~~~~~~~~~~^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 489, <span class="keyword">in</span> &lt;lambda&gt;</span><br><span class="line">    Output.STRING: lambda: run_and_get_output(*args),</span><br><span class="line">                           ~~~~~~~~~~~~~~~~~~^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 352, <span class="keyword">in</span> run_and_get_output</span><br><span class="line">    run_tesseract(**kwargs)</span><br><span class="line">    ~~~~~~~~~~~~~^^^^^^^^^^</span><br><span class="line">  File <span class="string">&quot;/home/zhangjc/.pyenv/versions/crawler/lib/python3.13/site-packages/pytesseract/pytesseract.py&quot;</span>, line 284, <span class="keyword">in</span> run_tesseract</span><br><span class="line">    raise TesseractError(proc.returncode, get_errors(error_string))</span><br><span class="line">pytesseract.pytesseract.TesseractError: (1, <span class="string">&#x27;Error opening data file /usr/share/tesseract-ocr/5/tessdata/eng.traineddata Please make sure the TESSDATA_PREFIX environment variable is set to your &quot;tessdata&quot; directory. Failed loading language \&#x27;</span>eng\&#x27; Tesseract couldn\&#x27;t load any languages! Could not initialize tesseract.<span class="string">&#x27;)</span></span><br></pre></td></tr></table></figure>
-
-<p>根据提示信息，需要设置 TESSDATA_PREFIX 环境变量指向包含 Tesseract 语言数据文件（如 eng.traineddata、fra.traineddata 等）的 tessdata 目录。通常该目录位置如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/05/31/Please-make-sure-the-TESSDATA-PREFIX-environment-variable-is-set-to-your-tessdata-directory/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
