@@ -8495,4 +8495,22 @@ remote:            path: search.xml:6173
         <tag>Linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux查看系统版本的三种方法</title>
+    <url>/2025/10/29/Linux%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>以下三种方法可以查看系统版本或内核版本，可以选择使用。</p>
+<h1 id="方法一：查看系统文件"><a href="#方法一：查看系统文件" class="headerlink" title="方法一：查看系统文件"></a>方法一：查看系统文件</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> /etc/os-release </span><br><span class="line">PRETTY_NAME=<span class="string">&quot;Deepin 20.9&quot;</span></span><br><span class="line">NAME=<span class="string">&quot;Deepin&quot;</span></span><br><span class="line">VERSION_ID=<span class="string">&quot;20.9&quot;</span></span><br><span class="line">VERSION=<span class="string">&quot;20.9&quot;</span></span><br><span class="line">VERSION_CODENAME=<span class="string">&quot;apricot&quot;</span></span><br><span class="line">ID=Deepin</span><br><span class="line">HOME_URL=<span class="string">&quot;https://www.deepin.org/&quot;</span></span><br><span class="line">BUG_REPORT_URL=<span class="string">&quot;https://bbs.deepin.org/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="方法二：uname命令"><a href="#方法二：uname命令" class="headerlink" title="方法二：uname命令"></a>方法二：uname命令</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">uname</span> -a</span><br><span class="line">Linux frin 5.18.17-amd64-desktop-hwe <span class="comment">#20.01.00.10 SMP PREEMPT_DYNAMIC Thu Jun 15 16:17:50 CST 2023 x86_64 GNU/Linux</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="方法三：lsb-release命令"><a href="#方法三：lsb-release命令" class="headerlink" title="方法三：lsb_release命令"></a>方法三：lsb_release命令</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID: Deepin</span><br><span class="line">Description:    Deepin 20.9</span><br><span class="line">Release:        20.9</span><br><span class="line">Codename:       apricot</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
 </search>
