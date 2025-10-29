@@ -8213,4 +8213,24 @@ remote:            path: search.xml:6173
         <tag>Deepin</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin普通用户Docker权限</title>
+    <url>/2025/10/29/Deepin%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7Docker%E6%9D%83%E9%99%90/</url>
+    <content><![CDATA[<p>Deepin下安装完Docker后，非root用户执行命令时出现以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line">Got permission denied <span class="keyword">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get <span class="string">&quot;http://%2Fvar%2Frun%2Fdocker.sock/v1.40/containers/json&quot;</span>: dial unix /var/run/docker.sock: connect: permission denied</span><br></pre></td></tr></table></figure>
+
+<p>执行以下命令将当前用户添加至docker用户组：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> gpasswd -a <span class="variable">$USER</span> docker <span class="comment"># 将普通用户username加入到docker组中</span></span><br><span class="line">$ newgrp docker <span class="comment"># 更新docker组</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>云计算</category>
+        <category>Docker</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Deepin</tag>
+        <tag>Docker</tag>
+        <tag>云计算</tag>
+      </tags>
+  </entry>
 </search>
