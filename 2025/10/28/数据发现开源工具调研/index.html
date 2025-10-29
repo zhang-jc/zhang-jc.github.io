@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-uvpMLUrrdm">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.zhangjc.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"changyan","storage":true,"lazyload":false,"nav":null,"activeClass":"changyan"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="必要性数据发现平台的目是帮助更好的发现、理解和使用数据。就是解决以下问题：数据存在哪里？如何使用这些数据？数据做什么？数据是如何创建的？数据是如何更新的？ 通过 Amundsen，Lyft 将其数据团队的生产力提高了20%。同样，DataHub 帮助 LinkedIn 实现了数据大众化——每周有1,500 名员工访问 DataHub，以搜索、发现和使用数据来完成他们的工作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据发现开源工具调研">
+<meta property="og:url" content="https://www.zhangjc.com/2025/10/28/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/index.html">
+<meta property="og:site_name" content="一张假钞的真实世界">
+<meta property="og:description" content="必要性数据发现平台的目是帮助更好的发现、理解和使用数据。就是解决以下问题：数据存在哪里？如何使用这些数据？数据做什么？数据是如何创建的？数据是如何更新的？ 通过 Amundsen，Lyft 将其数据团队的生产力提高了20%。同样，DataHub 帮助 LinkedIn 实现了数据大众化——每周有1,500 名员工访问 DataHub，以搜索、发现和使用数据来完成他们的工作。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-28T13:16:43.000Z">
+<meta property="article:modified_time" content="2025-10-29T01:55:42.749Z">
+<meta property="article:author" content="徂徕山人">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="数据发现">
+<meta property="article:tag" content="Atlas">
+<meta property="article:tag" content="Amundsen">
+<meta property="article:tag" content="DataHub">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.zhangjc.com/2025/10/28/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.zhangjc.com/2025/10/28/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/","path":"2025/10/28/数据发现开源工具调研/","title":"数据发现开源工具调研"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数据发现开源工具调研 | 一张假钞的真实世界</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?8cfb7c545d2dfbf8e45d31d21ccd6e7d"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一张假钞的真实世界</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">大道至简</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">必要性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7"><span class="nav-number">2.</span> <span class="nav-text">开源工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E7%BB%93%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">评估结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">评估项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD"><span class="nav-number">4.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80"><span class="nav-number">4.2.</span> <span class="nav-text">语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA"><span class="nav-number">4.3.</span> <span class="nav-text">社区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">4.4.</span> <span class="nav-text">底层架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%85%AC%E5%8F%B8%E6%88%96%E7%BB%84%E7%BB%87"><span class="nav-number">4.5.</span> <span class="nav-text">应用公司或组织</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="徂徕山人"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">徂徕山人</p>
+  <div class="site-description" itemprop="description">天行健，君子以自强不息。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">214</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">63</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">95</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:charles.zhangjc@qq.com" title="E-Mail → mailto:charles.zhangjc@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/images/wechat.jpg" title="WeChat → &#x2F;images&#x2F;wechat.jpg" rel="noopener me"><i class="fab fa-weixin fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/28/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据发现开源工具调研 | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据发现开源工具调研
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-28 21:16:43" itemprop="dateCreated datePublished" datetime="2025-10-28T21:16:43+08:00">2025-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-29 09:55:42" itemprop="dateModified" datetime="2025-10-29T09:55:42+08:00">2025-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0/" itemprop="url" rel="index"><span itemprop="name">数据发现</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/28/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/" class="post-meta-item leancloud_visitors" data-flag-title="数据发现开源工具调研" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="数据发现开源工具调研" href="/2025/10/28/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7%E8%B0%83%E7%A0%94/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::99917e55fa65be21a7582d01619b83b5" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="必要性"><a href="#必要性" class="headerlink" title="必要性"></a>必要性</h1><p>数据发现平台的目是帮助更好的发现、理解和使用数据。就是解决以下问题：数据存在哪里？如何使用这些数据？数据做什么？数据是如何创建的？数据是如何更新的？</p>
+<p>通过 Amundsen，Lyft 将其数据团队的生产力提高了20%。同样，DataHub 帮助 LinkedIn 实现了数据大众化——每周有1,500 名员工访问 DataHub，以搜索、发现和使用数据来完成他们的工作。</p>
+<h1 id="开源工具"><a href="#开源工具" class="headerlink" title="开源工具"></a>开源工具</h1><ul>
+<li>Atlas（Apache，Cloudera）</li>
+<li>Amundsen（LF AI &amp; Data，Lyft）</li>
+<li>DataHub（Apache，Linkedin）</li>
+</ul>
+<h1 id="评估结论"><a href="#评估结论" class="headerlink" title="评估结论"></a>评估结论</h1><p>推荐Datahub。功能完整；开源社区相当活跃；开发语言Java、Python为主，比较适合团队现状。</p>
+<p>Amundsen优势在数据发现，微服务架构及Python+TypeScript语言为主两个方面与团队现状不符。</p>
+<p>Atlas纯Java为主开发语言与团队现状最符，但太偏技术化。</p>
+<p>演示环境：</p>
+<ul>
+<li>DataHub：<a target="_blank" rel="noopener" href="https://demo.datahubproject.io/">https://demo.datahubproject.io/</a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>Atlas</th>
+<th>Amundsen</th>
+<th>DataHub</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开发者</td>
+<td>Clouder</td>
+<td>Lyft</td>
+<td>LinkedIn</td>
+</tr>
+<tr>
+<td>架构</td>
+<td>元数据摄取的Hook</td>
+<td>基于 ETL 的元数据摄取</td>
+<td>基于插件的元数据摄取</td>
+</tr>
+<tr>
+<td>特征</td>
+<td>1. 搜索和发现</td>
+<td>1. 易于设置、修改和部署</td>
+<td>1. 搜索和发现</td>
+</tr>
+<tr>
+<td></td>
+<td>2. 使用 JanusGraph 作为元数据库和 Solr 进行搜索</td>
+<td>2. 搜索和发现</td>
+<td>2. 使用 Kafka 与流生态系统集成并支持 GraphQL</td>
+</tr>
+<tr>
+<td></td>
+<td>3. 专注于分类、数据治理和血缘（表和列）</td>
+<td>3. 多后端支持</td>
+<td>3. 数据血缘（基于列的血缘在路线图中）</td>
+</tr>
+<tr>
+<td></td>
+<td>4. 细粒度访问控制（Ranger）</td>
+<td>4. 数据血缘（表和列）</td>
+<td>4. 细粒度的访问控制</td>
+</tr>
+<tr>
+<td></td>
+<td>5. 数据分类和标记</td>
+<td>5. 数据分类和标记</td>
+<td>5. 数据分类和标记</td>
+</tr>
+<tr>
+<td></td>
+<td>6. 为 Hadoop 构建生态系统并使用 Hive 元数据与任何数据源一起工作</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>部署</td>
+<td>没有官方部署建议</td>
+<td>1. Kubernetes</td>
+<td>1. Kubernetes</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>2. AWS ECS</td>
+<td>2. 谷歌云 GKE（谷歌 Kubernetes 引擎）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3. 独立docker</td>
+<td>3. 独立docker</td>
+</tr>
+<tr>
+<td>认证</td>
+<td>1. 文件</td>
+<td>OAuth OIDC（OpenID 连接）</td>
+<td>1. OAuth OIDC</td>
+</tr>
+<tr>
+<td></td>
+<td>2. Kerberos SSO</td>
+<td></td>
+<td>2. JaaS (Java Authentication and Authorization Service)</td>
+</tr>
+<tr>
+<td></td>
+<td>3. LDAP</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>鉴权</td>
+<td>1. 基于 Ranger 的授权</td>
+<td>在路线图中</td>
+<td>平台和元数据策略</td>
+</tr>
+<tr>
+<td></td>
+<td>2. 数据屏蔽</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>路线图和更新</td>
+<td>1. 一个公开的 JIRA 项目</td>
+<td>1. Amundsen 路线图</td>
+<td>1. DataHub 路线图</td>
+</tr>
+<tr>
+<td></td>
+<td>2. Medium 上社区的博客文章</td>
+<td>2. Medium 和 Stemma 的更新</td>
+<td>2. 媒体更新</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3. GitHub（也可以让你贡献）</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="评估项"><a href="#评估项" class="headerlink" title="评估项"></a>评估项</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>Atlas：较少关注集成，而更多地关注：<ul>
+<li>信息分类：用户可以使用词汇表添加特定于业务的上下文信息。</li>
+<li>数据治理：治理团队可以更好地控制数据库实体的分类。此外，词汇表和分类可以相互关联以简化管理。</li>
+<li>集成各种元数据源：使用 Hive，用户可以连接任意数量的元数据源，而无需自定义集成。此外，Atlas 默认完全支持所有基于 Hadoop 生态系统的数据源。</li>
+</ul>
+</li>
+<li>Amundsen：易于使用，支持多种后端环境，并提供复杂的预览功能，帮助用户更好地了解他们的数据。</li>
+<li>DataHub：的优势在于其数据治理能力。这些包括：<ul>
+<li>更精细的访问控制：DataHub 支持列级和数据集级分类、PII 标记、自动数据删除（以帮助遵守 GDPR）等。</li>
+<li>数据血缘：在其路线图中，DataHub 承诺列级血缘以及与 Great Expectations、dbt test 和 deequ 等测试框架的集成。</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>Atlas</th>
+<th>Amundsen</th>
+<th>DataHub</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>搜索和发现</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>认证</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>Airflow支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>DBT</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>多后端支持</td>
+<td>不支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>表血缘</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>列血缘</td>
+<td>支持</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>细粒度的访问控制</td>
+<td>支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+</tbody></table>
+<h2 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h2><p>就开发语言来说Atlas最适合我们团队，Datahub次之，Amundsen匹配度最低。</p>
+<table>
+<thead>
+<tr>
+<th>框架</th>
+<th>Atlas</th>
+<th>Amundsen</th>
+<th>DataHub</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>语言</td>
+<td>Java：60.2%</td>
+<td>Python：67.8%</td>
+<td>Java：45.5%</td>
+</tr>
+<tr>
+<td></td>
+<td>JavaScript：30.9%</td>
+<td>TypeScript：29.7%</td>
+<td>Python：34.4%</td>
+</tr>
+<tr>
+<td></td>
+<td>Python：2.9%</td>
+<td>SCSS：2.1%</td>
+<td>TypeScript：17.9%</td>
+</tr>
+<tr>
+<td></td>
+<td>HTML：2.8%</td>
+<td>HTML：0.1%</td>
+<td>Shell：0.7%</td>
+</tr>
+<tr>
+<td></td>
+<td>SCSS：2.1%</td>
+<td>Makefile：0.1%</td>
+<td>JavaScript：0.6%</td>
+</tr>
+<tr>
+<td></td>
+<td>Shell：0.8%</td>
+<td>Scala：0.1%</td>
+<td>Dockerfile：0.2%</td>
+</tr>
+<tr>
+<td></td>
+<td>Other：0.3%</td>
+<td>Other：0.1%</td>
+<td>Other：0.7%</td>
+</tr>
+</tbody></table>
+<h2 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h2><ul>
+<li>Apache Atlas 有一个公共 JIRA 项目，但没有明确定义的路线图。文档主要是官网。</li>
+<li>Amundsen：定期更新，并拥有一个支持该项目的大型社区。官方文档及社区博文。</li>
+<li>有一个公共路线图和广泛的社区支持。DataHub 也维护产品路线图并在 Medium 上分享频繁更新。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>开源时间</th>
+<th>Star</th>
+<th>Fork</th>
+<th>Watch</th>
+<th>版本数</th>
+<th>Contributors</th>
+<th>Issues</th>
+<th>PR</th>
+<th>最新版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Atlas</td>
+<td>2015年5月</td>
+<td>1.3K</td>
+<td>692</td>
+<td>65</td>
+<td>37</td>
+<td>115</td>
+<td>845，3714</td>
+<td>78，101</td>
+<td>2021-08-17</td>
+</tr>
+<tr>
+<td>Amundsen</td>
+<td>2019年10月</td>
+<td>3.3K</td>
+<td>836</td>
+<td>245</td>
+<td>95</td>
+<td>205</td>
+<td>103，507</td>
+<td>21，1237</td>
+<td>2022-05-17</td>
+</tr>
+<tr>
+<td>DataHub</td>
+<td>2020年2月</td>
+<td>5.6K</td>
+<td>1.5K</td>
+<td>223</td>
+<td>56</td>
+<td>241</td>
+<td>204，915</td>
+<td>34，3982</td>
+<td>2022-06-10</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Issues、PR都是采用“Open数量 ，Closed数量”的数量展示。</p>
+</blockquote>
+<h2 id="底层架构"><a href="#底层架构" class="headerlink" title="底层架构"></a>底层架构</h2><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>数据库</th>
+<th>搜索</th>
+<th>服务</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Atlas</td>
+<td>JanusGraph</td>
+<td>Solr</td>
+<td>REST API、Kafka</td>
+</tr>
+<tr>
+<td>Amundsen</td>
+<td>neo4j</td>
+<td>Elasticsearch</td>
+<td>REST API</td>
+</tr>
+<tr>
+<td>DataHub</td>
+<td>neo4j</td>
+<td>Elasticsearch</td>
+<td>REST API、GraphQL、Kafka</td>
+</tr>
+</tbody></table>
+<h2 id="应用公司或组织"><a href="#应用公司或组织" class="headerlink" title="应用公司或组织"></a>应用公司或组织</h2><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>Atlas</th>
+<th>Amundsen</th>
+<th>DataHub</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>公司或组织</td>
+<td>Cloudera，其他无相关信息</td>
+<td>Lyft、Databricks等38个公司或组织</td>
+<td>LinkedIn、海博科技、上海华瑞银行等26个公司或组织</td>
+</tr>
+</tbody></table>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li>Data Discovery Platforms and Their Open Source Solutions (eugeneyan.com)</li>
+<li>Onebridge | Data Catalogs for Metadata Management</li>
+<li>数据治理工具-元数据管理 (daimajiaoliu.com)</li>
+<li>Data Catalogs, the Luxury of Choice | by Fadi Maali | Zendesk Engineering</li>
+<li>2103.07532.pdf (arxiv.org)</li>
+<li>How LinkedIn, Uber, Lyft, Airbnb and Netflix are Solving Data Management and Discovery for Machine Learning Solutions - KDnuggets</li>
+<li>End-to-End Data Discovery, Observability, and Governance on AWS with LinkedIn’s Open-source DataHub | Programmatic Ponderings</li>
+<li>数据治理方案技术调研 Atlas VS Datahub VS Amundsen - 云+社区 - 腾讯云 (tencent.com)</li>
+<li>Apache Atlas Alternatives — Amundsen, DataHub, Metacat, Databook (atlan.com)</li>
+<li>Github 1.9K Star的数据治理框架-Amundsen - 知乎 (zhihu.com)</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="徂徕山人 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%91%E7%8E%B0/" rel="tag"><i class="fa fa-tag"></i> 数据发现</a>
+              <a href="/tags/Atlas/" rel="tag"><i class="fa fa-tag"></i> Atlas</a>
+              <a href="/tags/Amundsen/" rel="tag"><i class="fa fa-tag"></i> Amundsen</a>
+              <a href="/tags/DataHub/" rel="tag"><i class="fa fa-tag"></i> DataHub</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/28/Spark%E5%AE%BD%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%AA%84%E4%BE%9D%E8%B5%96/" rel="prev" title="Spark宽依赖与窄依赖">
+                  <i class="fa fa-angle-left"></i> Spark宽依赖与窄依赖
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="SOHUCS" sid="99917e55fa65be21a7582d01619b83b5"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2015 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">徂徕山人</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+  <script class="next-config" data-name="leancloud_visitors" type="application/json">{"enable":true,"app_id":"SRXBdbjjCaJOyELY9xlLyBoy-gzGzoHsz","app_key":"ZlEDt8G2GfTSQH46EEPCVmTK","server_url":"https://srxbdbjj.lc-cn-n1-shared.com","security":false}</script>
+  <script src="/js/third-party/statistics/lean-analytics.js"></script>
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="changyan" type="application/json">{"enable":true,"appid":"cyvzjVauu","appkey":"37a4035ac51fb5296159e02cae686df6","count":true}</script>
+<script src="/js/third-party/comments/changyan.js"></script>
+
+</body>
+</html>

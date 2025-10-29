@@ -155,18 +155,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">213</span>
+          <span class="site-state-item-count">214</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">62</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-count">95</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -191,6 +191,126 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/08/24/org-apache-kafka-common-errors-TimeoutException/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/08/24/org-apache-kafka-common-errors-TimeoutException/" class="post-title-link" itemprop="url">org.apache.kafka.common.errors.TimeoutException</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-08-24 12:24:19" itemprop="dateCreated datePublished" datetime="2017-08-24T12:24:19+08:00">2017-08-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%AE%9E%E6%97%B6%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">实时计算</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2017/08/24/org-apache-kafka-common-errors-TimeoutException/" class="post-meta-item leancloud_visitors" data-flag-title="org.apache.kafka.common.errors.TimeoutException" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="org.apache.kafka.common.errors.TimeoutException" href="/2017/08/24/org-apache-kafka-common-errors-TimeoutException/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::ba78fc9fe79f53b2438c839242cb67be" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>使用<code>kafka-console-producer.sh</code>向远端Kafka写入数据时遇到以下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ bin/kafka-console-producer.sh --broker-list 172.16.72.202:9092 --topic <span class="built_in">test</span></span><br><span class="line">This is a message</span><br><span class="line">[2017-08-24 11:47:48,286] ERROR Error when sending message to topic <span class="built_in">test</span> with key: null, value: 17 bytes with error: (org.apache.kafka.clients.producer.internals.ErrorLoggingCallback)</span><br><span class="line">org.apache.kafka.common.errors.TimeoutException: Expiring 1 record(s) <span class="keyword">for</span> test-0: 1523 ms has passed since batch creation plus linger time</span><br><span class="line">八月 24, 2017 11:50:55 上午 sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span> executeAcceptLoop</span><br><span class="line">警告: RMI TCP Accept-0: accept loop <span class="keyword">for</span> ServerSocket[addr=0.0.0.0/0.0.0.0,localport=38175] throws</span><br><span class="line">java.io.IOException: The server sockets created using the LocalRMIServerSocketFactory only accept connections from clients running on the host <span class="built_in">where</span> the RMI remote objects have been exported.</span><br><span class="line">	at sun.management.jmxremote.LocalRMIServerSocketFactory<span class="variable">$1</span>.accept(LocalRMIServerSocketFactory.java:114)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.executeAcceptLoop(TCPTransport.java:400)</span><br><span class="line">	at sun.rmi.transport.tcp.TCPTransport<span class="variable">$AcceptLoop</span>.run(TCPTransport.java:372)</span><br><span class="line"> 	at java.lang.Thread.run(Thread.java:748)</span><br></pre></td></tr></table></figure>
+
+<p>在没有配置<code>advertised.host.name</code>的情况下，Kafka并没有广播我们配置的<code>host.name</code>，而是广播了主机配置的hostname。远端的客户端并没有配置hosts，所以自然是连接不上这个hostname的，所以在远端客户端配置hosts。在客户端<code>/etc/hosts</code>中添加以下内容后问题解决：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/08/24/org-apache-kafka-common-errors-TimeoutException/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1241,131 +1361,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/02/11/Windows7-%E4%B8%8A%E6%9E%84%E5%BB%BA%E5%B9%B6%E5%AE%89%E8%A3%85-Hadoop-2-7-3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/" class="post-title-link" itemprop="url">Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2017-02-11 18:47:51" itemprop="dateCreated datePublished" datetime="2017-02-11T18:47:51+08:00">2017-02-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-09-04 15:26:17" itemprop="dateModified" datetime="2025-09-04T15:26:17+08:00">2025-09-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Windows7搭建Hadoop-2.7.3源码阅读环境问题解决列表" href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::0269942975c241108eb3a4a67c4808ef" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h1><ul>
-<li>Windows 7</li>
-<li>java version “1.7.0_80”</li>
-<li>Apache Maven 3.2.3</li>
-<li>ProtocolBuffer 2.5.0</li>
-<li>cmake version 3.7.2 win64 x64</li>
-<li>Windows SDK 7.1</li>
-</ul>
-<p>构建过程参照源代码目录下<code>BUILDING.txt</code>说明文件中的“Building on Windows”中的内容；以及我的另外一篇文章：<a href="https://www.zhangjc.com/2016/08/29/%E6%90%AD%E5%BB%BA-Hadoop-%E6%BA%90%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83/">搭建Hadoop源代码阅读环境</a>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/02/11/Windows7-%E6%90%AD%E5%BB%BA-Hadoop-2-7-3-%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%88%97%E8%A1%A8/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
