@@ -8161,4 +8161,22 @@ remote:            path: search.xml:6173
         <tag>Ubuntu</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Deepin中Python3.10导入gi模块异常</title>
+    <url>/2025/10/29/Deepin%E4%B8%ADPython3-10%E5%AF%BC%E5%85%A5gi%E6%A8%A1%E5%9D%97%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<p>异常信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ python3</span><br><span class="line">Python 3.10.9 (main, Mar  1 2023, 18:23:06) [GCC 11.2.0] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import gi</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">&quot;/home/username/anaconda3/lib/python3.10/site-packages/gi/__init__.py&quot;</span>, line 40, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from . import _gi</span><br><span class="line">ImportError: /lib/x86_64-linux-gnu/libgirepository-1.0.so.1: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0</span><br></pre></td></tr></table></figure>
+
+<p>修改链接库：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libffi.so.7</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>操作系统</category>
+        <category>Deepin</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>操作系统</tag>
+        <tag>Deepin</tag>
+      </tags>
+  </entry>
 </search>

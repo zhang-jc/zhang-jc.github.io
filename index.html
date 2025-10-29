@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">226</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -191,6 +191,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/Deepin%E4%B8%ADPython3-10%E5%AF%BC%E5%85%A5gi%E6%A8%A1%E5%9D%97%E5%BC%82%E5%B8%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="徂徕山人">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一张假钞的真实世界">
+      <meta itemprop="description" content="天行健，君子以自强不息。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/29/Deepin%E4%B8%ADPython3-10%E5%AF%BC%E5%85%A5gi%E6%A8%A1%E5%9D%97%E5%BC%82%E5%B8%B8/" class="post-title-link" itemprop="url">Deepin中Python3.10导入gi模块异常</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-29 19:33:15 / 修改时间：19:35:18" itemprop="dateCreated datePublished" datetime="2025-10-29T19:33:15+08:00">2025-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Deepin/" itemprop="url" rel="index"><span itemprop="name">Deepin</span></a>
+        </span>
+    </span>
+
+  
+    <span id="/2025/10/29/Deepin%E4%B8%ADPython3-10%E5%AF%BC%E5%85%A5gi%E6%A8%A1%E5%9D%97%E5%BC%82%E5%B8%B8/" class="post-meta-item leancloud_visitors" data-flag-title="Deepin中Python3.10导入gi模块异常" title="阅读次数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span class="leancloud-visitors-count"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Changyan：</span>
+    
+    <a title="Deepin中Python3.10导入gi模块异常" href="/2025/10/29/Deepin%E4%B8%ADPython3-10%E5%AF%BC%E5%85%A5gi%E6%A8%A1%E5%9D%97%E5%BC%82%E5%B8%B8/#SOHUCS" itemprop="discussionUrl">
+      <span id="sourceId::6a353b36c1c07f8430815c75efee1146" class="cy_cmt_count" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>异常信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ python3</span><br><span class="line">Python 3.10.9 (main, Mar  1 2023, 18:23:06) [GCC 11.2.0] on linux</span><br><span class="line">Type <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> or <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line">&gt;&gt;&gt; import gi</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">&quot;&lt;stdin&gt;&quot;</span>, line 1, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">  File <span class="string">&quot;/home/username/anaconda3/lib/python3.10/site-packages/gi/__init__.py&quot;</span>, line 40, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    from . import _gi</span><br><span class="line">ImportError: /lib/x86_64-linux-gnu/libgirepository-1.0.so.1: undefined symbol: ffi_type_uint32, version LIBFFI_BASE_7.0</span><br></pre></td></tr></table></figure>
+
+<p>修改链接库：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/10/29/Deepin%E4%B8%ADPython3-10%E5%AF%BC%E5%85%A5gi%E6%A8%A1%E5%9D%97%E5%BC%82%E5%B8%B8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1172,120 +1286,6 @@
     
     <div class="post-body" itemprop="articleBody">
           <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt remove cmdtest</span><br><span class="line"><span class="built_in">sudo</span> apt remove yarn</span><br><span class="line">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | <span class="built_in">sudo</span> apt-key add -</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | <span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/apt/sources.list.d/yarn.list</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install yarn -y</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.zhangjc.com/2025/10/29/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="徂徕山人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一张假钞的真实世界">
-      <meta itemprop="description" content="天行健，君子以自强不息。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 一张假钞的真实世界">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/10/29/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/" class="post-title-link" itemprop="url">Linux从用户组中删除用户</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2025-10-29 10:13:03 / 修改时间：10:14:00" itemprop="dateCreated datePublished" datetime="2025-10-29T10:13:03+08:00">2025-10-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-    </span>
-
-  
-    <span id="/2025/10/29/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/" class="post-meta-item leancloud_visitors" data-flag-title="Linux从用户组中删除用户" title="阅读次数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-eye"></i>
-      </span>
-      <span class="post-meta-item-text">阅读次数：</span>
-      <span class="leancloud-visitors-count"></span>
-    </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Changyan：</span>
-    
-    <a title="Linux从用户组中删除用户" href="/2025/10/29/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/#SOHUCS" itemprop="discussionUrl">
-      <span id="sourceId::196b01f3f70775bd79015a1e2e0f9d49" class="cy_cmt_count" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>使用 gpasswd，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gpasswd -d <span class="built_in">test</span> docker</span><br></pre></td></tr></table></figure>
-
-<p>将test用户从docker用户组中删除。其他用法参见gpasswd手册。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/10/29/Linux%E4%BB%8E%E7%94%A8%E6%88%B7%E7%BB%84%E4%B8%AD%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
       
     </div>
 
